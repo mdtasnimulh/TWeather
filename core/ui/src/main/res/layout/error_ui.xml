@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:minHeight="@dimen/_200sdp"
+    android:paddingVertical="@dimen/padding_20"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/fifteen"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/errorAnimationView"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/errorTitleTV"
+        android:layout_marginHorizontal="@dimen/margin_30"
+        android:layout_marginTop="@dimen/margin_50"
+        app:lottie_rawRes="@raw/network_error_anim"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
+
+    <com.tasnimulhasan.designsystem.CustomBoldTv
+        android:id="@+id/errorTitleTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/title_text_size"
+        android:gravity="center"
+        android:layout_marginVertical="@dimen/margin_20"
+        android:layout_marginHorizontal="@dimen/margin_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/errorAnimationView"
+        tools:text="something went wrong" />
+
+    <com.tasnimulhasan.designsystem.CustomTV
+        android:id="@+id/errorMessageTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/regular_text_size"
+        android:layout_marginTop="@dimen/margin_10"
+        app:layout_constraintEnd_toEndOf="@+id/errorTitleTV"
+        app:layout_constraintStart_toStartOf="@+id/errorTitleTV"
+        app:layout_constraintTop_toBottomOf="@+id/errorTitleTV"
+        tools:text="Lorem ipsum dolor sit amet" />
+
+    <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+        android:id="@+id/retryButtonTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_20"
+        android:paddingHorizontal="@dimen/padding_30"
+        android:paddingVertical="@dimen/padding_8"
+        android:background="@drawable/bg_solid_white_stroke_1_primary_radius_5"
+        android:text="@string/button_refresh"
+        android:textAllCaps="false"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/errorMessageTv"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/errorGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="errorAnimationView,errorTitleTV,errorMessageTv,retryButtonTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

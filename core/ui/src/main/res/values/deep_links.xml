@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="deep_link_home_fragment" translatable="false">app://com.tasnimulhasan.thweather/home</string>
+</resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/ten"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerCl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_light_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationViewLv"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginVertical="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/delete_warning_anim" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.tasnimulhasan.designsystem.CustomMediumTV
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/title_warning"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerCl" />
+
+        <com.tasnimulhasan.designsystem.CustomTV
+            android:id="@+id/messageTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_10"
+            android:gravity="center"
+            android:text="@string/msg_delete_history"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+        <LinearLayout
+            android:id="@+id/buttonsLn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fifteen"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/messageTv">
+
+            <com.tasnimulhasan.designsystem.CustomMediumTV
+                android:id="@+id/negativeBtnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:background="@drawable/bg_solid_white_rounded_5_stroke_1_gray"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:padding="@dimen/five"
+                android:text="@string/button_no"
+                android:textColor="@color/primary_orange_light_1000"
+                android:textSize="@dimen/regular_text_size"
+                app:textAllCaps="true" />
+
+            <com.tasnimulhasan.designsystem.CustomMediumTV
+                android:id="@+id/positiveBtnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/margin_8"
+                android:background="@drawable/bg_solid_white_rounded_5_stroke_1_gray"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:padding="@dimen/padding_5"
+                android:text="@string/button_yes"
+                android:textColor="@color/green_light_1000"
+                android:textSize="@dimen/regular_text_size"
+                app:textAllCaps="true" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

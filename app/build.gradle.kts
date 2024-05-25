@@ -76,6 +76,7 @@ dependencies {
 
     implementation(libs.bundles.androidx.core.dependencies)
     implementation(libs.bundles.androidx.lifecycle.dependencies)
+    implementation(libs.bundles.rxjava3.dependencies)
     implementation(libs.bundles.androidx.navigation.dependencies)
 
     implementation(libs.timber)

@@ -6,6 +6,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://oss.jfrog.org/libs-snapshot")
         maven("https://www.jitpack.io")
     }
 }
@@ -16,11 +17,13 @@ dependencyResolutionManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://www.jitpack.io")
+        maven("https://oss.jfrog.org/libs-snapshot")
     }
 }
 
-rootProject.name = "THWeather"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "THWeather"
 include(":app")
 
 //Feature module

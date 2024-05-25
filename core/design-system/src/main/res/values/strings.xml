@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">THWeather</string>
+
+    <!--    String resource naming convention-->
+    <!--    https://github.com/leapfrogtechnology/android-guidelines/blob/master/ResourcesGuidelines.md-->
+
+    <!--    Prefix	        Description-->
+    <!--    error_	        Used for error messages-->
+    <!--    title_	        Used for dialog titles-->
+    <!--    action_	        Used for option menu actions-->
+    <!--    msg_	        Used for generic message such as in a dialog-->
+    <!--    label_	        Used for activity labels-->
+    <!--    button_	        Used for button text-->
+    <!--    hint_	        Used for hint-->
+    <!--    desc_	        Used for image descriptions-->
+    <!--    heading_        Used for heading-->
+    <!--    format_         Used for format string-->
+
+    <!--    button string resources-->
+    <string name="button_refresh">Refresh</string>
+    <string name="button_no">No</string>
+    <string name="button_yes">Yes</string>
+    <!--    button string resources-->
+
+    <!--    heading string resources-->
+    <string name="heading_no_internet_connection">Unable to connect Internet!</string>
+    <string name="heading_oops">Oops!</string>
+    <!--    heading string resources-->
+
+    <!--    message string resources-->
+    <string name="msg_delete_history">Are you sure, want to remove this history?</string>
+    <string name="msg_no_internet_connection">It seems there is something wrong with your internet connection, please check your internet and retry.</string>
+    <!--    message string resources-->
+
+    <!--    error string resources-->
+    <!--    error string resources-->
+
+    <!--    hint string resources-->
+    <!--    hint string resources-->
+
+    <!--    label string resources-->
+    <!--    label string resources-->
+
+    <!--    title string resources-->
+    <string name="title_warning">Warning!</string>
+    <!--    title string resources-->
+
+    <!--    action string resources-->
+    <!--    action string resources-->
+
+    <!--    description string resources-->
+    <string name="desc_image_content_description">filer_image_toolbar</string>
+    <!--    description string resources-->
+
+    <!--    value string resources-->
+    <!--    value string resources-->
+
+    <!--    format string resources-->
+    <string name="format_app_version">%s - (%s)</string>
+    <!--    format string resources-->
+</resources>

@@ -28,6 +28,8 @@ sdpVersion = "1.1.0"
 lottieAnimation = "5.2.0"
 picassoVersion = "2.71828"
 swipeLayoutVersion = "1.1.0"
+dateced = "1.1.1"
+datePicker = "4.2.3"
 
 mapVersion = "18.2.0"
 mapLocationVersion = "21.2.0"
@@ -42,6 +44,8 @@ androidxEspresso = "3.5.1"
 
 okhttp3Version = "4.12.0"
 retrofitVersion = "2.9.0"
+rxJava3Version = "3.1.8"
+rxAndroid3Version = "3.0.2"
 
 gsonVersion = "2.10.1"
 
@@ -87,6 +91,8 @@ coil = {group = "io.coil-kt", name = "coil", version.ref = "coil"}
 lottie-animation = {group = "com.airbnb.android", name = "lottie", version.ref = "lottieAnimation"}
 picasso = {group = "com.squareup.picasso", name = "picasso", version.ref = "picassoVersion"}
 androidx-swipe-refresh = {group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeLayoutVersion"}
+dateced = {group = "com.github.kamrul3288", name = "dateced", version.ref = "dateced"}
+date-picker = {group = "com.wdullaer", name = "materialdatetimepicker", version.ref = "datePicker"}
 
 room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
 room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
@@ -107,6 +113,10 @@ retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "
 retrofit-json-converter = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 okhttp = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3Version"}
 okhttp-intercepter = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version"}
+
+retrofit-rxjava3-adapter = {group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofitVersion"}
+rx-java3 = {group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxJava3Version"}
+rx-java3-android = {group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxAndroid3Version"}
 
 test-junit = {group = "junit", name = "junit", version.ref="junit"}
 test-extjunit = {group = "androidx.test.ext", name = "junit", version.ref="junitVersion"}
@@ -142,10 +152,15 @@ room-dependencies = [
 ]
 network-dependencies = [
     "retrofit",
+    "retrofit.rxjava3.adapter",
     "retrofit.json.converter",
     "okhttp",
     "okhttp.intercepter",
     "gson",
+]
+rxjava3-dependencies = [
+    "rx.java3",
+    "rx.java3.android",
 ]
 androidx-navigation-dependencies = [
     "navigation.fragment",

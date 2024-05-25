@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nav_graph_main" type="id">@id/nav_graph_main</item>
+    <item name="loginFragment" type="id">@id/loginFragment</item>
+    <item name="changePasswordFragment" type="id">@id/changePasswordFragment</item>
+
+    <item name="homeFragment" type="id">@id/homeFragment</item>
+    <item name="settingFragment" type="id">@id/settingFragment</item>
+</resources>

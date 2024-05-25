@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0sp</dimen>
+    <dimen name="one">@dimen/_1sdp</dimen>
+    <dimen name="two">@dimen/_2sdp</dimen>
+    <dimen name="two_and_half">2.5sp</dimen>
+    <dimen name="three">@dimen/_3sdp</dimen>
+    <dimen name="five">@dimen/_5sdp</dimen>
+    <dimen name="eight">@dimen/_8sdp</dimen>
+    <dimen name="ten">@dimen/_10sdp</dimen>
+    <dimen name="twelve">@dimen/_12sdp</dimen>
+    <dimen name="thirteen">@dimen/_13sdp</dimen>
+    <dimen name="fourteen">@dimen/_14sdp</dimen>
+    <dimen name="fifteen">@dimen/_15sdp</dimen>
+    <dimen name="sixteen">@dimen/_16sdp</dimen>
+    <dimen name="eighteen">@dimen/_18sdp</dimen>
+    <dimen name="twenty">@dimen/_20sdp</dimen>
+    <dimen name="twentyFive">@dimen/_25sdp</dimen>
+    <dimen name="thirty">@dimen/_30sdp</dimen>
+    <dimen name="thirtyFive">@dimen/_35sdp</dimen>
+    <dimen name="forty">@dimen/_40sdp</dimen>
+    <dimen name="fifty">@dimen/_50sdp</dimen>
+    <dimen name="sixty">@dimen/_60sdp</dimen>
+
+    <dimen name="regular_icon_size">@dimen/_20sdp</dimen>
+    <dimen name="large_icon_size">@dimen/_25sdp</dimen>
+    <dimen name="extra_large_icon_size">@dimen/_30sdp</dimen>
+    <dimen name="small_icon_size">@dimen/_15sdp</dimen>
+    <dimen name="extra_small_icon_size">@dimen/_10sdp</dimen>
+
+    <dimen name="large_image_size">@dimen/_80sdp</dimen>
+    <dimen name="large_card_size">@dimen/_70sdp</dimen>
+    <dimen name="profile_image_size">@dimen/_50sdp</dimen>
+
+
+    <dimen name="divider_height">@dimen/_2sdp</dimen>
+
+    <dimen name="main_logo_height">@dimen/_100sdp</dimen>
+    <dimen name="min_weight_shift">100dp</dimen>
+    <dimen name="main_logo_width">@dimen/_150sdp</dimen>
+
+    <dimen name="margin_left">@dimen/_5sdp</dimen>
+    <dimen name="margin_right">@dimen/_5sdp</dimen>
+    <dimen name="margin_top">@dimen/_5sdp</dimen>
+    <dimen name="margin_bottom">@dimen/_5sdp</dimen>
+    <dimen name="margin_2">@dimen/_2sdp</dimen>
+    <dimen name="margin_4">@dimen/_4sdp</dimen>
+    <dimen name="margin_5">@dimen/_5sdp</dimen>
+    <dimen name="margin_8">@dimen/_8sdp</dimen>
+    <dimen name="margin_10">@dimen/_10sdp</dimen>
+    <dimen name="margin_12">@dimen/_12sdp</dimen>
+    <dimen name="margin_15">@dimen/_15sdp</dimen>
+    <dimen name="margin_20">@dimen/_20sdp</dimen>
+    <dimen name="margin_25">@dimen/_25sdp</dimen>
+    <dimen name="margin_30">@dimen/_30sdp</dimen>
+    <dimen name="margin_40">@dimen/_40sdp</dimen>
+    <dimen name="margin_50">@dimen/_50sdp</dimen>
+    <dimen name="margin_60">@dimen/_60sdp</dimen>
+    <dimen name="margin_70">@dimen/_70sdp</dimen>
+    <dimen name="margin_80">@dimen/_80sdp</dimen>
+    <dimen name="margin_90">@dimen/_90sdp</dimen>
+    <dimen name="margin_100">@dimen/_100sdp</dimen>
+
+    <dimen name="padding_left">@dimen/_5sdp</dimen>
+    <dimen name="padding_right">@dimen/_5sdp</dimen>
+    <dimen name="padding_top">@dimen/_5sdp</dimen>
+    <dimen name="padding_bottom">@dimen/_5sdp</dimen>
+    <dimen name="padding_2">@dimen/_2sdp</dimen>
+    <dimen name="padding_4">@dimen/_4sdp</dimen>
+    <dimen name="padding_5">@dimen/_5sdp</dimen>
+    <dimen name="padding_8">@dimen/_8sdp</dimen>
+    <dimen name="padding_10">@dimen/_10sdp</dimen>
+    <dimen name="padding_12">@dimen/_12sdp</dimen>
+    <dimen name="padding_15">@dimen/_15sdp</dimen>
+    <dimen name="padding_20">@dimen/_20sdp</dimen>
+    <dimen name="padding_25">@dimen/_25sdp</dimen>
+    <dimen name="padding_30">@dimen/_30sdp</dimen>
+    <dimen name="padding_35">@dimen/_35sdp</dimen>
+    <dimen name="padding_40">@dimen/_40sdp</dimen>
+
+    <dimen name="h1">@dimen/_24sdp</dimen>
+    <dimen name="h2">@dimen/_20sdp</dimen>
+    <dimen name="h3">@dimen/_18sdp</dimen>
+    <dimen name="h4">@dimen/_16sdp</dimen>
+    <dimen name="h5">@dimen/_14sdp</dimen>
+    <dimen name="h6">@dimen/_12sdp</dimen>
+
+    <dimen name="regular_text_size">@dimen/_13sdp</dimen>
+    <dimen name="title_text_size">@dimen/_16sdp</dimen>
+    <dimen name="sub_title_text_size">@dimen/_13sdp</dimen>
+    <dimen name="small_text_size">@dimen/_11sdp</dimen>
+    <dimen name="small_medium_text_size">@dimen/_10sdp</dimen>
+    <dimen name="medium_text_size">@dimen/_14sdp</dimen>
+    <dimen name="extra_small_text_size">@dimen/_9sdp</dimen>
+    <dimen name="large_text_size">@dimen/_16sdp</dimen>
+    <dimen name="extra_large_text_size">@dimen/_18sdp</dimen>
+
+    <dimen name="line_space">@dimen/_4sdp</dimen>
+</resources>
