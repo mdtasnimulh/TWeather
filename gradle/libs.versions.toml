@@ -1,0 +1,182 @@
+[versions]
+androidGradlePlugin = "8.4.1"
+androidTools = "31.4.1"
+kotlin = "1.9.23"
+ksp = "1.9.23-1.0.20"
+googleServices = "4.4.1"
+
+androidxAppCompat = "1.6.1"
+androidxCore = "1.13.1"
+material = "1.12.0"
+androidxActivity = "1.9.0"
+fragmentVersion = "1.7.1"
+recyclerViewVersion = "1.3.2"
+cardViewVersion = "1.0.0"
+constraintlayout = "2.1.4"
+androidxCoreSplashscreen = "1.0.1"
+androidxDataStore = "1.1.1"
+
+hilt = "2.51"
+hiltExt = "1.2.0"
+hiltNavigationFragmentVersion = "1.2.0"
+
+room = "2.6.1"
+navigationVersion = "2.7.7"
+timberVersion = "5.0.1"
+coil = "2.6.0"
+sdpVersion = "1.1.0"
+lottieAnimation = "5.2.0"
+picassoVersion = "2.71828"
+swipeLayoutVersion = "1.1.0"
+
+mapVersion = "18.2.0"
+mapLocationVersion = "21.2.0"
+mapPlaceVersion = "17.0.0"
+libraryPlaceVersion = "3.4.0"
+
+coroutinesVersion = "1.8.0"
+androidxLifecycle = "2.8.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+androidxEspresso = "3.5.1"
+
+okhttp3Version = "4.12.0"
+retrofitVersion = "2.9.0"
+
+gsonVersion = "2.10.1"
+
+[libraries]
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidxActivity" }
+androidx-fragment = {group = "androidx.fragment",name = "fragment-ktx", version.ref = "fragmentVersion"}
+androidx-viewmodel-ktx = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle"}
+androidx-viewmodel-save-state = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "androidxLifecycle"}
+androidx-livedata = {group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle"}
+androidx-lifecycle-runtime = {group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle"}
+androidx-lifecycle-service = {group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "androidxLifecycle"}
+
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-recycler-view = {group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerViewVersion"}
+card-view = {group = "androidx.cardview", name = "cardview", version.ref = "cardViewVersion"}
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+sdp = {group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpVersion"}
+ssp = {group = "com.intuit.ssp", name = "ssp-android", version.ref = "sdpVersion"}
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+androidx-dataStore-core = { group = "androidx.datastore", name = "datastore", version.ref = "androidxDataStore" }
+
+navigation-fragment = {group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationVersion"}
+navigation-ui = {group = "androidx.navigation", name = "navigation-ui-ktx" ,version.ref = "navigationVersion"}
+
+hilt-android = {group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-compiler = {group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
+hilt-navigation = {group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hiltNavigationFragmentVersion"}
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+
+kotlin-coroutines = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion"}
+
+gson = {group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion"}
+timber = {group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion"}
+coil = {group = "io.coil-kt", name = "coil", version.ref = "coil"}
+lottie-animation = {group = "com.airbnb.android", name = "lottie", version.ref = "lottieAnimation"}
+picasso = {group = "com.squareup.picasso", name = "picasso", version.ref = "picassoVersion"}
+androidx-swipe-refresh = {group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swipeLayoutVersion"}
+
+room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
+room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
+room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
+room-common = {group = "androidx.room", name = "room-common", version.ref = "room"}
+
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "mapVersion" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "mapLocationVersion" }
+play-services-places = { group = "com.google.android.gms", name = "play-services-places", version.ref = "mapPlaceVersion" }
+library-places = { group = "com.google.android.libraries.places", name = "places", version.ref = "libraryPlaceVersion" }
+
+lint-api = { group = "com.android.tools.lint", name = "lint-api", version.ref = "androidTools" }
+lint-checks = { group = "com.android.tools.lint", name = "lint-checks", version.ref = "androidTools" }
+lint-tests = { group = "com.android.tools.lint", name = "lint-tests", version.ref = "androidTools" }
+android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+
+retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion"}
+retrofit-json-converter = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
+okhttp = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3Version"}
+okhttp-intercepter = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Version"}
+
+test-junit = {group = "junit", name = "junit", version.ref="junit"}
+test-extjunit = {group = "androidx.test.ext", name = "junit", version.ref="junitVersion"}
+test-espresso = {group = "androidx.test.espresso", name = "espresso-core", version.ref="androidxEspresso"}
+
+[bundles]
+androidx-core-dependencies = [
+    "androidx.appcompat",
+    "androidx.core.ktx",
+    "material",
+    "androidx.recycler.view",
+    "androidx.constraintlayout",
+    "card.view",
+    "androidx.activity",
+    "androidx.fragment",
+]
+play-services-maps = [
+    "play.services.maps",
+    "play.services.location",
+    "play.services.places",
+    "library.places"
+]
+androidx-lifecycle-dependencies = [
+    "androidx.viewmodel.ktx",
+    "androidx.viewmodel.save.state",
+    "androidx.livedata",
+    "androidx.lifecycle.runtime",
+    "androidx.lifecycle.service",
+]
+room-dependencies = [
+    "room.ktx",
+    "room.runtime",
+]
+network-dependencies = [
+    "retrofit",
+    "retrofit.json.converter",
+    "okhttp",
+    "okhttp.intercepter",
+    "gson",
+]
+androidx-navigation-dependencies = [
+    "navigation.fragment",
+    "navigation.ui",
+    "hilt.navigation"
+]
+android-responsive-size-dependencies = [
+    "sdp",
+    "ssp"
+]
+
+[plugins]
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion" }
+
+# Plugins defined by this project
+thweather-android-application = { id = "thweather.android.application", version = "unspecified" }
+thweather-android-feature = { id = "thweather.android.feature", version = "unspecified" }
+thweather-android-hilt = { id = "thweather.android.hilt", version = "unspecified" }
+thweather-android-library = { id = "thweather.android.library", version = "unspecified" }
+thweather-android-lint = { id = "thweather.android.lint", version = "unspecified" }
+thweather-android-navigation = { id = "thweather.android.navigation", version = "unspecified" }
+thweather-android-room = { id = "thweather.android.room", version = "unspecified" }
+thweather-jvm-library = { id = "thweather.jvm.library", version = "unspecified" }
