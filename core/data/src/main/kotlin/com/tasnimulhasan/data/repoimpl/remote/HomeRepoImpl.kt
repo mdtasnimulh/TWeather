@@ -7,7 +7,7 @@ import com.tasnimulhasan.data.mapper.mapFromApiResponse
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.repository.remote.HomeWeatherRepository
-import com.tasnimulhasan.entity.home.HomeWeatherApiEntity
+import com.tasnimulhasan.entity.home.WeatherApiEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class HomeRepoImpl @Inject constructor(
     private val weatherApiMapper: WeatherApiMapper,
     private val networkBoundResources: NetworkBoundResource
 ) : HomeWeatherRepository {
-    override suspend fun fetchHomeWeatherData(params: HomeWeatherApiUseCase.Params): Flow<ApiResult<HomeWeatherApiEntity>> {
+    override suspend fun fetchHomeWeatherData(params: HomeWeatherApiUseCase.Params): Flow<ApiResult<WeatherApiEntity>> {
         return mapFromApiResponse(
             result = networkBoundResources.downloadData {
                 apiService.getHomeWeather(

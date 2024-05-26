@@ -1,5 +1,7 @@
 package com.tasnimulhasan.common.constant
 
+import com.tasnimulhasan.designsystem.R as Res
+
 object AppConstants {
     const val DATA_PER_PAGE = 20
     var IS_DATA_SET_CHANGED = false
@@ -20,4 +22,31 @@ object AppConstants {
     const val BASE_URL = "https://api.openweathermap.org/data/3.0/"
 
     const val ONE_CALL_API_END_POINT = "onecall?"
+
+    val iconList = listOf(
+        WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.clear_sky_day),
+        WeatherIcon(id = 2, iconId = "01n", iconRes = Res.drawable.clear_sky_night),
+        WeatherIcon(id = 3, iconId = "02d", iconRes = Res.drawable.few_clouds_d),
+        WeatherIcon(id = 4, iconId = "02n", iconRes = Res.drawable.few_clouds_n),
+        WeatherIcon(id = 5, iconId = "03d", iconRes = Res.drawable.scater_clouds),
+        WeatherIcon(id = 6, iconId = "03n", iconRes = Res.drawable.scater_clouds),
+        WeatherIcon(id = 7, iconId = "04d", iconRes = Res.drawable.broken_clouds),
+        WeatherIcon(id = 8, iconId = "04n", iconRes = Res.drawable.broken_clouds),
+        WeatherIcon(id = 9, iconId = "09d", iconRes = Res.drawable.rain_d),
+        WeatherIcon(id = 10, iconId = "09n", iconRes = Res.drawable.rain_n),
+        WeatherIcon(id = 11, iconId = "10d", iconRes = Res.drawable.rain_d),
+        WeatherIcon(id = 12, iconId = "10n", iconRes = Res.drawable.rain_n),
+        WeatherIcon(id = 13, iconId = "11d", iconRes = Res.drawable.thunder_d),
+        WeatherIcon(id = 14, iconId = "11n", iconRes = Res.drawable.thunder_n),
+        WeatherIcon(id = 15, iconId = "13d", iconRes = Res.drawable.snow),
+        WeatherIcon(id = 16, iconId = "13n", iconRes = Res.drawable.snow),
+        WeatherIcon(id = 17, iconId = "50d", iconRes = Res.drawable.mist_d),
+        WeatherIcon(id = 18, iconId = "50n", iconRes = Res.drawable.mist_n),
+    )
+
+    data class WeatherIcon(
+        val id: Int,
+        val iconId: String,
+        val iconRes: Int
+    )
 }

@@ -57,5 +57,6 @@
 
     <!--    format string resources-->
     <string name="format_app_version">%s - (%s)</string>
+    <string name="format_current_weather">%.1f°C</string>
     <!--    format string resources-->
 </resources>

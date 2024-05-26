@@ -3,7 +3,7 @@ package com.tasnimulhasan.home
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.base.BaseViewModel
-import com.tasnimulhasan.entity.home.HomeWeatherApiEntity
+import com.tasnimulhasan.entity.home.WeatherApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,7 +52,7 @@ sealed interface UiEvent {
 sealed interface UiState {
     data class Loading(val loading: Boolean) : UiState
     data class Error(val message: String) : UiState
-    data class ApiSuccess(val weatherData: HomeWeatherApiEntity) : UiState
+    data class ApiSuccess(val weatherData: WeatherApiEntity) : UiState
 }
 
 sealed interface UiAction {

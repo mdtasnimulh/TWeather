@@ -5,12 +5,14 @@ import androidx.fragment.app.viewModels
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
-import com.tasnimulhasan.entity.home.HomeWeatherApiEntity
+import com.tasnimulhasan.entity.home.CurrentWeatherValue
+import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.tasnimulhasan.designsystem.R as Res
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(){
@@ -37,11 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         viewModel.uiState.execute { uiState ->
             when (uiState) {
                 is UiState.Loading -> this showLoader uiState.loading
-
-                is UiState.ApiSuccess -> {
-                    this showWeatherData uiState.weatherData
-                }
-
+                is UiState.ApiSuccess -> this showWeatherData uiState.weatherData
                 is UiState.Error -> errorHandler.dataError(uiState.message){ /*NA*/ }
             }
         }
@@ -53,14 +51,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         }
     }
 
-    private infix fun showWeatherData(weatherData: HomeWeatherApiEntity){
+    private infix fun showWeatherData(weatherData: WeatherApiEntity){
         binding.apply {
-            showToastMessage("Weather Data Fetched!")
+            setCurrentWeatherIcon(weatherData.currentWeather.currentWeatherValue)
+            currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeather.currentTemp)
+            currentWeatherConditionTv.text = weatherData.currentWeather.currentWeatherValue[0].currentWeatherCondition
         }
     }
 
+    private fun setCurrentWeatherIcon(currentWeatherValue: List<CurrentWeatherValue>) {
+        AppConstants.iconList.find { weatherValue ->
+            weatherValue.iconId == currentWeatherValue[0].currentWeatherIcon
+        }?.iconRes?.let { icon -> binding.currentWeatherIconIv.setImageResource(icon) }
+    }
+
     private fun bindUiEvent() {
-        viewModel.uiEvent.execute { uiEvent ->
+        viewModel.uiEvent.execute { _ ->
 
         }
     }
