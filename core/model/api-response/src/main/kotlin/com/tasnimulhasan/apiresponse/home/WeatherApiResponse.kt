@@ -1,41 +1,42 @@
 package com.tasnimulhasan.apiresponse.home
 
-data class HomeWeatherApiResponse(
+data class WeatherApiResponse(
     val current: Current?,
     val daily: List<Daily>?,
     val hourly: List<Hourly>?,
-    val lat: Int?,
-    val lon: Int?,
+    val lat: Double?,
+    val lon: Double?,
     val minutely: List<Minutely>?,
     val timezone: String?,
-    val timezoneOffset: Int?
+    val timezone_offset: Int?
 )
 
 data class Current(
     val clouds: Int?,
-    val dewPoint: Double?,
+    val dew_point: Double?,
     val dt: Int?,
-    val feelsLike: Double?,
+    val feels_like: Double?,
     val humidity: Int?,
     val pressure: Int?,
+    val rain: Rain?,
     val sunrise: Int?,
     val sunset: Int?,
     val temp: Double?,
-    val uvi: Int?,
+    val uvi: Double?,
     val visibility: Int?,
-    val weather: List<Weather?>?,
-    val windDeg: Int?,
-    val windGust: Double?,
-    val windSpeed: Double?
+    val weather: List<Weather>?,
+    val wind_deg: Int?,
+    val wind_gust: Double?,
+    val wind_speed: Double?
 )
 
 data class Daily(
     val clouds: Int?,
-    val dewPoint: Double?,
+    val dew_point: Double?,
     val dt: Int?,
-    val feelsLike: FeelsLike?,
+    val feels_like: FeelsLike?,
     val humidity: Int?,
-    val moonPhase: Double?,
+    val moon_phase: Double?,
     val moonrise: Int?,
     val moonset: Int?,
     val pop: Double?,
@@ -47,9 +48,9 @@ data class Daily(
     val temp: Temp?,
     val uvi: Double?,
     val weather: List<Weather>?,
-    val windDeg: Int?,
-    val windGust: Double?,
-    val windSpeed: Double?
+    val wind_deg: Int?,
+    val wind_gust: Double?,
+    val wind_speed: Double?
 )
 
 data class FeelsLike(
@@ -61,9 +62,9 @@ data class FeelsLike(
 
 data class Hourly(
     val clouds: Int?,
-    val dewPoint: Double?,
+    val dew_point: Double?,
     val dt: Int?,
-    val feelsLike: Double?,
+    val feels_like: Double?,
     val humidity: Int?,
     val pop: Double?,
     val pressure: Int?,
@@ -72,18 +73,18 @@ data class Hourly(
     val uvi: Double?,
     val visibility: Int?,
     val weather: List<Weather>?,
-    val windDeg: Int?,
-    val windGust: Double?,
-    val windSpeed: Double?
+    val wind_deg: Int?,
+    val wind_gust: Double?,
+    val wind_speed: Double?
 )
 
 data class Minutely(
     val dt: Int?,
-    val precipitation: Int?
+    val precipitation: Double?
 )
 
 data class Rain(
-    val h: Double?
+    val `1h`: Double?
 )
 
 data class Temp(

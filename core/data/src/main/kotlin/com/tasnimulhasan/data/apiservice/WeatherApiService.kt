@@ -1,6 +1,6 @@
 package com.tasnimulhasan.data.apiservice
 
-import com.tasnimulhasan.apiresponse.home.HomeWeatherApiResponse
+import com.tasnimulhasan.apiresponse.home.WeatherApiResponse
 import com.tasnimulhasan.common.constant.AppConstants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,6 +14,6 @@ interface WeatherApiService {
         @Query("lon") lon: String?,
         @Query("appid") appid: String?,
         @Query("units") units: String?,
-    ) : Response<HomeWeatherApiResponse>
+    ) : Response<WeatherApiResponse>
 
 }

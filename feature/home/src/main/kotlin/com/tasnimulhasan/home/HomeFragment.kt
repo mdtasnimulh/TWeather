@@ -33,15 +33,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         bindUiEvent()
         onClickListener()
 
-
+        viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
     }
 
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
-                is UiState.Loading -> binding.helloTv.setTextColor(
-                    ContextCompat.getColor(requireContext(), Res.color.color_EC250D)
-                )
+                is UiState.Loading -> {
+                    binding.helloTv.setTextColor(
+                        ContextCompat.getColor(requireContext(), Res.color.color_EC250D)
+                    )
+                    binding.helloTv.text = "Loading"
+                }
 
                 is UiState.ApiSuccess -> {
                     showToastMessage(uiState.weatherData.toString())
@@ -67,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     private fun onClickListener(){
         binding.apply {
             helloTv.clickWithDebounce {
-                viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
+
             }
         }
     }
