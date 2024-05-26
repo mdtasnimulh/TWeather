@@ -36,13 +36,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
-                is UiState.Loading -> {
-                    this showLoader uiState.loading
-                }
+                is UiState.Loading -> this showLoader uiState.loading
 
                 is UiState.ApiSuccess -> {
                     this showWeatherData uiState.weatherData
                 }
+
+                is UiState.Error -> errorHandler.dataError(uiState.message){ /*NA*/ }
             }
         }
     }
@@ -61,11 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     private fun bindUiEvent() {
         viewModel.uiEvent.execute { uiEvent ->
-            when (uiEvent) {
-                is UiEvent.ShowError -> {
-                    showToastMessage(uiEvent.message)
-                }
-            }
+
         }
     }
 

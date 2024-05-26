@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
         execute {
             homeWeatherApiUseCase.execute(params).collect{ result ->
                 when (result) {
-                    is ApiResult.Error -> _uiEvent.send(UiEvent.ShowError(result.message))
+                    is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
                     is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
                     is ApiResult.Success -> _uiState.value = UiState.ApiSuccess(result.data)
                 }
@@ -46,11 +46,12 @@ class HomeViewModel @Inject constructor(
 }
 
 sealed interface UiEvent {
-    data class ShowError(val message: String) : UiEvent
+
 }
 
 sealed interface UiState {
     data class Loading(val loading: Boolean) : UiState
+    data class Error(val message: String) : UiState
     data class ApiSuccess(val weatherData: HomeWeatherApiEntity) : UiState
 }
 
