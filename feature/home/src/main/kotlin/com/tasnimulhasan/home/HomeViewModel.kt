@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,15 +35,9 @@ class HomeViewModel @Inject constructor(
         execute {
             homeWeatherApiUseCase.execute(params).collect{ result ->
                 when (result) {
-                    is ApiResult.Error -> {
-                        _uiEvent.send(UiEvent.ShowError(result.message))
-                        Timber.e("chkWeatherData ${result.message}${result.code}")
-                    }
+                    is ApiResult.Error -> _uiEvent.send(UiEvent.ShowError(result.message))
                     is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> {
-                        Timber.e("chkWeatherData ${result.data}")
-                        _uiState.value = UiState.ApiSuccess(result.data)
-                    }
+                    is ApiResult.Success -> _uiState.value = UiState.ApiSuccess(result.data)
                 }
             }
         }

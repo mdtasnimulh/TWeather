@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         viewModel.uiState.execute { uiState ->
             when (uiState) {
                 is UiState.Loading -> {
-                    this showLoader(uiState.loading)
+                    this showLoader uiState.loading
                 }
 
                 is UiState.ApiSuccess -> {

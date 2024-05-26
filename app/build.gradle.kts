@@ -54,6 +54,11 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    sourceSets {
+        getByName("main") {
+            java.srcDir("src/main/kotlin")
+        }
+    }
 }
 
 dependencies {
