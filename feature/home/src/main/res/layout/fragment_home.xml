@@ -14,17 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.tasnimulhasan.designsystem.CustomBoldTv
-            android:id="@+id/helloTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Home Fragment"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/large_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

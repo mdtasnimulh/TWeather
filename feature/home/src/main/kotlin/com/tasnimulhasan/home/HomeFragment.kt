@@ -1,19 +1,16 @@
 package com.tasnimulhasan.home
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.gson.Gson
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
-import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
+import com.tasnimulhasan.entity.home.HomeWeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.tasnimulhasan.designsystem.R as Res
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(){
@@ -40,20 +37,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
         viewModel.uiState.execute { uiState ->
             when (uiState) {
                 is UiState.Loading -> {
-                    binding.helloTv.setTextColor(
-                        ContextCompat.getColor(requireContext(), Res.color.color_EC250D)
-                    )
-                    binding.helloTv.text = "Loading"
+                    this showLoader(uiState.loading)
                 }
 
                 is UiState.ApiSuccess -> {
-                    showToastMessage(uiState.weatherData.toString())
-                    binding.helloTv.setTextColor(
-                        ContextCompat.getColor(requireContext(), Res.color.textColor)
-                    )
-                    binding.helloTv.text = "${uiState.weatherData}"
+                    this showWeatherData uiState.weatherData
                 }
             }
+        }
+    }
+
+    private infix fun showLoader(loading: Boolean) {
+        if (loading) {
+            showToastMessage("Loading, Please Wait!")
+        }
+    }
+
+    private infix fun showWeatherData(weatherData: HomeWeatherApiEntity){
+        binding.apply {
+            showToastMessage("Weather Data Fetched!")
         }
     }
 
@@ -69,9 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     private fun onClickListener(){
         binding.apply {
-            helloTv.clickWithDebounce {
 
-            }
         }
     }
 
