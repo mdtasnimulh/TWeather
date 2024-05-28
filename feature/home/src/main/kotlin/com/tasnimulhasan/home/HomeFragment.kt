@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
-import com.tasnimulhasan.entity.home.CurrentWeatherValue
+import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
@@ -53,15 +53,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     private infix fun showWeatherData(weatherData: WeatherApiEntity){
         binding.apply {
-            setCurrentWeatherIcon(weatherData.currentWeather.currentWeatherValue)
-            currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeather.currentTemp)
-            currentWeatherConditionTv.text = weatherData.currentWeather.currentWeatherValue[0].currentWeatherCondition
+            setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
+            currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
+            currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
         }
     }
 
-    private fun setCurrentWeatherIcon(currentWeatherValue: List<CurrentWeatherValue>) {
+    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
         AppConstants.iconList.find { weatherValue ->
-            weatherValue.iconId == currentWeatherValue[0].currentWeatherIcon
+            weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon -> binding.currentWeatherIconIv.setImageResource(icon) }
     }
 
