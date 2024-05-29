@@ -82,6 +82,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
                     getString(UI.string.deep_link_weather_details_fragment).toUri()
                 )
             }
+
+            currentWeatherTv.clickWithDebounce {
+                navigateToDestination(
+                    getString(UI.string.deep_link_city_search_fragment).toUri()
+                )
+            }
         }
     }
 

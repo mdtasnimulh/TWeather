@@ -40,6 +40,7 @@
 
     <!--    label string resources-->
     <string name="label_weather_overview">Weather Overview</string>
+    <string name="label_city">Cities</string>
     <!--    label string resources-->
 
     <!--    title string resources-->

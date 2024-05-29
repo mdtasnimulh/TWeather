@@ -37,7 +37,9 @@
             <option value="$PROJECT_DIR$/core/shared-pref" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/city" />
             <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/weather-details" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

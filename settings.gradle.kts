@@ -29,6 +29,7 @@ include(":app")
 //Feature module
 include(":feature:home")
 include(":feature:weather-details")
+include(":feature:city")
 
 //Core module
 include(":core:cache")

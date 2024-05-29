@@ -1,6 +1,6 @@
 package com.tasnimulhasan.apiresponse.details
 
-data class WeatherOverviewApiResponse(
+data class WeatherDetailsApiResponse(
     val date: String?,
     val lat: Double?,
     val lon: Double?,

@@ -1,6 +1,7 @@
 package com.tasnimulhasan.data.apiservice
 
-import com.tasnimulhasan.apiresponse.details.WeatherOverviewApiResponse
+import com.tasnimulhasan.apiresponse.city.SearchApiResponse
+import com.tasnimulhasan.apiresponse.details.WeatherDetailsApiResponse
 import com.tasnimulhasan.apiresponse.home.WeatherApiResponse
 import com.tasnimulhasan.common.constant.AppConstants
 import retrofit2.Response
@@ -23,6 +24,13 @@ interface WeatherApiService {
         @Query("lon") lon: String?,
         @Query("appid") appid: String?,
         @Query("units") units: String?,
-    ) : Response<WeatherOverviewApiResponse>
+    ) : Response<WeatherDetailsApiResponse>
+
+    @GET(AppConstants.CITY_SEARCH_END_POINT)
+    suspend fun fetchCityName(
+        @Query("q") q: String?,
+        @Query("limit") limit: Int?,
+        @Query("appid") appid: String?,
+    ) : Response<SearchApiResponse>
 
 }

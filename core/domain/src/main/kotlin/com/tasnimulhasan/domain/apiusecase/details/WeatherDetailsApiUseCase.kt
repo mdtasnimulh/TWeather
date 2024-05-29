@@ -2,12 +2,12 @@ package com.tasnimulhasan.domain.apiusecase.details
 
 import com.tasnimulhasan.domain.repository.remote.HomeWeatherRepository
 import com.tasnimulhasan.domain.usecase.ApiUseCaseParams
-import com.tasnimulhasan.entity.details.WeatherOverviewApiEntity
+import com.tasnimulhasan.entity.details.WeatherDetailsApiEntity
 import javax.inject.Inject
 
-class WeatherOverviewApiUseCase @Inject constructor(
+class WeatherDetailsApiUseCase @Inject constructor(
     private val repository: HomeWeatherRepository
-) : ApiUseCaseParams<WeatherOverviewApiUseCase.Params, WeatherOverviewApiEntity> {
+) : ApiUseCaseParams<WeatherDetailsApiUseCase.Params, WeatherDetailsApiEntity> {
 
     data class Params(
         val lat: String,

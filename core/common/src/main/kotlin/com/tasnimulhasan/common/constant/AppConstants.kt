@@ -19,10 +19,11 @@ object AppConstants {
 
     const val OPEN_WEATHER_API_KEY = "50f6d992404ddb49ea466d1da2bbef99"
     const val DATA_UNIT = "metric"
-    const val BASE_URL = "https://api.openweathermap.org/data/3.0/"
+    const val BASE_URL = "https://api.openweathermap.org/"
 
-    const val ONE_CALL_API_END_POINT = "onecall?"
-    const val ONE_CALL_OVERVIEW_API_END_POINT = "onecall/overview?"
+    const val ONE_CALL_API_END_POINT = "data/3.0/onecall?"
+    const val ONE_CALL_OVERVIEW_API_END_POINT = "data/3.0/onecall/overview?"
+    const val CITY_SEARCH_END_POINT = "geo/1.0/direct?"
 
     val iconList = listOf(
         WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.clear_sky_day),
