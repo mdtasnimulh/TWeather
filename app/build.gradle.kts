@@ -64,6 +64,7 @@ android {
 dependencies {
     with(projects) {
         implementation(feature.home)
+        implementation(feature.weatherDetails)
     }
 
     with(projects.core){

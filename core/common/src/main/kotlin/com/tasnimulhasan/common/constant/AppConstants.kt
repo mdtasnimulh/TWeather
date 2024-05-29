@@ -22,6 +22,7 @@ object AppConstants {
     const val BASE_URL = "https://api.openweathermap.org/data/3.0/"
 
     const val ONE_CALL_API_END_POINT = "onecall?"
+    const val ONE_CALL_OVERVIEW_API_END_POINT = "onecall/overview?"
 
     val iconList = listOf(
         WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.clear_sky_day),

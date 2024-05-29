@@ -1,9 +1,12 @@
 package com.tasnimulhasan.home
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
+import com.tasnimulhasan.common.extfun.clickWithDebounce
+import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
@@ -13,6 +16,7 @@ import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
+import com.tasnimulhasan.ui.R as UI
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(){
@@ -73,7 +77,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
 
     private fun onClickListener(){
         binding.apply {
-
+            currentWeatherIconIv.clickWithDebounce {
+                navigateToDestination(
+                    getString(UI.string.deep_link_weather_details_fragment).toUri()
+                )
+            }
         }
     }
 

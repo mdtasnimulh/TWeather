@@ -1,6 +1,6 @@
 package com.tasnimulhasan.thweather.di
 
-import com.tasnimulhasan.data.repoimpl.remote.HomeRepoImpl
+import com.tasnimulhasan.data.repoimpl.remote.WeatherRepoImpl
 import com.tasnimulhasan.domain.repository.remote.HomeWeatherRepository
 import dagger.Binds
 import dagger.Module
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 interface RepositoryModule {
 
     @Binds
-    fun bindHomeWeatherRepository(homeRepoImpl: HomeRepoImpl): HomeWeatherRepository
+    fun bindHomeWeatherRepository(weatherRepoImpl: WeatherRepoImpl): HomeWeatherRepository
 
 }

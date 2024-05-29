@@ -1,5 +1,6 @@
 package com.tasnimulhasan.data.apiservice
 
+import com.tasnimulhasan.apiresponse.details.WeatherOverviewApiResponse
 import com.tasnimulhasan.apiresponse.home.WeatherApiResponse
 import com.tasnimulhasan.common.constant.AppConstants
 import retrofit2.Response
@@ -15,5 +16,13 @@ interface WeatherApiService {
         @Query("appid") appid: String?,
         @Query("units") units: String?,
     ) : Response<WeatherApiResponse>
+
+    @GET(AppConstants.ONE_CALL_OVERVIEW_API_END_POINT)
+    suspend fun fetchWeatherOverView(
+        @Query("lat") lat: String?,
+        @Query("lon") lon: String?,
+        @Query("appid") appid: String?,
+        @Query("units") units: String?,
+    ) : Response<WeatherOverviewApiResponse>
 
 }

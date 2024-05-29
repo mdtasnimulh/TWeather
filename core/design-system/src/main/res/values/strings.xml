@@ -39,6 +39,7 @@
     <!--    hint string resources-->
 
     <!--    label string resources-->
+    <string name="label_weather_overview">Weather Overview</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
