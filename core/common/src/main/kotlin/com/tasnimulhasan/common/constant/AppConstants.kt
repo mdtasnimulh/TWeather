@@ -25,30 +25,66 @@ object AppConstants {
     const val ONE_CALL_OVERVIEW_API_END_POINT = "data/3.0/onecall/overview?"
     const val CITY_SEARCH_END_POINT = "geo/1.0/direct?"
 
-    val iconList = listOf(
-        WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.clear_sky_day),
-        WeatherIcon(id = 2, iconId = "01n", iconRes = Res.drawable.clear_sky_night),
-        WeatherIcon(id = 3, iconId = "02d", iconRes = Res.drawable.few_clouds_d),
-        WeatherIcon(id = 4, iconId = "02n", iconRes = Res.drawable.few_clouds_n),
-        WeatherIcon(id = 5, iconId = "03d", iconRes = Res.drawable.scater_clouds),
-        WeatherIcon(id = 6, iconId = "03n", iconRes = Res.drawable.scater_clouds),
-        WeatherIcon(id = 7, iconId = "04d", iconRes = Res.drawable.broken_clouds),
-        WeatherIcon(id = 8, iconId = "04n", iconRes = Res.drawable.broken_clouds),
-        WeatherIcon(id = 9, iconId = "09d", iconRes = Res.drawable.rain_d),
-        WeatherIcon(id = 10, iconId = "09n", iconRes = Res.drawable.rain_n),
-        WeatherIcon(id = 11, iconId = "10d", iconRes = Res.drawable.rain_d),
-        WeatherIcon(id = 12, iconId = "10n", iconRes = Res.drawable.rain_n),
-        WeatherIcon(id = 13, iconId = "11d", iconRes = Res.drawable.thunder_d),
-        WeatherIcon(id = 14, iconId = "11n", iconRes = Res.drawable.thunder_n),
-        WeatherIcon(id = 15, iconId = "13d", iconRes = Res.drawable.snow),
-        WeatherIcon(id = 16, iconId = "13n", iconRes = Res.drawable.snow),
-        WeatherIcon(id = 17, iconId = "50d", iconRes = Res.drawable.mist_d),
-        WeatherIcon(id = 18, iconId = "50n", iconRes = Res.drawable.mist_n),
+    //--- Weather Condition Names ---//
+    const val WEATHER_CONDITION_CLEAR_SKY = "Clear Sky"
+    const val WEATHER_CONDITION_FEW_CLOUDS = "Few Clouds"
+    const val WEATHER_CONDITION_SCATTERED_CLOUDS = "Scattered Clouds"
+    const val WEATHER_CONDITION_BROKEN_CLOUDS = "Broken Clouds"
+    const val WEATHER_CONDITION_SHOWER_RAIN = "Shower Rain"
+    const val WEATHER_CONDITION_RAIN = "Rain"
+    const val WEATHER_CONDITION_THUNDERSTORM = "Thunderstorm"
+    const val WEATHER_CONDITION_SNOW = "Snow"
+    const val WEATHER_CONDITION_MIST = "Mist"
+    //--- Weather Condition Names ---//
+
+    //--- Weather Icon Sets ---//
+    val iconSetOne = listOf(
+        WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.clear_sky_day, condition = WEATHER_CONDITION_CLEAR_SKY),
+        WeatherIcon(id = 2, iconId = "01n", iconRes = Res.drawable.clear_sky_night, condition = WEATHER_CONDITION_CLEAR_SKY),
+        WeatherIcon(id = 3, iconId = "02d", iconRes = Res.drawable.few_clouds_d, condition = WEATHER_CONDITION_FEW_CLOUDS),
+        WeatherIcon(id = 4, iconId = "02n", iconRes = Res.drawable.few_clouds_n, condition = WEATHER_CONDITION_FEW_CLOUDS),
+        WeatherIcon(id = 5, iconId = "03d", iconRes = Res.drawable.scater_clouds, condition = WEATHER_CONDITION_SCATTERED_CLOUDS),
+        WeatherIcon(id = 6, iconId = "03n", iconRes = Res.drawable.scater_clouds, condition = WEATHER_CONDITION_SCATTERED_CLOUDS),
+        WeatherIcon(id = 7, iconId = "04d", iconRes = Res.drawable.broken_clouds, condition = WEATHER_CONDITION_BROKEN_CLOUDS),
+        WeatherIcon(id = 8, iconId = "04n", iconRes = Res.drawable.broken_clouds, condition = WEATHER_CONDITION_BROKEN_CLOUDS),
+        WeatherIcon(id = 9, iconId = "09d", iconRes = Res.drawable.rain_d, condition = WEATHER_CONDITION_SHOWER_RAIN),
+        WeatherIcon(id = 10, iconId = "09n", iconRes = Res.drawable.rain_n, condition =WEATHER_CONDITION_SHOWER_RAIN),
+        WeatherIcon(id = 11, iconId = "10d", iconRes = Res.drawable.rain_d, condition = WEATHER_CONDITION_RAIN),
+        WeatherIcon(id = 12, iconId = "10n", iconRes = Res.drawable.rain_n, condition = WEATHER_CONDITION_RAIN),
+        WeatherIcon(id = 13, iconId = "11d", iconRes = Res.drawable.thunder_d, condition = WEATHER_CONDITION_THUNDERSTORM),
+        WeatherIcon(id = 14, iconId = "11n", iconRes = Res.drawable.thunder_n, condition = WEATHER_CONDITION_THUNDERSTORM),
+        WeatherIcon(id = 15, iconId = "13d", iconRes = Res.drawable.snow, condition = WEATHER_CONDITION_SNOW),
+        WeatherIcon(id = 16, iconId = "13n", iconRes = Res.drawable.snow, condition = WEATHER_CONDITION_SNOW),
+        WeatherIcon(id = 17, iconId = "50d", iconRes = Res.drawable.mist_d, condition = WEATHER_CONDITION_MIST),
+        WeatherIcon(id = 18, iconId = "50n", iconRes = Res.drawable.mist_n, condition = WEATHER_CONDITION_MIST),
     )
+
+    val iconSetTwo = listOf(
+        WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.ic_clear_sky_day, condition = WEATHER_CONDITION_CLEAR_SKY),
+        WeatherIcon(id = 2, iconId = "01n", iconRes = Res.drawable.ic_clear_sky_night, condition = WEATHER_CONDITION_CLEAR_SKY),
+        WeatherIcon(id = 3, iconId = "02d", iconRes = Res.drawable.ic_cloudy_day, condition = WEATHER_CONDITION_FEW_CLOUDS),
+        WeatherIcon(id = 4, iconId = "02n", iconRes = Res.drawable.ic_cloud_night, condition = WEATHER_CONDITION_FEW_CLOUDS),
+        WeatherIcon(id = 5, iconId = "03d", iconRes = Res.drawable.ic_overcast_cloud, condition = WEATHER_CONDITION_SCATTERED_CLOUDS),
+        WeatherIcon(id = 6, iconId = "03n", iconRes = Res.drawable.ic_overcast_cloud, condition = WEATHER_CONDITION_SCATTERED_CLOUDS),
+        WeatherIcon(id = 7, iconId = "04d", iconRes = Res.drawable.ic_sunny_day, condition = WEATHER_CONDITION_BROKEN_CLOUDS),
+        WeatherIcon(id = 8, iconId = "04n", iconRes = Res.drawable.ic_night, condition = WEATHER_CONDITION_BROKEN_CLOUDS),
+        WeatherIcon(id = 9, iconId = "09d", iconRes = Res.drawable.ic_stormy_weather, condition = WEATHER_CONDITION_SHOWER_RAIN),
+        WeatherIcon(id = 10, iconId = "09n", iconRes = Res.drawable.ic_stormy_weather, condition =WEATHER_CONDITION_SHOWER_RAIN),
+        WeatherIcon(id = 11, iconId = "10d", iconRes = Res.drawable.ic_rain, condition = WEATHER_CONDITION_RAIN),
+        WeatherIcon(id = 12, iconId = "10n", iconRes = Res.drawable.ic_rain, condition = WEATHER_CONDITION_RAIN),
+        WeatherIcon(id = 13, iconId = "11d", iconRes = Res.drawable.ic_thunderstorm, condition = WEATHER_CONDITION_THUNDERSTORM),
+        WeatherIcon(id = 14, iconId = "11n", iconRes = Res.drawable.ic_thunderstorm, condition = WEATHER_CONDITION_THUNDERSTORM),
+        WeatherIcon(id = 15, iconId = "13d", iconRes = Res.drawable.ic_snow_fall, condition = WEATHER_CONDITION_SNOW),
+        WeatherIcon(id = 16, iconId = "13n", iconRes = Res.drawable.ic_snow_fall, condition = WEATHER_CONDITION_SNOW),
+        WeatherIcon(id = 17, iconId = "50d", iconRes = Res.drawable.ic_fogg, condition = WEATHER_CONDITION_MIST),
+        WeatherIcon(id = 18, iconId = "50n", iconRes = Res.drawable.ic_fogg, condition = WEATHER_CONDITION_MIST),
+    )
+    //--- Weather Icon Sets ---//
 
     data class WeatherIcon(
         val id: Int,
         val iconId: String,
-        val iconRes: Int
+        val iconRes: Int,
+        val condition: String
     )
 }

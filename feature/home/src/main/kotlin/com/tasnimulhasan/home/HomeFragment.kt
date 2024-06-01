@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     }
 
     private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
-        AppConstants.iconList.find { weatherValue ->
+        AppConstants.iconSetTwo.find { weatherValue ->
             weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon -> binding.currentWeatherIconIv.setImageResource(icon) }
     }
@@ -78,15 +78,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(){
     private fun onClickListener(){
         binding.apply {
             currentWeatherIconIv.clickWithDebounce {
-                navigateToDestination(
-                    getString(UI.string.deep_link_weather_details_fragment).toUri()
-                )
+                navigateToDestination(getString(UI.string.deep_link_weather_details_fragment).toUri())
             }
 
             currentWeatherTv.clickWithDebounce {
-                navigateToDestination(
-                    getString(UI.string.deep_link_city_search_fragment).toUri()
-                )
+                navigateToDestination(getString(UI.string.deep_link_city_search_fragment).toUri())
             }
         }
     }

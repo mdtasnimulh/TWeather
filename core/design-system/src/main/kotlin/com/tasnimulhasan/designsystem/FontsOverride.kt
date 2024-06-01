@@ -4,11 +4,12 @@ import android.content.Context
 import android.graphics.Typeface
 
 object FontsOverride {
-    const val REGULAR_FONT = "fonts/Inter-Regular.ttf"
-    const val BOLD_FONT = "fonts/Inter-Bold.ttf"
-    const val SEMI_BOLD_FONT = "fonts/Inter-SemiBold.ttf"
-    const val MEDIUM_FONT = "fonts/Inter-Medium.ttf"
-    const val ITALIC_FONT = "fonts/Inter-Italic.ttf"
+    const val REGULAR_FONT = "fonts/JetBrainsMono-Regular.ttf"
+    const val BOLD_FONT = "fonts/JetBrainsMono-Bold.ttf"
+    const val SEMI_BOLD_FONT = "fonts/JetBrainsMono-SemiBold.ttf"
+    const val EXTRA_BOLD_FONT = "fonts/JetBrainsMono-ExtraBold.ttf"
+    const val MEDIUM_FONT = "fonts/JetBrainsMono-Medium.ttf"
+    const val ITALIC_FONT = "fonts/JetBrainsMono-Italic.ttf"
 
     fun setDefaultFont(context: Context, staticTypefaceFieldName: String, fontAssetName: String) {
         val regular = Typeface.createFromAsset(context.assets, fontAssetName)

@@ -17,6 +17,9 @@ android {
         versionCode = AppConfig.VERSION_CODE
         versionName = AppConfig.VERSION_NAME
 
+        /*renderscriptTargetApi = AppConfig.MIN_SDK_VERSION
+        renderscriptSupportModeEnabled = true*/
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

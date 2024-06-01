@@ -5,7 +5,7 @@ kotlin = "1.9.23"
 ksp = "1.9.23-1.0.20"
 googleServices = "4.4.1"
 
-androidxAppCompat = "1.6.1"
+androidxAppCompat = "1.7.0"
 androidxCore = "1.13.1"
 material = "1.12.0"
 androidxActivity = "1.9.0"
@@ -22,6 +22,7 @@ hiltNavigationFragmentVersion = "1.2.0"
 
 room = "2.6.1"
 navigationVersion = "2.7.7"
+shimmer = "0.5.0"
 timberVersion = "5.0.1"
 coil = "2.6.0"
 sdpVersion = "1.1.0"
@@ -32,12 +33,12 @@ dateced = "1.1.1"
 datePicker = "4.2.3"
 
 mapVersion = "18.2.0"
-mapLocationVersion = "21.2.0"
-mapPlaceVersion = "17.0.0"
-libraryPlaceVersion = "3.4.0"
+mapLocationVersion = "21.3.0"
+mapPlaceVersion = "17.1.0"
+libraryPlaceVersion = "3.5.0"
 
 coroutinesVersion = "1.8.0"
-androidxLifecycle = "2.8.0"
+androidxLifecycle = "2.8.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 androidxEspresso = "3.5.1"
@@ -70,6 +71,7 @@ androidx-recycler-view = {group = "androidx.recyclerview", name = "recyclerview"
 card-view = {group = "androidx.cardview", name = "cardview", version.ref = "cardViewVersion"}
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 sdp = {group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdpVersion"}
+shimmer = { group = "com.facebook.shimmer", name="shimmer", version.ref = "shimmer" }
 ssp = {group = "com.intuit.ssp", name = "ssp-android", version.ref = "sdpVersion"}
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 androidx-dataStore-core = { group = "androidx.datastore", name = "datastore", version.ref = "androidxDataStore" }

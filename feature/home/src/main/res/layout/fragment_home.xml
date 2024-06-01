@@ -16,38 +16,52 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/currentWeatherIconIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            tools:src="@mipmap/ic_launcher"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="-30dp"
+            android:layout_marginEnd="-30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_stormy_weather" />
+
+        <View
+            android:id="@+id/viewContainer"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="-30dp"
+            android:layout_marginEnd="-30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.tasnimulhasan.designsystem.CustomBoldTv
             android:id="@+id/currentWeatherTv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            tools:text="29°C"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/thirtyFive"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintHorizontal_bias="0"
             android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/currentWeatherIconIv"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_35ssp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="29.00°C" />
 
         <com.tasnimulhasan.designsystem.CustomMediumTV
             android:id="@+id/currentWeatherConditionTv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2"
-            tools:text="Cloudy"
-            android:textSize="@dimen/regular_text_size"
-            android:textColor="@color/color_172B4D80"
-            app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
+            android:textColor="@color/subTextColor"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintHorizontal_bias="0"
+            android:textSize="@dimen/_20ssp"
+            android:includeFontPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
-            app:layout_constraintEnd_toEndOf="@id/currentWeatherTv"/>
+            app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
+            tools:text="Cloudy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

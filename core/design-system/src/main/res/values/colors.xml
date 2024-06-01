@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#40CD86</color>
-    <color name="colorPrimaryDark">#48A43F</color>
-    <color name="colorAccent">#1ABC83</color>
+    <color name="colorPrimary">@color/color_3</color>
+    <color name="colorPrimaryDark">@color/color_6</color>
+    <color name="colorAccent">@color/color_5</color>
 
-    <color name="textColor">#172B4D</color>
+    <color name="color_1">#C076B4</color>
+    <color name="color_2">#9164D1</color>
+    <color name="color_3">#844DC7</color>
+    <color name="color_4">#AC82D5</color>
+    <color name="color_5">#673AB7</color>
+    <color name="color_6">#5C1BAE</color>
+    <color name="color_7">#40CD86</color>
+    <color name="color_8">#48A43F</color>
+    <color name="color_9">#1ABC83</color>
+    <color name="color_10">#3E1A6C</color>
+    <color name="color_11">#6E4F95</color>
+
+    <color name="textColor">@color/color_10</color>
+    <color name="subTextColor">@color/color_11</color>
     <color name="child_text_color">#8B95A6</color>
     <color name="offWhiteBackground">#80FAF7ED</color>
     <color name="divider_color">#F3F3FA</color>
