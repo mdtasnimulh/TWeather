@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/featureUi"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/currentWeatherIconIv"
@@ -31,7 +31,7 @@
             android:layout_marginTop="-30dp"
             android:layout_marginEnd="-30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.tasnimulhasan.designsystem.CustomBoldTv
             android:id="@+id/currentWeatherTv"
@@ -39,28 +39,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_30sdp"
-            app:layout_constraintWidth_percent="0.75"
-            app:layout_constraintHorizontal_bias="0"
-            android:includeFontPadding="false"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/_35ssp"
+            android:textSize="@dimen/_60ssp"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="29.00°C" />
+            app:layout_constraintWidth_percent="0.75"
+            tools:text="29°C" />
 
         <com.tasnimulhasan.designsystem.CustomMediumTV
             android:id="@+id/currentWeatherConditionTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/subTextColor"
-            app:layout_constraintWidth_percent="0.4"
-            app:layout_constraintHorizontal_bias="0"
-            android:textSize="@dimen/_20ssp"
             android:includeFontPadding="false"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
             app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
+            app:layout_constraintWidth_percent="0.4"
             tools:text="Cloudy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -68,12 +68,12 @@
     <include
         android:id="@+id/errorUi"
         layout="@layout/error_ui"
-        android:layout_height="0dp"
         android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
