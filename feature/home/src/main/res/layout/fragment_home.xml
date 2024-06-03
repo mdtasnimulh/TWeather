@@ -33,15 +33,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.tasnimulhasan.designsystem.CustomMediumTV
+            android:id="@+id/currentCityTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_12"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/currentWeatherTv"
+            app:layout_constraintEnd_toEndOf="@+id/currentWeatherTv"
+            app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
+            tools:text="Dhaka, Bangladesh" />
+
         <com.tasnimulhasan.designsystem.CustomBoldTv
             android:id="@+id/currentWeatherTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/margin_30"
+            android:includeFontPadding="false"
             android:textColor="@color/textColor"
             android:textSize="@dimen/_60ssp"
-            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="@+id/currentWeatherIconIv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +76,14 @@
             app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
             app:layout_constraintWidth_percent="0.4"
             tools:text="Cloudy" />
+
+        <include android:id="@+id/currentWeatherDetailsIncl"
+            layout="@layout/include_current_weather_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/currentWeatherIconIv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

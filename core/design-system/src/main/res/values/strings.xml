@@ -41,6 +41,14 @@
     <!--    label string resources-->
     <string name="label_weather_overview">Weather Overview</string>
     <string name="label_city">Cities</string>
+    <string name="label_real_feel">Real Feel</string>
+    <string name="label_humidity">Humidity</string>
+    <string name="label_wind_speed">Wind Speed</string>
+    <string name="label_wind">Wind</string>
+    <string name="label_pressure">Pressure</string>
+    <string name="label_rain">Rain</string>
+    <string name="label_precipitation">Precipitation</string>
+    <string name="label_uv_index">UV Index</string>">
     <!--    label string resources-->
 
     <!--    title string resources-->
