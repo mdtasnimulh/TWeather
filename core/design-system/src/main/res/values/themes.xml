@@ -62,4 +62,9 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_solid_white_top_round</item>
     </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_5sdp</item>
+    </style>
 </resources>

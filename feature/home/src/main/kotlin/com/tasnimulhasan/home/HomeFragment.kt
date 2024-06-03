@@ -42,6 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         uiStateObserver()
         bindUiEvent()
         onClickListener()
+        setDetailsTvTextColor()
 
         viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
     }
@@ -67,24 +68,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
             currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
             currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
-        }
-    }
 
-    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
-        AppConstants.iconSetTwo.find { weatherValue ->
-            weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
-        }?.iconRes?.let { icon ->
-            binding.currentWeatherIconIv.setImageResource(icon)
-            setTextColor(binding.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
+            currentWeatherDetailsIncl.apply {
+                maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
+                minValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMinimumTemperature)
+                visibilityValueTv.text = getString(Res.string.format_visibility, weatherData.currentWeatherData.currentVisibility/1000)
+                realFeelValueTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentFeelsLike)
+                humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
+                pressureValueTv.text = getString(Res.string.format_air_pressure, weatherData.currentWeatherData.currentPressure.toString())
+                windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
+                uvIndexValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
+                rainValueTv.text = getString(Res.string.format_rain, weatherData.currentWeatherData.currentRain)
+            }
         }
-    }
-
-    private fun setTextColor(textView: AppCompatTextView, palette: Palette) {
-        textView.paint.shader = LinearGradient(
-            0f, 0f, textView.paint.measureText(textView.text.toString()), textView.textSize,
-            palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
-            Shader.TileMode.CLAMP
-        )
     }
 
     private fun bindUiEvent() {
@@ -112,6 +108,52 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             appid = AppConstants.OPEN_WEATHER_API_KEY,
             units = AppConstants.DATA_UNIT
         )
+    }
+
+    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
+        AppConstants.iconSetTwo.find { weatherValue ->
+            weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
+        }?.iconRes?.let { icon ->
+            binding.currentWeatherIconIv.setImageResource(icon)
+            setTextColor(binding.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
+        }
+    }
+
+    private fun setTextColor(textView: AppCompatTextView, palette: Palette) {
+        textView.paint.shader = LinearGradient(
+            0f, 0f, textView.paint.measureText(textView.text.toString()), textView.textSize,
+            palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
+            Shader.TileMode.CLAMP
+        )
+    }
+
+    private fun setDetailsTvTextColor() {
+        binding.currentWeatherDetailsIncl.apply {
+            realFeelTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            humidityTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            pressureTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            uvIndexTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            windTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            rainTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
+            realFeelValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            humidityValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            pressureValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            uvIndexValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            windValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            rainValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+        }
+    }
+
+    private fun setDetailsValueTextColor(image: Int): Int{
+        return Palette.from(
+            ContextCompat.getDrawable(requireContext(), image)?.toBitmap()!!
+        ).generate().vibrantSwatch?.bodyTextColor ?: ContextCompat.getColor(requireContext(), Res.color.white)
+    }
+
+    private fun setDetailsTvTextColor(image: Int): Int{
+        return Palette.from(
+            ContextCompat.getDrawable(requireContext(), image)?.toBitmap()!!
+        ).generate().vibrantSwatch?.titleTextColor ?: ContextCompat.getColor(requireContext(), Res.color.white)
     }
 
     override fun isEnableEdgeToEdge() = true

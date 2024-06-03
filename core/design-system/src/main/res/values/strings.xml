@@ -49,6 +49,9 @@
     <string name="label_rain">Rain</string>
     <string name="label_precipitation">Precipitation</string>
     <string name="label_uv_index">UV Index</string>">
+    <string name="label_max">Max</string>
+    <string name="label_min">Min</string>
+    <string name="label_visibility">Visibility</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -68,5 +71,11 @@
     <!--    format string resources-->
     <string name="format_app_version">%s - (%s)</string>
     <string name="format_current_weather">%.0f°C</string>
+    <string name="format_humidity">%s%%</string>
+    <string name="format_air_pressure">%s mb</string>
+    <string name="format_wind">%.1f km/h</string>
+    <string name="format_uv_index">%.1f</string>
+    <string name="format_rain">%.1f%%</string>
+    <string name="format_visibility">%d km</string>
     <!--    format string resources-->
 </resources>

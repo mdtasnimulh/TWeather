@@ -5,359 +5,495 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/realFeelCv"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/maxCl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.40">
+        app:layout_constraintEnd_toStartOf="@+id/minCl">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/maxIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/realFeelIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/maxValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maxIv"
+            tools:text="35°C" />
 
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/realFeelValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/realFeelIv"
-                tools:text="35°C" />
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/maxTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_max"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maxValueTv" />
 
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/realFeelTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_real_feel"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/realFeelValueTv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/minCl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/margin_10"
+        app:layout_constraintStart_toEndOf="@+id/maxCl"
+        app:layout_constraintBottom_toBottomOf="@id/maxCl"
+        app:layout_constraintTop_toTopOf="@id/maxCl"
+        app:layout_constraintEnd_toStartOf="@+id/visibilityCl">
 
-    </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/minIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/humidityCv"
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/minValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/minIv"
+            tools:text="35°C" />
+
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/minTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_min"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/minValueTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/visibilityCl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margin_10"
+        app:layout_constraintStart_toEndOf="@+id/minCl"
+        app:layout_constraintBottom_toBottomOf="@id/maxCl"
+        app:layout_constraintTop_toTopOf="@id/maxCl"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/visibilityIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/visibilityValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/visibilityIv"
+            tools:text="90%" />
+
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/visibilityTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_visibility"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/visibilityValueTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/realFeelCl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/realFeelCv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/realFeelCv"
-        app:layout_constraintTop_toTopOf="@+id/realFeelCv">
+        android:layout_marginTop="@dimen/margin_10"
+        app:layout_constraintStart_toStartOf="@id/maxCl"
+        app:layout_constraintTop_toBottomOf="@id/maxCl"
+        app:layout_constraintEnd_toStartOf="@+id/humidityCl">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/realFeelIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/humidityIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/realFeelValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/realFeelIv"
+            tools:text="35°C" />
 
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/humidityValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/humidityIv"
-                tools:text="70.35%" />
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/realFeelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_real_feel"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/realFeelValueTv" />
 
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/humidityTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_humidity"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/humidityValueTv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/humidityCl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/margin_10"
+        app:layout_constraintStart_toEndOf="@+id/realFeelCl"
+        app:layout_constraintEnd_toStartOf="@+id/pressureCl"
+        app:layout_constraintTop_toTopOf="@+id/realFeelCl"
+        app:layout_constraintBottom_toBottomOf="@+id/realFeelCl">
 
-    </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/humidityIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/pressureCv"
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/humidityValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidityIv"
+            tools:text="70.35%" />
+
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/humidityTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_humidity"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidityValueTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pressureCl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@+id/humidityCl"
+        app:layout_constraintTop_toTopOf="@+id/realFeelCl"
+        app:layout_constraintBottom_toBottomOf="@+id/realFeelCl"
+        app:layout_constraintEnd_toEndOf="@id/visibilityCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pressureIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/pressureValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pressureIv"
+            tools:text="1000 hPa" />
+
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/pressureTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_pressure"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pressureValueTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/windCl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
-        app:layout_constraintStart_toStartOf="@+id/realFeelCv"
-        app:layout_constraintTop_toBottomOf="@+id/realFeelCv"
-        app:layout_constraintWidth_percent="0.60">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/pressureIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/pressureValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pressureIv"
-                tools:text="1000 hPa" />
-
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/pressureTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_pressure"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pressureValueTv" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/windCv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/pressureCv"
-        app:layout_constraintEnd_toEndOf="@+id/humidityCv"
-        app:layout_constraintStart_toEndOf="@+id/pressureCv"
-        app:layout_constraintTop_toTopOf="@+id/pressureCv">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/windIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/windValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/windIv"
-                tools:text="15 km/h" />
-
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/windTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_wind"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/windValueTv" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/uvIndexCv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
+        android:layout_marginVertical="@dimen/margin_10"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pressureCv"
-        app:layout_constraintTop_toBottomOf="@+id/pressureCv"
-        app:layout_constraintWidth_percent="0.45">
+        app:layout_constraintStart_toStartOf="@+id/realFeelCl"
+        app:layout_constraintTop_toBottomOf="@+id/realFeelCl"
+        app:layout_constraintEnd_toEndOf="@+id/realFeelCl">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/windIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/uvIndexIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/windValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/windIv"
+            tools:text="15 km/h" />
 
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/uvIndexValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/uvIndexIv"
-                tools:text="12" />
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/windTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_wind"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/windValueTv" />
 
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/uvIndexTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_uv_index"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/uvIndexValueTv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/rainCv"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/uviCl"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_weight="1"
-        app:cardCornerRadius="@dimen/_3sdp"
-        app:cardElevation="@dimen/_3sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/uvIndexCv"
-        app:layout_constraintEnd_toEndOf="@+id/humidityCv"
-        app:layout_constraintStart_toEndOf="@+id/uvIndexCv"
-        app:layout_constraintTop_toTopOf="@+id/uvIndexCv">
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/margin_10"
+        app:layout_constraintStart_toEndOf="@+id/windCl"
+        app:layout_constraintEnd_toStartOf="@+id/rainCl"
+        app:layout_constraintTop_toTopOf="@+id/windCl"
+        app:layout_constraintBottom_toBottomOf="@+id/windCl">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="@dimen/padding_4">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/uvIndexIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/rainIv"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_uvi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/uvIndexValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uvIndexIv"
+            tools:text="12" />
 
-            <com.tasnimulhasan.designsystem.CustomBoldTv
-                android:id="@+id/rainValueTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/regular_text_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rainIv"
-                tools:text="12%" />
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/uvIndexTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_uv_index"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uvIndexValueTv" />
 
-            <com.tasnimulhasan.designsystem.CustomMediumTV
-                android:id="@+id/rainTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:gravity="center"
-                android:text="@string/label_precipitation"
-                android:textColor="@color/subTextColor"
-                android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rainValueTv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rainCl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@+id/pressureCl"
+        app:layout_constraintTop_toTopOf="@+id/windCl"
+        app:layout_constraintBottom_toBottomOf="@+id/windCl"
+        app:layout_constraintEnd_toEndOf="@+id/pressureCl">
 
-    </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rainIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_uvi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/rainValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rainIv"
+            tools:text="12%" />
+
+        <com.tasnimulhasan.designsystem.CustomSemiBoldTV
+            android:id="@+id/rainTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center"
+            android:text="@string/label_precipitation"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rainValueTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dividerView1"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:background="@drawable/divider_dash_line_vertical"
+        android:layerType="software"
+        app:layout_constraintStart_toEndOf="@+id/realFeelCl"
+        app:layout_constraintEnd_toStartOf="@id/humidityCl"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dividerView2"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:background="@drawable/divider_dash_line_vertical"
+        android:layerType="software"
+        app:layout_constraintStart_toEndOf="@+id/humidityCl"
+        app:layout_constraintEnd_toStartOf="@id/pressureCl"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dividerView3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@drawable/divider_dash_line"
+        android:layerType="software"
+        app:layout_constraintTop_toBottomOf="@id/maxCl"
+        app:layout_constraintBottom_toTopOf="@id/realFeelCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dividerView4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="@drawable/divider_dash_line"
+        android:layerType="software"
+        app:layout_constraintTop_toBottomOf="@id/realFeelCl"
+        app:layout_constraintBottom_toTopOf="@id/windCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,6 +46,8 @@
     <dimen name="margin_2">@dimen/_2sdp</dimen>
     <dimen name="margin_4">@dimen/_4sdp</dimen>
     <dimen name="margin_5">@dimen/_5sdp</dimen>
+    <dimen name="margin_6">@dimen/_6sdp</dimen>
+    <dimen name="margin_7">@dimen/_7sdp</dimen>
     <dimen name="margin_8">@dimen/_8sdp</dimen>
     <dimen name="margin_10">@dimen/_10sdp</dimen>
     <dimen name="margin_12">@dimen/_12sdp</dimen>

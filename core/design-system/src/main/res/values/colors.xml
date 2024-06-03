@@ -15,6 +15,8 @@
     <color name="color_9">#1ABC83</color>
     <color name="color_10">#3E1A6C</color>
     <color name="color_11">#6E4F95</color>
+    <color name="color_12">#D8D8FE</color>
+    <color name="color_13">#B3B2FD</color>
 
     <color name="textColor">@color/color_10</color>
     <color name="subTextColor">@color/color_11</color>
