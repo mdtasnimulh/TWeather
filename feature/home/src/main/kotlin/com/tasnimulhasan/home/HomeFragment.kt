@@ -1,17 +1,11 @@
 package com.tasnimulhasan.home
 
-import android.graphics.Color
-import android.graphics.Color.alpha
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.alpha
-import androidx.core.graphics.blue
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.green
-import androidx.core.graphics.red
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.palette.graphics.Palette
@@ -27,7 +21,6 @@ import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.math.absoluteValue
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
 
@@ -89,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun setTextColor(textView: AppCompatTextView, palette: Palette) {
         textView.paint.shader = LinearGradient(
             0f, 0f, textView.paint.measureText(textView.text.toString()), textView.textSize,
-            palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF.toInt()),
+            palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
             Shader.TileMode.CLAMP
         )
     }
@@ -120,4 +113,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             units = AppConstants.DATA_UNIT
         )
     }
+
+    override fun isEnableEdgeToEdge() = true
 }

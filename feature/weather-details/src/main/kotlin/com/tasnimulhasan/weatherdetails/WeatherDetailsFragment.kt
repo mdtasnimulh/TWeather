@@ -84,4 +84,6 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
             units = AppConstants.DATA_UNIT
         )
     }
+
+    override fun isEnableEdgeToEdge() = false
 }

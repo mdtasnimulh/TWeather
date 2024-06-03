@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +24,7 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
     protected val  binding get() = _binding!!
     protected abstract fun viewBindingLayout(): V
     protected abstract fun initializeView(savedInstanceState: Bundle?)
+    protected abstract fun isEnableEdgeToEdge(): Boolean
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +32,7 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = viewBindingLayout()
+        setEdgeToEdge()
         initializeView(savedInstanceState)
         return binding.root
     }
@@ -59,7 +64,6 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        //requireActivity().hideKeyboard()
         _binding = null
     }
 
@@ -91,6 +95,27 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
     fun execute(job: suspend () -> Unit){
         lifecycleScope.launch {
             job.invoke()
+        }
+    }
+
+    private fun setEdgeToEdge() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            if (isEnableEdgeToEdge()) {
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    leftMargin = insets.left
+                    bottomMargin = insets.bottom
+                    rightMargin = insets.right
+                }
+            } else {
+                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    leftMargin = insets.left
+                    bottomMargin = insets.bottom
+                    rightMargin = insets.right
+                    topMargin = insets.top
+                }
+            }
+            WindowInsetsCompat.CONSUMED
         }
     }
 }

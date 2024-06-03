@@ -83,4 +83,6 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
             limit = 10
         )
     }
+
+    override fun isEnableEdgeToEdge() = false
 }

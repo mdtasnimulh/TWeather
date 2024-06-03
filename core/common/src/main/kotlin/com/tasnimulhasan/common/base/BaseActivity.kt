@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -18,6 +19,7 @@ abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
     protected abstract fun initializeView(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = viewBindingLayout()
         setContentView(binding.root)
