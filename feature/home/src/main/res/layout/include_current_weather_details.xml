@@ -317,7 +317,7 @@
             android:id="@+id/windIv"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/ic_uvi"
+            android:src="@drawable/wind"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -441,7 +441,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_2"
             android:gravity="center"
-            android:text="@string/label_precipitation"
+            android:text="@string/label_rain"
             android:textColor="@color/black"
             android:textSize="@dimen/small_text_size"
             android:includeFontPadding="false"

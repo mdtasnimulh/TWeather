@@ -1,6 +1,9 @@
 package com.tasnimulhasan.common.extfun
 
+import android.content.Context
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 
 fun Picasso.loadImage(drawable: Int, url: String, imageView: ImageView) {
@@ -19,4 +22,8 @@ fun ImageView.loadImageUrl(drawable: Int, url: String) {
 
     Picasso.get().load(imageUrl).placeholder(drawable)
         .into(this)
+}
+
+fun ImageView.loadGifImage(drawable: Int, context: Context) {
+    Glide.with(context).load(drawable).into(this)
 }

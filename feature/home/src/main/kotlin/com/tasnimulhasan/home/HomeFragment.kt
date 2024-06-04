@@ -1,9 +1,6 @@
 package com.tasnimulhasan.home
 
-import android.graphics.LinearGradient
-import android.graphics.Shader
 import android.os.Bundle
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
@@ -12,7 +9,11 @@ import androidx.palette.graphics.Palette
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
+import com.tasnimulhasan.common.extfun.loadGifImage
 import com.tasnimulhasan.common.extfun.navigateToDestination
+import com.tasnimulhasan.common.extfun.setDetailsTvTextColor
+import com.tasnimulhasan.common.extfun.setDetailsValueTextColor
+import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
@@ -28,13 +29,11 @@ import com.tasnimulhasan.ui.R as UI
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var errorHandler: ErrorUiHandler
-
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<HomeViewModel>()
 
-    override fun viewBindingLayout(): FragmentHomeBinding =
-        FragmentHomeBinding.inflate(layoutInflater)
+    override fun viewBindingLayout(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
@@ -42,7 +41,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         uiStateObserver()
         bindUiEvent()
         onClickListener()
-        setDetailsTvTextColor()
+        setDetailsTextColor()
+        setImage()
 
         viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
     }
@@ -119,41 +119,41 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setTextColor(textView: AppCompatTextView, palette: Palette) {
-        textView.paint.shader = LinearGradient(
-            0f, 0f, textView.paint.measureText(textView.text.toString()), textView.textSize,
-            palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
-            Shader.TileMode.CLAMP
-        )
-    }
-
-    private fun setDetailsTvTextColor() {
+    private fun setDetailsTextColor() {
         binding.currentWeatherDetailsIncl.apply {
-            realFeelTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            humidityTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            pressureTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            uvIndexTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            windTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            rainTv.setTextColor(setDetailsTvTextColor(Res.drawable.ic_uvi))
-            realFeelValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
-            humidityValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
-            pressureValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
-            uvIndexValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
-            windValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
-            rainValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.ic_uvi))
+            // text color for details title //
+            maxTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
+            minTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
+            visibilityTv.setTextColor(setDetailsTvTextColor(Res.drawable.visibility, requireContext()))
+            realFeelTv.setTextColor(setDetailsTvTextColor(Res.drawable.real_feel, requireContext()))
+            humidityTv.setTextColor(setDetailsTvTextColor(Res.drawable.current_humidity, requireContext()))
+            pressureTv.setTextColor(setDetailsTvTextColor(Res.drawable.air_pressure, requireContext()))
+            uvIndexTv.setTextColor(setDetailsTvTextColor(Res.drawable.uvi, requireContext()))
+            windTv.setTextColor(setDetailsTvTextColor(Res.drawable.wind, requireContext()))
+            rainTv.setTextColor(setDetailsTvTextColor(Res.drawable.rain, requireContext()))
+            // text color for details value //
+            maxValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.max_temp, requireContext()))
+            minValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.max_temp, requireContext()))
+            visibilityValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.visibility, requireContext()))
+            realFeelValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.real_feel, requireContext()))
+            humidityValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.current_humidity, requireContext()))
+            pressureValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.air_pressure, requireContext()))
+            uvIndexValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.uvi, requireContext()))
+            windValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.wind, requireContext()))
+            rainValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.rain, requireContext()))
         }
     }
 
-    private fun setDetailsValueTextColor(image: Int): Int{
-        return Palette.from(
-            ContextCompat.getDrawable(requireContext(), image)?.toBitmap()!!
-        ).generate().vibrantSwatch?.bodyTextColor ?: ContextCompat.getColor(requireContext(), Res.color.white)
-    }
-
-    private fun setDetailsTvTextColor(image: Int): Int{
-        return Palette.from(
-            ContextCompat.getDrawable(requireContext(), image)?.toBitmap()!!
-        ).generate().vibrantSwatch?.titleTextColor ?: ContextCompat.getColor(requireContext(), Res.color.white)
+    private fun setImage() {
+        binding.currentWeatherDetailsIncl.maxIv.loadGifImage(Res.drawable.max_temp, requireContext())
+        binding.currentWeatherDetailsIncl.minIv.loadGifImage(Res.drawable.max_temp, requireContext())
+        binding.currentWeatherDetailsIncl.visibilityIv.loadGifImage(Res.drawable.visibility, requireContext())
+        binding.currentWeatherDetailsIncl.realFeelIv.loadGifImage(Res.drawable.real_feel, requireContext())
+        binding.currentWeatherDetailsIncl.humidityIv.loadGifImage(Res.drawable.current_humidity, requireContext())
+        binding.currentWeatherDetailsIncl.pressureIv.loadGifImage(Res.drawable.air_pressure, requireContext())
+        binding.currentWeatherDetailsIncl.uvIndexIv.loadGifImage(Res.drawable.uvi, requireContext())
+        binding.currentWeatherDetailsIncl.windIv.loadGifImage(Res.drawable.wind, requireContext())
+        binding.currentWeatherDetailsIncl.rainIv.loadGifImage(Res.drawable.rain, requireContext())
     }
 
     override fun isEnableEdgeToEdge() = true

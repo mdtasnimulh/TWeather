@@ -19,4 +19,6 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.dateced)
     implementation(libs.date.picker)
+    implementation(libs.glide)
+    implementation(libs.androidx.palette)
 }

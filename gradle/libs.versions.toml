@@ -26,6 +26,7 @@ navigationVersion = "2.7.7"
 shimmer = "0.5.0"
 timberVersion = "5.0.1"
 coil = "2.6.0"
+glide = "4.16.0"
 sdpVersion = "1.1.0"
 lottieAnimation = "5.2.0"
 picassoVersion = "2.71828"
@@ -54,6 +55,7 @@ gsonVersion = "2.10.1"
 [libraries]
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 androidx-palette = { module = "androidx.palette:palette", version.ref = "palette" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
