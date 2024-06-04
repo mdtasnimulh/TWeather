@@ -24,7 +24,7 @@ fun setDetailsValueTextColor(image: Int, context: Context): Int{
 fun setTextColor(textView: AppCompatTextView, palette: Palette) {
     textView.paint.shader = LinearGradient(
         0f, 0f, textView.paint.measureText(textView.text.toString()), textView.textSize,
-        palette.lightVibrantSwatch?.rgb!!, (palette.lightVibrantSwatch?.rgb!! and 0x66FFFFFF),
+        palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
         Shader.TileMode.CLAMP
     )
 }
