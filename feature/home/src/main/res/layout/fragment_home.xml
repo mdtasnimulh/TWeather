@@ -52,6 +52,7 @@
                 android:textSize="@dimen/regular_text_size"
                 android:gravity="center_vertical"
                 android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawableTint="@color/color_4"
                 android:drawablePadding="@dimen/padding_4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"/>
