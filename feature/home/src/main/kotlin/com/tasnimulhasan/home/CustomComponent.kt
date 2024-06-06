@@ -2,9 +2,7 @@ package com.tasnimulhasan.home
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -16,8 +14,13 @@ class CustomComponent @JvmOverloads constructor(
 
     private var indicatorValue: Int = 0
     private var maxIndicatorValue: Int = 500
-    private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.black_opt_60)
-    private var foregroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.colorPrimary)
+    private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
+    private var foregroundIndicatorColors: IntArray = intArrayOf(
+        ContextCompat.getColor(context, R.color.green_light_500),
+        ContextCompat.getColor(context, R.color.green_light_700),
+        ContextCompat.getColor(context, R.color.green_light_900),
+        ContextCompat.getColor(context, R.color.green_light_1000)
+    )
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
     private var sweepAngle: Float = 0f
@@ -45,7 +48,10 @@ class CustomComponent @JvmOverloads constructor(
                 indicatorValue = getInt(R.styleable.CustomIndicatorView_indicatorValue, indicatorValue)
                 maxIndicatorValue = getInt(R.styleable.CustomIndicatorView_maxIndicatorValue, maxIndicatorValue)
                 backgroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_backgroundIndicatorColor, backgroundIndicatorColor)
-                foregroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_foregroundIndicatorColor, foregroundIndicatorColor)
+                val colorsArrayId = getResourceId(R.styleable.CustomIndicatorView_foregroundIndicatorColors, 0)
+                if (colorsArrayId != 0) {
+                    foregroundIndicatorColors = context.resources.getIntArray(colorsArrayId)
+                }
                 backgroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_backgroundIndicatorStrokeWidth, backgroundIndicatorStrokeWidth)
                 foregroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_foregroundIndicatorStrokeWidth, foregroundIndicatorStrokeWidth)
             } finally {
@@ -73,7 +79,11 @@ class CustomComponent @JvmOverloads constructor(
         backgroundPaint.color = backgroundIndicatorColor
         backgroundPaint.strokeWidth = backgroundIndicatorStrokeWidth
 
-        foregroundPaint.color = foregroundIndicatorColor
+        val gradientPositions = floatArrayOf(0f, 0.33f, 0.66f, 1f)
+        foregroundPaint.shader = LinearGradient(
+            rect.left, rect.top, rect.right, rect.bottom,
+            foregroundIndicatorColors, gradientPositions, Shader.TileMode.CLAMP
+        )
         foregroundPaint.strokeWidth = foregroundIndicatorStrokeWidth
 
         canvas.drawArc(rect, 150f, 240f, false, backgroundPaint)
@@ -92,3 +102,4 @@ class CustomComponent @JvmOverloads constructor(
         animator.start()
     }
 }
+
