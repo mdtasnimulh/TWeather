@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.ApiSuccess -> {
                     this showWeatherData uiState.weatherData
                     initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
+                    binding.airQualityIncl.customIndicatorView.setIndicatorValue(300)
                 }
             }
         }

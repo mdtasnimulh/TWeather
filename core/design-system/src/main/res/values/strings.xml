@@ -58,6 +58,7 @@
     <string name="title_warning">Warning!</string>
     <string name="title_today_weather">Today\'s Weather</string>
     <string name="title_weather_forecast">Weather Forecast</string>
+    <string name="title_air_quality">Air Quality</string>
     <!--    title string resources-->
 
     <!--    action string resources-->

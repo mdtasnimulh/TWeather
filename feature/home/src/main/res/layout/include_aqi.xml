@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.tasnimulhasan.designsystem.CustomBoldTv
+        android:id="@+id/todayWeatherTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:layout_marginStart="@dimen/margin_12"
+        android:text="@string/title_air_quality"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/regular_text_size"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_forward"
+        android:drawableTint="@color/secondary_blue_dark_200"
+        android:drawablePadding="@dimen/padding_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.tasnimulhasan.home.CustomComponent
+        android:id="@+id/customIndicatorView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_200sdp"
+        app:backgroundIndicatorColor="@color/gray"
+        app:backgroundIndicatorStrokeWidth="35dp"
+        app:foregroundIndicatorColor="@color/colorPrimary"
+        app:foregroundIndicatorStrokeWidth="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todayWeatherTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

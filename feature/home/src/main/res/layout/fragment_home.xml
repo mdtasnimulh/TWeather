@@ -51,7 +51,7 @@
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/regular_text_size"
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawableEnd="@drawable/ic_forward"
                 android:drawableTint="@color/color_4"
                 android:drawablePadding="@dimen/padding_4"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,14 @@
                 android:orientation="horizontal"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_hourly" />
+
+            <include android:id="@+id/airQualityIncl"
+                layout="@layout/include_aqi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/hourlyRv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomIndicatorView">
+        <attr name="indicatorValue" format="integer" />
+        <attr name="maxIndicatorValue" format="integer" />
+        <attr name="backgroundIndicatorColor" format="color" />
+        <attr name="foregroundIndicatorColor" format="color" />
+        <attr name="backgroundIndicatorStrokeWidth" format="dimension" />
+        <attr name="foregroundIndicatorStrokeWidth" format="dimension" />
+    </declare-styleable>
+</resources>
