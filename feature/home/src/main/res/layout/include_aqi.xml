@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.tasnimulhasan.home.CustomComponent
+    <com.tasnimulhasan.designsystem.CustomCircularProgress
         android:id="@+id/customIndicatorView"
         android:layout_width="0dp"
         android:layout_height="@dimen/_200sdp"

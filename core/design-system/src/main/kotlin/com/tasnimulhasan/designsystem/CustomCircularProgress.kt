@@ -1,4 +1,4 @@
-package com.tasnimulhasan.home
+package com.tasnimulhasan.designsystem
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -6,9 +6,8 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.tasnimulhasan.designsystem.R
 
-class CustomComponent @JvmOverloads constructor(
+class CustomCircularProgress @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
@@ -16,10 +15,12 @@ class CustomComponent @JvmOverloads constructor(
     private var maxIndicatorValue: Int = 500
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
     private var foregroundIndicatorColors: IntArray = intArrayOf(
-        ContextCompat.getColor(context, R.color.green_light_500),
         ContextCompat.getColor(context, R.color.green_light_700),
-        ContextCompat.getColor(context, R.color.green_light_900),
-        ContextCompat.getColor(context, R.color.green_light_1000)
+        ContextCompat.getColor(context, R.color.green_light_800),
+        ContextCompat.getColor(context, R.color.yellow_light_700),
+        ContextCompat.getColor(context, R.color.yellow_light_800),
+        ContextCompat.getColor(context, R.color.yellow_light_700),
+        ContextCompat.getColor(context, R.color.primary_orange_light_800),
     )
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
@@ -79,9 +80,9 @@ class CustomComponent @JvmOverloads constructor(
         backgroundPaint.color = backgroundIndicatorColor
         backgroundPaint.strokeWidth = backgroundIndicatorStrokeWidth
 
-        val gradientPositions = floatArrayOf(0f, 0.33f, 0.66f, 1f)
+        val gradientPositions = floatArrayOf(0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f)
         foregroundPaint.shader = LinearGradient(
-            rect.left, rect.top, rect.right, rect.bottom,
+            rect.left, rect.bottom, rect.right, rect.bottom,
             foregroundIndicatorColors, gradientPositions, Shader.TileMode.CLAMP
         )
         foregroundPaint.strokeWidth = foregroundIndicatorStrokeWidth
