@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.tasnimulhasan.designsystem.CustomBoldTv
         android:id="@+id/todayWeatherTv"
@@ -30,5 +31,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/todayWeatherTv" />
+
+    <com.tasnimulhasan.designsystem.CustomTV
+        android:id="@+id/aqiDescriptionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_60"
+        tools:text="Moderate"
+        android:textColor="@color/color_78849E"
+        android:textSize="@dimen/regular_text_size"
+        app:layout_constraintTop_toTopOf="@+id/customIndicatorView"
+        app:layout_constraintEnd_toEndOf="@+id/aqiValueTv"
+        app:layout_constraintStart_toStartOf="@+id/aqiValueTv" />
+
+    <com.tasnimulhasan.designsystem.CustomMediumTV
+        android:id="@+id/aqiTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-5dp"
+        android:text="@string/label_aqi"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/regular_text_size"
+        android:drawableStart="@drawable/ic_backward"
+        android:drawableEnd="@drawable/ic_forward"
+        android:drawablePadding="@dimen/padding_5"
+        android:drawableTint="@color/color_78849E"
+        app:layout_constraintBottom_toTopOf="@+id/aqiValueTv"
+        app:layout_constraintEnd_toEndOf="@+id/aqiValueTv"
+        app:layout_constraintStart_toStartOf="@+id/aqiValueTv" />
+
+    <com.tasnimulhasan.designsystem.CustomBoldTv
+        android:id="@+id/aqiValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="256"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_28ssp"
+        android:layout_marginBottom="@dimen/_22sdp"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toBottomOf="@+id/customIndicatorView"
+        app:layout_constraintStart_toStartOf="@id/customIndicatorView"
+        app:layout_constraintEnd_toEndOf="@id/customIndicatorView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

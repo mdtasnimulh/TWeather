@@ -9,6 +9,7 @@ import androidx.palette.graphics.Palette
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
+import com.tasnimulhasan.common.extfun.getColorForAqiName
 import com.tasnimulhasan.common.extfun.loadGifImage
 import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setDetailsTvTextColor
@@ -16,7 +17,8 @@ import com.tasnimulhasan.common.extfun.setDetailsValueTextColor
 import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
-import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
+import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
+import com.tasnimulhasan.entity.home.HourlyWeatherConditionData
 import com.tasnimulhasan.entity.home.HourlyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
@@ -24,6 +26,7 @@ import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.roundToInt
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
 
@@ -65,8 +68,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.ApiSuccess -> {
                     this showWeatherData uiState.weatherData
                     initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
-                    binding.airQualityIncl.customIndicatorView.setIndicatorValue(500)
                 }
+
+                is UiState.AirQualityIndex -> this showAirQualityIndex uiState.aqi
             }
         }
     }
@@ -79,9 +83,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
-            setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
+            setCurrentWeatherIcon(weatherData.hourlyWeatherData[0].hourlyWeatherCondition)
             currentWeatherHeaderIncl.currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
-            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
+            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.hourlyWeatherData[0].hourlyWeatherCondition[0].hourlyWeatherCondition
 
             currentWeatherDetailsIncl.apply {
                 maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
@@ -93,6 +97,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
                 uvIndexValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
                 rainValueTv.text = getString(Res.string.format_rain, weatherData.currentWeatherData.currentRain)
+            }
+        }
+    }
+
+    private infix fun showAirQualityIndex(aqi: List<AirQualityIndexApiEntity>) {
+        with(binding.airQualityIncl) {
+            aqiValueTv.text = getString(Res.string.format_aqi_pm1_5_value, aqi[0].aqiDetails.pm25)
+            customIndicatorView.setIndicatorValue(aqi[0].aqiDetails.pm25.roundToInt())
+
+            val matchingAqi = AppConstants.aqiValuesUs.find {
+                aqi[0].aqiDetails.pm25 in it.lowPm..it.highPm
+            }
+            aqiDescriptionTv.text = matchingAqi?.name
+            matchingAqi?.name.let {
+                aqiValueTv.setTextColor(ContextCompat.getColor(requireContext(), getColorForAqiName(it.toString())))
             }
         }
     }
@@ -115,9 +134,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
+    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<HourlyWeatherConditionData>) {
         AppConstants.iconSetTwo.find { weatherValue ->
-            weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
+            weatherValue.iconId == currentWeatherConditionData[0].hourlyWeatherIcon
         }?.iconRes?.let { icon ->
             binding.currentWeatherHeaderIncl.currentWeatherIconIv.setImageResource(icon)
             setTextColor(binding.currentWeatherHeaderIncl.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
@@ -126,7 +145,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun setDetailsTextColor() {
         binding.currentWeatherDetailsIncl.apply {
-            // text color for details title //
             maxTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
             minTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
             visibilityTv.setTextColor(setDetailsTvTextColor(Res.drawable.visibility, requireContext()))
@@ -136,7 +154,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             uvIndexTv.setTextColor(setDetailsTvTextColor(Res.drawable.uvi, requireContext()))
             windTv.setTextColor(setDetailsTvTextColor(Res.drawable.wind, requireContext()))
             rainTv.setTextColor(setDetailsTvTextColor(Res.drawable.rain, requireContext()))
-            // text color for details value //
+
             maxValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.max_temp, requireContext()))
             minValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.max_temp, requireContext()))
             visibilityValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.visibility, requireContext()))

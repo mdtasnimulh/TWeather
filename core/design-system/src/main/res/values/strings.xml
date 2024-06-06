@@ -52,6 +52,7 @@
     <string name="label_max">Max</string>
     <string name="label_min">Min</string>
     <string name="label_visibility">Visibility</string>
+    <string name="label_aqi">AQI</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -80,5 +81,6 @@
     <string name="format_uv_index">%.1f</string>
     <string name="format_rain">%.1f%%</string>
     <string name="format_visibility">%d km</string>
+    <string name="format_aqi_pm1_5_value">%.2f</string>
     <!--    format string resources-->
 </resources>

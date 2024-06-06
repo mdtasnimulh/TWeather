@@ -28,3 +28,15 @@ fun setTextColor(textView: AppCompatTextView, palette: Palette) {
         Shader.TileMode.CLAMP
     )
 }
+
+fun getColorForAqiName(aqiName: String): Int {
+    return when (aqiName) {
+        "Good" -> Res.color.green_light_900
+        "Moderate" -> Res.color.green_dark_200
+        "Unhealthy" -> Res.color.color_EFAE2E
+        "Very Unhealthy" -> Res.color.primary_orange_light_1000
+        "Hazardous" -> Res.color.purple_light_900
+        "Very Hazardous" -> Res.color.red_dark_1000
+        else -> Res.color.textColor
+    }
+}

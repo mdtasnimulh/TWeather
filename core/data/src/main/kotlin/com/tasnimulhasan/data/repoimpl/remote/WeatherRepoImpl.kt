@@ -2,15 +2,18 @@ package com.tasnimulhasan.data.repoimpl.remote
 
 import com.tasnimulhasan.data.NetworkBoundResource
 import com.tasnimulhasan.data.apiservice.WeatherApiService
+import com.tasnimulhasan.data.mapper.aqi.AirQualityIndexApiMapper
 import com.tasnimulhasan.data.mapper.city.CitySearchApiMapper
 import com.tasnimulhasan.data.mapper.details.WeatherOverviewApiMapper
 import com.tasnimulhasan.data.mapper.home.WeatherApiMapper
 import com.tasnimulhasan.data.mapper.mapFromApiResponse
+import com.tasnimulhasan.domain.apiusecase.aqi.AirQualityIndexApiUseCase
 import com.tasnimulhasan.domain.apiusecase.city.CitySearchApiUseCase
 import com.tasnimulhasan.domain.apiusecase.details.WeatherDetailsApiUseCase
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.repository.remote.HomeWeatherRepository
+import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
 import com.tasnimulhasan.entity.city.CitySearchApiEntity
 import com.tasnimulhasan.entity.details.WeatherDetailsApiEntity
 import com.tasnimulhasan.entity.home.WeatherApiEntity
@@ -22,6 +25,7 @@ class WeatherRepoImpl @Inject constructor(
     private val weatherApiMapper: WeatherApiMapper,
     private val weatherOverviewApiMapper: WeatherOverviewApiMapper,
     private val citySearchApiMapper: CitySearchApiMapper,
+    private val airQualityIndexApiMapper: AirQualityIndexApiMapper,
     private val networkBoundResources: NetworkBoundResource
 ) : HomeWeatherRepository {
     override suspend fun fetchHomeWeatherData(params: HomeWeatherApiUseCase.Params): Flow<ApiResult<WeatherApiEntity>> {
@@ -59,6 +63,19 @@ class WeatherRepoImpl @Inject constructor(
                     limit = params.limit
                 )
             }, mapper = citySearchApiMapper
+        )
+    }
+
+    override suspend fun fetchAirQualityIndex(params: AirQualityIndexApiUseCase.Params): Flow<ApiResult<List<AirQualityIndexApiEntity>>> {
+        return mapFromApiResponse(
+            result = networkBoundResources.downloadData {
+                apiService.fetchAirQualityIndex(
+                    lat = params.lat,
+                    lon = params.lon,
+                    appid = params.appid,
+                    units = params.units
+                )
+            }, mapper = airQualityIndexApiMapper
         )
     }
 }

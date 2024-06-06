@@ -24,6 +24,7 @@ object AppConstants {
     const val ONE_CALL_API_END_POINT = "data/3.0/onecall?"
     const val ONE_CALL_OVERVIEW_API_END_POINT = "data/3.0/onecall/overview?"
     const val CITY_SEARCH_END_POINT = "geo/1.0/direct?"
+    const val AIR_POLLUTION_END_POINT = "data/2.5/air_pollution/forecast?"
 
     //--- Weather Condition Names ---//
     const val WEATHER_CONDITION_CLEAR_SKY = "Clear Sky"
@@ -60,10 +61,37 @@ object AppConstants {
     )
     //--- Weather Icon Sets ---//
 
+    val aqiValues = listOf(
+        AqiValueToReadableValue(aqi = 1, name = "Good"),
+        AqiValueToReadableValue(aqi = 2, name = "Fair"),
+        AqiValueToReadableValue(aqi = 3, name = "Moderate"),
+        AqiValueToReadableValue(aqi = 4, name = "Poor"),
+        AqiValueToReadableValue(aqi = 5, name = "Very Poor"),
+    )
+    val aqiValuesUs = listOf(
+        AqiValueToReadableValueUs(aqi = 1, name = "Good", lowPm = 0.0, highPm = 50.0),
+        AqiValueToReadableValueUs(aqi = 2, name = "Moderate", lowPm = 51.0, highPm = 100.0),
+        AqiValueToReadableValueUs(aqi = 3, name = "Unhealthy", lowPm = 101.0, highPm = 200.0),
+        AqiValueToReadableValueUs(aqi = 4, name = "Very unhealthy", lowPm = 201.0, highPm = 300.0),
+        AqiValueToReadableValueUs(aqi = 5, name = "Hazardous", lowPm = 301.0, highPm = 500.0),
+        AqiValueToReadableValueUs(aqi = 6, name = "Very Hazardous", lowPm = 501.0, highPm = 1000.0),
+    )
+
     data class WeatherIcon(
         val id: Int,
         val iconId: String,
         val iconRes: Int,
         val condition: String
+    )
+
+    data class AqiValueToReadableValue(
+        val aqi: Int,
+        val name: String
+    )
+    data class AqiValueToReadableValueUs(
+        val aqi: Int,
+        val name: String,
+        val lowPm: Double,
+        val highPm: Double
     )
 }

@@ -1,5 +1,6 @@
 package com.tasnimulhasan.data.apiservice
 
+import com.tasnimulhasan.apiresponse.aqi.AirQualityIndexApiResponse
 import com.tasnimulhasan.apiresponse.city.SearchApiResponse
 import com.tasnimulhasan.apiresponse.details.WeatherDetailsApiResponse
 import com.tasnimulhasan.apiresponse.home.WeatherApiResponse
@@ -32,5 +33,13 @@ interface WeatherApiService {
         @Query("limit") limit: Int?,
         @Query("appid") appid: String?,
     ) : Response<SearchApiResponse>
+
+    @GET(AppConstants.AIR_POLLUTION_END_POINT)
+    suspend fun fetchAirQualityIndex(
+        @Query("lat") lat: String?,
+        @Query("lon") lon: String?,
+        @Query("appid") appid: String?,
+        @Query("units") units: String?,
+    ) : Response<AirQualityIndexApiResponse>
 
 }
