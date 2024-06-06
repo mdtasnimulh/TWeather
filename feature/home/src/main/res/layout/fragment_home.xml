@@ -6,89 +6,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/featureUi"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/featureNsv"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/currentWeatherIconIv"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="-30dp"
-            android:layout_marginEnd="-30dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/featureUi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_stormy_weather" />
-
-        <View
-            android:id="@+id/viewContainer"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="-30dp"
-            android:layout_marginEnd="-30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.tasnimulhasan.designsystem.CustomMediumTV
-            android:id="@+id/currentCityTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_12"
-            android:includeFontPadding="false"
-            android:textColor="@color/black"
-            android:textSize="@dimen/regular_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/currentWeatherTv"
-            app:layout_constraintEnd_toEndOf="@+id/currentWeatherTv"
-            app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
-            tools:text="Dhaka, Bangladesh" />
-
-        <com.tasnimulhasan.designsystem.CustomBoldTv
-            android:id="@+id/currentWeatherTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/margin_30"
-            android:includeFontPadding="false"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/_60ssp"
-            app:layout_constraintBottom_toBottomOf="@+id/currentWeatherIconIv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.75"
-            tools:text="29°C" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.tasnimulhasan.designsystem.CustomMediumTV
-            android:id="@+id/currentWeatherConditionTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:textColor="@color/subTextColor"
-            android:textSize="@dimen/_20ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
-            app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
-            app:layout_constraintWidth_percent="0.4"
-            tools:text="Cloudy" />
+            <include android:id="@+id/currentWeatherHeaderIncl"
+                layout="@layout/include_current_weather_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        <include android:id="@+id/currentWeatherDetailsIncl"
-            layout="@layout/include_current_weather_details"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_10"
-            android:layout_marginTop="@dimen/margin_10"
-            app:layout_constraintTop_toBottomOf="@+id/currentWeatherIconIv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <include android:id="@+id/currentWeatherDetailsIncl"
+                layout="@layout/include_current_weather_details"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currentWeatherHeaderIncl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.tasnimulhasan.designsystem.CustomBoldTv
+                android:id="@+id/todayWeatherTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="@string/title_today_weather"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/regular_text_size"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawablePadding="@dimen/padding_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hourlyRv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/padding_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/todayWeatherTv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_hourly" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <include
         android:id="@+id/errorUi"

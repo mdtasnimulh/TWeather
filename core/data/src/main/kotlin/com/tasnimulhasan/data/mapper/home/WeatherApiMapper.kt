@@ -84,6 +84,7 @@ class WeatherApiMapper @Inject constructor() :
             } ?: emptyList(),
             hourlyWeatherData = type.hourly?.map { hourly ->
                 HourlyWeatherData(
+                    hourlyTime = hourly.dt ?: 0,
                     hourlyTemperature = hourly.temp ?: 0.0,
                     hourlyFeelsLike = hourly.feels_like ?: 0.0,
                     hourlyPressure = hourly.pressure ?: 0,

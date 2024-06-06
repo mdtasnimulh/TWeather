@@ -5,14 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <com.tasnimulhasan.designsystem.CustomBoldTv
+        android:id="@+id/weatherForecastTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:layout_marginStart="@dimen/margin_12"
+        android:text="@string/title_weather_forecast"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/regular_text_size"
+        android:gravity="center_vertical"
+        android:drawableEnd="@drawable/ic_arrow_forward"
+        android:drawablePadding="@dimen/padding_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/maxCl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10"
-        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_12"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherForecastTv"
         app:layout_constraintEnd_toStartOf="@+id/minCl">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -109,7 +124,7 @@
         android:id="@+id/visibilityCl"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_12"
         app:layout_constraintStart_toEndOf="@+id/minCl"
         app:layout_constraintBottom_toBottomOf="@id/maxCl"
         app:layout_constraintTop_toTopOf="@id/maxCl"
@@ -460,8 +475,8 @@
         android:layerType="software"
         app:layout_constraintStart_toEndOf="@+id/realFeelCl"
         app:layout_constraintEnd_toStartOf="@id/humidityCl"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/maxCl"
+        app:layout_constraintBottom_toBottomOf="@id/windCl"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dividerView2"
@@ -471,8 +486,8 @@
         android:layerType="software"
         app:layout_constraintStart_toEndOf="@+id/humidityCl"
         app:layout_constraintEnd_toStartOf="@id/pressureCl"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/visibilityCl"
+        app:layout_constraintBottom_toBottomOf="@id/rainCl"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dividerView3"
@@ -482,8 +497,8 @@
         android:layerType="software"
         app:layout_constraintTop_toBottomOf="@id/maxCl"
         app:layout_constraintBottom_toTopOf="@id/realFeelCl"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/maxCl"
+        app:layout_constraintEnd_toEndOf="@id/visibilityCl"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dividerView4"
@@ -493,7 +508,7 @@
         android:layerType="software"
         app:layout_constraintTop_toBottomOf="@id/realFeelCl"
         app:layout_constraintBottom_toTopOf="@id/windCl"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/maxCl"
+        app:layout_constraintEnd_toEndOf="@id/visibilityCl"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

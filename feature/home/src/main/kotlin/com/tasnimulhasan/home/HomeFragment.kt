@@ -14,8 +14,10 @@ import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setDetailsTvTextColor
 import com.tasnimulhasan.common.extfun.setDetailsValueTextColor
 import com.tasnimulhasan.common.extfun.setTextColor
-import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
+import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
+import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
+import com.tasnimulhasan.entity.home.HourlyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
@@ -32,6 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<HomeViewModel>()
+    private var hourlyAdapter by autoCleared<HourlyAdapter>()
 
     override fun viewBindingLayout(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -43,16 +46,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         onClickListener()
         setDetailsTextColor()
         setImage()
+    }
 
-        viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
+    private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
+        hourlyAdapter = HourlyAdapter {
+
+        }
+        requireContext().setUpHorizontalRecyclerView(binding.hourlyRv, hourlyAdapter)
+        hourlyAdapter.submitList(hourlyWeatherData)
+        hourlyAdapter.notifyItemRangeChanged(0, hourlyAdapter.itemCount)
     }
 
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
                 is UiState.Loading -> this showLoader uiState.loading
-                is UiState.ApiSuccess -> this showWeatherData uiState.weatherData
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
+                is UiState.ApiSuccess -> {
+                    this showWeatherData uiState.weatherData
+                    initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
+                }
             }
         }
     }
@@ -66,8 +79,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
-            currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
-            currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
+            currentWeatherHeaderIncl.currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
+            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
 
             currentWeatherDetailsIncl.apply {
                 maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
@@ -91,31 +104,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onClickListener() {
         binding.apply {
-            currentWeatherIconIv.clickWithDebounce {
+            currentWeatherHeaderIncl.currentWeatherIconIv.clickWithDebounce {
                 navigateToDestination(getString(UI.string.deep_link_weather_details_fragment).toUri())
             }
 
-            currentWeatherTv.clickWithDebounce {
+            currentWeatherHeaderIncl.currentWeatherTv.clickWithDebounce {
                 navigateToDestination(getString(UI.string.deep_link_city_search_fragment).toUri())
             }
         }
-    }
-
-    private fun getWeatherApiParams(): HomeWeatherApiUseCase.Params {
-        return HomeWeatherApiUseCase.Params(
-            lat = AppConstants.DEFAULT_LATITUDE,
-            lon = AppConstants.DEFAULT_LONGITUDE,
-            appid = AppConstants.OPEN_WEATHER_API_KEY,
-            units = AppConstants.DATA_UNIT
-        )
     }
 
     private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
         AppConstants.iconSetTwo.find { weatherValue ->
             weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon ->
-            binding.currentWeatherIconIv.setImageResource(icon)
-            setTextColor(binding.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
+            binding.currentWeatherHeaderIncl.currentWeatherIconIv.setImageResource(icon)
+            setTextColor(binding.currentWeatherHeaderIncl.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
         }
     }
 

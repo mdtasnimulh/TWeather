@@ -79,6 +79,7 @@ data class DailyWeatherConditionData(
 
 // Hourly Weather Data //
 data class HourlyWeatherData(
+    val hourlyTime: Int,
     val hourlyTemperature: Double,
     val hourlyFeelsLike: Double,
     val hourlyPressure: Int,

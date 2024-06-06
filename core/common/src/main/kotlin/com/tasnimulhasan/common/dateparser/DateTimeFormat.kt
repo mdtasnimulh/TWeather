@@ -25,5 +25,5 @@ object DateTimeFormat {
     const val outputHMSA = "hh:mm:ss aa"
     const val outputHMS = "hh:mm:ss"
     const val outputHMA = "hh:mm aa"
-
+    const val HOURLY_TIME_FORMAT = "hh aa"
 }

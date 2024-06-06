@@ -1,5 +1,6 @@
 package com.tasnimulhasan.home
 
+import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.base.BaseViewModel
@@ -15,7 +16,12 @@ class HomeViewModel @Inject constructor(
     private val homeWeatherApiUseCase: HomeWeatherApiUseCase
 ) : BaseViewModel() {
 
-    val action: (UiAction) -> Unit
+
+    val action : (UiAction) -> Unit = {
+        when (it) {
+            is UiAction.FetchWeatherData -> fetchWeatherData(getWeatherApiParams())
+        }
+    }
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent get() = _uiEvent.receiveAsFlow()
@@ -24,11 +30,7 @@ class HomeViewModel @Inject constructor(
     val uiState get() = _uiState
 
     init {
-        action = {
-            when (it) {
-                is UiAction.FetchWeatherData -> fetchWeatherData(it.params)
-            }
-        }
+       fetchWeatherData(getWeatherApiParams())
     }
 
     private fun fetchWeatherData(params: HomeWeatherApiUseCase.Params) {
@@ -37,12 +39,22 @@ class HomeViewModel @Inject constructor(
                 when (result) {
                     is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
                     is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> _uiState.value = UiState.ApiSuccess(result.data)
+                    is ApiResult.Success -> {
+                        _uiState.value = UiState.ApiSuccess(result.data)
+                    }
                 }
             }
         }
     }
 
+    private fun getWeatherApiParams(): HomeWeatherApiUseCase.Params {
+        return HomeWeatherApiUseCase.Params(
+            lat = AppConstants.DEFAULT_LATITUDE,
+            lon = AppConstants.DEFAULT_LONGITUDE,
+            appid = AppConstants.OPEN_WEATHER_API_KEY,
+            units = AppConstants.DATA_UNIT
+        )
+    }
 }
 
 sealed interface UiEvent {

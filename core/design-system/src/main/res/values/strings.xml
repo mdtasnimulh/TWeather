@@ -56,6 +56,8 @@
 
     <!--    title string resources-->
     <string name="title_warning">Warning!</string>
+    <string name="title_today_weather">Today\'s Weather</string>
+    <string name="title_weather_forecast">Weather Forecast</string>
     <!--    title string resources-->
 
     <!--    action string resources-->

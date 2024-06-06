@@ -22,6 +22,10 @@ object DateTimeParser {
         return df.format(time)
     }
 
+    fun convertLongToDateTime(time: Long, format: String): String {
+        val df = SimpleDateFormat(format, Locale.US)
+        return df.format(Date(time*1000))
+    }
 
     fun String.convertReadableDateTime(
         dateFormat: String,
