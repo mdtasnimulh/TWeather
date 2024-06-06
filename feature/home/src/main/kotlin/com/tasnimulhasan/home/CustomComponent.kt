@@ -56,15 +56,15 @@ class CustomComponent @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        val leftMargin = 50f
-        val rightMargin = 50f
-
+        val screenWidth = width.toFloat()
+        val screenHeight = height.toFloat()
+        val leftMargin = 25f
+        val rightMargin = 25f
         val padding = backgroundIndicatorStrokeWidth / 2
-        val availableWidth = width - leftMargin - rightMargin
-        val componentSize = availableWidth.coerceAtMost(height.toFloat()) - padding * 2
-
+        val availableWidth = screenWidth - leftMargin - rightMargin
+        val componentSize = availableWidth.coerceAtMost(screenHeight) - padding * 2
         val left = leftMargin + (availableWidth - componentSize) / 2
-        val top = (height - componentSize) / 2 + padding
+        val top = (screenHeight - componentSize) / 2 + padding
         val right = left + componentSize
         val bottom = top + componentSize
 
