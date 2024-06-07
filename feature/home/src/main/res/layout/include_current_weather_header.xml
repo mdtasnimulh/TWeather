@@ -28,14 +28,15 @@
         android:id="@+id/currentCityTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_12"
         android:includeFontPadding="false"
         android:textColor="@color/black"
         android:textSize="@dimen/regular_text_size"
         app:layout_constraintBottom_toTopOf="@+id/currentWeatherTv"
         app:layout_constraintEnd_toEndOf="@+id/currentWeatherTv"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
-        android:text="Dhaka, Bangladesh" />
+        app:layout_constraintWidth_percent="0.6"
+        tools:text="Dhaka, Bangladesh" />
 
     <com.tasnimulhasan.designsystem.CustomBoldTv
         android:id="@+id/currentWeatherTv"
@@ -46,13 +47,14 @@
         android:includeFontPadding="false"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_60ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/currentWeatherIconIv"
+        app:layout_constraintBottom_toTopOf="@+id/currentWeatherConditionTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.75"
-        tools:text="29°C"/>
+        tools:text="29°C" />
 
     <com.tasnimulhasan.designsystem.CustomMediumTV
         android:id="@+id/currentWeatherConditionTv"
@@ -60,12 +62,13 @@
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:textColor="@color/subTextColor"
-        android:textSize="@dimen/_20ssp"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:textSize="@dimen/regular_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/currentWeatherIconIv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/currentWeatherTv"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTv"
         app:layout_constraintWidth_percent="0.4"
-        tools:text="Cloudy"/>
+        tools:text="Cloudy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

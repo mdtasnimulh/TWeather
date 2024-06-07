@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.bundles.androidx.lifecycle.dependencies)
     implementation(libs.bundles.androidx.navigation.dependencies)
     implementation(libs.bundles.rxjava3.dependencies)
+    implementation(libs.bundles.play.services.maps)
     implementation(libs.picasso)
     implementation(libs.dateced)
     implementation(libs.date.picker)

@@ -27,15 +27,15 @@ object AppConstants {
     const val AIR_POLLUTION_END_POINT = "data/2.5/air_pollution/forecast?"
 
     //--- Weather Condition Names ---//
-    const val WEATHER_CONDITION_CLEAR_SKY = "Clear Sky"
-    const val WEATHER_CONDITION_FEW_CLOUDS = "Few Clouds"
-    const val WEATHER_CONDITION_SCATTERED_CLOUDS = "Scattered Clouds"
-    const val WEATHER_CONDITION_BROKEN_CLOUDS = "Broken Clouds"
-    const val WEATHER_CONDITION_SHOWER_RAIN = "Shower Rain"
-    const val WEATHER_CONDITION_RAIN = "Rain"
-    const val WEATHER_CONDITION_THUNDERSTORM = "Thunderstorm"
-    const val WEATHER_CONDITION_SNOW = "Snow"
-    const val WEATHER_CONDITION_MIST = "Mist"
+    private const val WEATHER_CONDITION_CLEAR_SKY = "Clear Sky"
+    private const val WEATHER_CONDITION_FEW_CLOUDS = "Few Clouds"
+    private const val WEATHER_CONDITION_SCATTERED_CLOUDS = "Scattered Clouds"
+    private const val WEATHER_CONDITION_BROKEN_CLOUDS = "Broken Clouds"
+    private const val WEATHER_CONDITION_SHOWER_RAIN = "Shower Rain"
+    private const val WEATHER_CONDITION_RAIN = "Rain"
+    private const val WEATHER_CONDITION_THUNDERSTORM = "Thunderstorm"
+    private const val WEATHER_CONDITION_SNOW = "Snow"
+    private const val WEATHER_CONDITION_MIST = "Mist"
     //--- Weather Condition Names ---//
 
     //--- Weather Icon Sets ---//

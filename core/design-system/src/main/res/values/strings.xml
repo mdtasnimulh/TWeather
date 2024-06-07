@@ -32,6 +32,7 @@
     <string name="msg_no_internet_connection">It seems there is something wrong with your internet connection, please check your internet and retry.</string>
     <string name="msg_location_permission_denied">Location Permission is denied!\nplease allow \'Location\' permission to continue the app.</string>
     <string name="msg_location_permission_granted">Location permission granted successfully.</string>
+    <string name="msg_location_permanent_denied">Location permanently denied!!</string>
     <!--    message string resources-->
 
     <!--    error string resources-->
@@ -60,7 +61,7 @@
     <!--    title string resources-->
     <string name="title_warning">Warning!</string>
     <string name="title_today_weather">Today\'s Weather</string>
-    <string name="title_weather_forecast">Weather Forecast</string>
+    <string name="title_weather_forecast">Today\'s Forecast</string>
     <string name="title_air_quality">Air Quality</string>
     <!--    title string resources-->
 
@@ -76,12 +77,12 @@
 
     <!--    format string resources-->
     <string name="format_app_version">%s - (%s)</string>
-    <string name="format_current_weather">%.0f°C</string>
+    <string name="format_current_weather">%.1f°C</string>
     <string name="format_humidity">%s%%</string>
     <string name="format_air_pressure">%s mb</string>
-    <string name="format_wind">%.1f km/h</string>
-    <string name="format_uv_index">%.1f</string>
-    <string name="format_rain">%.1f%%</string>
+    <string name="format_wind">%.2f km/h</string>
+    <string name="format_uv_index">%.2f</string>
+    <string name="format_rain">%.2f%%</string>
     <string name="format_visibility">%d km</string>
     <string name="format_aqi_pm1_5_value">%.2f</string>
     <!--    format string resources-->

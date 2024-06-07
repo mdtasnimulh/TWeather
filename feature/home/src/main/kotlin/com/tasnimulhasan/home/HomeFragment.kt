@@ -2,26 +2,27 @@ package com.tasnimulhasan.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context.LOCATION_SERVICE
-import android.location.LocationManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.palette.graphics.Palette
-import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.Task
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
+import com.tasnimulhasan.common.extfun.createLocationRequest
 import com.tasnimulhasan.common.extfun.getColorForAqiName
+import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.loadGifImage
 import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setDetailsTvTextColor
@@ -30,14 +31,14 @@ import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
-import com.tasnimulhasan.entity.home.HourlyWeatherConditionData
+import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.HourlyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.roundToInt
 import com.tasnimulhasan.designsystem.R as Res
@@ -57,18 +58,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
-                if (isLocationEnabled()) {
+                if (requireActivity().isLocationEnabled()) {
                     viewModel.isLocationGranted = true
-
-                    Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 4444")
                 } else {
                     showToastMessage(getString(Res.string.msg_location_permission_denied))
-                    createLocationRequest()
+                    requireActivity().createLocationRequest()
                 }
             }
             else -> {
                 viewModel.isLocationGranted = false
-                showToastMessage("Location permanently denied!!")
+                showToastMessage(getString(Res.string.msg_location_permanent_denied))
             }
         }
     }
@@ -77,33 +76,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         requestPermission()
-        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 1111")
         getCurrentLocation()
-        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 2222")
         uiStateObserver()
         bindUiEvent()
         onClickListener()
         setDetailsTextColor()
         setImage()
-
-        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 3333")
     }
 
     private fun requestPermission() {
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
         fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener { location ->
+            getCityName(location)
             viewModel.latitude = location.result.latitude.toString()
             viewModel.longitude = location.result.longitude.toString()
             viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
             viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
         }
+    }
+
+    private fun getCityName(location: Task<Location>) {
+        val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
+        if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
+        else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
     }
 
     private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
@@ -118,9 +120,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
-                is UiState.Loading -> this showLoader uiState.loading
+                is UiState.Loading -> { /*NA*/ }
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
                 is UiState.ApiSuccess -> {
+                    binding.loadingAnimationView.isGone = true
                     this showWeatherData uiState.weatherData
                     initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
                 }
@@ -130,17 +133,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private infix fun showLoader(loading: Boolean) {
-        if (loading) {
-            showToastMessage("Loading, Please Wait!")
-        }
-    }
-
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
-            setCurrentWeatherIcon(weatherData.hourlyWeatherData[0].hourlyWeatherCondition)
+            setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
             currentWeatherHeaderIncl.currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
-            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.hourlyWeatherData[0].hourlyWeatherCondition[0].hourlyWeatherCondition
+            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
 
             currentWeatherDetailsIncl.apply {
                 maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
@@ -189,9 +186,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<HourlyWeatherConditionData>) {
+    private fun setCurrentWeatherIcon(currentWeatherConditionData: List<CurrentWeatherConditionData>) {
         AppConstants.iconSetTwo.find { weatherValue ->
-            weatherValue.iconId == currentWeatherConditionData[0].hourlyWeatherIcon
+            weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon ->
             binding.currentWeatherHeaderIncl.currentWeatherIconIv.setImageResource(icon)
             setTextColor(binding.currentWeatherHeaderIncl.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
@@ -232,38 +229,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.currentWeatherDetailsIncl.uvIndexIv.loadGifImage(Res.drawable.uvi, requireContext())
         binding.currentWeatherDetailsIncl.windIv.loadGifImage(Res.drawable.wind, requireContext())
         binding.currentWeatherDetailsIncl.rainIv.loadGifImage(Res.drawable.rain, requireContext())
-    }
-
-    private fun isLocationEnabled() : Boolean {
-        val locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager
-        try {
-            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        } catch (e: Exception) {
-            showToastMessage(e.toString())
-        }
-        return false
-    }
-
-    private fun createLocationRequest() {
-        val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY,
-            10000
-        ).setMinUpdateIntervalMillis(5000).build()
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        val client = LocationServices.getSettingsClient(requireActivity())
-        val task = client.checkLocationSettings(builder.build())
-        task.addOnSuccessListener {
-
-        }
-        task.addOnFailureListener {
-            if (it is ResolvableApiException) {
-                try {
-                    it.startResolutionForResult(requireActivity(), 107)
-                } catch (sendEx: java.lang.Exception) {
-                    showToastMessage(sendEx.toString())
-                }
-            }
-        }
     }
 
     override fun isEnableEdgeToEdge() = true

@@ -33,14 +33,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <include android:id="@+id/currentWeatherDetailsIncl"
-                layout="@layout/include_current_weather_details"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/currentWeatherHeaderIncl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
             <com.tasnimulhasan.designsystem.CustomBoldTv
                 android:id="@+id/todayWeatherTv"
                 android:layout_width="wrap_content"
@@ -55,7 +47,7 @@
                 android:drawableTint="@color/color_4"
                 android:drawablePadding="@dimen/padding_4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"/>
+                app:layout_constraintTop_toBottomOf="@+id/currentWeatherHeaderIncl"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hourlyRv"
@@ -71,17 +63,38 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_hourly" />
 
-            <include android:id="@+id/airQualityIncl"
-                layout="@layout/include_aqi"
+            <include android:id="@+id/currentWeatherDetailsIncl"
+                layout="@layout/include_current_weather_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/hourlyRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <include android:id="@+id/airQualityIncl"
+                layout="@layout/include_aqi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:lottie_rawRes="@raw/loading_anim"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
 
     <include
         android:id="@+id/errorUi"
