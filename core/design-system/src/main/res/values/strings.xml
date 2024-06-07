@@ -56,11 +56,13 @@
     <string name="label_min">Min</string>
     <string name="label_visibility">Visibility</string>
     <string name="label_aqi">AQI</string>
+    <string name="label_see_more">See More</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
     <string name="title_warning">Warning!</string>
     <string name="title_today_weather">Today\'s Weather</string>
+    <string name="title_daily_weather">Weekly Weather</string>
     <string name="title_weather_forecast">Today\'s Forecast</string>
     <string name="title_air_quality">Air Quality</string>
     <!--    title string resources-->
@@ -78,6 +80,8 @@
     <!--    format string resources-->
     <string name="format_app_version">%s - (%s)</string>
     <string name="format_current_weather">%.1f°C</string>
+    <string name="format_daily_min_weather">Min: %.1f°C</string>
+    <string name="format_daily_max_weather">Max: %.1f°C</string>
     <string name="format_humidity">%s%%</string>
     <string name="format_air_pressure">%s mb</string>
     <string name="format_wind">%.2f km/h</string>

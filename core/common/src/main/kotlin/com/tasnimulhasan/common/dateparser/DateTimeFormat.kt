@@ -26,4 +26,5 @@ object DateTimeFormat {
     const val outputHMS = "hh:mm:ss"
     const val outputHMA = "hh:mm aa"
     const val HOURLY_TIME_FORMAT = "hh aa"
+    const val DAILY_TIME_FORMAT = "EEEE"
 }

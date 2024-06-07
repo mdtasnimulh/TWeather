@@ -75,8 +75,56 @@
                 layout="@layout/include_aqi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"
+                app:layout_constraintTop_toBottomOf="@+id/seeMoreTv"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.tasnimulhasan.designsystem.CustomBoldTv
+                android:id="@+id/dailyWeatherTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="@string/title_daily_weather"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/regular_text_size"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/ic_forward"
+                android:drawableTint="@color/color_FF8E1D"
+                android:drawablePadding="@dimen/padding_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentWeatherDetailsIncl"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dailyRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/padding_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dailyWeatherTv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_daily" />
+
+            <com.tasnimulhasan.designsystem.CustomMediumTV
+                android:id="@+id/seeMoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_12"
+                android:text="@string/label_see_more"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/regular_text_size"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/padding_2"
+                android:drawableEnd="@drawable/ic_forward"
+                android:drawableTint="@color/textColor"
+                android:drawablePadding="@dimen/padding_4"
+                app:layout_constraintTop_toBottomOf="@+id/dailyRv"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

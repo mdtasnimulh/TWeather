@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_4"
+    app:strokeWidth="0.5dp"
+    app:cardElevation="@dimen/_3sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hourlyCardCl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        android:padding="@dimen/_1sdp">
+
+        <com.tasnimulhasan.designsystem.CustomMediumTV
+            android:id="@+id/dayTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:paddingHorizontal="@dimen/padding_8"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dailyIconIv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Friday" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/dailyIconIv"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_clear_sky_day" />
+
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/dailyMinTv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="@dimen/padding_4"
+            android:textColor="@color/green_light_900"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/dailyMaxTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dailyIconIv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Min: 25.0°" />
+
+        <com.tasnimulhasan.designsystem.CustomBoldTv
+            android:id="@+id/dailyMaxTv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="@dimen/padding_4"
+            android:textColor="@color/primary_orange_light_900"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dailyMinTv"
+            app:layout_constraintTop_toBottomOf="@id/dailyMinTv"
+            tools:text="Max: 35.0°" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginHorizontal="@dimen/margin_2"
+            android:background="@drawable/divider_dash_line"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dailyMinTv"
+            app:layout_constraintTop_toBottomOf="@+id/dailyMinTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView2"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/divider_dash_line_vertical"
+            android:layerType="software"
+            app:layout_constraintTop_toTopOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dailyMinTv"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyMaxTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView3"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/divider_dash_line_vertical"
+            android:layerType="software"
+            app:layout_constraintTop_toTopOf="@+id/dailyMinTv"
+            app:layout_constraintEnd_toEndOf="@+id/dailyMinTv"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyMaxTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView4"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginHorizontal="@dimen/margin_2"
+            android:background="@drawable/divider_dash_line"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dayTv"
+            app:layout_constraintTop_toTopOf="@+id/dailyMinTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView5"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginHorizontal="@dimen/margin_2"
+            android:background="@drawable/divider_dash_line"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dayTv"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyMaxTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView6"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="-2dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/divider_dash_line_vertical"
+            android:layerType="software"
+            app:layout_constraintTop_toTopOf="@+id/dailyMinTv"
+            app:layout_constraintEnd_toEndOf="@+id/dayTv"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyMaxTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dividerView7"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/divider_dash_line_vertical"
+            android:layerType="software"
+            app:layout_constraintTop_toTopOf="@+id/dailyMinTv"
+            app:layout_constraintStart_toStartOf="@+id/dayTv"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyMaxTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

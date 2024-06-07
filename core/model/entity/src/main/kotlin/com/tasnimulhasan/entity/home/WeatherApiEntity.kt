@@ -35,6 +35,7 @@ data class CurrentWeatherConditionData(
 
 // Daily Weather Data //
 data class DailyWeatherData(
+    val day: Long,
     val dailySunrise: Long,
     val dailySunSet: Long,
     val dailyMoonRise: Long,

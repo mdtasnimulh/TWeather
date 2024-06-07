@@ -44,6 +44,7 @@ class WeatherApiMapper @Inject constructor() :
             ),
             dailyWeatherData = type.daily?.map { daily ->
                 DailyWeatherData(
+                    day = (daily.dt ?: 0L).toLong(),
                     dailySunrise = (daily.sunrise ?: 0L).toLong(),
                     dailySunSet = (daily.sunset ?: 0L).toLong(),
                     dailyMoonRise = (daily.moonrise ?: 0L).toLong(),

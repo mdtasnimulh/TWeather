@@ -29,9 +29,11 @@ import com.tasnimulhasan.common.extfun.setDetailsTvTextColor
 import com.tasnimulhasan.common.extfun.setDetailsValueTextColor
 import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
+import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
+import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.entity.home.HourlyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
@@ -52,6 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<HomeViewModel>()
     private var hourlyAdapter by autoCleared<HourlyAdapter>()
+    private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val locationPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -117,6 +120,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         hourlyAdapter.notifyItemRangeChanged(0, hourlyAdapter.itemCount)
     }
 
+    private fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
+        dailyAdapter = DailyAdapter {
+
+        }
+        requireContext().setUpVerticalRecyclerView(binding.dailyRv, dailyAdapter)
+        dailyAdapter.submitList(dailyWeatherData)
+        dailyAdapter.notifyItemRangeChanged(0, dailyAdapter.itemCount)
+    }
+
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
@@ -126,6 +138,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     binding.loadingAnimationView.isGone = true
                     this showWeatherData uiState.weatherData
                     initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
+                    initDailyRecyclerView(uiState.weatherData.dailyWeatherData.take(3))
                 }
 
                 is UiState.AirQualityIndex -> this showAirQualityIndex uiState.aqi
