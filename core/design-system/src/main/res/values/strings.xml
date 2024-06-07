@@ -30,6 +30,8 @@
     <!--    message string resources-->
     <string name="msg_delete_history">Are you sure, want to remove this history?</string>
     <string name="msg_no_internet_connection">It seems there is something wrong with your internet connection, please check your internet and retry.</string>
+    <string name="msg_location_permission_denied">Location Permission is denied!\nplease allow \'Location\' permission to continue the app.</string>
+    <string name="msg_location_permission_granted">Location permission granted successfully.</string>
     <!--    message string resources-->
 
     <!--    error string resources-->

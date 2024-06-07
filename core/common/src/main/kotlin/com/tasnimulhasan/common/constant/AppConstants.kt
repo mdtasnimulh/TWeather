@@ -69,12 +69,12 @@ object AppConstants {
         AqiValueToReadableValue(aqi = 5, name = "Very Poor"),
     )
     val aqiValuesUs = listOf(
-        AqiValueToReadableValueUs(aqi = 1, name = "Good", lowPm = 0.0, highPm = 50.0),
-        AqiValueToReadableValueUs(aqi = 2, name = "Moderate", lowPm = 51.0, highPm = 100.0),
-        AqiValueToReadableValueUs(aqi = 3, name = "Unhealthy", lowPm = 101.0, highPm = 200.0),
-        AqiValueToReadableValueUs(aqi = 4, name = "Very unhealthy", lowPm = 201.0, highPm = 300.0),
-        AqiValueToReadableValueUs(aqi = 5, name = "Hazardous", lowPm = 301.0, highPm = 500.0),
-        AqiValueToReadableValueUs(aqi = 6, name = "Very Hazardous", lowPm = 501.0, highPm = 1000.0),
+        AqiValueToReadableValueUs(aqi = 1, name = "Good", lowPm = 0.00, highPm = 50.00),
+        AqiValueToReadableValueUs(aqi = 2, name = "Moderate", lowPm = 50.01, highPm = 100.00),
+        AqiValueToReadableValueUs(aqi = 3, name = "Unhealthy", lowPm = 100.01, highPm = 200.00),
+        AqiValueToReadableValueUs(aqi = 4, name = "Very unhealthy", lowPm = 200.01, highPm = 300.00),
+        AqiValueToReadableValueUs(aqi = 5, name = "Hazardous", lowPm = 300.01, highPm = 500.00),
+        AqiValueToReadableValueUs(aqi = 6, name = "Very Hazardous", lowPm = 500.01, highPm = 1000.00),
     )
 
     data class WeatherIcon(

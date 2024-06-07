@@ -10,4 +10,5 @@ dependencies {
     implementation(libs.shimmer)
     implementation(libs.androidx.palette)
     implementation(libs.glide)
+    implementation(libs.bundles.play.services.maps)
 }

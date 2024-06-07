@@ -19,6 +19,10 @@ class HomeViewModel @Inject constructor(
     private val airQualityIndexApiUseCase: AirQualityIndexApiUseCase
 ) : BaseViewModel() {
 
+    var isLocationGranted = false
+    var latitude = ""
+    var longitude = ""
+    var cityName = ""
 
     val action: (UiAction) -> Unit = {
         when (it) {
@@ -34,8 +38,8 @@ class HomeViewModel @Inject constructor(
     val uiState get() = _uiState
 
     init {
-        fetchWeatherData(getWeatherApiParams())
-        fetchAirQualityIndex(getAqiParams())
+        /*fetchWeatherData(getWeatherApiParams())
+        fetchAirQualityIndex(getAqiParams())*/
     }
 
     private fun fetchWeatherData(params: HomeWeatherApiUseCase.Params) {
@@ -64,19 +68,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getWeatherApiParams(): HomeWeatherApiUseCase.Params {
+    fun getWeatherApiParams(): HomeWeatherApiUseCase.Params {
         return HomeWeatherApiUseCase.Params(
-            lat = AppConstants.DEFAULT_LATITUDE,
-            lon = AppConstants.DEFAULT_LONGITUDE,
+            lat = latitude,
+            lon = longitude,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
             units = AppConstants.DATA_UNIT
         )
     }
 
-    private fun getAqiParams(): AirQualityIndexApiUseCase.Params {
+    fun getAqiParams(): AirQualityIndexApiUseCase.Params {
         return AirQualityIndexApiUseCase.Params(
-            lat = AppConstants.DEFAULT_LATITUDE,
-            lon = AppConstants.DEFAULT_LONGITUDE,
+            lat = latitude,
+            lon = longitude,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
             units = AppConstants.DATA_UNIT
         )

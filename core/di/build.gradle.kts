@@ -10,5 +10,6 @@ android {
 dependencies {
     api(projects.core.sharedPref)
     implementation(libs.bundles.network.dependencies)
+    implementation(libs.bundles.play.services.maps)
     implementation(libs.timber)
 }

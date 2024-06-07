@@ -1,11 +1,23 @@
 package com.tasnimulhasan.home
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context.LOCATION_SERVICE
+import android.location.LocationManager
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.palette.graphics.Palette
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
@@ -25,6 +37,7 @@ import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.roundToInt
 import com.tasnimulhasan.designsystem.R as Res
@@ -38,17 +51,59 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<HomeViewModel>()
     private var hourlyAdapter by autoCleared<HourlyAdapter>()
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private val locationPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
+            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
+                if (isLocationEnabled()) {
+                    viewModel.isLocationGranted = true
+
+                    Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 4444")
+                } else {
+                    showToastMessage(getString(Res.string.msg_location_permission_denied))
+                    createLocationRequest()
+                }
+            }
+            else -> {
+                viewModel.isLocationGranted = false
+                showToastMessage("Location permanently denied!!")
+            }
+        }
+    }
 
     override fun viewBindingLayout(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
 
+        requestPermission()
+        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 1111")
+        getCurrentLocation()
+        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 2222")
         uiStateObserver()
         bindUiEvent()
         onClickListener()
         setDetailsTextColor()
         setImage()
+
+        Timber.e("chkViewModelGranted ${viewModel.isLocationGranted} 3333")
+    }
+
+    private fun requestPermission() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getCurrentLocation() {
+        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener { location ->
+            viewModel.latitude = location.result.latitude.toString()
+            viewModel.longitude = location.result.longitude.toString()
+            viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
+            viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+        }
     }
 
     private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
@@ -177,6 +232,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.currentWeatherDetailsIncl.uvIndexIv.loadGifImage(Res.drawable.uvi, requireContext())
         binding.currentWeatherDetailsIncl.windIv.loadGifImage(Res.drawable.wind, requireContext())
         binding.currentWeatherDetailsIncl.rainIv.loadGifImage(Res.drawable.rain, requireContext())
+    }
+
+    private fun isLocationEnabled() : Boolean {
+        val locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager
+        try {
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (e: Exception) {
+            showToastMessage(e.toString())
+        }
+        return false
+    }
+
+    private fun createLocationRequest() {
+        val locationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            10000
+        ).setMinUpdateIntervalMillis(5000).build()
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val client = LocationServices.getSettingsClient(requireActivity())
+        val task = client.checkLocationSettings(builder.build())
+        task.addOnSuccessListener {
+
+        }
+        task.addOnFailureListener {
+            if (it is ResolvableApiException) {
+                try {
+                    it.startResolutionForResult(requireActivity(), 107)
+                } catch (sendEx: java.lang.Exception) {
+                    showToastMessage(sendEx.toString())
+                }
+            }
+        }
     }
 
     override fun isEnableEdgeToEdge() = true
