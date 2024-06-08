@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 
 object DateTimeParser {
@@ -89,5 +91,11 @@ object DateTimeParser {
         val sdf = SimpleDateFormat(DateTimeFormat.sqlYMD, Locale.US)
         val currentDate = sdf.format(Date())
         return if (currentDate == date) date else ""
+    }
+
+    fun calculateHoursBetweenTwoTimes(startDate: Long, endDate: Long) : Long {
+        val duration = abs(endDate - startDate)
+        val hours = TimeUnit.MILLISECONDS.toHours(duration)
+        return hours
     }
 }

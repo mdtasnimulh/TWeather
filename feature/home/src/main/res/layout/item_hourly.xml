@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/hourlyCardCl"
+        android:id="@+id/dailyCardCl"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_115sdp"
         android:paddingVertical="@dimen/padding_5"

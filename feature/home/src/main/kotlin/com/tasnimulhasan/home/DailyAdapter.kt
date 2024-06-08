@@ -4,10 +4,12 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import com.tasnimulhasan.common.adapter.DataBoundListAdapter
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
+import com.tasnimulhasan.common.dateparser.DateTimeParser.calculateHoursBetweenTwoTimes
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.entity.home.DailyWeatherData
@@ -47,6 +49,13 @@ class DailyAdapter(
             }
             dailyMinTv.text = resources.getString(Res.string.format_daily_min_weather, item.dailyTemp.dailyDayTemperature)
             dailyMaxTv.text = resources.getString(Res.string.format_daily_max_weather, item.dailyTemp.dailyNightTemperature)
+            sunriseValueTv.text = convertLongToDateTime(item.dailySunrise, DateTimeFormat.outputHMA)
+            sunsetValueTv.text = convertLongToDateTime(item.dailySunSet, DateTimeFormat.outputHMA)
+            dailySummaryTv.text = item.dailySummary
+            dailyHumidityTv.text = resources.getString(Res.string.format_daily_humidity, item.dailyHumidity)
+            dailyRainTv.text = resources.getString(Res.string.format_daily_rain, item.dailyRain)
+            dailyUviTv.text = resources.getString(Res.string.format_daily_uvi, item.dailyUvi)
+            sunRiseSetPb.progress = 75
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
             val colorPrimary = ContextCompat.getColor(context, Res.color.green_light_100)
@@ -56,7 +65,13 @@ class DailyAdapter(
             root.setCardBackgroundColor(if (isCurrentTime) colorPrimary else colorWhite)
             dayTv.setTextColor(if (isCurrentTime) ColorStateList.valueOf(colorText) else ColorStateList.valueOf(colorText))
 
-            root.clickWithDebounce { onClick.invoke(item) }
+            root.clickWithDebounce {
+                item.isVisible = !item.isVisible
+                onClick.invoke(item)
+                dailyBodyCl.isVisible = item.isVisible
+            }
+
+            Timber.e("chkTimeResult ${calculateHoursBetweenTwoTimes(item.dailySunrise, item.dailySunSet)}")
         }
     }
 

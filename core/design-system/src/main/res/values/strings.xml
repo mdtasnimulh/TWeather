@@ -57,6 +57,8 @@
     <string name="label_visibility">Visibility</string>
     <string name="label_aqi">AQI</string>
     <string name="label_see_more">See More</string>
+    <string name="label_sunrise">Sunrise:</string>
+    <string name="label_sunset">:Sunset</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -89,5 +91,8 @@
     <string name="format_rain">%.2f%%</string>
     <string name="format_visibility">%d km</string>
     <string name="format_aqi_pm1_5_value">%.2f</string>
+    <string name="format_daily_humidity">Humidity\n %d%%</string>
+    <string name="format_daily_rain">Rain\n %.2f%%</string>
+    <string name="format_daily_uvi">UVI\n %.2f</string>
     <!--    format string resources-->
 </resources>

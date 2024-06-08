@@ -53,7 +53,8 @@ data class DailyWeatherData(
     val dailyWeatherCondition: List<DailyWeatherConditionData>,
     val dailyRain: Double,
     val dailyClouds: Int,
-    val dailyUvi: Double
+    val dailyUvi: Double,
+    var isVisible: Boolean = false
 )
 
 data class DailyFeelsLikeData(

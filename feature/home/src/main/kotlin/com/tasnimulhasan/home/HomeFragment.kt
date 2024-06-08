@@ -106,9 +106,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun getCityName(location: Task<Location>) {
-        val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
-        if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
-        else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
+        if (viewModel.isLocationGranted) {
+            val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
+            if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
+            else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
+        }
     }
 
     private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
