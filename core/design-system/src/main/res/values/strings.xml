@@ -84,6 +84,7 @@
     <string name="format_current_weather">%.1f°C</string>
     <string name="format_daily_min_weather">Min: %.1f°C</string>
     <string name="format_daily_max_weather">Max: %.1f°C</string>
+    <string name="format_min_max_temp">%.0f°C/%.0f°C</string>
     <string name="format_humidity">%s%%</string>
     <string name="format_air_pressure">%s mb</string>
     <string name="format_wind">%.2f km/h</string>
@@ -94,5 +95,6 @@
     <string name="format_daily_humidity">Humidity\n %d%%</string>
     <string name="format_daily_rain">Rain\n %.2f%%</string>
     <string name="format_daily_uvi">UVI\n %.2f</string>
+    <string name="format_daily_condition">(%s)</string>
     <!--    format string resources-->
 </resources>

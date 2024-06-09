@@ -16,8 +16,6 @@ import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.home.databinding.ItemDailyBinding
 import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import com.tasnimulhasan.designsystem.R as Res
@@ -47,14 +45,14 @@ class DailyAdapter(
             AppConstants.iconSetTwo.find { it.iconId == item.dailyWeatherCondition[0].dailyWeatherIcon }?.let {
                 dailyIconIv.setImageResource(it.iconRes)
             }
-            dailyMinTv.text = resources.getString(Res.string.format_daily_min_weather, item.dailyTemp.dailyDayTemperature)
-            dailyMaxTv.text = resources.getString(Res.string.format_daily_max_weather, item.dailyTemp.dailyNightTemperature)
+            dailyMinMaxTv.text = resources.getString(Res.string.format_min_max_temp, item.dailyTemp.dailyMinimumTemperature, item.dailyTemp.dailyMaximumTemperature)
             sunriseValueTv.text = convertLongToDateTime(item.dailySunrise, DateTimeFormat.outputHMA)
             sunsetValueTv.text = convertLongToDateTime(item.dailySunSet, DateTimeFormat.outputHMA)
             dailySummaryTv.text = item.dailySummary
             dailyHumidityTv.text = resources.getString(Res.string.format_daily_humidity, item.dailyHumidity)
             dailyRainTv.text = resources.getString(Res.string.format_daily_rain, item.dailyRain)
             dailyUviTv.text = resources.getString(Res.string.format_daily_uvi, item.dailyUvi)
+            dailyConditionTv.text = resources.getString(Res.string.format_daily_condition, item.dailyWeatherCondition[0].dailyWeatherCondition)
             sunRiseSetPb.progress = 75
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
