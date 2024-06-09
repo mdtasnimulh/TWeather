@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
     private val airQualityIndexApiUseCase: AirQualityIndexApiUseCase
 ) : BaseViewModel() {
 
-    var isLocationGranted = false
+    var isLocationGranted = MutableStateFlow<Boolean>(false)
     var latitude = ""
     var longitude = ""
     var cityName = ""

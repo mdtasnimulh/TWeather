@@ -62,14 +62,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
                 if (requireActivity().isLocationEnabled()) {
-                    viewModel.isLocationGranted = true
+                    viewModel.isLocationGranted.value = true
                 } else {
                     showToastMessage(getString(Res.string.msg_location_permission_denied))
                     requireActivity().createLocationRequest()
                 }
             }
             else -> {
-                viewModel.isLocationGranted = false
+                viewModel.isLocationGranted.value = false
                 showToastMessage(getString(Res.string.msg_location_permanent_denied))
             }
         }
@@ -82,12 +82,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         requestPermission()
-        getCurrentLocation()
-        uiStateObserver()
-        bindUiEvent()
-        onClickListener()
-        setDetailsTextColor()
-        setImage()
+        viewModel.isLocationGranted.execute {
+            if (it) {
+                getCurrentLocation()
+                uiStateObserver()
+                bindUiEvent()
+                onClickListener()
+                setDetailsTextColor()
+                setImage()
+            }
+        }
     }
 
     private fun requestPermission() {
@@ -106,11 +110,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun getCityName(location: Task<Location>) {
-        if (viewModel.isLocationGranted) {
-            val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
-            if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
-            else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
-        }
+        val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
+        if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
+        else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
     }
 
     private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
