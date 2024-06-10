@@ -19,10 +19,9 @@ class HomeViewModel @Inject constructor(
     private val airQualityIndexApiUseCase: AirQualityIndexApiUseCase
 ) : BaseViewModel() {
 
-    var isLocationGranted = MutableStateFlow<Boolean>(false)
+    var isLocationGranted = MutableStateFlow(false)
     var latitude = ""
     var longitude = ""
-    var cityName = ""
 
     val action: (UiAction) -> Unit = {
         when (it) {
@@ -36,11 +35,6 @@ class HomeViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading(false))
     val uiState get() = _uiState
-
-    init {
-        /*fetchWeatherData(getWeatherApiParams())
-        fetchAirQualityIndex(getAqiParams())*/
-    }
 
     private fun fetchWeatherData(params: HomeWeatherApiUseCase.Params) {
         execute {
