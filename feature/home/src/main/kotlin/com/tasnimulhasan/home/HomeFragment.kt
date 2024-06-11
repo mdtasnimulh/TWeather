@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.Loading -> { /*NA*/ }
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
                 is UiState.ApiSuccess -> {
-                    binding.loadingAnimationView.isGone = true
+                    binding.loadingCl.isGone = true
                     this showWeatherData uiState.weatherData
                     initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
                     initDailyRecyclerView(uiState.weatherData.dailyWeatherData.take(3))

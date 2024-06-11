@@ -37,6 +37,7 @@
     <string name="msg_location_permanent_denied">Location permanently denied!!</string>
     <string name="msg_city_already_exists">Whoops! City already exists. Please another or go back to \'City List\'</string>
     <string name="msg_no_city_found">No pre added city found.\nAdd new city to the list.</string>
+    <string name="msg_loading">Fetching Data, Please Wait</string>
     <!--    message string resources-->
 
     <!--    error string resources-->
