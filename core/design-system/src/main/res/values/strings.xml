@@ -36,9 +36,11 @@
     <!--    message string resources-->
 
     <!--    error string resources-->
+    <string name="error_empty_search_keyword">Empty search keyword is not allowed</string>
     <!--    error string resources-->
 
     <!--    hint string resources-->
+    <string name="hint_search_city">Search City</string>
     <!--    hint string resources-->
 
     <!--    label string resources-->
@@ -96,5 +98,6 @@
     <string name="format_daily_rain">Rain\n %.2f%%</string>
     <string name="format_daily_uvi">UVI\n %.2f</string>
     <string name="format_daily_condition">(%s)</string>
+    <string name="format_city_search_name">%s\n%s, %s</string>
     <!--    format string resources-->
 </resources>
