@@ -20,5 +20,5 @@ interface RoomCollectableUseCase<Params, ReturnType> : BaseUseCase {
 }
 
 interface RoomCollectableUseCaseNoParams< ReturnType> : BaseUseCase {
-    operator fun invoke(): Flow<ReturnType>
+    suspend operator fun invoke(): Flow<ReturnType>
 }

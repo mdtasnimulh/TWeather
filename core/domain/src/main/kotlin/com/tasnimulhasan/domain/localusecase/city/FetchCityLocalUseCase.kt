@@ -10,7 +10,7 @@ import javax.inject.Inject
 class FetchCityLocalUseCase @Inject constructor(
     private val repository: WeatherRoomRepository
 ) : RoomCollectableUseCaseNoParams<List<WeatherRoomEntity>> {
-    override fun invoke(): Flow<List<WeatherRoomEntity>> {
+    override suspend fun invoke(): Flow<List<WeatherRoomEntity>> {
         return repository.fetchCities()
     }
 }
