@@ -105,7 +105,7 @@
     <string name="format_daily_rain">Rain\n %.2f%%</string>
     <string name="format_daily_uvi">UVI\n %.2f</string>
     <string name="format_daily_condition">(%s)</string>
-    <string name="format_city_search_name">%s\n%s, %s</string>
+    <string name="format_city_search_name">%s, %s</string>
     <string name="format_lat_lon">%f / %f</string>
     <!--    format string resources-->
 </resources>

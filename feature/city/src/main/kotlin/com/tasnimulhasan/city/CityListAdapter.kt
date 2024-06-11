@@ -31,8 +31,7 @@ class CityListAdapter(
     override fun bind(binding: ItemCityListBinding, item: CityListRoomEntity, position: Int) {
         with(binding) {
             cityNameTv.text = root.context.getString(
-                Res.string.format_city_search_name, item.cityName?.ifEmpty { item.name }, item.state, item.country)
-            latLonTv.text = root.context.getString(Res.string.format_lat_lon, item.lat, item.lon)
+                Res.string.format_city_search_name, item.cityName?.ifEmpty { item.name }, item.state)
 
             root.clickWithDebounce { onClick.invoke(item) }
         }
