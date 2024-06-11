@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var errorHandler: ErrorUiHandler
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModels<WeatherViewModel>()
     private var hourlyAdapter by autoCleared<HourlyAdapter>()
     private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient

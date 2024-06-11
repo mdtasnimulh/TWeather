@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class WeatherViewModel @Inject constructor(
     private val homeWeatherApiUseCase: HomeWeatherApiUseCase,
     private val airQualityIndexApiUseCase: AirQualityIndexApiUseCase
 ) : BaseViewModel() {

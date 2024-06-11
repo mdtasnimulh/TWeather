@@ -1,27 +1,20 @@
 package com.tasnimulhasan.city
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tasnimulhasan.city.databinding.FragmentCityBinding
 import com.tasnimulhasan.common.base.BaseFragment
-import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
-import com.tasnimulhasan.common.extfun.getTextFromEt
-import com.tasnimulhasan.common.extfun.hideKeyboard
+import com.tasnimulhasan.common.extfun.navigateDestination
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
-import com.tasnimulhasan.domain.apiusecase.city.CitySearchApiUseCase
-import com.tasnimulhasan.entity.city.CitySearchApiEntity
-import com.tasnimulhasan.ui.ErrorUiHandler
-import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import com.tasnimulhasan.designsystem.R as Res
+import com.tasnimulhasan.entity.room.CityListRoomEntity
+import com.tasnimulhasan.ui.ErrorUiHandler
+import com.tasnimulhasan.ui.showWarningDialog
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CityFragment : BaseFragment<FragmentCityBinding>() {
@@ -39,7 +32,6 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
         initToolbar()
         uiStateObserver()
         bindUiEvent()
-        searchCity()
         onClickListener()
     }
 
@@ -52,9 +44,19 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
         }
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         adapter = CityListAdapter { item ->
-            Timber.e("checkItemClicked $item")
+            requireActivity().showWarningDialog(
+                title = getString(Res.string.title_warning),
+                message = getString(Res.string.msg_delete_city),
+                positiveBtnCallback = {
+                    viewModel.action(UiAction.DeleteCities(item))
+                    showToastMessage(getString(Res.string.msg_delete_city_successful, item.cityName))
+                },
+                negativeButtonCallback = {
+                    showToastMessage(getString(Res.string.msg_delete_city_canceled, item.cityName))
+                }
+            )
         }
 
         requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)
@@ -67,12 +69,13 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
     private fun uiStateObserver() {
         viewModel.uiState.execute { uiState ->
             when (uiState) {
-                is UiState.Loading -> this showLoader uiState.loading
-                is UiState.ApiSuccess -> {
-                    binding.searchCityTv.isGone = true
-                    this showCities uiState.cityEntity
+                is UiState.Loading -> showLoader(uiState.loading)
+                is UiState.CityList -> {
+                    binding.searchCityTv.isGone = uiState.cityList.isNotEmpty()
+                    showCities(uiState.cityList)
                 }
-                is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
+
+                else -> {}
             }
         }
     }
@@ -83,51 +86,19 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
         }
     }
 
-    private infix fun showCities(result: List<CitySearchApiEntity>) {
+    private infix fun showCities(result: List<CityListRoomEntity>) {
         binding.apply {
             adapter.submitList(result)
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
         }
     }
 
-    private fun searchCity() {
-        binding.citySearchEt.setOnEditorActionListener { _, actionId, event ->
-            if ((event != null && (event.keyCode == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                if (binding.citySearchEt.getTextFromEt().isNotEmpty()) {
-                    initRecyclerView()
-                    binding.citySearchEt.hideKeyboard()
-                    viewModel.action(UiAction.FetchCityName(getSearchApiParams(binding.citySearchEt.getTextFromEt())))
-                } else showToastMessage(getString(Res.string.error_empty_search_keyword))
-            }
-            false
-        }
-    }
-
     private fun onClickListener() {
         binding.apply {
-            searchCityTv.clickWithDebounce {
-                binding.citySearchTil.requestFocus()
+            citySearchFab.clickWithDebounce {
+                navigateDestination(CityFragmentDirections.actionCityFragmentToCitySearchFragment())
             }
-
-            binding.citySearchEt.addTextChangedListener(object : TextWatcher{
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { /*NA*/ }
-
-                override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
-                    if ((query?.length ?: 0) >= 1)
-                        viewModel.action(UiAction.FetchCityName(getSearchApiParams(query = query.toString())))
-                }
-
-                override fun afterTextChanged(s: Editable?) { /*NA*/ }
-            })
         }
-    }
-
-    private fun getSearchApiParams(query: String): CitySearchApiUseCase.Params {
-        return CitySearchApiUseCase.Params(
-            appId = AppConstants.OPEN_WEATHER_API_KEY,
-            query = query,
-            limit = 10
-        )
     }
 
     override fun isEnableEdgeToEdge() = false

@@ -25,14 +25,44 @@
             android:id="@+id/searchCityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_no_city_found"
+            android:text="@string/label_add_city"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/extra_large_text_size"
-            android:gravity="center"
+            android:textSize="@dimen/_25ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/citySearchTil"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_12"
+            android:layout_marginTop="@dimen/margin_10"
+            android:hint="@string/hint_search_city"
+            app:endIconMode="clear_text"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="0.5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/citySearchEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeActionLabel="Search"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:drawableStart="@drawable/ic_city"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="@dimen/padding_5"
+                android:paddingHorizontal="@dimen/padding_10"
+                android:paddingVertical="@dimen/padding_12"
+                android:textSize="@dimen/regular_text_size" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cityListRv"
@@ -47,28 +77,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="4"
+            app:layout_constraintTop_toBottomOf="@+id/citySearchTil"
+            tools:itemCount="5"
             tools:listitem="@layout/item_city_search" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/citySearchFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_15"
-            android:layout_marginEnd="@dimen/margin_15"
-            android:clickable="true"
-            android:contentDescription="@string/desc_image_content_description"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:icon="@drawable/ic_city"
-            app:iconGravity="end"
-            app:iconTint="@color/white"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textSize="@dimen/regular_text_size"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/label_add_city"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

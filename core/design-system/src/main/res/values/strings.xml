@@ -28,11 +28,15 @@
     <!--    heading string resources-->
 
     <!--    message string resources-->
-    <string name="msg_delete_history">Are you sure, want to remove this history?</string>
+    <string name="msg_delete_city">Are you sure, want to remove this city from list?</string>
+    <string name="msg_delete_city_canceled">City %s delete attempt was canceled!</string>
+    <string name="msg_delete_city_successful">City %s deleted successfully!</string>
     <string name="msg_no_internet_connection">It seems there is something wrong with your internet connection, please check your internet and retry.</string>
     <string name="msg_location_permission_denied">Location Permission is denied!\nplease allow \'Location\' permission to continue the app.</string>
     <string name="msg_location_permission_granted">Location permission granted successfully.</string>
     <string name="msg_location_permanent_denied">Location permanently denied!!</string>
+    <string name="msg_city_already_exists">Whoops! City already exists. Please another or go back to \'City List\'</string>
+    <string name="msg_no_city_found">No pre added city found.\nAdd new city to the list.</string>
     <!--    message string resources-->
 
     <!--    error string resources-->
@@ -46,6 +50,7 @@
     <!--    label string resources-->
     <string name="label_weather_overview">Weather Overview</string>
     <string name="label_city">Cities</string>
+    <string name="label_city_search">Search Cities</string>
     <string name="label_real_feel">Real Feel</string>
     <string name="label_humidity">Humidity</string>
     <string name="label_wind_speed">Wind Speed</string>
@@ -61,6 +66,7 @@
     <string name="label_see_more">See More</string>
     <string name="label_sunrise">Sunrise:</string>
     <string name="label_sunset">:Sunset</string>
+    <string name="label_add_city">Add City</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -99,5 +105,6 @@
     <string name="format_daily_uvi">UVI\n %.2f</string>
     <string name="format_daily_condition">(%s)</string>
     <string name="format_city_search_name">%s\n%s, %s</string>
+    <string name="format_lat_lon">%f / %f</string>
     <!--    format string resources-->
 </resources>

@@ -2,15 +2,15 @@ package com.tasnimulhasan.cache
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.tasnimulhasan.cache.dao.WeatherDao
-import com.tasnimulhasan.entity.room.WeatherRoomEntity
+import com.tasnimulhasan.cache.dao.CityListDao
+import com.tasnimulhasan.entity.room.CityListRoomEntity
 
 @Database(
     entities = [
-        WeatherRoomEntity::class,
+        CityListRoomEntity::class,
     ],
     version = 1, exportSchema = false
 )
 abstract class WeatherDatabase : RoomDatabase() {
-    abstract fun cartDao(): WeatherDao
+    abstract fun cartDao(): CityListDao
 }

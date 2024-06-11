@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_4"
-    app:strokeColor="@color/colorPrimary"
-    app:strokeWidth="0.5dp"
     app:cardElevation="@dimen/_3sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth="0.5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dailyCardCl"
@@ -28,9 +27,9 @@
                 android:id="@+id/dayTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
                 android:gravity="start"
                 android:includeFontPadding="false"
-                android:layout_marginStart="@dimen/margin_8"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/regular_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -80,41 +79,42 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/dividerView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/black_light_700"
-            android:layout_marginTop="@dimen/margin_2"
-            app:layout_constraintTop_toBottomOf="@+id/dailyHeaderCl"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dailyBodyCl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_2"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/dividerView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/dailyHeaderCl"
+            tools:visibility="visible">
+
+            <View
+                android:id="@+id/dividerView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/margin_2"
+                android:background="@color/black_light_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.tasnimulhasan.designsystem.CustomBoldTv
                 android:id="@+id/dailyHumidityTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
                 android:gravity="center"
-                android:paddingVertical="@dimen/padding_5"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="@dimen/padding_4"
+                android:paddingVertical="@dimen/padding_5"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/small_text_size"
-                tools:text="Humidity\n 25.05°"
                 app:layout_constraintEnd_toStartOf="@+id/dailyUviTv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Humidity\n 25.05°" />
 
             <com.tasnimulhasan.designsystem.CustomBoldTv
                 android:id="@+id/dailyUviTv"
@@ -125,11 +125,11 @@
                 android:paddingHorizontal="@dimen/padding_4"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/small_text_size"
-                tools:text="UVI\n25.56"
-                app:layout_constraintStart_toEndOf="@id/dailyHumidityTv"
+                app:layout_constraintBottom_toBottomOf="@id/dailyHumidityTv"
                 app:layout_constraintEnd_toStartOf="@+id/dailyRainTv"
+                app:layout_constraintStart_toEndOf="@id/dailyHumidityTv"
                 app:layout_constraintTop_toTopOf="@id/dailyHumidityTv"
-                app:layout_constraintBottom_toBottomOf="@id/dailyHumidityTv"/>
+                tools:text="UVI\n25.56" />
 
             <com.tasnimulhasan.designsystem.CustomBoldTv
                 android:id="@+id/dailyRainTv"
@@ -140,29 +140,29 @@
                 android:paddingHorizontal="@dimen/padding_4"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/small_text_size"
-                tools:text="Rain\n25.0°C"
-                app:layout_constraintStart_toEndOf="@+id/dailyUviTv"
+                app:layout_constraintBottom_toBottomOf="@id/dailyHumidityTv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dailyUviTv"
                 app:layout_constraintTop_toTopOf="@id/dailyHumidityTv"
-                app:layout_constraintBottom_toBottomOf="@id/dailyHumidityTv"/>
+                tools:text="Rain\n25.0°C" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sunriseCl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dailyHumidityTv">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/sunriseIv"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/margin_8"
                     android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:src="@drawable/ic_sunrise"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_sunrise" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.tasnimulhasan.designsystem.CustomMediumTV
                     android:id="@+id/sunriseTv"
@@ -172,22 +172,22 @@
                     android:layout_marginBottom="@dimen/margin_8"
                     android:gravity="start"
                     android:includeFontPadding="false"
+                    android:text="@string/label_sunrise"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/small_text_size"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sunriseIv"
                     app:layout_constraintStart_toStartOf="@+id/sunriseIv"
-                    android:text="@string/label_sunrise" />
+                    app:layout_constraintTop_toBottomOf="@+id/sunriseIv" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/sunsetIv"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginEnd="@dimen/margin_8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/sunriseIv"
+                    android:src="@drawable/ic_sunset"
                     app:layout_constraintBottom_toBottomOf="@id/sunriseIv"
-                    android:src="@drawable/ic_sunset" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/sunriseIv" />
 
                 <com.tasnimulhasan.designsystem.CustomMediumTV
                     android:id="@+id/sunsetTv"
@@ -196,12 +196,12 @@
                     android:layout_marginTop="@dimen/margin_2"
                     android:gravity="end"
                     android:includeFontPadding="false"
+                    android:text="@string/label_sunset"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/small_text_size"
-                    app:layout_constraintTop_toTopOf="@+id/sunriseTv"
                     app:layout_constraintBottom_toBottomOf="@+id/sunriseTv"
                     app:layout_constraintEnd_toEndOf="@+id/sunsetIv"
-                    android:text="@string/label_sunset" />
+                    app:layout_constraintTop_toTopOf="@+id/sunriseTv" />
 
                 <com.tasnimulhasan.designsystem.CustomTV
                     android:id="@+id/sunriseValueTv"
@@ -212,9 +212,9 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/small_text_size"
+                    app:layout_constraintBottom_toBottomOf="@id/sunriseTv"
                     app:layout_constraintStart_toEndOf="@id/sunriseTv"
                     app:layout_constraintTop_toTopOf="@id/sunriseTv"
-                    app:layout_constraintBottom_toBottomOf="@id/sunriseTv"
                     tools:text="05:15 am" />
 
                 <com.tasnimulhasan.designsystem.CustomTV
@@ -226,23 +226,23 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/small_text_size"
+                    app:layout_constraintBottom_toBottomOf="@id/sunsetTv"
                     app:layout_constraintEnd_toStartOf="@id/sunsetTv"
                     app:layout_constraintTop_toTopOf="@id/sunsetTv"
-                    app:layout_constraintBottom_toBottomOf="@id/sunsetTv"
                     tools:text="06:35 pm" />
 
                 <ProgressBar
                     android:id="@+id/sunRiseSetPb"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_20"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:progressDrawable="@drawable/sun_progress_bar"
-                    tools:progress="75"
-                    app:layout_constraintTop_toTopOf="@id/sunriseIv"
                     app:layout_constraintBottom_toBottomOf="@id/sunriseIv"
+                    app:layout_constraintEnd_toStartOf="@+id/sunsetIv"
                     app:layout_constraintStart_toEndOf="@id/sunriseIv"
-                    app:layout_constraintEnd_toStartOf="@+id/sunsetIv"/>
+                    app:layout_constraintTop_toTopOf="@id/sunriseIv"
+                    tools:progress="75" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

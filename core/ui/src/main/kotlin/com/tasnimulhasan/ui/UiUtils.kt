@@ -6,7 +6,7 @@ import com.tasnimulhasan.common.extfun.showViewAlertDialog
 import com.tasnimulhasan.ui.databinding.DialogWarningMessageBinding
 import com.tasnimulhasan.designsystem.R as Res
 
-fun Activity.showWarningDialog(title : String, message : String, positiveBtnCallback : ()-> Unit, negativeButtonCallback : ()-> Unit){
+fun Activity.showWarningDialog(title : String?, message : String?, positiveBtnCallback : ()-> Unit, negativeButtonCallback : ()-> Unit){
     val dialogBinding = DialogWarningMessageBinding.inflate(layoutInflater)
 
     dialogBinding.titleTv.text = title

@@ -1,15 +1,14 @@
 package com.tasnimulhasan.domain.repository.local
 
-import com.tasnimulhasan.entity.room.WeatherRoomEntity
+import com.tasnimulhasan.domain.localusecase.city.DeleteCityLocalUseCase
+import com.tasnimulhasan.domain.localusecase.city.FetchCityLocalUseCase
+import com.tasnimulhasan.entity.room.CityListRoomEntity
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 interface WeatherRoomRepository {
+    suspend fun insertCity(city: CityListRoomEntity)
 
-    suspend fun upsertCities(city: WeatherRoomEntity)
+    suspend fun deleteCity(params: DeleteCityLocalUseCase.Params)
 
-    suspend fun deleteCities(city: WeatherRoomEntity)
-
-    suspend fun fetchCities(): Flow<List<WeatherRoomEntity>>
-
+    fun fetchCities(): Flow<List<CityListRoomEntity>>
 }
