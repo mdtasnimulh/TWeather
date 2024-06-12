@@ -3,6 +3,7 @@ package com.tasnimulhasan.common.extfun
 import android.content.Context
 import android.graphics.LinearGradient
 import android.graphics.Shader
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -27,6 +28,11 @@ fun setTextColor(textView: AppCompatTextView, palette: Palette) {
         palette.vibrantSwatch?.rgb!!, (palette.vibrantSwatch?.rgb!! and 0x66FFFFFF),
         Shader.TileMode.CLAMP
     )
+}
+
+fun setTextColorWithIconBG(textView: AppCompatTextView, imageView: AppCompatImageView, palette: Palette, context: Context) {
+    textView.setTextColor(palette.vibrantSwatch?.rgb ?: ContextCompat.getColor(context, Res.color.subTextColor))
+    imageView.setBackgroundColor(palette.lightVibrantSwatch?.rgb ?: Res.color.colorPrimaryDark)
 }
 
 fun getColorForAqiName(aqiName: String): Int {

@@ -8,6 +8,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.tasnimulhasan.city.citysearch.CitySearchViewModel
+import com.tasnimulhasan.city.citysearch.UiAction
+import com.tasnimulhasan.city.citysearch.UiEvent
+import com.tasnimulhasan.city.citysearch.UiState
 import com.tasnimulhasan.city.databinding.FragmentCitySearchBinding
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
@@ -26,7 +30,7 @@ import com.tasnimulhasan.designsystem.R as Res
 @AndroidEntryPoint
 class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
 
-    private val viewModel by viewModels<CityViewModel>()
+    private val viewModel by viewModels<CitySearchViewModel>()
     private lateinit var errorHandler: ErrorUiHandler
     private var adapter by autoCleared<CitySearchListAdapter>()
 
@@ -55,10 +59,10 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
     private fun initRecyclerView() {
         adapter = CitySearchListAdapter { item ->
             var isCityExists = false
-            viewModel.cityList.forEach { if (item.name == it.name && item.cityName == it.cityName) isCityExists = true }
+            //viewModel.cityList.forEach { if (item.name == it.name && item.cityName == it.cityName) isCityExists = true }
 
-            if (isCityExists) showToastMessage(getString(Res.string.msg_city_already_exists))
-            else viewModel.action(UiAction.InsertCities(CityListRoomEntity(name = item.name, cityName = item.cityName, lat = item.lat, lon = item.lon, country = item.country, state = item.state)))
+            //if (isCityExists) showToastMessage(getString(Res.string.msg_city_already_exists))
+            viewModel.action(UiAction.InsertCities(CityListRoomEntity(name = item.name, cityName = item.cityName, lat = item.lat, lon = item.lon, country = item.country, state = item.state)))
         }
 
         requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)
@@ -77,8 +81,6 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
                     this showCities uiState.cityEntity
                 }
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
-                is UiState.CityList -> {}
-                else -> {}
             }
         }
     }

@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/cityNameTv"
             app:layout_constraintEnd_toEndOf="@+id/cityNameTv"
             app:layout_constraintStart_toStartOf="@+id/cityNameTv"
-            android:text="00:00 PM" />
+            tools:text="00:00 PM" />
 
         <com.tasnimulhasan.designsystem.CustomSemiBoldTV
             android:id="@+id/cityNameTv"
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toStartOf="@+id/cityTempTv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cityTempTv"
-            tools:text="Dhaka, Bangladesh" />
+            tools:text="Dhaka" />
 
         <com.tasnimulhasan.designsystem.CustomTV
             android:id="@+id/cityConditionTv"
@@ -51,24 +51,24 @@
             android:layout_marginTop="@dimen/margin_2"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:textColor="@color/child_text_color"
+            android:textColor="@color/subTextColor"
             android:textSize="@dimen/small_text_size"
             app:layout_constraintEnd_toEndOf="@+id/cityNameTv"
             app:layout_constraintStart_toStartOf="@+id/cityNameTv"
             app:layout_constraintTop_toBottomOf="@+id/cityNameTv"
-            android:text="Clear Sky" />
+            tools:text="Clear Sky" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cityIconIv"
             android:layout_width="0dp"
             android:layout_height="@dimen/_100sdp"
-            android:background="@color/cyan_dark_800"
-            android:padding="@dimen/padding_5"
+            android:background="@color/colorPrimaryDark"
+            android:padding="@dimen/padding_8"
             app:layout_constraintWidth_percent="0.33"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_stormy_weather"/>
+            tools:src="@drawable/ic_stormy_weather"/>
 
         <com.tasnimulhasan.designsystem.CustomBoldTv
             android:id="@+id/cityTempTv"
@@ -76,13 +76,13 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/_25ssp"
+            android:textSize="@dimen/_20ssp"
             android:includeFontPadding="false"
             android:layout_marginEnd="@dimen/margin_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cityIconIv"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="00°" />
+            tools:text="00.0°C" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

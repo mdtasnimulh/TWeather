@@ -40,6 +40,7 @@ import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
+import okio.IOException
 import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -101,18 +102,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
         fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener { location ->
-            getCityName(location)
-            viewModel.latitude = location.result.latitude.toString()
-            viewModel.longitude = location.result.longitude.toString()
-            viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
-            viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+            try {
+                getCityName(location)
+                viewModel.latitude = location.result.latitude.toString()
+                viewModel.longitude = location.result.longitude.toString()
+                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
+                viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+            } catch (_: Exception) {}
         }
     }
 
     private fun getCityName(location: Task<Location>) {
         val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
-        if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
-        else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
+        try {
+            if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
+            else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {

@@ -1,3 +1,4 @@
+/*
 package com.tasnimulhasan.city
 
 import com.tasnimulhasan.common.constant.AppConstants
@@ -143,4 +144,4 @@ sealed interface UiAction {
     data class DeleteCities(val city: CityListRoomEntity) : UiAction
     data object FetchCities : UiAction
     data class FetchWeather(val params: HomeWeatherApiUseCase.Params) : UiAction
-}
+}*/

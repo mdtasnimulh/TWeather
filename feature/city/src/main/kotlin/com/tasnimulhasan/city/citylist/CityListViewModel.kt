@@ -34,10 +34,6 @@ class CityListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading(false))
     val uiState get() = _uiState
 
-    init {
-        fetchCities()
-    }
-
     private fun deleteCities(id: Int, name: String){
         execute {
             deleteCityLocalUseCase.invoke(DeleteCityLocalUseCase.Params(id = id, name = name))
@@ -47,7 +43,7 @@ class CityListViewModel @Inject constructor(
     private fun fetchCities() {
         execute {
             fetchCityLocalUseCase.invoke().collect{
-                //cityList.clear()
+                cityList.clear()
                 cityList.addAll(it)
                 _uiState.value = UiState.CityList(it)
                 it.forEach { city ->

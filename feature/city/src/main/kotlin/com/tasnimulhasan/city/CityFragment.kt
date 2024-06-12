@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.tasnimulhasan.city.citylist.CityListViewModel
+import com.tasnimulhasan.city.citylist.UiAction
+import com.tasnimulhasan.city.citylist.UiState
 import com.tasnimulhasan.city.databinding.FragmentCityBinding
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.extfun.clickWithDebounce
@@ -20,7 +23,7 @@ import com.tasnimulhasan.designsystem.R as Res
 @AndroidEntryPoint
 class CityFragment : BaseFragment<FragmentCityBinding>() {
 
-    private val viewModel by viewModels<CityViewModel>()
+    private val viewModel by viewModels<CityListViewModel>()
     private lateinit var errorHandler: ErrorUiHandler
     private var adapter by autoCleared<CityListAdapter>()
 
@@ -32,8 +35,9 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
         initRecyclerView()
         initToolbar()
         uiStateObserver()
-        bindUiEvent()
         onClickListener()
+
+        viewModel.action(UiAction.FetchCities)
     }
 
     private fun initToolbar() {
@@ -80,14 +84,8 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
                     adapter.updateWeatherData(uiState.weatherList)
                 }
 
-                else -> {}
+                is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
             }
-        }
-    }
-
-    private fun bindUiEvent() {
-        viewModel.uiEvent.execute { _ ->
-
         }
     }
 

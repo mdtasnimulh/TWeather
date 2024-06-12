@@ -4,6 +4,8 @@ import android.text.InputFilter
 import android.text.Spanned
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 fun String.convertToInt(): Int {
     return try {
@@ -19,6 +21,11 @@ fun Double.roundOfTwoDecimalPlaces(): Double {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).toDouble()
+}
+
+fun roundToPrecision(value: Double, precision: Int): Double {
+    val scale = 10.0.pow(precision)
+    return (value * scale).roundToInt() / scale
 }
 
 class MinMaxFilter(minValue: Int, maxValue: Int) : InputFilter {
