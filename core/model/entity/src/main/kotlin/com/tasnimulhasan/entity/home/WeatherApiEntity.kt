@@ -10,6 +10,7 @@ data class WeatherApiEntity(
 
 // Current Weather Data //
 data class CurrentWeatherData(
+    val currentTime: Long,
     val currentSunrise: Long,
     val currentSunset: Long,
     val currentTemp: Double,

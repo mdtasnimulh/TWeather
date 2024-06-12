@@ -10,11 +10,12 @@ import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.navigateDestination
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
-import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.ui.showWarningDialog
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import com.tasnimulhasan.designsystem.R as Res
 
 @AndroidEntryPoint
 class CityFragment : BaseFragment<FragmentCityBinding>() {
@@ -73,6 +74,10 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
                 is UiState.CityList -> {
                     binding.searchCityTv.isGone = uiState.cityList.isNotEmpty()
                     showCities(uiState.cityList)
+                }
+                is UiState.WeatherList -> {
+                    Timber.e("chkWeatherDetails ${uiState.weatherList.size}")
+                    adapter.updateWeatherData(uiState.weatherList)
                 }
 
                 else -> {}

@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/cityNameTv"
             app:layout_constraintEnd_toEndOf="@+id/cityNameTv"
             app:layout_constraintStart_toStartOf="@+id/cityNameTv"
-            android:text="08:45 PM" />
+            android:text="00:00 PM" />
 
         <com.tasnimulhasan.designsystem.CustomSemiBoldTV
             android:id="@+id/cityNameTv"
@@ -82,7 +82,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cityIconIv"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="35°" />
+            android:text="00°" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

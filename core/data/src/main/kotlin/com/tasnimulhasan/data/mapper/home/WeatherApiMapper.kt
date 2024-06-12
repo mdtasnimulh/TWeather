@@ -20,6 +20,7 @@ class WeatherApiMapper @Inject constructor() :
             lat = type.lat ?: 0.0,
             lon = type.lon ?: 0.0,
             currentWeatherData = CurrentWeatherData(
+                currentTime = (type.current?.dt ?: 0L).toLong(),
                 currentSunrise = (type.current?.sunrise ?: 0L).toLong(),
                 currentSunset = (type.current?.sunset ?: 0L).toLong(),
                 currentTemp = type.current?.temp ?: 0.0,

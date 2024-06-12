@@ -10,7 +10,7 @@ import com.tasnimulhasan.entity.city.CitySearchApiEntity
 import com.tasnimulhasan.designsystem.R as Res
 
 class CitySearchListAdapter(
-    private val onClick: (CitySearchApiEntity, Int) -> Unit
+    private val onClick: (CitySearchApiEntity) -> Unit
 ) : DataBoundListAdapter<CitySearchApiEntity, ItemCitySearchBinding>(
     diffCallback = object : DiffUtil.ItemCallback<CitySearchApiEntity>() {
         override fun areItemsTheSame(oldItem: CitySearchApiEntity, newItem: CitySearchApiEntity) =
@@ -33,7 +33,7 @@ class CitySearchListAdapter(
             cityNameTv.text = root.context.getString(
                 Res.string.format_city_search_name, item.cityName.ifEmpty { item.name }, item.state, item.country)
 
-            root.clickWithDebounce { onClick.invoke(item, position) }
+            root.clickWithDebounce { onClick.invoke(item) }
         }
     }
 

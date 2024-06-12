@@ -108,6 +108,6 @@
     <string name="format_city_name">%s, %s</string>
     <string name="format_city_search_name">%s\n%s, %s</string>
     <string name="format_lat_lon">%f / %f</string>
-    <string name="format_temperature">%.0d°C</string>
+    <string name="format_temperature">%.0f°C</string>
     <!--    format string resources-->
 </resources>
