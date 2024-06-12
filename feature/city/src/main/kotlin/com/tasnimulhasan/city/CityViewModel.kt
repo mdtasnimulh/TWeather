@@ -1,15 +1,12 @@
 package com.tasnimulhasan.city
 
-import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.domain.apiusecase.city.CitySearchApiUseCase
-import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.base.BaseViewModel
 import com.tasnimulhasan.domain.localusecase.city.DeleteCityLocalUseCase
 import com.tasnimulhasan.domain.localusecase.city.FetchCityLocalUseCase
 import com.tasnimulhasan.domain.localusecase.city.InsertCityLocalUseCase
 import com.tasnimulhasan.entity.city.CitySearchApiEntity
-import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -22,14 +19,10 @@ class CityViewModel @Inject constructor(
     private val citySearchApiUseCase: CitySearchApiUseCase,
     private val insertCityLocalUseCase: InsertCityLocalUseCase,
     private val deleteCityLocalUseCase: DeleteCityLocalUseCase,
-    private val fetchCityLocalUseCase: FetchCityLocalUseCase,
-    private val homeWeatherApiUseCase: HomeWeatherApiUseCase
+    private val fetchCityLocalUseCase: FetchCityLocalUseCase
 ) : BaseViewModel() {
 
     var cityList = mutableListOf<CityListRoomEntity>()
-
-    private val _weatherData = MutableStateFlow<List<WeatherApiEntity>>(emptyList())
-    val weatherData get() = _weatherData
 
     val action: (UiAction) -> Unit = { action ->
         when (action) {
@@ -37,7 +30,6 @@ class CityViewModel @Inject constructor(
             is UiAction.DeleteCities -> action.city.name?.let { deleteCities(action.city.id, it) }
             is UiAction.FetchCities -> fetchCities()
             is UiAction.InsertCities -> insertCitiesToLocalDb(action.city)
-            is UiAction.FetchWeatherForAllCities -> fetchWeatherForAllCities()
         }
     }
 
@@ -96,34 +88,6 @@ class CityViewModel @Inject constructor(
             }
         }
     }
-
-    private fun fetchWeatherForAllCities() {
-        cityList.forEach { city ->
-            val params = HomeWeatherApiUseCase.Params(
-                lat = city.lat.toString(),
-                lon = city.lon.toString(),
-                appid = AppConstants.OPEN_WEATHER_API_KEY,
-                units = AppConstants.DATA_UNIT
-            )
-            fetchWeatherData(params)
-        }
-    }
-
-    private fun fetchWeatherData(params: HomeWeatherApiUseCase.Params) {
-        execute {
-            homeWeatherApiUseCase.execute(params).collect { result ->
-                when (result) {
-                    is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
-                    is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> {
-                        val updatedWeatherData = _weatherData.value.toMutableList()
-                        updatedWeatherData.add(result.data)
-                        _weatherData.value = updatedWeatherData
-                    }
-                }
-            }
-        }
-    }
 }
 
 sealed interface UiEvent {
@@ -142,5 +106,4 @@ sealed interface UiAction {
     data class InsertCities(val city: CityListRoomEntity) : UiAction
     data class DeleteCities(val city: CityListRoomEntity) : UiAction
     data object FetchCities : UiAction
-    data object FetchWeatherForAllCities : UiAction
 }

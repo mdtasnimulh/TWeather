@@ -54,9 +54,7 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
 
     private fun initRecyclerView() {
         adapter = CitySearchListAdapter { item, position ->
-            if (item.name == viewModel.cityList[position].name && item.cityName == viewModel.cityList[position].cityName) {
-                showToastMessage(getString(Res.string.msg_city_already_exists))
-            } else {
+            if (viewModel.cityList.isEmpty()) {
                 viewModel.action(
                     UiAction.InsertCities(
                         CityListRoomEntity(
@@ -69,6 +67,23 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
                         )
                     )
                 )
+            } else {
+                if (item.name == viewModel.cityList[position].name && item.cityName == viewModel.cityList[position].cityName) {
+                    showToastMessage(getString(Res.string.msg_city_already_exists))
+                } else {
+                    viewModel.action(
+                        UiAction.InsertCities(
+                            CityListRoomEntity(
+                                name = item.name,
+                                cityName = item.cityName,
+                                lat = item.lat,
+                                lon = item.lon,
+                                country = item.country,
+                                state = item.state
+                            )
+                        )
+                    )
+                }
             }
         }
 
