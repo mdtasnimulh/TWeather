@@ -45,6 +45,8 @@ androidxLifecycle = "2.8.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 androidxEspresso = "3.6.1"
+testCore = "1.6.1"
+testRunner = "1.6.1"
 
 okhttp3Version = "4.12.0"
 retrofitVersion = "2.9.0"
@@ -131,6 +133,8 @@ rx-java3-android = {group = "io.reactivex.rxjava3", name = "rxandroid", version.
 test-junit = {group = "junit", name = "junit", version.ref="junit"}
 test-extjunit = {group = "androidx.test.ext", name = "junit", version.ref="junitVersion"}
 test-espresso = {group = "androidx.test.espresso", name = "espresso-core", version.ref="androidxEspresso"}
+test-core = {group = "androidx.test", name = "core", version.ref="testCore"}
+test-runner = {group = "androidx.test", name = "runner", version.ref="testRunner"}
 
 [bundles]
 androidx-core-dependencies = [

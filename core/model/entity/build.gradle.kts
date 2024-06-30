@@ -9,4 +9,8 @@ android {
 dependencies {
     implementation(libs.room.common)
     implementation(libs.gson)
+
+    androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.extjunit)
+    androidTestImplementation(libs.test.espresso)
 }

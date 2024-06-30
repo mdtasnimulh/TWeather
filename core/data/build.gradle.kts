@@ -19,4 +19,8 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.model.entity)
     implementation(projects.core.model.apiResponse)
+
+    androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.extjunit)
+    androidTestImplementation(libs.test.espresso)
 }

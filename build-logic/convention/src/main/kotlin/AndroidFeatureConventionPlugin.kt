@@ -46,6 +46,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("testImplementation", libs.findLibrary("test.junit").get())
                 add("androidTestImplementation", libs.findLibrary("test.extjunit").get())
                 add( "androidTestImplementation",libs.findLibrary("test.espresso").get())
+                add( "androidTestImplementation",libs.findLibrary("test.core").get())
+                add( "androidTestImplementation",libs.findLibrary("test.runner").get())
             }
         }
     }

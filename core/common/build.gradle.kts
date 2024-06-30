@@ -22,4 +22,8 @@ dependencies {
     implementation(libs.date.picker)
     implementation(libs.glide)
     implementation(libs.androidx.palette)
+
+    androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.extjunit)
+    androidTestImplementation(libs.test.espresso)
 }
