@@ -41,7 +41,7 @@ mapPlaceVersion = "17.1.0"
 libraryPlaceVersion = "3.5.0"
 
 coroutinesVersion = "1.8.1"
-androidxLifecycle = "2.8.2"
+androidxLifecycle = "2.8.3"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 androidxEspresso = "3.6.1"
