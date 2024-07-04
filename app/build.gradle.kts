@@ -90,6 +90,7 @@ dependencies {
     implementation(libs.bundles.androidx.navigation.dependencies)
 
     implementation(libs.timber)
+    implementation(libs.androidx.core.splashscreen)
 
     ksp(libs.hilt.compiler)
     kspTest(libs.hilt.compiler)
