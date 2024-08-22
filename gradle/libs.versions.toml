@@ -1,6 +1,6 @@
 [versions]
-androidGradlePlugin = "8.5.1"
-androidTools = "31.5.1"
+androidGradlePlugin = "8.5.2"
+androidTools = "31.5.2"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.21"
 googleServices = "4.4.2"
@@ -46,7 +46,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 androidxEspresso = "3.6.1"
 testCore = "1.6.1"
-testRunner = "1.6.1"
+testRunner = "1.6.2"
 
 okhttp3Version = "4.12.0"
 retrofitVersion = "2.9.0"
@@ -54,7 +54,7 @@ rxJava3Version = "3.1.8"
 rxAndroid3Version = "3.0.2"
 
 gsonVersion = "2.10.1"
-workVersion = "2.9.0"
+workVersion = "2.9.1"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
@@ -138,48 +138,48 @@ test-runner = {group = "androidx.test", name = "runner", version.ref="testRunner
 
 [bundles]
 androidx-core-dependencies = [
-    "androidx.appcompat",
-    "androidx.core.ktx",
+    "androidx-appcompat",
+    "androidx-core-ktx",
     "material",
-    "androidx.recycler.view",
-    "androidx.constraintlayout",
-    "card.view",
-    "androidx.activity",
-    "androidx.fragment",
+    "androidx-recycler-view",
+    "androidx-constraintlayout",
+    "card-view",
+    "androidx-activity",
+    "androidx-fragment",
 ]
 play-services-maps = [
-    "play.services.maps",
-    "play.services.location",
-    "play.services.places",
-    "library.places"
+    "play-services-maps",
+    "play-services-location",
+    "play-services-places",
+    "library-places"
 ]
 androidx-lifecycle-dependencies = [
-    "androidx.viewmodel.ktx",
-    "androidx.viewmodel.save.state",
-    "androidx.livedata",
-    "androidx.lifecycle.runtime",
-    "androidx.lifecycle.service",
+    "androidx-viewmodel-ktx",
+    "androidx-viewmodel-save-state",
+    "androidx-livedata",
+    "androidx-lifecycle-runtime",
+    "androidx-lifecycle-service",
 ]
 room-dependencies = [
-    "room.ktx",
-    "room.runtime",
+    "room-ktx",
+    "room-runtime",
 ]
 network-dependencies = [
     "retrofit",
-    "retrofit.rxjava3.adapter",
-    "retrofit.json.converter",
+    "retrofit-rxjava3-adapter",
+    "retrofit-json-converter",
     "okhttp",
-    "okhttp.intercepter",
+    "okhttp-intercepter",
     "gson",
 ]
 rxjava3-dependencies = [
-    "rx.java3",
-    "rx.java3.android",
+    "rx-java3",
+    "rx-java3-android",
 ]
 androidx-navigation-dependencies = [
-    "navigation.fragment",
-    "navigation.ui",
-    "hilt.navigation"
+    "navigation-fragment",
+    "navigation-ui",
+    "hilt-navigation"
 ]
 android-responsive-size-dependencies = [
     "sdp",
