@@ -1,6 +1,6 @@
 import com.android.build.gradle.LibraryExtension
+import com.tasnimulhasan.thweather.AppConfig
 import com.tasnimulhasan.thweather.configureKotlinAndroid
-import com.tasnimulhasan.thweather.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -18,10 +18,12 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 34
-                testOptions.animationsDisabled = true
-                resourcePrefix = path.split("""\W""".toRegex()).drop(1).distinct().joinToString(separator = "_").lowercase() + "_"
+                defaultConfig {
+                    testInstrumentationRunner = AppConfig.testInstrumentationRunner
+                    consumerProguardFile("consumer-rules.pro")
+                }
             }
+
             dependencies {
                 add("testImplementation", kotlin("test"))
             }

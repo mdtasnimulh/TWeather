@@ -55,6 +55,7 @@
     <dimen name="margin_20">@dimen/_20sdp</dimen>
     <dimen name="margin_25">@dimen/_25sdp</dimen>
     <dimen name="margin_30">@dimen/_30sdp</dimen>
+    <dimen name="margin_35">@dimen/_35sdp</dimen>
     <dimen name="margin_40">@dimen/_40sdp</dimen>
     <dimen name="margin_50">@dimen/_50sdp</dimen>
     <dimen name="margin_60">@dimen/_60sdp</dimen>
