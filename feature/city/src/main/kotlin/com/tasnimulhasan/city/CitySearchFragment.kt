@@ -155,6 +155,4 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
             adapter.notifyItemRangeChanged(0, adapter.itemCount)
         }
     }
-
-    override fun isEnableEdgeToEdge() = false
 }

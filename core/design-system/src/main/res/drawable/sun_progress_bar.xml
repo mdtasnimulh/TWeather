@@ -4,13 +4,8 @@
     <item
         android:id="@android:id/background">
         <shape>
-            <padding
-                android:bottom="@dimen/_2sdp"
-                android:top="@dimen/_2sdp"
-                android:left="@dimen/_2sdp"
-                android:right="@dimen/_2sdp"/>
             <corners
-                android:radius="@dimen/_3sdp" />
+                android:radius="@dimen/_10sdp" />
             <gradient
                 android:startColor="@color/yellow_light_400"
                 android:centerColor="@color/yellow_light_700"
@@ -24,7 +19,7 @@
         <clip>
             <shape>
                 <corners
-                    android:radius="@dimen/_3sdp" />
+                    android:radius="@dimen/_10sdp" />
                 <gradient
                     android:startColor="@color/yellow_light_1000"
                     android:endColor="@color/primary_orange_dark_100"

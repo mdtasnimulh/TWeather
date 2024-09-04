@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/weatherForecastTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_15"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:text="@string/title_weather_forecast"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_13ssp"
+        app:fontFamily="@font/poppins_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/maxTempCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/_6sdp"
+        app:layout_constraintEnd_toStartOf="@id/minTempCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weatherForecastTv">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/maxConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maxTempTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Max"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/maxValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/maxConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maxValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="High, 32°C"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/maxTempTv"
+            app:layout_constraintStart_toStartOf="@id/maxTempTv"
+            app:layout_constraintTop_toBottomOf="@id/maxTempTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/minMaxDivider"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@color/white_n_gray_light_300"
+        app:layout_constraintTop_toTopOf="@id/maxTempCl"
+        app:layout_constraintBottom_toBottomOf="@id/maxTempCl"
+        app:layout_constraintStart_toEndOf="@id/maxTempCl"
+        app:layout_constraintEnd_toStartOf="@id/minTempCl"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/minTempCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@id/maxTempCl"
+        android:layout_marginEnd="@dimen/margin_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/maxTempCl"
+        app:layout_constraintTop_toTopOf="@id/maxTempCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/minConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/minTempTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Min"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/minValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/minConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/minValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="High, 32°C"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/minTempTv"
+            app:layout_constraintStart_toStartOf="@id/minTempTv"
+            app:layout_constraintTop_toBottomOf="@id/minTempTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/windCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_6"
+        android:layout_marginEnd="@dimen/_6sdp"
+        app:layout_constraintEnd_toStartOf="@id/rainCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/maxTempCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/windConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/windTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Wind"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/windValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/windConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/windValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="12 km/h"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/windTv"
+            app:layout_constraintStart_toStartOf="@id/windTv"
+            app:layout_constraintTop_toBottomOf="@id/windTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/windRainDivider"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@color/white_n_gray_light_300"
+        app:layout_constraintTop_toTopOf="@id/windCl"
+        app:layout_constraintBottom_toBottomOf="@id/windCl"
+        app:layout_constraintStart_toEndOf="@id/windCl"
+        app:layout_constraintEnd_toStartOf="@id/rainCl"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rainCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@id/windCl"
+        android:layout_marginEnd="@dimen/margin_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/windCl"
+        app:layout_constraintTop_toTopOf="@id/windCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rainConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rainTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Rain"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/rainValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rainConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rainValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="41%"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/rainTv"
+            app:layout_constraintStart_toStartOf="@id/rainTv"
+            app:layout_constraintTop_toBottomOf="@id/rainTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/humidityCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_6"
+        android:layout_marginEnd="@dimen/_6sdp"
+        app:layout_constraintEnd_toStartOf="@id/uviCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/windCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/humidityConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/humidityTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Humidity"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/humidityValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/humidityConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/humidityValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="70.35%"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/humidityTv"
+            app:layout_constraintStart_toStartOf="@id/humidityTv"
+            app:layout_constraintTop_toBottomOf="@id/humidityTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/humidityUviDivider"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@color/white_n_gray_light_300"
+        app:layout_constraintTop_toTopOf="@id/humidityCl"
+        app:layout_constraintBottom_toBottomOf="@id/humidityCl"
+        app:layout_constraintStart_toEndOf="@id/humidityCl"
+        app:layout_constraintEnd_toStartOf="@id/uviCl"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/uviCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_12"
+        android:layout_marginStart="@dimen/margin_6"
+        app:layout_constraintStart_toEndOf="@id/humidityCl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/humidityCl"
+        app:layout_constraintBottom_toBottomOf="@id/humidityCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/uviConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/uviTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="UVI"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/uviValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/uviConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/uviValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="12"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/uviTv"
+            app:layout_constraintStart_toStartOf="@id/uviTv"
+            app:layout_constraintTop_toBottomOf="@id/uviTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/realFeelCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_6"
+        android:layout_marginEnd="@dimen/_6sdp"
+        app:layout_constraintEnd_toStartOf="@id/pressureCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/humidityCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/realFeelConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/realFeelTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Real Feel"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/realFeelValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/realFeelConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/realFeelValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="32°C"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/realFeelTv"
+            app:layout_constraintStart_toStartOf="@id/realFeelTv"
+            app:layout_constraintTop_toBottomOf="@id/realFeelTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/realFeelPressureDivider"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@color/white_n_gray_light_300"
+        app:layout_constraintTop_toTopOf="@id/realFeelCl"
+        app:layout_constraintBottom_toBottomOf="@id/realFeelCl"
+        app:layout_constraintStart_toEndOf="@id/realFeelCl"
+        app:layout_constraintEnd_toStartOf="@id/pressureCl"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pressureCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_12"
+        android:layout_marginStart="@dimen/margin_6"
+        app:layout_constraintStart_toEndOf="@id/realFeelCl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/realFeelCl"
+        app:layout_constraintBottom_toBottomOf="@id/realFeelCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pressureConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pressureTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Pressure"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/pressureValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pressureConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pressureValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="1000 pHb"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/pressureTv"
+            app:layout_constraintStart_toStartOf="@id/pressureTv"
+            app:layout_constraintTop_toBottomOf="@id/pressureTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/visibilityCl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_6"
+        app:layout_constraintEnd_toEndOf="@id/realFeelCl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/realFeelCl">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/visibilityConditionIv"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/visibilityTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="Visibility"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_13ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toTopOf="@id/visibilityValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/visibilityConditionIv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/visibilityValueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:includeFontPadding="false"
+            android:text="70%"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_12ssp"
+            app:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/visibilityTv"
+            app:layout_constraintStart_toStartOf="@id/visibilityTv"
+            app:layout_constraintTop_toBottomOf="@id/visibilityTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

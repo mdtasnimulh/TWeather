@@ -34,11 +34,8 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
     }
 
     private fun initToolbar() {
-        binding.toolbarIncl.apply {
-            toolbarTitleTv.text = getString(Res.string.label_weather_overview)
-            toolbarBackIv.clickWithDebounce {
-                findNavController().popBackStack()
-            }
+        binding.backIv.clickWithDebounce {
+            findNavController().popBackStack()
         }
     }
 
@@ -84,6 +81,4 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
             units = AppConstants.DATA_UNIT
         )
     }
-
-    override fun isEnableEdgeToEdge() = false
 }

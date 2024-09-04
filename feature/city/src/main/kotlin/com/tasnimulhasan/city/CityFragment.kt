@@ -103,6 +103,4 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
             }
         }
     }
-
-    override fun isEnableEdgeToEdge() = false
 }

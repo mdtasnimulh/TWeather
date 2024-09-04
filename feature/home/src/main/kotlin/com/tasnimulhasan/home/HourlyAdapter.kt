@@ -1,3 +1,4 @@
+/*
 package com.tasnimulhasan.home
 
 import android.content.res.ColorStateList
@@ -66,4 +67,4 @@ class HourlyAdapter(
         return SimpleDateFormat(DateTimeFormat.HOURLY_TIME_FORMAT, Locale.US).format(Date(System.currentTimeMillis()))
     }
 
-}
+}*/

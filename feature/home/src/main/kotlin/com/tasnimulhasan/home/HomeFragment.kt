@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<WeatherViewModel>()
-    private var hourlyAdapter by autoCleared<HourlyAdapter>()
+    //private var hourlyAdapter by autoCleared<HourlyAdapter>()
     private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -89,8 +89,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 uiStateObserver()
                 bindUiEvent()
                 onClickListener()
-                setDetailsTextColor()
-                setImage()
+                //setDetailsTextColor()
+                //setImage()
             }
         }
     }
@@ -115,27 +115,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun getCityName(location: Task<Location>) {
         val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
         try {
-            if (place?.subLocality.isNullOrEmpty()) binding.currentWeatherHeaderIncl.currentCityTv.text = place?.thoroughfare
-            else binding.currentWeatherHeaderIncl.currentCityTv.text = place?.subLocality
+            if (place?.subLocality.isNullOrEmpty()) binding.cityNameTv.text = place?.thoroughfare
+            else binding.cityNameTv.text = place?.subLocality
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
+    /*private fun initRecyclerView(hourlyWeatherData: List<HourlyWeatherData>) {
         hourlyAdapter = HourlyAdapter {
 
         }
         requireContext().setUpHorizontalRecyclerView(binding.hourlyRv, hourlyAdapter)
         hourlyAdapter.submitList(hourlyWeatherData)
         hourlyAdapter.notifyItemRangeChanged(0, hourlyAdapter.itemCount)
-    }
+    }*/
 
     private fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
         dailyAdapter = DailyAdapter {
 
         }
-        requireContext().setUpVerticalRecyclerView(binding.dailyRv, dailyAdapter)
+        requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
         dailyAdapter.submitList(dailyWeatherData)
         dailyAdapter.notifyItemRangeChanged(0, dailyAdapter.itemCount)
     }
@@ -146,9 +146,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.Loading -> { /*NA*/ }
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
                 is UiState.ApiSuccess -> {
-                    binding.loadingCl.isGone = true
                     this showWeatherData uiState.weatherData
-                    initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
+                    //initRecyclerView(uiState.weatherData.hourlyWeatherData.take(24))
                     initDailyRecyclerView(uiState.weatherData.dailyWeatherData.take(3))
                 }
 
@@ -160,20 +159,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
-            currentWeatherHeaderIncl.currentWeatherTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
-            currentWeatherHeaderIncl.currentWeatherConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
+            tempTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
+            currentConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition.map { "$it\n" }.joinToString("")
 
-            currentWeatherDetailsIncl.apply {
-                maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
-                minValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMinimumTemperature)
-                visibilityValueTv.text = getString(Res.string.format_visibility, weatherData.currentWeatherData.currentVisibility/1000)
-                realFeelValueTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentFeelsLike)
-                humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
-                pressureValueTv.text = getString(Res.string.format_air_pressure, weatherData.currentWeatherData.currentPressure.toString())
-                windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
-                uvIndexValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
-                rainValueTv.text = getString(Res.string.format_rain, weatherData.currentWeatherData.currentRain)
-            }
+            //maxValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature)
+            //minValueTv.text = getString(Res.string.format_current_weather, weatherData.dailyWeatherData[0].dailyTemp.dailyMinimumTemperature)
+            //visibilityValueTv.text = getString(Res.string.format_visibility, weatherData.currentWeatherData.currentVisibility/1000)
+            //realFeelValueTv.text = getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentFeelsLike)
+            humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
+            //pressureValueTv.text = getString(Res.string.format_air_pressure, weatherData.currentWeatherData.currentPressure.toString())
+            windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
+            uviValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
+            //rainValueTv.text = getString(Res.string.format_rain, weatherData.currentWeatherData.currentRain)
         }
     }
 
@@ -200,11 +197,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onClickListener() {
         binding.apply {
-            currentWeatherHeaderIncl.currentWeatherIconIv.clickWithDebounce {
+            weatherConditionIv.clickWithDebounce {
                 navigateToDestination(getString(UI.string.deep_link_weather_details_fragment).toUri())
             }
 
-            currentWeatherHeaderIncl.currentWeatherTv.clickWithDebounce {
+            cityIv.clickWithDebounce {
                 navigateToDestination(getString(UI.string.deep_link_city_search_fragment).toUri())
             }
         }
@@ -214,12 +211,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         AppConstants.iconSetTwo.find { weatherValue ->
             weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon ->
-            binding.currentWeatherHeaderIncl.currentWeatherIconIv.setImageResource(icon)
-            setTextColor(binding.currentWeatherHeaderIncl.currentWeatherTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
+            binding.weatherConditionIv.setImageResource(icon)
+            setTextColor(binding.currentConditionTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
         }
     }
 
-    private fun setDetailsTextColor() {
+    /*private fun setDetailsTextColor() {
         binding.currentWeatherDetailsIncl.apply {
             maxTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
             minTv.setTextColor(setDetailsTvTextColor(Res.drawable.max_temp, requireContext()))
@@ -241,9 +238,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             windValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.wind, requireContext()))
             rainValueTv.setTextColor(setDetailsValueTextColor(Res.drawable.rain, requireContext()))
         }
-    }
+    }*/
 
-    private fun setImage() {
+    /*private fun setImage() {
         binding.currentWeatherDetailsIncl.maxIv.loadGifImage(Res.drawable.max_temp, requireContext())
         binding.currentWeatherDetailsIncl.minIv.loadGifImage(Res.drawable.max_temp, requireContext())
         binding.currentWeatherDetailsIncl.visibilityIv.loadGifImage(Res.drawable.visibility, requireContext())
@@ -253,7 +250,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.currentWeatherDetailsIncl.uvIndexIv.loadGifImage(Res.drawable.uvi, requireContext())
         binding.currentWeatherDetailsIncl.windIv.loadGifImage(Res.drawable.wind, requireContext())
         binding.currentWeatherDetailsIncl.rainIv.loadGifImage(Res.drawable.rain, requireContext())
-    }
-
-    override fun isEnableEdgeToEdge() = true
+    }*/
 }

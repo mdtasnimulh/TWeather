@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -24,6 +26,11 @@ abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
         binding = viewBindingLayout()
         setContentView(binding.root)
         activityContext = this
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         initializeView(savedInstanceState)
     }
 
@@ -55,6 +62,5 @@ abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
     override fun onDestroy() {
         super.onDestroy()
         activityContext = null
-        //finish()
     }
 }
