@@ -12,6 +12,18 @@
         tools:layout="@layout/fragment_weather_details">
 
         <deepLink app:uri="@string/deep_link_weather_details_fragment"/>
+
+        <argument android:name="weatherData"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument android:name="airQuality"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument android:name="cityName"
+            app:argType="string"
+            app:nullable="false"/>
     </fragment>
 
 </navigation>

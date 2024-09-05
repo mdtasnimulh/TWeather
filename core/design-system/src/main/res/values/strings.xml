@@ -39,6 +39,7 @@
     <string name="msg_no_city_found">No pre added city found.\nAdd new city to the list.</string>
     <string name="msg_loading">Fetching Data, Please Wait</string>
     <string name="msg_demo_overview">The current weather is partly cloudy with a temperature of 33°C and a slight breeze with a wind speed of 1 meter/sec. The humidity is at 56%, and the visibility is good at 10,000 meters. The weather may feel warmer than the actual temperature due to the feels-like temperature of 39°C. The UV index is at 4, so it\'s important to take precautions if spending extended time outdoors. The cloud cover is at 43%, indicating some scattered clouds in the sky. Overall, it\'s a warm and pleasant day with a gentle breeze and some clouds in the sky.</string>
+    <string name="msg_15_day_forecast">Showing 15 day\'s forecast for <b>%s</b></string>
     <!--    message string resources-->
 
     <!--    error string resources-->
@@ -65,10 +66,13 @@
     <string name="label_min">Min</string>
     <string name="label_visibility">Visibility</string>
     <string name="label_aqi">AQI</string>
-    <string name="label_see_more">See More</string>
+    <string name="label_see_more">More</string>
     <string name="label_sunrise">Sunrise</string>
     <string name="label_sunset">Sunset</string>
     <string name="label_add_city">Add City</string>
+    <string name="label_see_details">Details</string>
+    <string name="label_daily_forecasts">Daily Forecasts</string>
+    <string name="label_daily_forecasts_details">%s\'s Forecast</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -97,8 +101,9 @@
     <string name="format_daily_min_weather">Min: %.1f°C</string>
     <string name="format_daily_max_weather">Max: %.1f°C</string>
     <string name="format_min_max_temp">%.0f°C/%.0f°C</string>
+    <string name="format_home_min_max_temp">%.0f°/%.0f°</string>
     <string name="format_humidity">%s%%</string>
-    <string name="format_air_pressure">%s mb</string>
+    <string name="format_air_pressure">%s hPa</string>
     <string name="format_wind">%.2f km/h</string>
     <string name="format_uv_index">%.2f</string>
     <string name="format_rain">%.2f%%</string>
@@ -112,5 +117,13 @@
     <string name="format_city_search_name">%s\n%s, %s</string>
     <string name="format_lat_lon">%f / %f</string>
     <string name="format_temperature">%.0f°C</string>
+    <string name="format_high_temp">High, %.1f°C</string>
+    <string name="format_low_temp">Low, %.1f°C</string>
+    <string name="format_temp">%.0f°</string>
+    <string name="format_city_day">%s, %s</string>
+    <string name="format_day_weather">Day: %.1f°C</string>
+    <string name="format_night_weather">Night: %.1f°C</string>
+    <string name="format_eve_weather">Evening: %.1f°C</string>
+    <string name="format_morn_weather">Morning: %.1f°C</string>
     <!--    format string resources-->
 </resources>

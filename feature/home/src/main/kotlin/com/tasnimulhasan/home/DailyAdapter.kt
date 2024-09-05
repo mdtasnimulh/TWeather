@@ -41,41 +41,22 @@ class DailyAdapter(
         val resources = context.resources
 
         with(binding) {
-            dayTv.text = convertLongToDateTime(item.day, DateTimeFormat.DAILY_TIME_FORMAT)
+            dayTv.text = convertLongToDateTime(item.day, DateTimeFormat.DAY_TIME_FORMAT)
             AppConstants.iconSetTwo.find { it.iconId == item.dailyWeatherCondition[0].dailyWeatherIcon }?.let {
                 dailyIconIv.setImageResource(it.iconRes)
             }
-            dailyTempTv.text = resources.getString(Res.string.format_current_weather, item.dailyTemp.dailyMaximumTemperature)
-            /*dailyMinMaxTv.text = resources.getString(Res.string.format_min_max_temp, item.dailyTemp.dailyMinimumTemperature, item.dailyTemp.dailyMaximumTemperature)
-            sunriseValueTv.text = convertLongToDateTime(item.dailySunrise, DateTimeFormat.outputHMA)
-            sunsetValueTv.text = convertLongToDateTime(item.dailySunSet, DateTimeFormat.outputHMA)
-            dailySummaryTv.text = item.dailySummary
-            dailyHumidityTv.text = resources.getString(Res.string.format_daily_humidity, item.dailyHumidity)
-            dailyRainTv.text = resources.getString(Res.string.format_daily_rain, item.dailyRain)
-            dailyUviTv.text = resources.getString(Res.string.format_daily_uvi, item.dailyUvi)
-            dailyConditionTv.text = resources.getString(Res.string.format_daily_condition, item.dailyWeatherCondition[0].dailyWeatherCondition)
-            sunRiseSetPb.progress = 75*/
+            dailyTempTv.text = resources.getString(Res.string.format_home_min_max_temp, item.dailyTemp.dailyMaximumTemperature, item.dailyTemp.dailyMinimumTemperature)
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
-            val colorPrimary = ContextCompat.getColor(context, Res.color.green_light_100)
-            val colorWhite = ContextCompat.getColor(context, Res.color.white)
-            val colorText = ContextCompat.getColor(context, Res.color.textColor)
-
-            //root.setCardBackgroundColor(if (isCurrentTime) colorPrimary else colorWhite)
-            dayTv.setTextColor(if (isCurrentTime) ColorStateList.valueOf(colorText) else ColorStateList.valueOf(colorText))
-
-            root.clickWithDebounce {
-                item.isVisible = !item.isVisible
-                onClick.invoke(item)
-                //dailyBodyCl.isVisible = item.isVisible
-            }
+            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.white_n_gray_light_100))
+            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur))
 
             Timber.e("chkTimeResult ${calculateHoursBetweenTwoTimes(item.dailySunrise, item.dailySunSet)}")
         }
     }
 
     private fun getCurrentTimeFormatted(): String {
-        return SimpleDateFormat(DateTimeFormat.DAILY_TIME_FORMAT, Locale.US).format(Date(System.currentTimeMillis()))
+        return SimpleDateFormat(DateTimeFormat.DAY_TIME_FORMAT, Locale.US).format(Date(System.currentTimeMillis()))
     }
 
 }

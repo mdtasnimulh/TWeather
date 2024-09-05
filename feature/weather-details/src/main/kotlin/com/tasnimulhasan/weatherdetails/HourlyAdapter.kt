@@ -1,5 +1,4 @@
-/*
-package com.tasnimulhasan.home
+package com.tasnimulhasan.weatherdetails
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -12,8 +11,7 @@ import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.entity.home.HourlyWeatherData
-import com.tasnimulhasan.home.databinding.ItemHourlyBinding
-import timber.log.Timber
+import com.tasnimulhasan.weatherdetails.databinding.ItemHourlyBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -45,19 +43,10 @@ class HourlyAdapter(
                 hourlyIconIv.setImageResource(it.iconRes)
             }
             hourlyTempTv.text = resources.getString(Res.string.format_current_weather, item.hourlyTemperature)
-            hourlyConditionTv.text = item.hourlyWeatherCondition[0].hourlyWeatherCondition
 
             val isCurrentTime = hourlyTimeTv.text == getCurrentTimeFormatted()
-            val colorPrimary = ContextCompat.getColor(context, Res.color.colorPrimary)
-            val colorPrimaryDark = ContextCompat.getColor(context, Res.color.colorPrimaryDark)
-            val colorWhite = ContextCompat.getColor(context, Res.color.white)
-            val colorSubText = ContextCompat.getColor(context, Res.color.subTextColor)
-            val colorText = ContextCompat.getColor(context, Res.color.textColor)
-
-            root.setCardBackgroundColor(if (isCurrentTime) colorPrimary else colorWhite)
-            root.strokeColor = if (isCurrentTime) colorPrimaryDark else colorPrimary
-            hourlyTimeTv.setTextColor(if (isCurrentTime) ColorStateList.valueOf(colorWhite) else ColorStateList.valueOf(colorSubText))
-            hourlyTempTv.setTextColor(if (isCurrentTime) ColorStateList.valueOf(colorWhite) else ColorStateList.valueOf(colorText))
+            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.white_n_gray_light_100))
+            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur))
 
             root.clickWithDebounce { onClick.invoke(item) }
         }
@@ -67,4 +56,4 @@ class HourlyAdapter(
         return SimpleDateFormat(DateTimeFormat.HOURLY_TIME_FORMAT, Locale.US).format(Date(System.currentTimeMillis()))
     }
 
-}*/
+}

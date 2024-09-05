@@ -30,6 +30,8 @@ include(":app")
 include(":feature:home")
 include(":feature:weather-details")
 include(":feature:city")
+include(":feature:daily-forecast")
+include(":feature:daily-forecast-details")
 
 //Core module
 include(":core:cache")

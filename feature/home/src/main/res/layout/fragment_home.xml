@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_color_white_blur"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
@@ -26,11 +26,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
-                android:text="27°"
+                tools:text="27°"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/_45ssp"
+                android:textSize="@dimen/_60ssp"
                 app:fontFamily="@font/roboto_serif_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,11 +39,11 @@
                 android:id="@+id/degreeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:includeFontPadding="false"
                 android:text="C"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/_20ssp"
+                android:textSize="@dimen/_28ssp"
                 app:fontFamily="@font/roboto_serif_semibold"
                 app:layout_constraintStart_toEndOf="@id/tempTv"
                 app:layout_constraintTop_toTopOf="@+id/tempTv" />
@@ -63,7 +63,7 @@
                 android:id="@+id/weatherConditionIv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_220sdp"
-                android:layout_marginTop="@dimen/margin_50"
+                android:layout_marginTop="@dimen/margin_45"
                 android:paddingHorizontal="@dimen/padding_12"
                 android:paddingVertical="@dimen/padding_5"
                 android:src="@mipmap/ic_launcher"
@@ -88,7 +88,7 @@
                 android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_90"
                 android:includeFontPadding="false"
-                android:text="MELBOURNE"
+                tools:text="MELBOURNE"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_22ssp"
                 app:fontFamily="@font/roboto_serif_medium"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:includeFontPadding="false"
-                android:text="Monday 9:00"
+                tools:text="Monday 9:00"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/regular_text_size"
                 app:fontFamily="@font/poppins"
@@ -115,7 +115,7 @@
                 android:layout_marginTop="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_25"
                 android:includeFontPadding="false"
-                android:text="S\nU\nN\nN\nY"
+                tools:text="S\nU\nN\nN\nY"
                 android:gravity="center_horizontal"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_16ssp"
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        android:text="High"
+                        tools:text="High"
                         android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
@@ -172,7 +172,7 @@
                     android:layout_width="@dimen/_1sdp"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="@dimen/margin_8"
-                    android:background="@color/white_n_gray_light_300" />
+                    android:background="@color/white_n_gray_light_100" />
 
                 <LinearLayout
                     android:id="@+id/windLl"
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        android:text="5 km/h"
+                        tools:text="5 km/h"
                         android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
@@ -210,7 +210,7 @@
                     android:layout_width="@dimen/_1sdp"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="@dimen/margin_8"
-                    android:background="@color/white_n_gray_light_300" />
+                    android:background="@color/white_n_gray_light_100" />
 
                 <LinearLayout
                     android:id="@+id/humidityLl"
@@ -237,7 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        android:text="35%"
+                        tools:text="35%"
                         android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
@@ -250,10 +250,10 @@
                 android:id="@+id/summaryTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginHorizontal="@dimen/margin_12"
                 android:includeFontPadding="false"
-                android:text="@string/msg_demo_overview"
+                tools:text="@string/msg_demo_overview"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_11ssp"
                 app:fontFamily="@font/poppins"
@@ -261,6 +261,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/weatherConditionLl"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/seeDetailsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_12"
+                android:includeFontPadding="false"
+                android:text="@string/label_see_details"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:textColor="@color/subTextColor"
+                android:textSize="@dimen/_12ssp"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintTop_toBottomOf="@id/summaryTv"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dailyWeatherRv"
@@ -273,9 +288,24 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/summaryTv"
+                app:layout_constraintTop_toBottomOf="@+id/seeDetailsTv"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_daily_weather" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/seeMoreDailyTempTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4"
+                android:layout_marginEnd="@dimen/margin_12"
+                android:includeFontPadding="false"
+                android:text="@string/label_see_more"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:textColor="@color/subTextColor"
+                android:textSize="@dimen/_12ssp"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintTop_toBottomOf="@id/dailyWeatherRv"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <include
                 android:id="@+id/airQualityIncl"
@@ -285,7 +315,7 @@
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dailyWeatherRv" />
+                app:layout_constraintTop_toBottomOf="@+id/seeMoreDailyTempTv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
