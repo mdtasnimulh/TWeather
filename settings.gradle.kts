@@ -30,6 +30,7 @@ include(":app")
 include(":feature:home")
 include(":feature:weather-details")
 include(":feature:city")
+include(":feature:city-search")
 include(":feature:daily-forecast")
 include(":feature:daily-forecast-details")
 

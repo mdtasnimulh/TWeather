@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_city_search"
+    app:startDestination="@id/citySearchFragment">
+
+    <fragment
+        android:id="@+id/citySearchFragment"
+        android:name="com.tasnimulhasan.citysearch.CitySearchFragment"
+        android:label="CitySearchFragment"
+        tools:layout="@layout/fragment_city_search" >
+
+        <deepLink app:uri="@string/deep_link_city_search_fragment"/>
+
+        <argument android:name="cities"
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
+
+</navigation>

@@ -1,9 +1,9 @@
-package com.tasnimulhasan.city
+package com.tasnimulhasan.citysearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.tasnimulhasan.city.databinding.ItemCitySearchBinding
+import com.tasnimulhasan.citysearch.databinding.ItemCitySearchBinding
 import com.tasnimulhasan.common.adapter.DataBoundListAdapter
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.entity.city.CitySearchApiEntity

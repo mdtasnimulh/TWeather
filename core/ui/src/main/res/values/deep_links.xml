@@ -5,7 +5,9 @@
     <string name="deep_link_weather_details_fragment" translatable="false">app://com.tasnimulhasan.thweather/weather_details/params={weatherData}&amp;{airQuality}&amp;{cityName}</string>
     <string name="deep_link_weather_details_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/weather_details/params=%s&amp;%s&amp;%s</string>
 
-    <string name="deep_link_city_search_fragment" translatable="false">app://com.tasnimulhasan.thweather/city_search_fragment</string>
+    <string name="deep_link_city_fragment" translatable="false">app://com.tasnimulhasan.thweather/city_fragment</string>
+    <string name="deep_link_city_search_fragment" translatable="false">app://com.tasnimulhasan.thweather/city_search_fragment/params={cities}</string>
+    <string name="deep_link_city_search_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/city_search_fragment/params=%s</string>
 
     <string name="deep_link_daily_forecast_fragment" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast/params={cityName}</string>
     <string name="deep_link_daily_forecast_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast/params=%s</string>

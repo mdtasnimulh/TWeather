@@ -192,7 +192,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             cityIv.clickWithDebounce {
-                navigateToDestination(getString(UI.string.deep_link_city_search_fragment).toUri())
+                navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri())
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.tasnimulhasan.city
+package com.tasnimulhasan.citysearch
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,14 +8,13 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tasnimulhasan.city.citysearch.CitySearchViewModel
-import com.tasnimulhasan.city.citysearch.UiAction
-import com.tasnimulhasan.city.citysearch.UiEvent
-import com.tasnimulhasan.city.citysearch.UiState
-import com.tasnimulhasan.city.databinding.FragmentCitySearchBinding
+import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
+import com.tasnimulhasan.citysearch.databinding.FragmentCitySearchBinding
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
+import com.tasnimulhasan.common.extfun.decode
 import com.tasnimulhasan.common.extfun.getTextFromEt
 import com.tasnimulhasan.common.extfun.hideKeyboard
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
@@ -25,14 +24,24 @@ import com.tasnimulhasan.entity.city.CitySearchApiEntity
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 
 @AndroidEntryPoint
 class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
 
+    @Inject
+    lateinit var gson: Gson
     private val viewModel by viewModels<CitySearchViewModel>()
     private lateinit var errorHandler: ErrorUiHandler
     private var adapter by autoCleared<CitySearchListAdapter>()
+    private val args by navArgs<CitySearchFragmentArgs>()
+    private val jsonArgs: List<CityListRoomEntity> by lazy {
+        gson.fromJson(
+            args.cities.decode(),
+            Array<CityListRoomEntity>::class.java
+        ).toList()
+    }
 
     override fun viewBindingLayout() = FragmentCitySearchBinding.inflate(layoutInflater)
 
@@ -58,11 +67,9 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
 
     private fun initRecyclerView() {
         adapter = CitySearchListAdapter { item ->
-            var isCityExists = false
-            //viewModel.cityList.forEach { if (item.name == it.name && item.cityName == it.cityName) isCityExists = true }
-
-            //if (isCityExists) showToastMessage(getString(Res.string.msg_city_already_exists))
-            viewModel.action(UiAction.InsertCities(CityListRoomEntity(name = item.name, cityName = item.cityName, lat = item.lat, lon = item.lon, country = item.country, state = item.state)))
+            val isCityExists = jsonArgs.any { it.name == item.name && it.cityName == item.cityName}
+            if (isCityExists) showToastMessage(getString(Res.string.msg_city_already_exists))
+            else viewModel.action(UiAction.InsertCities(CityListRoomEntity(name = item.name, cityName = item.cityName, lat = item.lat, lon = item.lon, country = item.country, state = item.state)))
         }
 
         requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)
@@ -149,7 +156,7 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
     private fun cancelSearch() {
         with(binding) {
             citySearchEt.clearFocus()
-            citySearchEt.setText("")
+            citySearchEt.text = null
             citySearchEt.hideKeyboard()
             adapter.submitList(emptyList<CitySearchApiEntity>())
             adapter.notifyItemRangeChanged(0, adapter.itemCount)

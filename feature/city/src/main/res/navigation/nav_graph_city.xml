@@ -11,17 +11,7 @@
         android:label="CityFragment"
         tools:layout="@layout/fragment_city">
 
-        <deepLink app:uri="@string/deep_link_city_search_fragment"/>
-
-        <action
-            android:id="@+id/action_cityFragment_to_citySearchFragment"
-            app:destination="@id/citySearchFragment" />
+        <deepLink app:uri="@string/deep_link_city_fragment"/>
     </fragment>
-
-    <fragment
-        android:id="@+id/citySearchFragment"
-        android:name="com.tasnimulhasan.city.CitySearchFragment"
-        android:label="CityFragment"
-        tools:layout="@layout/fragment_city_search"/>
 
 </navigation>

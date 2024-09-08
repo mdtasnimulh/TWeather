@@ -1,4 +1,4 @@
-package com.tasnimulhasan.city.citysearch
+package com.tasnimulhasan.citysearch
 
 import com.tasnimulhasan.domain.apiusecase.city.CitySearchApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult

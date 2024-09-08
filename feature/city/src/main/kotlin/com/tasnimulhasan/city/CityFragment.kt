@@ -1,29 +1,32 @@
 package com.tasnimulhasan.city
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tasnimulhasan.city.citylist.CityListViewModel
-import com.tasnimulhasan.city.citylist.UiAction
-import com.tasnimulhasan.city.citylist.UiState
+import com.google.gson.Gson
 import com.tasnimulhasan.city.databinding.FragmentCityBinding
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.extfun.clickWithDebounce
-import com.tasnimulhasan.common.extfun.navigateDestination
+import com.tasnimulhasan.common.extfun.encode
+import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.ui.showWarningDialog
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
+import com.tasnimulhasan.ui.R as UI
 
 @AndroidEntryPoint
 class CityFragment : BaseFragment<FragmentCityBinding>() {
 
-    private val viewModel by viewModels<CityListViewModel>()
+    @Inject
+    lateinit var gson: Gson
+    private val viewModel by viewModels<CityViewModel>()
     private lateinit var errorHandler: ErrorUiHandler
     private var adapter by autoCleared<CityListAdapter>()
 
@@ -79,11 +82,7 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
                     binding.searchCityTv.isGone = uiState.cityList.isNotEmpty()
                     showCities(uiState.cityList)
                 }
-                is UiState.WeatherList -> {
-                    Timber.e("chkWeatherDetails ${uiState.weatherList.size}")
-                    adapter.updateWeatherData(uiState.weatherList)
-                }
-
+                is UiState.WeatherList -> adapter.updateWeatherData(uiState.weatherList)
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
             }
         }
@@ -99,7 +98,7 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
     private fun onClickListener() {
         binding.apply {
             citySearchFab.clickWithDebounce {
-                navigateDestination(CityFragmentDirections.actionCityFragmentToCitySearchFragment())
+                navigateToDestination(getString(UI.string.deep_link_city_search_fragment_args, gson.toJson(viewModel.cityList).encode()).toUri())
             }
         }
     }
