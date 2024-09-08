@@ -44,7 +44,7 @@ class CityListAdapter(
             val key = Pair(roundToPrecision(item.lat?:0.0, 2), roundToPrecision(item.lon?:0.0, 2))
             val weatherData = weatherMap[key]
             if (weatherData != null) {
-                cityTempTv.text = root.context.getString(Res.string.format_current_weather, weatherData.currentWeatherData.currentTemp)
+                cityTempTv.text = root.context.getString(Res.string.format_temperature, weatherData.currentWeatherData.currentTemp)
                 cityConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
                 cityTimeTv.text = DateTimeParser.convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.outputHMA)
                 AppConstants.iconSetTwo.find { it.iconId == weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherIcon }?.let { icon ->
@@ -52,9 +52,9 @@ class CityListAdapter(
                     setTextColorWithIconBG(cityTempTv, cityIconIv, Palette.from(ContextCompat.getDrawable(root.context, icon.iconRes)?.toBitmap()!!).generate(), root.context)
                 }
             } else {
-                cityTempTv.text = ""
-                cityConditionTv.text = ""
-                cityTimeTv.text = ""
+                cityTempTv.text = null
+                cityConditionTv.text = null
+                cityTimeTv.text = null
                 cityIconIv.setImageDrawable(null)
             }
 

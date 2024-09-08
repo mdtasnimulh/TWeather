@@ -31,7 +31,7 @@ fun setTextColor(textView: AppCompatTextView, palette: Palette) {
 }
 
 fun setTextColorWithIconBG(textView: AppCompatTextView, imageView: AppCompatImageView, palette: Palette, context: Context) {
-    textView.setTextColor(palette.vibrantSwatch?.rgb ?: ContextCompat.getColor(context, Res.color.subTextColor))
+    //textView.setTextColor(palette.vibrantSwatch?.rgb ?: ContextCompat.getColor(context, Res.color.subTextColor))
     imageView.setBackgroundColor(palette.lightVibrantSwatch?.rgb ?: Res.color.colorPrimaryDark)
 }
 
