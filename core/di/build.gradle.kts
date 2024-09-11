@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.thweather.android.library)
-    alias(libs.plugins.thweather.android.hilt)
+    alias(libs.plugins.tweather.android.library)
+    alias(libs.plugins.tweather.android.hilt)
 }
 
 android {

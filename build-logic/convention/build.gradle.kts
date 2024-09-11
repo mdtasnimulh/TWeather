@@ -4,7 +4,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.tasnimulhasan.thweather.buildlogic"
+group = "com.tasnimulhasan.tweather.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -34,35 +34,35 @@ tasks {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "thweather.android.application"
+            id = "tweather.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidFeature") {
-            id = "thweather.android.feature"
+            id = "tweather.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("androidHilt") {
-            id = "thweather.android.hilt"
+            id = "tweather.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
         register("androidLibrary") {
-            id = "thweather.android.library"
+            id = "tweather.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("androidLint") {
-            id = "thweather.android.lint"
+            id = "tweather.android.lint"
             implementationClass = "AndroidLintConventionPlugin"
         }
         register("androidNavigation") {
-            id = "thweather.android.navigation"
+            id = "tweather.android.navigation"
             implementationClass = "AndroidNavigationComponentConventionPlugin"
         }
         register("androidRoom") {
-            id = "thweather.android.room"
+            id = "tweather.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
         register("jvmLibrary") {
-            id = "thweather.jvm.library"
+            id = "tweather.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
     }

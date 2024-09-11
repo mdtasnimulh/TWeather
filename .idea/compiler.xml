@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="THWeather.app" target="17" />
+      <module name="THWeather.core.cache" target="17" />
+      <module name="THWeather.core.common" target="17" />
+      <module name="THWeather.core.data" target="17" />
+      <module name="THWeather.core.design-system" target="17" />
+      <module name="THWeather.core.di" target="17" />
+      <module name="THWeather.core.domain" target="17" />
+      <module name="THWeather.core.model.entity" target="17" />
+      <module name="THWeather.core.shared-pref" target="17" />
+      <module name="THWeather.core.ui" target="17" />
+      <module name="THWeather.feature.city" target="17" />
+      <module name="THWeather.feature.city-search" target="17" />
+      <module name="THWeather.feature.daily-forecast" target="17" />
+      <module name="THWeather.feature.daily-forecast-details" target="17" />
+      <module name="THWeather.feature.home" target="17" />
+      <module name="THWeather.feature.weather-details" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,9 +1,9 @@
-import com.tasnimulhasan.thweather.AppConfig
+import com.tasnimulhasan.tweather.AppConfig
 
 plugins {
-    alias(libs.plugins.thweather.android.application)
-    alias(libs.plugins.thweather.android.hilt)
-    alias(libs.plugins.thweather.android.navigation)
+    alias(libs.plugins.tweather.android.application)
+    alias(libs.plugins.tweather.android.hilt)
+    alias(libs.plugins.tweather.android.navigation)
 }
 
 android {
@@ -25,10 +25,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("app-credential/thweather.jks")
-            storePassword = "thweather107"
-            keyAlias = "thweather"
-            keyPassword = "thweather107"
+            storeFile = file("app-credential/tweather.jks")
+            storePassword = "tweather107"
+            keyAlias = "tweather"
+            keyPassword = "tweather107"
         }
     }
 

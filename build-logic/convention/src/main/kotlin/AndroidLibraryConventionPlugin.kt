@@ -1,6 +1,6 @@
 import com.android.build.gradle.LibraryExtension
-import com.tasnimulhasan.thweather.AppConfig
-import com.tasnimulhasan.thweather.configureKotlinAndroid
+import com.tasnimulhasan.tweather.AppConfig
+import com.tasnimulhasan.tweather.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -13,7 +13,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
-                apply("thweather.android.lint")
+                apply("tweather.android.lint")
             }
 
             extensions.configure<LibraryExtension> {

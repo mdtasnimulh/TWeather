@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.thweather.android.library)
+    alias(libs.plugins.tweather.android.library)
 }
 
 android {

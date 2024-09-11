@@ -1,6 +1,6 @@
 import com.android.build.gradle.LibraryExtension
-import com.tasnimulhasan.thweather.AppConfig
-import com.tasnimulhasan.thweather.libs
+import com.tasnimulhasan.tweather.AppConfig
+import com.tasnimulhasan.tweather.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -10,9 +10,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("thweather.android.library")
-                apply("thweather.android.hilt")
-                apply("thweather.android.navigation")
+                apply("tweather.android.library")
+                apply("tweather.android.hilt")
+                apply("tweather.android.navigation")
             }
             extensions.configure<LibraryExtension> {
                 defaultConfig {

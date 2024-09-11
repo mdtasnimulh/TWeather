@@ -1,9 +1,9 @@
-package com.tasnimulhasan.thweather
+package com.tasnimulhasan.tweather
 
 import org.gradle.api.JavaVersion
 
 object AppConfig {
-    const val APPLICATION_ID = "com.tasnimulhasan.thweather"
+    const val APPLICATION_ID = "com.tasnimulhasan.tweather"
     const val MIN_SDK_VERSION = 28
     const val COMPILE_SDK_VERSION = 34
     const val TARGET_SDK_VERSION = 34

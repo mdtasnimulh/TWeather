@@ -3,11 +3,11 @@
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
-        <item name="postSplashScreenTheme">@style/Theme.THWeather</item>
+        <item name="postSplashScreenTheme">@style/Theme.tweather</item>
     </style>
 
     <!-- Base application theme. -->
-    <style name="Base.Theme.THWeather" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.tweather" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -18,7 +18,7 @@
         <item name="android:statusBarColor">@color/colorAccent</item>
     </style>
 
-    <style name="Theme.THWeather" parent="Base.Theme.THWeather" />
+    <style name="Theme.tweather" parent="Base.Theme.tweather" />
 
     <style name="ChoiceRadioButton">
         <item name="android:button">@null</item>

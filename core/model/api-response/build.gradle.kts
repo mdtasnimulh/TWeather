@@ -1,3 +1,3 @@
 plugins {
-    alias(libs.plugins.thweather.jvm.library)
+    alias(libs.plugins.tweather.jvm.library)
 }

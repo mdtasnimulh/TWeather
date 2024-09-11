@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">THWeather</string>
+    <string name="app_name">T Weather</string>
 
     <!--    String resource naming convention-->
     <!--    https://github.com/leapfrogtechnology/android-guidelines/blob/master/ResourcesGuidelines.md-->

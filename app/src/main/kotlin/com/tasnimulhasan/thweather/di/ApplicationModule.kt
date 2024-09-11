@@ -1,11 +1,11 @@
-package com.tasnimulhasan.thweather.di
+package com.tasnimulhasan.tweather.di
 
 import android.content.Context
 import com.tasnimulhasan.common.utils.Utils
 import com.tasnimulhasan.di.qualifier.AppBuildType
 import com.tasnimulhasan.di.qualifier.AppVersion
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
-import com.tasnimulhasan.thweather.BuildConfig
+import com.tasnimulhasan.tweather.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

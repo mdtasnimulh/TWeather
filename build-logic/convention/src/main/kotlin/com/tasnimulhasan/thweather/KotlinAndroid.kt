@@ -1,4 +1,4 @@
-package com.tasnimulhasan.thweather
+package com.tasnimulhasan.tweather
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion

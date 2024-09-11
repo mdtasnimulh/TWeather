@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="deep_link_home_fragment" translatable="false">app://com.tasnimulhasan.thweather/home</string>
+    <string name="deep_link_home_fragment" translatable="false">app://com.tasnimulhasan.tweather/home</string>
 
-    <string name="deep_link_weather_details_fragment" translatable="false">app://com.tasnimulhasan.thweather/weather_details/params={weatherData}&amp;{airQuality}&amp;{cityName}</string>
-    <string name="deep_link_weather_details_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/weather_details/params=%s&amp;%s&amp;%s</string>
+    <string name="deep_link_weather_details_fragment" translatable="false">app://com.tasnimulhasan.tweather/weather_details/params={weatherData}&amp;{airQuality}&amp;{cityName}</string>
+    <string name="deep_link_weather_details_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/weather_details/params=%s&amp;%s&amp;%s</string>
 
-    <string name="deep_link_city_fragment" translatable="false">app://com.tasnimulhasan.thweather/city_fragment</string>
-    <string name="deep_link_city_search_fragment" translatable="false">app://com.tasnimulhasan.thweather/city_search_fragment/params={cities}</string>
-    <string name="deep_link_city_search_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/city_search_fragment/params=%s</string>
+    <string name="deep_link_city_fragment" translatable="false">app://com.tasnimulhasan.tweather/city_fragment</string>
+    <string name="deep_link_city_search_fragment" translatable="false">app://com.tasnimulhasan.tweather/city_search_fragment/params={cities}</string>
+    <string name="deep_link_city_search_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/city_search_fragment/params=%s</string>
 
-    <string name="deep_link_daily_forecast_fragment" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast/params={cityName}</string>
-    <string name="deep_link_daily_forecast_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast/params=%s</string>
+    <string name="deep_link_daily_forecast_fragment" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast/params={cityName}</string>
+    <string name="deep_link_daily_forecast_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast/params=%s</string>
 
-    <string name="deep_link_daily_forecast_details_fragment" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast_details/params={forecast}</string>
-    <string name="deep_link_daily_forecast_details_fragment_args" translatable="false">app://com.tasnimulhasan.thweather/daily_forecast_details/params=%s</string>
+    <string name="deep_link_daily_forecast_details_fragment" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast_details/params={forecast}</string>
+    <string name="deep_link_daily_forecast_details_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast_details/params=%s</string>
 </resources>

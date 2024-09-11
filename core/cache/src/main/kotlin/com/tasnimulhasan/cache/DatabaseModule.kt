@@ -17,7 +17,7 @@ object DatabaseModule {
     fun provideDatabase(application: Application): WeatherDatabase {
         return Room.databaseBuilder(
             application, WeatherDatabase::class.java,
-            "thweather.db"
+            "tweather.db"
         ).build()
     }
 

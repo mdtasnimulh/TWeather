@@ -1,4 +1,4 @@
-package com.tasnimulhasan.thweather.di
+package com.tasnimulhasan.tweather.di
 
 import com.tasnimulhasan.data.repoimpl.local.WeatherRoomRepoImpl
 import com.tasnimulhasan.data.repoimpl.remote.WeatherRepoImpl

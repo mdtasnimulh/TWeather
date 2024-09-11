@@ -1,4 +1,4 @@
-package com.tasnimulhasan.thweather
+package com.tasnimulhasan.tweather
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate

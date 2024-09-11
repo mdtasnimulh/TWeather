@@ -1,4 +1,4 @@
-import com.tasnimulhasan.thweather.configureKotlinJvm
+import com.tasnimulhasan.tweather.configureKotlinJvm
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -7,7 +7,7 @@ class JvmLibraryConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.jvm")
-                apply("thweather.android.lint")
+                apply("tweather.android.lint")
             }
             configureKotlinJvm()
         }

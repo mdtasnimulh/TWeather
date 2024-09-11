@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "THWeather"
+rootProject.name = "TWeather"
 include(":app")
 
 //Feature module

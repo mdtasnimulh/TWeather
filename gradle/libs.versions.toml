@@ -1,8 +1,8 @@
 [versions]
 androidGradlePlugin = "8.5.2"
 androidTools = "31.6.0"
-kotlin = "2.0.0"
-ksp = "2.0.0-1.0.21"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.24"
 googleServices = "4.4.2"
 androidDesugarJdkLibs = "2.1.2"
 
@@ -201,11 +201,11 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion" }
 
 # Plugins defined by this project
-thweather-android-application = { id = "thweather.android.application", version = "unspecified" }
-thweather-android-feature = { id = "thweather.android.feature", version = "unspecified" }
-thweather-android-hilt = { id = "thweather.android.hilt", version = "unspecified" }
-thweather-android-library = { id = "thweather.android.library", version = "unspecified" }
-thweather-android-lint = { id = "thweather.android.lint", version = "unspecified" }
-thweather-android-navigation = { id = "thweather.android.navigation", version = "unspecified" }
-thweather-android-room = { id = "thweather.android.room", version = "unspecified" }
-thweather-jvm-library = { id = "thweather.jvm.library", version = "unspecified" }
+tweather-android-application = { id = "tweather.android.application", version = "unspecified" }
+tweather-android-feature = { id = "tweather.android.feature", version = "unspecified" }
+tweather-android-hilt = { id = "tweather.android.hilt", version = "unspecified" }
+tweather-android-library = { id = "tweather.android.library", version = "unspecified" }
+tweather-android-lint = { id = "tweather.android.lint", version = "unspecified" }
+tweather-android-navigation = { id = "tweather.android.navigation", version = "unspecified" }
+tweather-android-room = { id = "tweather.android.room", version = "unspecified" }
+tweather-jvm-library = { id = "tweather.jvm.library", version = "unspecified" }

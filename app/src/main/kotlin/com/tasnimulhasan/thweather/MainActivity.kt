@@ -1,8 +1,8 @@
-package com.tasnimulhasan.thweather
+package com.tasnimulhasan.tweather
 
 import android.os.Bundle
 import com.tasnimulhasan.common.base.BaseActivity
-import com.tasnimulhasan.thweather.databinding.ActivityMainBinding
+import com.tasnimulhasan.tweather.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

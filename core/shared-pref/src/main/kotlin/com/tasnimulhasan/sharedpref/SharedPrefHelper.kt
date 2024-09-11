@@ -3,7 +3,7 @@ package com.tasnimulhasan.sharedpref
 import android.content.Context
 
 class SharedPrefHelper(application: Context) {
-    private var sharedPreferences = application.getSharedPreferences("com.tasnimulhasan.thweather", 0)
+    private var sharedPreferences = application.getSharedPreferences("com.tasnimulhasan.tweather", 0)
     fun putString(key: String, value: String) {
         val editor = sharedPreferences.edit()
         editor.putString(key, value)

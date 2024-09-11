@@ -1,4 +1,4 @@
-package com.tasnimulhasan.thweather
+package com.tasnimulhasan.tweather
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
