@@ -13,6 +13,7 @@ android {
 dependencies {
     implementation(libs.bundles.androidx.core.dependencies)
     implementation(libs.bundles.android.responsive.size.dependencies)
+    implementation(libs.androidx.core.splashscreen)
 
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.extjunit)

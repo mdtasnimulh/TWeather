@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.date.picker)
     implementation(libs.glide)
     implementation(libs.androidx.palette)
+    implementation(libs.androidx.core.splashscreen)
 
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.extjunit)

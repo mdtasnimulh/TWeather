@@ -1,6 +1,7 @@
 package com.tasnimulhasan.common.base
 
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -8,10 +9,12 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.tasnimulhasan.designsystem.R as Res
 
 abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
 
@@ -22,7 +25,9 @@ abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        splashScreen.setKeepOnScreenCondition { false }
         binding = viewBindingLayout()
         setContentView(binding.root)
         activityContext = this
