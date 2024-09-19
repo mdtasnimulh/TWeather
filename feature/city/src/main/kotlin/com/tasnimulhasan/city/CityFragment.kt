@@ -1,7 +1,6 @@
 package com.tasnimulhasan.city
 
 import android.content.res.Configuration
-import android.hardware.display.DisplayManager
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.core.view.isGone
@@ -20,7 +19,6 @@ import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.ui.showWarningDialog
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
