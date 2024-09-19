@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_2"
     android:layout_marginBottom="@dimen/margin_6"
-    app:strokeColor="@color/colorPrimary"
+    app:strokeColor="@color/gray"
     app:strokeWidth="0.5dp"
+    app:cardBackgroundColor="@color/background_color_white"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

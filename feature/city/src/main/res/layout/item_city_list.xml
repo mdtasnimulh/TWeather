@@ -4,11 +4,10 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_2"
     android:layout_marginBottom="@dimen/margin_8"
-    app:cardElevation="0dp"
+    app:cardElevation="@dimen/_1sdp"
     app:cardCornerRadius="@dimen/_15sdp"
-    app:strokeWidth="@dimen/_1sdp"
-    app:strokeColor="@color/background_color"
-    app:cardBackgroundColor="@color/background_color_white_blur"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/background_color_white"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

@@ -15,6 +15,7 @@
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
         android:src="@drawable/ic_back"
+        android:tint="@color/textColor"
         android:layout_marginTop="@dimen/margin_12"
         android:layout_marginStart="@dimen/margin_12"
         app:layout_constraintTop_toTopOf="parent"

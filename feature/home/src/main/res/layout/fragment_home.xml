@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_white_blur"
+    android:background="@color/background_color"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:background="@color/background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +56,7 @@
                 android:layout_marginEnd="@dimen/margin_12"
                 android:padding="@dimen/_1sdp"
                 android:src="@drawable/ic_city"
+                android:tint="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="@+id/tempTv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tempTv" />
@@ -76,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_150sdp"
                 android:layout_marginTop="-170dp"
-                android:background="#D9FFFFFF"
+                android:background="@color/background_color_white_blur"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weatherConditionIv" />
@@ -271,6 +273,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/label_see_details"
                 android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawableTint="@color/subTextColor"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins_medium"
@@ -301,6 +304,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/label_see_more"
                 android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawableTint="@color/subTextColor"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins_medium"

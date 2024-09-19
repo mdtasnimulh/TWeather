@@ -46,12 +46,13 @@ class DailyAdapter(
                 dailyIconIv.setImageResource(it.iconRes)
             }
             dailyTempTv.text = resources.getString(Res.string.format_home_min_max_temp, item.dailyTemp.dailyMaximumTemperature, item.dailyTemp.dailyMinimumTemperature)
+            dailyConditionTv.text = item.dailyWeatherCondition[0].dailyWeatherCondition
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
-            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.white_n_gray_light_100))
-            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur))
+            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white))
+            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.transparent))
 
-            Timber.e("chkTimeResult ${calculateHoursBetweenTwoTimes(item.dailySunrise, item.dailySunSet)}")
+            root.setOnClickListener { onClick.invoke(item) }
         }
     }
 

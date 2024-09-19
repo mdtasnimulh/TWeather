@@ -123,7 +123,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
         dailyAdapter = DailyAdapter {
-
+            navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri())
         }
         requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
         dailyAdapter.submitList(dailyWeatherData)

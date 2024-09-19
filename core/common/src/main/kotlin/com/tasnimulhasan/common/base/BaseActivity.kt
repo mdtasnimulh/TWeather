@@ -24,6 +24,8 @@ abstract class BaseActivity<D:ViewBinding> : AppCompatActivity(){
     protected abstract fun initializeView(savedInstanceState: Bundle?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) setTheme(Res.style.Theme_App_Starting)
+        else setTheme(Res.style.Theme_tweather)
         enableEdgeToEdge()
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
