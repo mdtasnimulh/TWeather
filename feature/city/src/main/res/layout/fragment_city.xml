@@ -45,7 +45,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/padding_8"
             android:paddingBottom="@dimen/_50sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:barrierMargin="@dimen/margin_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

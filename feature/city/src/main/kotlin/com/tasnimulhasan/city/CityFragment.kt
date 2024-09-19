@@ -1,5 +1,7 @@
 package com.tasnimulhasan.city
 
+import android.content.res.Configuration
+import android.hardware.display.DisplayManager
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.core.view.isGone
@@ -11,12 +13,14 @@ import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.navigateToDestination
+import com.tasnimulhasan.common.extfun.setUpGridRecyclerView
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.ui.showWarningDialog
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -67,7 +71,10 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
             )
         }
 
-        requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)
+        else
+            requireContext().setUpGridRecyclerView(binding.cityListRv, adapter, 2)
     }
 
     private infix fun showLoader(loading: Boolean) {
