@@ -115,11 +115,10 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
 
     private fun showAirQuality(aqi: AirQualityIndexApiEntity) {
         with(binding.airQualityIncl) {
-            aqiValueTv.text = getString(Res.string.format_aqi_pm1_5_value, aqi.aqiDetails.pm25)
-            customIndicatorView.setIndicatorValue(aqi.aqiDetails.pm25.roundToInt())
-
-            val matchingAqi = AppConstants.aqiValuesUs.find {
-                aqi.aqiDetails.pm25 in it.lowPm..it.highPm
+            aqiValueTv.text = aqi.aqi.toString()
+            customIndicatorView.setIndicatorValue(aqi.aqi)
+            val matchingAqi = AppConstants.aqiValues.find {
+                aqi.aqi == it.aqi
             }
             aqiDescriptionTv.text = matchingAqi?.name
             matchingAqi?.name.let {

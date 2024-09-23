@@ -12,7 +12,7 @@ class CustomCircularProgress @JvmOverloads constructor(
 ) : View(context, attrs, defStyle) {
 
     private var indicatorValue: Int = 0
-    private var maxIndicatorValue: Int = 500
+    private var maxIndicatorValue: Int = 5
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
     private var foregroundIndicatorColors: IntArray = intArrayOf(
         ContextCompat.getColor(context, R.color.green_light_700),

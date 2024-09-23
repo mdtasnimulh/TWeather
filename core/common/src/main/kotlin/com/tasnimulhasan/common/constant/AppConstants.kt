@@ -40,6 +40,17 @@ object AppConstants {
     private const val WEATHER_CONDITION_MIST = "Mist"
     //--- Weather Condition Names ---//
 
+    //--- Air Quality Index Values ---//
+    const val CO = "9400"
+    const val NO = "70"
+    const val NO2 = "70"
+    const val O3 = "100"
+    const val SO2 = "80"
+    const val PM25 = "25"
+    const val PM10 = "50"
+    const val NH3 = "100"
+    //--- Air Quality Index Values ---//
+
     //--- Weather Icon Sets ---//
     val iconSetTwo = listOf(
         WeatherIcon(id = 1, iconId = "01d", iconRes = Res.drawable.ic_clear_sky_day, condition = WEATHER_CONDITION_CLEAR_SKY),

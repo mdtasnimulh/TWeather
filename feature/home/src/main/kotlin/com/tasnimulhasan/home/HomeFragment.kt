@@ -161,11 +161,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private infix fun showAirQualityIndex(aqi: List<AirQualityIndexApiEntity>) {
         with(binding.airQualityIncl) {
-            aqiValueTv.text = getString(Res.string.format_aqi_pm1_5_value, aqi[0].aqiDetails.pm25)
-            customIndicatorView.setIndicatorValue(aqi[0].aqiDetails.pm25.roundToInt())
-
-            val matchingAqi = AppConstants.aqiValuesUs.find {
-                aqi[0].aqiDetails.pm25 in it.lowPm..it.highPm
+            aqiValueTv.text = aqi[0].aqi.toString()
+            customIndicatorView.setIndicatorValue(aqi[0].aqi)
+            val matchingAqi = AppConstants.aqiValues.find {
+                aqi[0].aqi == it.aqi
             }
             aqiDescriptionTv.text = matchingAqi?.name
             matchingAqi?.name.let {
@@ -193,6 +192,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             cityIv.clickWithDebounce {
                 navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri())
+            }
+
+            airQualityIncl.customIndicatorView.clickWithDebounce {
+                AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet")
             }
         }
     }

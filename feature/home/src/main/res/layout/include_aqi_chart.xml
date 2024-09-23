@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_10"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:id="@+id/divider0"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:text="@string/label_name"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toStartOf="@+id/divider10"
+        app:layout_constraintStart_toEndOf="@id/divider8"
+        app:layout_constraintTop_toBottomOf="@+id/divider0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/normalTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        android:text="@string/label_normal"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toStartOf="@+id/currentTv"
+        app:layout_constraintTop_toTopOf="@id/nameTv"
+        app:layout_constraintBottom_toBottomOf="@id/nameTv"
+        app:layout_constraintWidth_percent="0.22" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/currentTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        android:text="@string/label_current"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toEndOf="@id/divider0"
+        app:layout_constraintTop_toTopOf="@id/nameTv"
+        app:layout_constraintBottom_toBottomOf="@id/nameTv"
+        app:layout_constraintWidth_percent="0.20" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTv"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_6"
+        app:fontFamily="@font/poppins"
+        android:text="@string/label_aqi_co"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toStartOf="@+id/divider10"
+        app:layout_constraintStart_toEndOf="@id/divider8"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coNormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/coTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider4"
+        android:text="@string/label_aqi_no" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noNormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/noTv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/noTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/noTv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/noTv" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/noTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/no2Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        android:text="@string/label_aqi_no2"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/no2NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/no2Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/no2Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/no2ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/no2Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/no2Tv" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/no2Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/o3Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider6"
+        android:text="@string/label_aqi_o3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/o3NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/o3Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/o3Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/o3ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/o3Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/o3Tv" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/o3Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/so2Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider7"
+        android:text="@string/label_aqi_so2"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/so2NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/so2Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/so2Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/so2ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/so2Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/so2Tv" />
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/so2Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm25Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider11"
+        android:text="@string/label_aqi_pm25" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm25NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/pm25Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/pm25Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm25ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/pm25Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/pm25Tv" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/pm25Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm10Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider12"
+        android:text="@string/label_aqi_pm10" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm10NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/pm10Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/pm10Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pm10ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/pm10Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/pm10Tv" />
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/pm10Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nh3Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_5"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/small_medium_text_size"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintEnd_toEndOf="@+id/coTv"
+        app:layout_constraintStart_toStartOf="@id/coTv"
+        app:layout_constraintTop_toBottomOf="@+id/divider13"
+        android:text="@string/label_aqi_nh3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nh3NormalValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/nh3Tv"
+        app:layout_constraintStart_toStartOf="@id/normalTv"
+        app:layout_constraintEnd_toEndOf="@id/normalTv"
+        app:layout_constraintTop_toTopOf="@+id/nh3Tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nh3ValueTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingVertical="@dimen/padding_5"
+        tools:text="0.0"
+        android:textColor="@color/subTextColor"
+        android:textSize="@dimen/_10ssp"
+        app:fontFamily="@font/poppins"
+        app:layout_constraintBottom_toBottomOf="@+id/nh3Tv"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
+        app:layout_constraintEnd_toEndOf="@id/currentTv"
+        app:layout_constraintTop_toTopOf="@+id/nh3Tv" />
+
+    <View
+        android:id="@+id/divider14"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/three"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:background="@drawable/bg_dotted_horizontal_line"
+        app:layout_constraintEnd_toEndOf="@+id/divider3"
+        app:layout_constraintStart_toStartOf="@+id/divider3"
+        app:layout_constraintTop_toBottomOf="@+id/nh3Tv" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="@dimen/three"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_dotted_vertical_line"
+        app:layout_constraintBottom_toBottomOf="@+id/divider14"
+        app:layout_constraintStart_toStartOf="@+id/divider0"
+        app:layout_constraintTop_toBottomOf="@+id/divider0" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="@dimen/three"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_dotted_vertical_line"
+        app:layout_constraintBottom_toBottomOf="@+id/divider14"
+        app:layout_constraintEnd_toEndOf="@+id/divider0"
+        app:layout_constraintTop_toBottomOf="@+id/divider0" />
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="@dimen/three"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_dotted_vertical_line"
+        app:layout_constraintBottom_toBottomOf="@+id/divider14"
+        app:layout_constraintEnd_toStartOf="@+id/normalTv"
+        app:layout_constraintTop_toBottomOf="@id/divider0" />
+
+    <View
+        android:id="@+id/divider15"
+        android:layout_width="@dimen/three"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_dotted_vertical_line"
+        app:layout_constraintBottom_toBottomOf="@+id/divider14"
+        app:layout_constraintEnd_toStartOf="@+id/currentTv"
+        app:layout_constraintTop_toBottomOf="@id/divider0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
