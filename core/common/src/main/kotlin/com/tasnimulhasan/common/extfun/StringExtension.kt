@@ -88,3 +88,15 @@ fun String.commaSeparator(): String {
         .joinToString(",")
         .reversed()
 }
+
+fun String.toCapitalizeEachWord() : String{
+    return this.split(" ").joinToString(" ") {
+        if (it.contains("/")) {
+            it.split("/").joinToString("/") { word ->
+                word.replaceFirstChar { firstChar -> firstChar.uppercase() }
+            }
+        } else {
+            it.replaceFirstChar { firstChar -> firstChar.uppercase() }
+        }
+    }
+}
