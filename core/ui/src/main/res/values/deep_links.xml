@@ -2,7 +2,7 @@
 <resources>
     <string name="deep_link_home_fragment" translatable="false">app://com.tasnimulhasan.tweather/home</string>
 
-    <string name="deep_link_weather_details_fragment" translatable="false">app://com.tasnimulhasan.tweather/weather_details/params={weatherData}&amp;{airQuality}&amp;{cityName}</string>
+    <string name="deep_link_weather_details_fragment" translatable="false">app://com.tasnimulhasan.tweather/weather_details/params={cityName}&amp;{lat}&amp;{lon}</string>
     <string name="deep_link_weather_details_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/weather_details/params=%s&amp;%s&amp;%s</string>
 
     <string name="deep_link_city_fragment" translatable="false">app://com.tasnimulhasan.tweather/city_fragment</string>

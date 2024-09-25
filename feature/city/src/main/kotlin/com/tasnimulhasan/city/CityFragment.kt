@@ -55,19 +55,28 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
     }
 
     private fun initRecyclerView() {
-        adapter = CityListAdapter { item ->
-            requireActivity().showWarningDialog(
-                title = getString(Res.string.title_warning),
-                message = getString(Res.string.msg_delete_city),
-                positiveBtnCallback = {
-                    viewModel.action(UiAction.DeleteCities(item))
-                    showToastMessage(getString(Res.string.msg_delete_city_successful, item.cityName))
-                },
-                negativeButtonCallback = {
-                    showToastMessage(getString(Res.string.msg_delete_city_canceled, item.cityName))
-                }
-            )
-        }
+        adapter = CityListAdapter (
+            onClick = { item ->
+                navigateToDestination(getString(
+                    UI.string.deep_link_weather_details_fragment_args,
+                    item.cityName, item.lat.toString(), item.lon.toString()
+                ).toUri())
+            },
+
+            onLongClick = { item ->
+                requireActivity().showWarningDialog(
+                    title = getString(Res.string.title_warning),
+                    message = getString(Res.string.msg_delete_city),
+                    positiveBtnCallback = {
+                        viewModel.action(UiAction.DeleteCities(item))
+                        showToastMessage(getString(Res.string.msg_delete_city_successful, item.cityName))
+                    },
+                    negativeButtonCallback = {
+                        showToastMessage(getString(Res.string.msg_delete_city_canceled, item.cityName))
+                    }
+                )
+            }
+        )
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             requireContext().setUpVerticalRecyclerView(binding.cityListRv, adapter)

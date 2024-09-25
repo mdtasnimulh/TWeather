@@ -13,15 +13,15 @@
 
         <deepLink app:uri="@string/deep_link_weather_details_fragment"/>
 
-        <argument android:name="weatherData"
-            app:argType="string"
-            app:nullable="false"/>
-
-        <argument android:name="airQuality"
-            app:argType="string"
-            app:nullable="false"/>
-
         <argument android:name="cityName"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument android:name="lat"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument android:name="lon"
             app:argType="string"
             app:nullable="false"/>
     </fragment>

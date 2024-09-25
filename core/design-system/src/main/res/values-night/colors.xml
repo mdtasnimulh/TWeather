@@ -30,6 +30,8 @@
     <color name="background_color">#000000</color>
     <color name="background_color_white">#262626</color>
     <color name="background_color_white_blur">#E6000000</color>
+    <color name="gradient_white">#D9000000</color>
+    <color name="gradient_white_medium">#B3000000</color>
 
     <color name="pending_color">#7FABB8</color>
     <color name="submit_color">#80005972</color>

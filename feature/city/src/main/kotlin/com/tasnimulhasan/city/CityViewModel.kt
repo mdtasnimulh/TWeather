@@ -10,7 +10,6 @@ import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.entity.room.CityListRoomEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -68,7 +67,6 @@ class CityViewModel @Inject constructor(
                     is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
                     is ApiResult.Success -> {
                         weatherDataList.add(result.data)
-                        Timber.e("chkWeatherDetails ${weatherDataList.size}")
                         _uiState.value = UiState.WeatherList(weatherDataList.toList())
                     }
                 }

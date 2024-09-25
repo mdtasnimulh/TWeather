@@ -19,7 +19,8 @@ import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.designsystem.R as Res
 
 class CityListAdapter(
-    private val onClick: (CityListRoomEntity) -> Unit
+    private val onClick: (CityListRoomEntity) -> Unit,
+    private val onLongClick: (CityListRoomEntity) -> Unit
 ) : DataBoundListAdapter<CityListRoomEntity, ItemCityListBinding>(
     diffCallback = object : DiffUtil.ItemCallback<CityListRoomEntity>() {
         override fun areItemsTheSame(oldItem: CityListRoomEntity, newItem: CityListRoomEntity) =
@@ -59,6 +60,10 @@ class CityListAdapter(
             }
 
             root.clickWithDebounce { onClick.invoke(item) }
+            root.setOnLongClickListener {
+                onLongClick.invoke(item)
+                true
+            }
         }
     }
 

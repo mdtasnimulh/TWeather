@@ -65,10 +65,10 @@
                 android:id="@+id/weatherConditionIv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_220sdp"
-                android:layout_marginTop="@dimen/margin_45"
+                android:layout_marginTop="@dimen/margin_30"
                 android:paddingHorizontal="@dimen/padding_12"
                 android:paddingVertical="@dimen/padding_5"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_cloudy_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tempTv" />
@@ -77,11 +77,11 @@
                 android:id="@+id/blurView"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="-170dp"
-                android:background="@color/background_color_white_blur"
+                android:layout_marginTop="@dimen/_75sdp"
+                android:background="@drawable/day_gradient_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherConditionIv" />
+                app:layout_constraintTop_toTopOf="@id/weatherConditionIv" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/cityNameTv"
@@ -123,7 +123,7 @@
                 android:textSize="@dimen/_16ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tempTv" />
+                app:layout_constraintTop_toBottomOf="@+id/cityIv" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/weatherConditionLl"

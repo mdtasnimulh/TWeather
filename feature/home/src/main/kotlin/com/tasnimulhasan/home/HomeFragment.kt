@@ -181,8 +181,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun onClickListener() {
         binding.apply {
             seeDetailsTv.clickWithDebounce {
-                navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, gson.toJson(viewModel.weatherData).encode(),
-                    gson.toJson(viewModel.aqi[0]).encode(), binding.cityNameTv.text.toString()).toUri())
+                navigateToDestination(
+                    getString(UI.string.deep_link_weather_details_fragment_args,
+                        binding.cityNameTv.text.toString(), viewModel.latitude, viewModel.longitude
+                    ).toUri()
+                )
             }
 
             seeMoreDailyTempTv.clickWithDebounce {
