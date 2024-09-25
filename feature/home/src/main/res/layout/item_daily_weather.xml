@@ -15,6 +15,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dayTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:includeFontPadding="false"
+            tools:text="Mon"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_10ssp"
+            app:fontFamily="@font/poppins_semibold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dailyIconIv"
             android:layout_width="@dimen/_20sdp"
@@ -24,7 +38,7 @@
             android:layout_marginTop="@dimen/margin_4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/dayTv"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/dailyTempTv"
@@ -45,30 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:layout_marginTop="@dimen/margin_4"
             android:textColor="@color/textColor"
             android:textSize="@dimen/_10ssp"
             app:fontFamily="@font/poppins_medium"
             tools:text="Cloudy"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dailyTempTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dayTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/margin_4"
-            android:includeFontPadding="false"
-            tools:text="Mon"
-            android:textColor="@color/subTextColor"
-            android:textSize="@dimen/_10ssp"
-            app:fontFamily="@font/poppins_semibold"
-            app:layout_constraintTop_toBottomOf="@id/dailyConditionTv"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

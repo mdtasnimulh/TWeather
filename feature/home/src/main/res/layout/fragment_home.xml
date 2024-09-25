@@ -65,7 +65,7 @@
                 android:id="@+id/weatherConditionIv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_220sdp"
-                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_15"
                 android:paddingHorizontal="@dimen/padding_12"
                 android:paddingVertical="@dimen/padding_5"
                 android:src="@drawable/ic_cloudy_day"

@@ -3,7 +3,6 @@ package com.tasnimulhasan.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -15,7 +14,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
 import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
@@ -23,7 +21,6 @@ import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.createLocationRequest
-import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.getColorForAqiName
 import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
@@ -40,9 +37,7 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
-import timber.log.Timber
 import java.util.Locale
-import java.util.Spliterator
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -51,21 +46,18 @@ import com.tasnimulhasan.ui.R as UI
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var errorHandler: ErrorUiHandler
-    @Inject
-    lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<WeatherViewModel>()
     private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    @Inject
-    lateinit var gson: Gson
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
+    @Inject lateinit var gson: Gson
 
     private val locationPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
-                if (requireActivity().isLocationEnabled()) {
-                    viewModel.isLocationGranted.value = true
-                } else {
+                if (requireActivity().isLocationEnabled()) viewModel.isLocationGranted.value = true
+                else {
                     showToastMessage(getString(Res.string.msg_location_permission_denied))
                     requireActivity().createLocationRequest()
                 }
@@ -83,41 +75,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        Timber.e("chkCurrentTimeUsingSharedPref: ${sharedPrefHelper.getString(SpKey.CURRENT_TIME)}")
-
         if (sharedPrefHelper.getString(SpKey.CURRENT_TIME).isNotEmpty()) {
             if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 1800000) {
                 requestPermission()
                 getCurrentLocation()
-                uiStateObserver()
-                bindUiEvent()
-                onClickListener()
+                initUi()
             } else {
-                uiStateObserver()
-                bindUiEvent()
-                onClickListener()
-
-                if (sharedPrefHelper.getString(SpKey.CITY_NAME).isEmpty()) {
+                initUi()
+                if (sharedPrefHelper.getString(SpKey.CITY_NAME).isEmpty())
                     getCityName(sharedPrefHelper.getString(SpKey.LATITUDE).toDouble(), sharedPrefHelper.getString(SpKey.LONGITUDE).toDouble())
-                } else {
+                else {
                     viewModel.cityName = sharedPrefHelper.getString(SpKey.CITY_NAME)
                     binding.cityNameTv.text = sharedPrefHelper.getString(SpKey.CITY_NAME)
                 }
-
                 viewModel.latitude = sharedPrefHelper.getString(SpKey.LATITUDE)
                 viewModel.longitude = sharedPrefHelper.getString(SpKey.LONGITUDE)
-                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
-                viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
-                viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+                fetchData()
             }
         } else {
             requestPermission()
             viewModel.isLocationGranted.execute {
                 if (it) {
                     getCurrentLocation()
-                    uiStateObserver()
-                    bindUiEvent()
-                    onClickListener()
+                    initUi()
                 }
             }
         }
@@ -139,9 +119,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 viewModel.latitude = location.result.latitude.toString()
                 viewModel.longitude = location.result.longitude.toString()
 
-                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
-                viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
-                viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+                fetchData()
             } catch (_: Exception) {}
         }
     }
@@ -151,12 +129,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         try {
             viewModel.cityName = place?.subLocality ?: place?.thoroughfare ?: ""
             sharedPrefHelper.putString(SpKey.CITY_NAME, viewModel.cityName)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        } catch (e: IOException) { e.printStackTrace() }
     }
 
-    private fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
+    private fun initUi() {
+        uiStateObserver()
+        bindUiEvent()
+        onClickListener()
+    }
+
+    private fun fetchData() {
+        viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
+        viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
+        viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+    }
+
+    private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
         dailyAdapter = DailyAdapter {
             navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri())
         }
@@ -172,9 +160,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
                 is UiState.ApiSuccess -> {
                     this showWeatherData uiState.weatherData
-                    initDailyRecyclerView(uiState.weatherData.dailyWeatherData.take(5))
+                    this initDailyRecyclerView uiState.weatherData.dailyWeatherData.take(5)
                 }
-
                 is UiState.AirQualityIndex -> this showAirQualityIndex uiState.aqi
                 is UiState.WeatherOverview -> binding.summaryTv.text = uiState.weatherOverview.weatherOverview
             }
@@ -184,11 +171,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
-            binding.cityNameTv.text = viewModel.cityName
+            cityNameTv.text = viewModel.cityName
             tempTv.text = getString(Res.string.format_temp, weatherData.currentWeatherData.currentTemp)
             currentConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition.map { "$it\n" }.joinToString("")
             dayTimeTv.text = convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.DAY_HOUR_TIME_FORMAT  )
-
             humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
             windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
             uviValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
@@ -199,43 +185,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding.airQualityIncl) {
             aqiValueTv.text = aqi[0].aqi.toString()
             customIndicatorView.setIndicatorValue(aqi[0].aqi)
-            val matchingAqi = AppConstants.aqiValues.find {
-                aqi[0].aqi == it.aqi
-            }
-            aqiDescriptionTv.text = matchingAqi?.name
-            matchingAqi?.name.let {
-                aqiValueTv.setTextColor(ContextCompat.getColor(requireContext(), getColorForAqiName(it.toString())))
+            val matchingAqi = AppConstants.aqiValues.find { aqi[0].aqi == it.aqi }
+            matchingAqi?.let {
+                aqiDescriptionTv.text = it.name
+                aqiValueTv.setTextColor(ContextCompat.getColor(requireContext(), getColorForAqiName(it.name)))
             }
         }
     }
 
     private fun bindUiEvent() {
-        viewModel.uiEvent.execute { _ ->
-
-        }
+        viewModel.uiEvent.execute {  }
     }
 
     private fun onClickListener() {
         binding.apply {
-            seeDetailsTv.clickWithDebounce {
-                navigateToDestination(
-                    getString(UI.string.deep_link_weather_details_fragment_args,
-                        binding.cityNameTv.text.toString(), viewModel.latitude, viewModel.longitude
-                    ).toUri()
-                )
-            }
-
-            seeMoreDailyTempTv.clickWithDebounce {
-                navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri())
-            }
-
-            cityIv.clickWithDebounce {
-                navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri())
-            }
-
-            airQualityIncl.customIndicatorView.clickWithDebounce {
-                AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet")
-            }
+            seeDetailsTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, binding.cityNameTv.text.toString(), viewModel.latitude, viewModel.longitude).toUri()) }
+            seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri()) }
+            cityIv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri()) }
+            airQualityIncl.customIndicatorView.clickWithDebounce { AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet") }
         }
     }
 

@@ -64,7 +64,9 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
         viewModel.uiState.execute { state ->
             when (state) {
                 is UiState.Loading -> errorHandler.showProgressBarHideFeatureUi(state.loading)
-                is UiState.Error -> errorHandler.dataError(state.message) { /*NA*/ }
+                is UiState.Error -> errorHandler.dataError(state.message) {
+                    viewModel.action(UiAction.FetchDailyForecast(getDailyForecastApiParams()))
+                }
                 is UiState.DailyForecast -> {
                     adapter.submitList(state.dailyForecast.dailyList)
                     adapter.notifyItemRangeChanged(0, adapter.itemCount)

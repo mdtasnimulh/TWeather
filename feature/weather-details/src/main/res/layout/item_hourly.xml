@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/margin_2"
     android:layout_marginHorizontal="@dimen/margin_4"
+    android:layout_marginVertical="@dimen/margin_2"
     app:cardBackgroundColor="@color/background_color_white_blur"
-    app:strokeWidth="0dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dailyCardCl"
         android:layout_width="@dimen/_58sdp"
         android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/hourlyTimeTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_10ssp"
+            app:fontFamily="@font/poppins_semibold"
+            app:layout_constraintEnd_toEndOf="@id/hourlyTempTv"
+            app:layout_constraintStart_toStartOf="@id/hourlyTempTv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="11:35 AM" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/hourlyIconIv"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:src="@mipmap/ic_launcher"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/hourlyTimeTv"
+            tools:src="@mipmap/ic_launcher" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/hourlyTempTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6"
+            android:layout_marginBottom="@dimen/_3sdp"
             android:gravity="center"
             android:includeFontPadding="false"
             android:textColor="@color/textColor"
             android:textSize="@dimen/_11ssp"
             app:fontFamily="@font/poppins_medium"
-            android:layout_marginTop="@dimen/margin_8"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hourlyIconIv"
             tools:text="30°C" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/hourlyTimeTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2"
-            android:layout_marginBottom="@dimen/margin_5"
-            tools:text="11:35 AM"
-            android:textSize="@dimen/_10ssp"
-            app:fontFamily="@font/poppins"
-            android:textColor="@color/subTextColor"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/hourlyTempTv"
-            app:layout_constraintStart_toStartOf="@id/hourlyTempTv"
-            app:layout_constraintEnd_toEndOf="@id/hourlyTempTv"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
