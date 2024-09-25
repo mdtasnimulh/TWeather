@@ -10,4 +10,9 @@ object SpKey {
     const val REMEMBER_USERNAME  = "rememberUsername"
     const val REMEMBER_ME_STATUS  = "rememberMeStatus"
     const val USER_NAME = "userName"
+
+    const val LATITUDE = "latitude"
+    const val LONGITUDE = "longitude"
+    const val CURRENT_TIME = "currentTime"
+    const val CITY_NAME = "cityName"
 }

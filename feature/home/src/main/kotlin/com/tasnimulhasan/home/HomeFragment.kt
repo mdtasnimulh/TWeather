@@ -36,10 +36,12 @@ import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
+import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
 import java.util.Locale
+import java.util.Spliterator
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -80,13 +82,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        requestPermission()
-        viewModel.isLocationGranted.execute {
-            if (it) {
-                getCurrentLocation()
+        if (sharedPrefHelper.getString(SpKey.CURRENT_TIME).isNotEmpty()) {
+            if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 3600000) {
+                requestPermission()
+            } else {
                 uiStateObserver()
                 bindUiEvent()
                 onClickListener()
+
+                if (sharedPrefHelper.getString(SpKey.CITY_NAME).isEmpty()) {
+                    getCityName(sharedPrefHelper.getString(SpKey.LATITUDE).toDouble(), sharedPrefHelper.getString(SpKey.LONGITUDE).toDouble())
+                } else {
+                    viewModel.cityName = sharedPrefHelper.getString(SpKey.CITY_NAME)
+                    binding.cityNameTv.text = sharedPrefHelper.getString(SpKey.CITY_NAME)
+                }
+
+                viewModel.latitude = sharedPrefHelper.getString(SpKey.LATITUDE)
+                viewModel.longitude = sharedPrefHelper.getString(SpKey.LONGITUDE)
+                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
+                viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
+                viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
+            }
+        } else {
+            requestPermission()
+            viewModel.isLocationGranted.execute {
+                if (it) {
+                    getCurrentLocation()
+                    uiStateObserver()
+                    bindUiEvent()
+                    onClickListener()
+                }
             }
         }
     }
@@ -99,9 +124,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun getCurrentLocation() {
         fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener { location ->
             try {
-                getCityName(location)
+                sharedPrefHelper.putString(SpKey.LATITUDE, location.result.latitude.toString())
+                sharedPrefHelper.putString(SpKey.LONGITUDE, location.result.longitude.toString())
+                sharedPrefHelper.putString(SpKey.CURRENT_TIME, System.currentTimeMillis().toString())
+
+                getCityName(location.result.latitude, location.result.longitude)
                 viewModel.latitude = location.result.latitude.toString()
                 viewModel.longitude = location.result.longitude.toString()
+
                 viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
                 viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
                 viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
@@ -109,12 +139,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun getCityName(location: Task<Location>) {
-        val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(location.result.latitude, location.result.longitude, 1)?.get(0)
+    private fun getCityName(lat: Double, lon: Double) {
+        val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(lat, lon, 1)?.get(0)
         try {
-            viewModel.cityName = place?.locality ?: ""
-            if (place?.subLocality.isNullOrEmpty()) binding.cityNameTv.text = place?.thoroughfare
-            else binding.cityNameTv.text = place?.subLocality
+            viewModel.cityName = place?.subLocality ?: place?.thoroughfare ?: ""
+            sharedPrefHelper.putString(SpKey.CITY_NAME, viewModel.cityName)
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -148,6 +177,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
+            binding.cityNameTv.text = viewModel.cityName
             tempTv.text = getString(Res.string.format_temp, weatherData.currentWeatherData.currentTemp)
             currentConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition.map { "$it\n" }.joinToString("")
             dayTimeTv.text = convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.DAY_HOUR_TIME_FORMAT  )
