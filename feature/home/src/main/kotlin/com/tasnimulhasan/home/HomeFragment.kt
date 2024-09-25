@@ -40,6 +40,7 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
+import timber.log.Timber
 import java.util.Locale
 import java.util.Spliterator
 import javax.inject.Inject
@@ -82,9 +83,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        Timber.e("chkCurrentTimeUsingSharedPref: ${sharedPrefHelper.getString(SpKey.CURRENT_TIME)}")
+
         if (sharedPrefHelper.getString(SpKey.CURRENT_TIME).isNotEmpty()) {
-            if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 3600000) {
+            if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 1800000) {
                 requestPermission()
+                getCurrentLocation()
+                uiStateObserver()
+                bindUiEvent()
+                onClickListener()
             } else {
                 uiStateObserver()
                 bindUiEvent()
