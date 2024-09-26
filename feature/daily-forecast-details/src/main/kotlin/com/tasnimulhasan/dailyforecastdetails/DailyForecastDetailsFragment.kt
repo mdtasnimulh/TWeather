@@ -5,12 +5,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.gson.Gson
 import com.tasnimulhasan.common.base.BaseFragment
+import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.decode
 import com.tasnimulhasan.dailyforecastdetails.databinding.FragmentDailyForecastDetailsBinding
 import com.tasnimulhasan.entity.daily.DailyForecast
+import com.tasnimulhasan.sharedpref.SharedPrefHelper
+import com.tasnimulhasan.sharedpref.SpKey
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
@@ -20,6 +23,7 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
 
     @Inject
     lateinit var gson: Gson
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private val args by navArgs<DailyForecastDetailsFragmentArgs>()
     private val jsonArgs: DailyForecast by lazy {
         gson.fromJson(
@@ -43,20 +47,21 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
     }
 
     private fun showDetails() {
+        val exits = sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS
         binding.apply {
             dayDateTv.text = convertLongToDateTime(jsonArgs.dateTime, DateTimeFormat.FULL_DAY_DATE)
 
-            tempDayValueTv.text = getString(Res.string.format_day_weather, jsonArgs.temp.dayTemp)
-            tempNightValueTv.text = getString(Res.string.format_night_weather, jsonArgs.temp.nightTemp)
-            tempMornValueTv.text = getString(Res.string.format_morn_weather, jsonArgs.temp.mornTemp)
-            tempEveValueTv.text = getString(Res.string.format_eve_weather, jsonArgs.temp.eveTemp)
-            tempMaxValueTv.text = getString(Res.string.format_daily_max_weather, jsonArgs.temp.maxTemp)
-            tempMinValueTv.text = getString(Res.string.format_daily_min_weather, jsonArgs.temp.minTemp)
+            tempDayValueTv.text = getString(if (exits) Res.string.format_day_weather else Res.string.format_day_weather_f, jsonArgs.temp.dayTemp)
+            tempNightValueTv.text = getString(if (exits) Res.string.format_night_weather else Res.string.format_night_weather_f, jsonArgs.temp.nightTemp)
+            tempMornValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.temp.mornTemp)
+            tempEveValueTv.text = getString(if (exits) Res.string.format_eve_weather else Res.string.format_eve_weather_f, jsonArgs.temp.eveTemp)
+            tempMaxValueTv.text = getString(if (exits) Res.string.format_daily_max_weather else Res.string.format_daily_max_weather_f, jsonArgs.temp.maxTemp)
+            tempMinValueTv.text = getString(if (exits) Res.string.format_daily_min_weather else Res.string.format_daily_min_weather_f, jsonArgs.temp.minTemp)
 
-            feelsLikeDayValueTv.text = getString(Res.string.format_day_weather, jsonArgs.feelsLike.dayFeelsLike)
-            feelsLikeNightValueTv.text = getString(Res.string.format_night_weather, jsonArgs.feelsLike.nightFeelsLike)
-            feelsLikeMornValueTv.text = getString(Res.string.format_morn_weather, jsonArgs.feelsLike.mornFeelsLike)
-            feelsLikeEveValueTv.text = getString(Res.string.format_eve_weather, jsonArgs.feelsLike.eveFeelsLike)
+            feelsLikeDayValueTv.text = getString(if (exits) Res.string.format_day_weather else Res.string.format_day_weather_f, jsonArgs.feelsLike.dayFeelsLike)
+            feelsLikeNightValueTv.text = getString(if (exits) Res.string.format_night_weather else Res.string.format_night_weather_f, jsonArgs.feelsLike.nightFeelsLike)
+            feelsLikeMornValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.feelsLike.mornFeelsLike)
+            feelsLikeEveValueTv.text = getString(if (exits) Res.string.format_eve_weather else Res.string.format_eve_weather_f, jsonArgs.feelsLike.eveFeelsLike)
 
             pressureValueTv.text = getString(Res.string.format_air_pressure, jsonArgs.pressure.toString())
             humidityValueTv.text = getString(Res.string.format_humidity, jsonArgs.humidity.toString())

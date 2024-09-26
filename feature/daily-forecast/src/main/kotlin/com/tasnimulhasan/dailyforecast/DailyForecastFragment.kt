@@ -15,6 +15,8 @@ import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.dailyforecast.databinding.FragmentDailyForecastBinding
 import com.tasnimulhasan.domain.apiusecase.daily.DailyForecastApiUseCase
+import com.tasnimulhasan.sharedpref.SharedPrefHelper
+import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -30,6 +32,7 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
     private var adapter by autoCleared<DailyForecastAdapter>()
     @Inject
     lateinit var gson: Gson
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private val args by navArgs<DailyForecastFragmentArgs>()
 
     override fun viewBindingLayout() = FragmentDailyForecastBinding.inflate(layoutInflater)
@@ -37,11 +40,11 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
 
+        setUnit()
         initRecyclerView()
         initToolbar()
         uiStateObserver()
         binding.msgTv.text = resources.getString(Res.string.msg_15_day_forecast, args.cityName)
-        Timber.e("chkCityName: ${args.cityName}")
 
         viewModel.action(UiAction.FetchDailyForecast(getDailyForecastApiParams()))
     }
@@ -54,8 +57,18 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
         }
     }
 
+    private fun setUnit() {
+        if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS)
+            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT)
+            viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
+        else
+            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+    }
+
     private fun initRecyclerView() {
-        adapter = DailyForecastAdapter { dailyForecast ->
+        val exits = sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS
+        adapter = DailyForecastAdapter(exits) { dailyForecast ->
             navigateToDestination(getString(UI.string.deep_link_daily_forecast_details_fragment_args, gson.toJson(dailyForecast).encode()).toUri())
         }
 
@@ -82,7 +95,7 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
             name = args.cityName.lowercase(),
             count = 15,
             appId = AppConstants.DAILY_FORECAST_API_KEY,
-            units = AppConstants.DATA_UNIT_CELSIUS
+            units = viewModel.units
         )
     }
 }

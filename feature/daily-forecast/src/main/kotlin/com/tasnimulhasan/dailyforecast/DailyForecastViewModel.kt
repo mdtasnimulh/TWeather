@@ -15,6 +15,8 @@ class DailyForecastViewModel @Inject constructor(
     private val dailyForecastApiUseCase: DailyForecastApiUseCase
 ) : BaseViewModel() {
 
+    var units: String = ""
+
     val action: (UiAction) -> Unit = {
         when (it) {
             is UiAction.FetchDailyForecast -> fetchDailyForecast(it.params)

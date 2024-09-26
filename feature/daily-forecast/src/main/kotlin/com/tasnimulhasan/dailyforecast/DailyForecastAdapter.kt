@@ -18,6 +18,7 @@ import java.util.Locale
 import com.tasnimulhasan.designsystem.R as Res
 
 class DailyForecastAdapter(
+    private val exits: Boolean,
     private val onClick: (DailyForecast) -> Unit
 ) : DataBoundListAdapter<DailyForecast, ItemDailyForecastBinding>(
     diffCallback = object : DiffUtil.ItemCallback<DailyForecast>() {
@@ -38,7 +39,7 @@ class DailyForecastAdapter(
         val resources = context.resources
 
         with(binding) {
-            dailyMinMaxTv.text = resources.getString(Res.string.format_min_max_temp, item.temp.maxTemp, item.temp.minTemp)
+            dailyMinMaxTv.text = resources.getString(if (exits) Res.string.format_min_max_temp else Res.string.format_min_max_temp_f, item.temp.maxTemp, item.temp.minTemp)
             dayTv.text = convertLongToDateTime(item.dateTime, DateTimeFormat.DAILY_TIME_FORMAT)
             AppConstants.iconSetTwo.find { it.iconId == item.weather.firstOrNull()?.icon }?.let {
                 dailyIconIv.setImageResource(it.iconRes)

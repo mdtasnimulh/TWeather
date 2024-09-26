@@ -147,7 +147,7 @@
     <string name="format_temp">%.0f°</string>
     <string name="format_city_day">%s, %s</string>
     <string name="format_day_weather">Day: %.1f°C</string>
-    <string name="format_day_weather_F">Day: %.1f°F</string>
+    <string name="format_day_weather_f">Day: %.1f°F</string>
     <string name="format_night_weather">Night: %.1f°C</string>
     <string name="format_night_weather_f">Night: %.1f°F</string>
     <string name="format_eve_weather">Evening: %.1f°C</string>

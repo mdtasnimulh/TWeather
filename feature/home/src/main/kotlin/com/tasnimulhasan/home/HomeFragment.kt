@@ -94,6 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     getCityName(sharedPrefHelper.getString(SpKey.LATITUDE).toDouble(), sharedPrefHelper.getString(SpKey.LONGITUDE).toDouble())
                 else {
                     viewModel.cityName = sharedPrefHelper.getString(SpKey.CITY_NAME)
+                    viewModel.locality = sharedPrefHelper.getString(SpKey.LOCALITY_NAME)
                     binding.cityNameTv.text = sharedPrefHelper.getString(SpKey.CITY_NAME)
                 }
                 viewModel.latitude = sharedPrefHelper.getString(SpKey.LATITUDE)
@@ -147,6 +148,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             viewModel.cityName = place?.subLocality ?: place?.thoroughfare ?: ""
             viewModel.locality = place?.locality ?: ""
             sharedPrefHelper.putString(SpKey.CITY_NAME, viewModel.cityName)
+            sharedPrefHelper.putString(SpKey.LOCALITY_NAME, viewModel.locality)
         } catch (e: IOException) { e.printStackTrace() }
     }
 
