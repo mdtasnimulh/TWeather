@@ -2,11 +2,11 @@ package com.tasnimulhasan.apiresponse.home
 
 data class WeatherApiResponse(
     val current: Current?,
-    val daily: List<Daily>?,
-    val hourly: List<Hourly>?,
+    val daily: List<Daily?>?,
+    val hourly: List<Hourly?>?,
     val lat: Double?,
     val lon: Double?,
-    val minutely: List<Minutely>?,
+    val minutely: List<Minutely?>?,
     val timezone: String?,
     val timezone_offset: Int?
 )
@@ -24,7 +24,7 @@ data class Current(
     val temp: Double?,
     val uvi: Double?,
     val visibility: Int?,
-    val weather: List<Weather>?,
+    val weather: List<Weather?>?,
     val wind_deg: Int?,
     val wind_gust: Double?,
     val wind_speed: Double?
@@ -47,7 +47,7 @@ data class Daily(
     val sunset: Int?,
     val temp: Temp?,
     val uvi: Double?,
-    val weather: List<Weather>?,
+    val weather: List<Weather?>?,
     val wind_deg: Int?,
     val wind_gust: Double?,
     val wind_speed: Double?
@@ -72,7 +72,7 @@ data class Hourly(
     val temp: Double?,
     val uvi: Double?,
     val visibility: Int?,
-    val weather: List<Weather>?,
+    val weather: List<Weather?>?,
     val wind_deg: Int?,
     val wind_gust: Double?,
     val wind_speed: Double?
