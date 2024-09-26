@@ -27,9 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/msg_no_city_found"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/extra_large_text_size"
             android:gravity="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +54,7 @@
             tools:itemCount="4"
             tools:listitem="@layout/item_city_list" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/citySearchFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,15 +66,12 @@
             android:contentDescription="@string/desc_image_content_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:icon="@drawable/ic_city"
-            app:iconGravity="end"
-            app:iconTint="@color/white"
+            android:src="@drawable/ic_city"
+            app:tint="@color/white"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            app:elevation="@dimen/_5sdp"
-            android:textSize="@dimen/regular_text_size"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:text="@string/label_add_city"/>
+            app:elevation="@dimen/_2sdp"
+            android:backgroundTint="@color/colorPrimaryDark"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
@@ -107,7 +108,7 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
             when (uiState) {
                 is UiState.Loading -> showLoader(uiState.loading)
                 is UiState.CityList -> {
-                    binding.searchCityTv.isGone = uiState.cityList.isNotEmpty()
+                    binding.searchCityTv.isVisible = uiState.cityList.isEmpty()
                     showCities(uiState.cityList)
                 }
                 is UiState.WeatherList -> adapter.updateWeatherData(uiState.weatherList)
