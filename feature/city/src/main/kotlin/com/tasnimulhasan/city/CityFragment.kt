@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.tasnimulhasan.city.databinding.FragmentCityBinding
 import com.tasnimulhasan.common.base.BaseFragment
+import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.navigateToDestination
@@ -16,6 +17,8 @@ import com.tasnimulhasan.common.extfun.setUpGridRecyclerView
 import com.tasnimulhasan.common.extfun.setUpVerticalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.room.CityListRoomEntity
+import com.tasnimulhasan.sharedpref.SharedPrefHelper
+import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.ui.showWarningDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +29,8 @@ import com.tasnimulhasan.ui.R as UI
 @AndroidEntryPoint
 class CityFragment : BaseFragment<FragmentCityBinding>() {
 
-    @Inject
-    lateinit var gson: Gson
+    @Inject lateinit var gson: Gson
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private val viewModel by viewModels<CityViewModel>()
     private lateinit var errorHandler: ErrorUiHandler
     private var adapter by autoCleared<CityListAdapter>()
@@ -37,6 +40,12 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
 
+        viewModel.exists =
+            if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
+            else true
+
+        setUnit()
         initRecyclerView()
         initToolbar()
         uiStateObserver()
@@ -54,15 +63,20 @@ class CityFragment : BaseFragment<FragmentCityBinding>() {
         }
     }
 
+    private fun setUnit() {
+        if (viewModel.exists) viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        else viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
+    }
+
     private fun initRecyclerView() {
         adapter = CityListAdapter (
+            exists = viewModel.exists,
             onClick = { item ->
                 navigateToDestination(getString(
                     UI.string.deep_link_weather_details_fragment_args,
                     item.cityName, item.lat.toString(), item.lon.toString()
                 ).toUri())
             },
-
             onLongClick = { item ->
                 requireActivity().showWarningDialog(
                     title = getString(Res.string.title_warning),

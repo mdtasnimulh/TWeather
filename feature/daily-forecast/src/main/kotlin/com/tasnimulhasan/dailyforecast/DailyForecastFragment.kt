@@ -19,7 +19,6 @@ import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -27,12 +26,11 @@ import com.tasnimulhasan.ui.R as UI
 @AndroidEntryPoint
 class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
 
+    @Inject lateinit var gson: Gson
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private lateinit var errorHandler: ErrorUiHandler
     private val viewModel by viewModels<DailyForecastViewModel>()
     private var adapter by autoCleared<DailyForecastAdapter>()
-    @Inject
-    lateinit var gson: Gson
-    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private val args by navArgs<DailyForecastFragmentArgs>()
 
     override fun viewBindingLayout() = FragmentDailyForecastBinding.inflate(layoutInflater)
@@ -40,11 +38,16 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
     override fun initializeView(savedInstanceState: Bundle?) {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
 
+        viewModel.exists =
+            if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
+            else true
+
         setUnit()
         initRecyclerView()
         initToolbar()
         uiStateObserver()
-        binding.msgTv.text = resources.getString(Res.string.msg_15_day_forecast, args.cityName)
+        binding.msgTv.text = resources.getString(Res.string.msg_15_day_forecast)
 
         viewModel.action(UiAction.FetchDailyForecast(getDailyForecastApiParams()))
     }
@@ -58,17 +61,12 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
     }
 
     private fun setUnit() {
-        if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS)
-            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
-        else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT)
-            viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
-        else
-            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        if (viewModel.exists) viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        else viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
     }
 
     private fun initRecyclerView() {
-        val exits = sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS
-        adapter = DailyForecastAdapter(exits) { dailyForecast ->
+        adapter = DailyForecastAdapter(viewModel.exists) { dailyForecast ->
             navigateToDestination(getString(UI.string.deep_link_daily_forecast_details_fragment_args, gson.toJson(dailyForecast).encode()).toUri())
         }
 

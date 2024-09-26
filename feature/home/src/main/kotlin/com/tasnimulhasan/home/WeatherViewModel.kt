@@ -29,6 +29,7 @@ class WeatherViewModel @Inject constructor(
     var locality = ""
     var aqi = mutableListOf<AirQualityIndexApiEntity>()
     var units: String = ""
+    var exists = true
 
     val action: (UiAction) -> Unit = {
         when (it) {

@@ -16,6 +16,7 @@ class DailyForecastViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var units: String = ""
+    var exists = true
 
     val action: (UiAction) -> Unit = {
         when (it) {

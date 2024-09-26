@@ -19,6 +19,9 @@ class CityViewModel @Inject constructor(
     private val homeWeatherApiUseCase: HomeWeatherApiUseCase
 ) : BaseViewModel() {
 
+    var units: String = ""
+    var exists = true
+
     var cityList = mutableListOf<CityListRoomEntity>()
     private val weatherDataList = mutableListOf<WeatherApiEntity>()
 
@@ -79,7 +82,7 @@ class CityViewModel @Inject constructor(
             lat = lat,
             lon = lon,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
-            units = AppConstants.DATA_UNIT_CELSIUS
+            units = units
         )
     }
 }

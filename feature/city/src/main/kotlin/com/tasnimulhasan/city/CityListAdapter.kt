@@ -19,6 +19,7 @@ import com.tasnimulhasan.entity.room.CityListRoomEntity
 import com.tasnimulhasan.designsystem.R as Res
 
 class CityListAdapter(
+    private val exists: Boolean,
     private val onClick: (CityListRoomEntity) -> Unit,
     private val onLongClick: (CityListRoomEntity) -> Unit
 ) : DataBoundListAdapter<CityListRoomEntity, ItemCityListBinding>(
@@ -45,7 +46,7 @@ class CityListAdapter(
             val key = Pair(roundToPrecision(item.lat?:0.0, 2), roundToPrecision(item.lon?:0.0, 2))
             val weatherData = weatherMap[key]
             if (weatherData != null) {
-                cityTempTv.text = root.context.getString(Res.string.format_temperature, weatherData.currentWeatherData.currentTemp)
+                cityTempTv.text = root.context.getString(if (exists) Res.string.format_temperature else Res.string.format_temperature_f, weatherData.currentWeatherData.currentTemp)
                 cityConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
                 cityTimeTv.text = DateTimeParser.convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.outputHMA)
                 AppConstants.iconSetTwo.find { it.iconId == weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherIcon }?.let { icon ->

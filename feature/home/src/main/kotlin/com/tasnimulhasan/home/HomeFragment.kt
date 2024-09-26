@@ -78,6 +78,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        viewModel.exists =
+            if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
+            else true
+
         setUnit()
         checkCache()
     }
@@ -113,12 +118,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setUnit() {
-        if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS)
-            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
-        else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT)
-            viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
-        else
-            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        if (viewModel.exists) viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        else viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
     }
 
     private fun requestPermission() {
@@ -145,7 +146,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun getCityName(lat: Double, lon: Double) {
         val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(lat, lon, 1)?.get(0)
         try {
-            viewModel.cityName = place?.subLocality ?: place?.thoroughfare ?: ""
+            viewModel.cityName = place?.subLocality ?: place?.locality ?: place?.thoroughfare ?: ""
             viewModel.locality = place?.locality ?: ""
             sharedPrefHelper.putString(SpKey.CITY_NAME, viewModel.cityName)
             sharedPrefHelper.putString(SpKey.LOCALITY_NAME, viewModel.locality)
@@ -165,7 +166,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
-        dailyAdapter = DailyAdapter(sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) {
+        dailyAdapter = DailyAdapter(viewModel.exists) {
             navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri())
         }
         requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
@@ -191,9 +192,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
-            unitTv?.text = if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) AppConstants.SHORT_FORM_CELSIUS
-            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) AppConstants.SHORT_FORM_FAHRENHEIT
-            else AppConstants.SHORT_FORM_CELSIUS
+
+            unitTv?.text = if (viewModel.exists) AppConstants.SHORT_FORM_CELSIUS
+            else AppConstants.SHORT_FORM_FAHRENHEIT
+
+            minMaxTempTv?.text = getString(
+                if (viewModel.exists) Res.string.format_min_max_temp else Res.string.format_min_max_temp_f,
+                weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature,
+                weatherData.dailyWeatherData[0].dailyTemp.dailyMinimumTemperature
+            )
+
             cityNameTv.text = viewModel.cityName
             tempTv.text = getString(Res.string.format_temp, weatherData.currentWeatherData.currentTemp)
             currentConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition.map { "$it\n" }.joinToString("")
@@ -227,23 +235,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onClickListener() {
         binding.apply {
-            seeDetailsTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, binding.cityNameTv.text.toString(), viewModel.latitude, viewModel.longitude).toUri()) }
+            seeDetailsTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, viewModel.cityName, viewModel.latitude, viewModel.longitude).toUri()) }
             seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri()) }
             cityIv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri()) }
             airQualityIncl.customIndicatorView.clickWithDebounce { AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet") }
             unitTv?.clickWithDebounce {
-                if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) {
+                if (viewModel.exists) {
                     sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_FAHRENHEIT)
                     viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
-                } else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) {
+                } else {
                     sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_CELSIUS)
                     viewModel.units = AppConstants.DATA_UNIT_CELSIUS
-                } else {
-                    sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_FAHRENHEIT)
-                    viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
                 }
-                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
-                viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
+                viewModel.exists = !viewModel.exists
+                fetchData()
             }
         }
     }

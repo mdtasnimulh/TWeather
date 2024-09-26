@@ -21,8 +21,7 @@ import com.tasnimulhasan.designsystem.R as Res
 @AndroidEntryPoint
 class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBinding>() {
 
-    @Inject
-    lateinit var gson: Gson
+    @Inject lateinit var gson: Gson
     @Inject lateinit var sharedPrefHelper: SharedPrefHelper
     private val args by navArgs<DailyForecastDetailsFragmentArgs>()
     private val jsonArgs: DailyForecast by lazy {
@@ -37,6 +36,7 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
         initToolbar()
         showDetails()
     }
+
     private fun initToolbar() {
         binding.toolbarIncl.apply {
             toolbarTitleTv.text = getString(Res.string.label_daily_forecasts_details, convertLongToDateTime(jsonArgs.dateTime, DateTimeFormat.DAILY_TIME_FORMAT))
@@ -47,7 +47,11 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
     }
 
     private fun showDetails() {
-        val exits = sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS
+        val exits =
+            if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
+            else true
+
         binding.apply {
             dayDateTv.text = convertLongToDateTime(jsonArgs.dateTime, DateTimeFormat.FULL_DAY_DATE)
 
