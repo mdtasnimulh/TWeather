@@ -26,9 +26,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("app-credential/tweather.jks")
-            storePassword = "tweather107"
+            storePassword = "tweather#107"
             keyAlias = "tweather"
-            keyPassword = "tweather107"
+            keyPassword = "tweather#107"
         }
     }
 

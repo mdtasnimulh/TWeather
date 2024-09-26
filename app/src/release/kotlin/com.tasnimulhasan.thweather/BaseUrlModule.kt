@@ -1,6 +1,6 @@
 package com.tasnimulhasan.tweather
 
-
+import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.di.qualifier.AppBaseUrl
 import com.tasnimulhasan.di.qualifier.AppImageBaseUrl
 import dagger.Module
@@ -20,4 +20,3 @@ class BaseUrlModule{
     @AppImageBaseUrl
     fun provideImageBaseUrl():String = AppConstants.BASE_URL
 }
-
