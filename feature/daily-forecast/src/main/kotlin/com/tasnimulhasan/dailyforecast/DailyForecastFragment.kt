@@ -80,7 +80,7 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
             name = args.cityName.lowercase(),
             count = 15,
             appId = AppConstants.DAILY_FORECAST_API_KEY,
-            units = AppConstants.DATA_UNIT
+            units = AppConstants.DATA_UNIT_CELSIUS
         )
     }
 }

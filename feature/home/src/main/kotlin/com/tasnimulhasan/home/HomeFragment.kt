@@ -37,6 +37,7 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
@@ -45,12 +46,12 @@ import com.tasnimulhasan.ui.R as UI
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
+    @Inject lateinit var gson: Gson
     private lateinit var errorHandler: ErrorUiHandler
     private val viewModel by viewModels<WeatherViewModel>()
     private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
-    @Inject lateinit var gson: Gson
 
     private val locationPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         when {
@@ -75,6 +76,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        setUnit()
+        checkCache()
+    }
+
+    private fun checkCache() {
         if (sharedPrefHelper.getString(SpKey.CURRENT_TIME).isNotEmpty()) {
             if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 1800000) {
                 requestPermission()
@@ -101,6 +107,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
         }
+    }
+
+    private fun setUnit() {
+        if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS)
+            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+        else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT)
+            viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
+        else
+            viewModel.units = AppConstants.DATA_UNIT_CELSIUS
     }
 
     private fun requestPermission() {
@@ -145,7 +160,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
-        dailyAdapter = DailyAdapter {
+        dailyAdapter = DailyAdapter(sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) {
             navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri())
         }
         requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
@@ -171,6 +186,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
+            unitTv?.text = if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) AppConstants.SHORT_FORM_CELSIUS
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) AppConstants.SHORT_FORM_FAHRENHEIT
+            else AppConstants.SHORT_FORM_CELSIUS
             cityNameTv.text = viewModel.cityName
             tempTv.text = getString(Res.string.format_temp, weatherData.currentWeatherData.currentTemp)
             currentConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition.map { "$it\n" }.joinToString("")
@@ -203,6 +221,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri()) }
             cityIv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri()) }
             airQualityIncl.customIndicatorView.clickWithDebounce { AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet") }
+            unitTv?.clickWithDebounce {
+                if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) {
+                    sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_FAHRENHEIT)
+                    viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
+                } else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) {
+                    sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_CELSIUS)
+                    viewModel.units = AppConstants.DATA_UNIT_CELSIUS
+                } else {
+                    sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_FAHRENHEIT)
+                    viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
+                }
+                viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
+                viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
+                Timber.e("chkApiCall SharedPref: ${sharedPrefHelper.getString(SpKey.UNIT_TYPE)}")
+            }
         }
     }
 

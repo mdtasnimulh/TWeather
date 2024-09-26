@@ -15,11 +15,15 @@ object AppConstants {
     const val DEFAULT_LATITUDE = "23.777176"
     const val DEFAULT_LONGITUDE = "90.399452"
 
+    const val SHORT_FORM_CELSIUS = "C"
+    const val SHORT_FORM_FAHRENHEIT = "F"
+
     val IMAGE_SELECTION_TYPE = arrayOf("image/png", "image/jpeg", "image/jpg")
 
     const val OPEN_WEATHER_API_KEY = "50f6d992404ddb49ea466d1da2bbef99"
     const val DAILY_FORECAST_API_KEY = "60c6fbeb4b93ac653c492ba806fc346d"
-    const val DATA_UNIT = "metric"
+    const val DATA_UNIT_CELSIUS = "metric"
+    const val DATA_UNIT_FAHRENHEIT = "imperial"
     const val BASE_URL = "https://api.openweathermap.org/"
 
     const val ONE_CALL_API_END_POINT = "data/3.0/onecall?"

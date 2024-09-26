@@ -15,4 +15,5 @@ object SpKey {
     const val LONGITUDE = "longitude"
     const val CURRENT_TIME = "currentTime"
     const val CITY_NAME = "cityName"
+    const val UNIT_TYPE = "unitType"
 }

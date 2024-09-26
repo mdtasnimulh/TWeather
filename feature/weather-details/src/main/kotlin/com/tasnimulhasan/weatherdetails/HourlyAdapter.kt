@@ -18,6 +18,7 @@ import java.util.Locale
 import com.tasnimulhasan.designsystem.R as Res
 
 class HourlyAdapter(
+    private val exits: Boolean,
     private val onClick: (HourlyWeatherData) -> Unit
 ) : DataBoundListAdapter<HourlyWeatherData, ItemHourlyBinding>(
     diffCallback = object : DiffUtil.ItemCallback<HourlyWeatherData>() {
@@ -42,7 +43,7 @@ class HourlyAdapter(
             AppConstants.iconSetTwo.find { it.iconId == item.hourlyWeatherCondition[0].hourlyWeatherIcon }?.let {
                 hourlyIconIv.setImageResource(it.iconRes)
             }
-            hourlyTempTv.text = resources.getString(Res.string.format_current_weather, item.hourlyTemperature)
+            hourlyTempTv.text = resources.getString(if (exits) Res.string.format_current_weather else Res.string.format_current_weather_f, item.hourlyTemperature)
 
             val isCurrentTime = hourlyTimeTv.text == getCurrentTimeFormatted()
             if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white))

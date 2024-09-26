@@ -37,17 +37,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/degreeTv"
+                android:id="@+id/unitTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:includeFontPadding="false"
-                android:text="C"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/_28ssp"
+                android:textSize="@dimen/_30ssp"
+                android:padding="@dimen/padding_2"
                 app:fontFamily="@font/roboto_serif_semibold"
+                app:layout_constraintBottom_toBottomOf="@+id/tempTv"
                 app:layout_constraintStart_toEndOf="@id/tempTv"
-                app:layout_constraintTop_toTopOf="@+id/tempTv" />
+                app:layout_constraintTop_toTopOf="@+id/tempTv"
+                tools:text="C" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/cityIv"

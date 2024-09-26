@@ -26,8 +26,8 @@ class WeatherViewModel @Inject constructor(
     var latitude = ""
     var longitude = ""
     var cityName = ""
-    var weatherData: WeatherApiEntity? = null
     var aqi = mutableListOf<AirQualityIndexApiEntity>()
+    var units: String = ""
 
     val action: (UiAction) -> Unit = {
         when (it) {
@@ -49,10 +49,7 @@ class WeatherViewModel @Inject constructor(
                 when (result) {
                     is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
                     is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> {
-                        weatherData = result.data
-                        _uiState.value = UiState.ApiSuccess(result.data)
-                    }
+                    is ApiResult.Success -> _uiState.value = UiState.ApiSuccess(result.data)
                 }
             }
         }
@@ -90,7 +87,7 @@ class WeatherViewModel @Inject constructor(
             lat = latitude,
             lon = longitude,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
-            units = AppConstants.DATA_UNIT
+            units = units
         )
     }
 
@@ -99,7 +96,7 @@ class WeatherViewModel @Inject constructor(
             lat = latitude,
             lon = longitude,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
-            units = AppConstants.DATA_UNIT
+            units = units
         )
     }
 
@@ -108,7 +105,7 @@ class WeatherViewModel @Inject constructor(
             lat = AppConstants.DEFAULT_LATITUDE,
             lon = AppConstants.DEFAULT_LONGITUDE,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
-            units = AppConstants.DATA_UNIT
+            units = units
         )
     }
 }
