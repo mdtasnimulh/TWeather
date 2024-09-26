@@ -75,13 +75,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tempTv" />
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/blurView"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_150sdp"
                 android:layout_marginTop="@dimen/_75sdp"
-                android:background="@drawable/day_gradient_bg"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/day_gradient_bg"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/weatherConditionIv" />
 

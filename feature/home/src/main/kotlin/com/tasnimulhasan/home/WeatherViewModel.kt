@@ -26,6 +26,7 @@ class WeatherViewModel @Inject constructor(
     var latitude = ""
     var longitude = ""
     var cityName = ""
+    var locality = ""
     var aqi = mutableListOf<AirQualityIndexApiEntity>()
     var units: String = ""
 

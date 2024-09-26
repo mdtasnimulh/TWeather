@@ -17,6 +17,7 @@ import com.tasnimulhasan.dailyforecast.databinding.FragmentDailyForecastBinding
 import com.tasnimulhasan.domain.apiusecase.daily.DailyForecastApiUseCase
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -40,6 +41,7 @@ class DailyForecastFragment : BaseFragment<FragmentDailyForecastBinding>() {
         initToolbar()
         uiStateObserver()
         binding.msgTv.text = resources.getString(Res.string.msg_15_day_forecast, args.cityName)
+        Timber.e("chkCityName: ${args.cityName}")
 
         viewModel.action(UiAction.FetchDailyForecast(getDailyForecastApiParams()))
     }

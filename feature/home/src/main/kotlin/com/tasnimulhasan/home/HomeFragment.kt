@@ -2,7 +2,10 @@ package com.tasnimulhasan.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.location.Geocoder
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -37,7 +40,6 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
@@ -143,6 +145,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val place = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(lat, lon, 1)?.get(0)
         try {
             viewModel.cityName = place?.subLocality ?: place?.thoroughfare ?: ""
+            viewModel.locality = place?.locality ?: ""
             sharedPrefHelper.putString(SpKey.CITY_NAME, viewModel.cityName)
         } catch (e: IOException) { e.printStackTrace() }
     }
@@ -161,7 +164,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
         dailyAdapter = DailyAdapter(sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) {
-            navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri())
+            navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri())
         }
         requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
         dailyAdapter.submitList(dailyWeatherData)
@@ -196,6 +199,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
             windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
             uviValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+                val blur: RenderEffect = RenderEffect.createBlurEffect(5f, 5f, Shader.TileMode.MIRROR)
+                weatherConditionIv.setRenderEffect(blur)
+            }
         }
     }
 
@@ -218,7 +226,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun onClickListener() {
         binding.apply {
             seeDetailsTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, binding.cityNameTv.text.toString(), viewModel.latitude, viewModel.longitude).toUri()) }
-            seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.cityName).toUri()) }
+            seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri()) }
             cityIv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri()) }
             airQualityIncl.customIndicatorView.clickWithDebounce { AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet") }
             unitTv?.clickWithDebounce {
@@ -234,7 +242,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
                 viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
                 viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
-                Timber.e("chkApiCall SharedPref: ${sharedPrefHelper.getString(SpKey.UNIT_TYPE)}")
             }
         }
     }
