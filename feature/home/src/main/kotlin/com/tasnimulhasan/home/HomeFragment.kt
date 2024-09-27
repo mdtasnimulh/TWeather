@@ -209,11 +209,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
             windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
             uviValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-                val blur: RenderEffect = RenderEffect.createBlurEffect(5f, 5f, Shader.TileMode.MIRROR)
-                weatherConditionIv.setRenderEffect(blur)
-            }
         }
     }
 
