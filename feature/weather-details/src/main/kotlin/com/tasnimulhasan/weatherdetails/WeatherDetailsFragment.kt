@@ -10,6 +10,7 @@ import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
+import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.getColorForAqiName
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
@@ -130,6 +131,17 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
                 sunriseValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunrise, DateTimeFormat.outputHMA)
                 sunsetValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunSet, DateTimeFormat.outputHMA)
             }
+
+            setSunriseSunsetProgress(weatherData.dailyWeatherData[0].dailySunrise, weatherData.dailyWeatherData[0].dailySunSet)
+        }
+    }
+
+    private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
+        binding.sunriseSunsetIncl.apply {
+            sunRiseSetPb.max = (sunset - sunrise).toInt()
+            sunRiseSetPb.min = 0
+            val progress = calculateProgressBySunriseSunset(sunrise, sunset)
+            sunRiseSetPb.progress = progress
         }
     }
 

@@ -109,7 +109,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sunriseIv"
-        android:progress="75" />
+        tools:progress="35" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

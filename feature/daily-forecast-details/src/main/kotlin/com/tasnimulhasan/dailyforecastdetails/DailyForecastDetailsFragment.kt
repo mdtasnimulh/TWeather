@@ -8,6 +8,7 @@ import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
+import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.decode
 import com.tasnimulhasan.dailyforecastdetails.databinding.FragmentDailyForecastDetailsBinding
@@ -77,6 +78,17 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
                 sunriseValueTv.text = convertLongToDateTime(jsonArgs.sunrise.toLong(), DateTimeFormat.outputHMA)
                 sunsetValueTv.text = convertLongToDateTime(jsonArgs.sunset.toLong(), DateTimeFormat.outputHMA)
             }
+
+            setSunriseSunsetProgress(jsonArgs.sunrise.toLong(), jsonArgs.sunset.toLong())
+        }
+    }
+
+    private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
+        binding.sunriseSunsetIncl.apply {
+            sunRiseSetPb.max = (sunset - sunrise).toInt()
+            sunRiseSetPb.min = 0
+            val progress = calculateProgressBySunriseSunset(sunrise, sunset)
+            sunRiseSetPb.progress = progress
         }
     }
 }
