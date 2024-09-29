@@ -35,7 +35,7 @@
     <string name="msg_location_permission_denied">Location Permission is denied!\nplease allow \'Location\' permission to continue the app.</string>
     <string name="msg_location_permission_granted">Location permission granted successfully.</string>
     <string name="msg_location_permanent_denied">Location permanently denied!!</string>
-    <string name="msg_city_already_exists">Whoops! City already exists. Please another or go back to \'City List\'</string>
+    <string name="msg_city_already_exists">Whoops! City already exists. Please add another or go back to \'City List\'</string>
     <string name="msg_no_city_found">No pre added city found.\nAdd new city to the list.</string>
     <string name="msg_loading">Fetching Data, Please Wait</string>
     <string name="msg_demo_overview">The current weather is partly cloudy with a temperature of 33°C and a slight breeze with a wind speed of 1 meter/sec. The humidity is at 56%, and the visibility is good at 10,000 meters. The weather may feel warmer than the actual temperature due to the feels-like temperature of 39°C. The UV index is at 4, so it\'s important to take precautions if spending extended time outdoors. The cloud cover is at 43%, indicating some scattered clouds in the sky. Overall, it\'s a warm and pleasant day with a gentle breeze and some clouds in the sky.</string>

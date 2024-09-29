@@ -84,7 +84,7 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
             when (uiState) {
                 is UiState.Loading -> this showLoader uiState.loading
                 is UiState.ApiSuccess -> {
-                    binding.searchCityTv.isGone = uiState.cityEntity.isEmpty()
+                    binding.searchCityTv.isGone = true
                     this showCities uiState.cityEntity
                 }
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
@@ -124,16 +124,14 @@ class CitySearchFragment : BaseFragment<FragmentCitySearchBinding>() {
 
     private fun onClickListener() {
         with(binding) {
-            searchCityTv.clickWithDebounce {
-                citySearchTil.requestFocus()
-            }
-
             citySearchEt.addTextChangedListener(object : TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { /*NA*/ }
 
                 override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
-                    if ((query?.length ?: 0) >= 1)
+                    if ((query?.length ?: 0) >= 1) {
+                        binding.searchCityTv.isGone = true
                         viewModel.action(UiAction.FetchCityName(getSearchApiParams(query = query.toString())))
+                    } else binding.searchCityTv.isGone = false
                 }
 
                 override fun afterTextChanged(s: Editable?) { /*NA*/ }
