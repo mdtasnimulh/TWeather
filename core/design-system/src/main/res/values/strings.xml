@@ -123,6 +123,8 @@
     <string name="format_daily_max_weather_f">Max: %.1f°F</string>
     <string name="format_min_max_temp">%.0f°C/%.0f°C</string>
     <string name="format_min_max_temp_f">%.0f°F/%.0f°F</string>
+    <string name="format_min_max_home_temp">H. %.0f°C - L. %.0f°C</string>
+    <string name="format_min_max_home_temp_f">H. %.0f°F - L. %.0f°F</string>
     <string name="format_home_min_max_temp">%.0f°C/%.0f°C</string>
     <string name="format_home_min_max_temp_f">%.0f°F/%.0f°F</string>
     <string name="format_humidity">%s%%</string>

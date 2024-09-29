@@ -2,10 +2,7 @@ package com.tasnimulhasan.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.location.Geocoder
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -197,7 +194,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             else AppConstants.SHORT_FORM_FAHRENHEIT
 
             minMaxTempTv?.text = getString(
-                if (viewModel.exists) Res.string.format_min_max_temp else Res.string.format_min_max_temp_f,
+                if (viewModel.exists) Res.string.format_min_max_home_temp else Res.string.format_min_max_home_temp_f,
                 weatherData.dailyWeatherData[0].dailyTemp.dailyMaximumTemperature,
                 weatherData.dailyWeatherData[0].dailyTemp.dailyMinimumTemperature
             )
