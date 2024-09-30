@@ -6,13 +6,16 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import kotlin.math.cos
+import kotlin.math.sin
 
 class CustomSunRiseSetProgress @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
     private var indicatorValue: Int = 0
-    private var maxIndicatorValue: Int = 5
+    private var maxIndicatorValue: Int = 0
+    private var minIndicatorValue: Int = 0
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
     private var foregroundIndicatorColors: IntArray = intArrayOf(
         ContextCompat.getColor(context, R.color.green_light_700),
@@ -31,14 +34,14 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
+        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the background
     }
 
     private val foregroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        // Add dotted line effect
-        pathEffect = DashPathEffect(floatArrayOf(10f, 20f), 0f)  // Adjust the dash and gap sizes
+        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
     }
 
     init {
@@ -114,8 +117,8 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         val radius = (rect.width() / 2) - foregroundIndicatorStrokeWidth / 2
 
         // Calculate the x and y position for the sun drawable
-        val sunX = (centerX + radius * Math.cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)
-        val sunY = (centerY + radius * Math.sin(radians)).toFloat() - (sunDrawable.intrinsicHeight / 2)
+        val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)
+        val sunY = (centerY + radius * sin(radians)).toFloat() - (sunDrawable.intrinsicHeight / 2)
 
         // Set the bounds for the drawable
         sunDrawable.setBounds(
@@ -130,15 +133,29 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     }
 
     fun setIndicatorValue(value: Int) {
+        // Ensure the value is within bounds
+        val newValue = value.coerceIn(minIndicatorValue, maxIndicatorValue)
+
         // Animate the progress indicator
-        val animator = ValueAnimator.ofFloat(indicatorValue.toFloat(), value.toFloat())
+        val animator = ValueAnimator.ofFloat(indicatorValue.toFloat(), newValue.toFloat())
         animator.duration = 1500
         animator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             indicatorValue = animatedValue.toInt()
-            sweepAngle = (indicatorValue.toFloat() / maxIndicatorValue) * 240f
+            sweepAngle = ((indicatorValue - minIndicatorValue).toFloat() / (maxIndicatorValue - minIndicatorValue)) * 240f
             invalidate() // Trigger redraw
         }
         animator.start()
     }
+
+    fun setMaxIndicatorValue(maxValue: Int) {
+        maxIndicatorValue = maxValue
+        invalidate() // Trigger redraw if necessary
+    }
+
+    fun setMinIndicatorValue(minValue: Int) {
+        minIndicatorValue = minValue
+        invalidate() // Trigger redraw if necessary
+    }
+
 }
