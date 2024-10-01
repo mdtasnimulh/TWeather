@@ -25,6 +25,7 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.weatherdetails.databinding.FragmentWeatherDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 

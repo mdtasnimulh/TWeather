@@ -19,14 +19,8 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     private var minIndicatorValue: Int = 0
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
     private var drawableIndicatorColor: Int = ContextCompat.getColor(context, R.color.transparent)
-    private var foregroundIndicatorColors: IntArray = intArrayOf(
-        ContextCompat.getColor(context, R.color.yellow_dark_200),
-        ContextCompat.getColor(context, R.color.yellow_dark_1000),
-        ContextCompat.getColor(context, R.color.yellow),
-        ContextCompat.getColor(context, R.color.yellow_dark_1000),
-        ContextCompat.getColor(context, R.color.yellow_dark_800),
-        ContextCompat.getColor(context, R.color.warning_color),
-    )
+
+    private var foregroundIndicatorColors = intArrayOf()
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
     private var drawableBackgroundIndicatorStrokeWidth: Float = 100f
@@ -75,6 +69,26 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
             0, 0
         ).apply {
             try {
+                if (indicatorValue != maxIndicatorValue) {
+                    foregroundIndicatorColors = intArrayOf(
+                        ContextCompat.getColor(context, R.color.yellow_dark_200),
+                        ContextCompat.getColor(context, R.color.yellow_dark_1000),
+                        ContextCompat.getColor(context, R.color.yellow),
+                        ContextCompat.getColor(context, R.color.yellow_dark_1000),
+                        ContextCompat.getColor(context, R.color.yellow_dark_800),
+                        ContextCompat.getColor(context, R.color.warning_color),
+                    )
+                } else {
+                    foregroundIndicatorColors = intArrayOf(
+                        ContextCompat.getColor(context, R.color.black_26),
+                        ContextCompat.getColor(context, R.color.black_26),
+                        ContextCompat.getColor(context, R.color.black_26),
+                        ContextCompat.getColor(context, R.color.black_26),
+                        ContextCompat.getColor(context, R.color.black_26),
+                        ContextCompat.getColor(context, R.color.black_26)
+                    )
+                }
+
                 indicatorValue = getInt(R.styleable.CustomIndicatorView_indicatorValue, indicatorValue)
                 maxIndicatorValue = getInt(R.styleable.CustomIndicatorView_maxIndicatorValue, maxIndicatorValue)
                 backgroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_backgroundIndicatorColor, backgroundIndicatorColor)
@@ -147,35 +161,37 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         // Draw the background and foreground arcs
         canvas.drawArc(rect, 150f, 240f, false, backgroundPaint)
         canvas.drawArc(rect, 150f, sweepAngle, false, foregroundPaint)
-        canvas.drawArc(rect, 150f, sweepAngle, false, drawableBackgroundPaint)
 
-        // Draw the sun drawable that moves along the arc
-        val sunDrawable = ContextCompat.getDrawable(context, R.drawable.ic_sun_solid) ?: return
+        if (indicatorValue != maxIndicatorValue) {
+            canvas.drawArc(rect, 150f, sweepAngle, false, drawableBackgroundPaint)
+            // Draw the sun drawable that moves along the arc
+            val sunDrawable = ContextCompat.getDrawable(context, R.drawable.ic_sun) ?: return
 
-        // Calculate the current progress angle (starting from 150 degrees)
-        val progressAngle = 150f + sweepAngle
+            // Calculate the current progress angle (starting from 150 degrees)
+            val progressAngle = 150f + sweepAngle
 
-        // Convert angle to radians for trigonometric calculation
-        val radians = Math.toRadians(progressAngle.toDouble())
+            // Convert angle to radians for trigonometric calculation
+            val radians = Math.toRadians(progressAngle.toDouble())
 
-        // Calculate the center of the arc
-        val centerX = rect.centerX()
-        val centerY = rect.centerY()
+            // Calculate the center of the arc
+            val centerX = rect.centerX()
+            val centerY = rect.centerY()
 
-        // Calculate the x and y position for the sun drawable
-        val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)
-        val sunY = (centerY + radius * sin(radians)).toFloat() - (sunDrawable.intrinsicHeight / 2)
+            // Calculate the x and y position for the sun drawable
+            val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)
+            val sunY = (centerY + radius * sin(radians)).toFloat() - (sunDrawable.intrinsicHeight / 2)
 
-        // Set the bounds for the drawable
-        sunDrawable.setBounds(
-            sunX.toInt(),
-            sunY.toInt(),
-            (sunX + sunDrawable.intrinsicWidth).toInt(),
-            (sunY + sunDrawable.intrinsicHeight).toInt()
-        )
+            // Set the bounds for the drawable
+            sunDrawable.setBounds(
+                sunX.toInt(),
+                sunY.toInt(),
+                (sunX + sunDrawable.intrinsicWidth).toInt(),
+                (sunY + sunDrawable.intrinsicHeight).toInt()
+            )
 
-        // Draw the sun drawable at the calculated position
-        sunDrawable.draw(canvas)
+            // Draw the sun drawable at the calculated position
+            sunDrawable.draw(canvas)
+        }
     }
 
     fun setIndicatorValue(value: Int) {
@@ -184,7 +200,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
 
         // Animate the progress indicator
         val animator = ValueAnimator.ofFloat(indicatorValue.toFloat(), newValue.toFloat())
-        animator.duration = 1500
+        animator.duration = 4000
         animator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             indicatorValue = animatedValue.toInt()
