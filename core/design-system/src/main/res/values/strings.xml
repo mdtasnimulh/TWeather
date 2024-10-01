@@ -90,6 +90,9 @@
     <string name="label_current">Current</string>
     <string name="label_normal">Fair</string>
     <string name="aqi_level">AQI Level</string>
+    <string name="label_current_time">Now</string>
+    <string name="label_remaining_time_sunset">Time to Sunset</string>
+    <string name="label_remaining_time_sunrise">Time to Sunrise</string>
     <!--    label string resources-->
 
     <!--    title string resources-->

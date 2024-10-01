@@ -10,3 +10,16 @@ fun calculateProgressBySunriseSunset(sunrise: Long, sunset: Long): Int {
         else -> elapsedTime.toInt() // During the day, normal progress
     }
 }
+
+fun calculateRemainingTime(sunrise: Long, sunset: Long): Long {
+    val currentTime = System.currentTimeMillis() / 1000
+    return when {
+        currentTime < sunrise -> { sunrise - currentTime }
+        currentTime > sunset -> {
+            val nextDaySunrise = sunrise + 86400
+            nextDaySunrise - currentTime
+        }
+        else -> { sunset - currentTime }
+    }
+}
+

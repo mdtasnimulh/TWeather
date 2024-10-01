@@ -1,5 +1,9 @@
 package com.tasnimulhasan.weatherdetails
 
+import android.os.Handler
+import android.os.Looper
+import com.tasnimulhasan.common.dateparser.DateTimeFormat
+import com.tasnimulhasan.common.extfun.calculateRemainingTime
 import com.tasnimulhasan.domain.apiusecase.aqi.AirQualityIndexApiUseCase
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
@@ -7,9 +11,13 @@ import com.tasnimulhasan.domain.base.BaseViewModel
 import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,11 +29,15 @@ class WeatherDetailsViewModel @Inject constructor(
     var aqi = mutableListOf<AirQualityIndexApiEntity>()
     var units: String = ""
     var exists = true
+    private val handler = Handler(Looper.getMainLooper())
 
     val action: (UiAction) -> Unit = {
         when (it) {
             is UiAction.FetchWeatherData -> fetchWeatherData(it.params)
             is UiAction.FetchAirQualityIndex -> fetchAirQualityIndex(it.params)
+            is UiAction.StartTimer -> startTimer()
+            is UiAction.StopTimer -> stopTimer()
+            is UiAction.RemainTime -> startRemainingTimer(it.sunrise, it.sunset)
         }
     }
 
@@ -61,6 +73,58 @@ class WeatherDetailsViewModel @Inject constructor(
             }
         }
     }
+
+    private fun startTimer() {
+        execute {
+            handler.post(object : Runnable {
+                override fun run() {
+                    updateTime()
+                    handler.postDelayed(this, 1000)
+                }
+            })
+        }
+    }
+
+    private fun updateTime() {
+        execute {
+            val currentTime = Calendar.getInstance().time
+            val sdf = SimpleDateFormat(DateTimeFormat.outputHMA, Locale.getDefault())
+            _uiState.value = UiState.TimerValue(sdf.format(currentTime))
+        }
+    }
+
+    private fun startRemainingTimer(sunrise: Long, sunset: Long) {
+        execute {
+            handler.post(object : Runnable {
+                override fun run() {
+                    updateRemainingTime(sunrise, sunset)
+                    handler.postDelayed(this, 1000)
+                }
+            })
+        }
+    }
+
+    private fun updateRemainingTime(sunrise: Long, sunset: Long) {
+        execute {
+            val remainingTimeInSeconds = calculateRemainingTime(sunrise, sunset)
+            if (remainingTimeInSeconds < 0) {
+                _uiState.value = UiState.RemainingTimerValue("00:00:00")
+                return@execute
+            }
+            val hours = (remainingTimeInSeconds / 3600).toInt()
+            val minutes = ((remainingTimeInSeconds % 3600) / 60).toInt()
+            val seconds = (remainingTimeInSeconds % 60).toInt()
+            val formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
+            _uiState.value = UiState.RemainingTimerValue(formattedTime)
+        }
+    }
+
+
+    private fun stopTimer(){
+        execute {
+            handler.removeCallbacksAndMessages(null)
+        }
+    }
 }
 
 sealed interface UiEvent {
@@ -72,9 +136,14 @@ sealed interface UiState {
     data class Error(val message: String) : UiState
     data class ApiSuccess(val weatherData: WeatherApiEntity) : UiState
     data class AirQualityIndex(val aqi: List<AirQualityIndexApiEntity>) : UiState
+    data class TimerValue(val time: String) : UiState
+    data class RemainingTimerValue(val time: String) : UiState
 }
 
 sealed interface UiAction {
     data class FetchWeatherData(val params: HomeWeatherApiUseCase.Params) : UiAction
     data class FetchAirQualityIndex(val params: AirQualityIndexApiUseCase.Params) : UiAction
+    data object StartTimer : UiAction
+    data object StopTimer : UiAction
+    data class RemainTime(val sunrise: Long, val sunset: Long) : UiAction
 }

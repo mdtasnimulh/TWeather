@@ -54,6 +54,7 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
         bindUiEvent()
         onClickListener()
 
+        viewModel.action(UiAction.StartTimer)
         viewModel.action(UiAction.FetchWeatherData(getWeatherApiParams()))
         viewModel.action(UiAction.FetchAirQualityIndex(getAqiParams()))
     }
@@ -68,6 +69,7 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
             toolbarTitleTv.text = getString(Res.string.label_weather_overview)
             toolbarBackIv.clickWithDebounce {
                 findNavController().popBackStack()
+                viewModel.action(UiAction.StopTimer)
             }
         }
     }
@@ -91,6 +93,8 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
                     this initHourlyRecyclerView uiState.weatherData.hourlyWeatherData.take(24)
                 }
                 is UiState.AirQualityIndex -> showAirQuality(uiState.aqi[0])
+                is UiState.TimerValue -> binding.sunriseSunsetIncl.currentTimeValueTv.text = uiState.time
+                is UiState.RemainingTimerValue -> binding.sunriseSunsetIncl.remainingTimeValueTv.text = uiState.time
             }
         }
     }
@@ -105,6 +109,8 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
 
     private infix fun showData(weatherData: WeatherApiEntity) {
         binding.apply {
+            viewModel.action(UiAction.RemainTime(weatherData.dailyWeatherData[0].dailySunrise, weatherData.dailyWeatherData[0].dailySunSet))
+
             todayTempTv.text = resources.getString(if (viewModel.exists) Res.string.format_temperature else Res.string.format_temperature_f, weatherData.currentWeatherData.currentTemp)
             todayConditionTv.text = weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
             cityDayTv.text = resources.getString(Res.string.format_city_day, args.cityName, convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.DAY_TIME_FORMAT))
