@@ -1,5 +1,8 @@
 package com.tasnimulhasan.common.extfun
 
+import com.tasnimulhasan.entity.details.RiseSet
+import com.tasnimulhasan.entity.details.SunriseSunsetRemainingTime
+
 fun calculateProgressBySunriseSunset(sunrise: Long, sunset: Long): Int {
     val currentTime = System.currentTimeMillis() / 1000
     val totalTime = sunset - sunrise
@@ -11,15 +14,23 @@ fun calculateProgressBySunriseSunset(sunrise: Long, sunset: Long): Int {
     }
 }
 
-fun calculateRemainingTime(sunrise: Long, sunset: Long): Long {
+fun calculateRemainingTime(sunrise: Long, sunset: Long): SunriseSunsetRemainingTime {
     val currentTime = System.currentTimeMillis() / 1000
     return when {
-        currentTime < sunrise -> { sunrise - currentTime }
+        currentTime < sunrise -> {
+            val remainingTime = sunrise - currentTime
+            SunriseSunsetRemainingTime(remainingTime, RiseSet.SUNRISE)
+        }
         currentTime > sunset -> {
             val nextDaySunrise = sunrise + 86400
-            nextDaySunrise - currentTime
+            val remainingTime = nextDaySunrise - currentTime
+            SunriseSunsetRemainingTime(remainingTime, RiseSet.SUNRISE)
         }
-        else -> { sunset - currentTime }
+        else -> {
+            val remainingTime = sunset - currentTime
+            SunriseSunsetRemainingTime(remainingTime, RiseSet.SUNSET)
+        }
     }
 }
+
 

@@ -9,6 +9,7 @@ import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.domain.base.BaseViewModel
 import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
+import com.tasnimulhasan.entity.details.RiseSet
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Runnable
@@ -106,19 +107,27 @@ class WeatherDetailsViewModel @Inject constructor(
 
     private fun updateRemainingTime(sunrise: Long, sunset: Long) {
         execute {
-            val remainingTimeInSeconds = calculateRemainingTime(sunrise, sunset)
+            val remainingTimeResult = calculateRemainingTime(sunrise, sunset)
+            val remainingTimeInSeconds = remainingTimeResult.remainingTime
+
             if (remainingTimeInSeconds < 0) {
                 _uiState.value = UiState.RemainingTimerValue("00:00:00")
                 return@execute
             }
+
             val hours = (remainingTimeInSeconds / 3600).toInt()
             val minutes = ((remainingTimeInSeconds % 3600) / 60).toInt()
             val seconds = (remainingTimeInSeconds % 60).toInt()
             val formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
-            _uiState.value = UiState.RemainingTimerValue(formattedTime)
+
+            val timeLabel = when (remainingTimeResult.timeType) {
+                RiseSet.SUNRISE -> "$formattedTime\nTime to Sunrise"
+                RiseSet.SUNSET -> "$formattedTime\nTime to Sunset"
+                else -> "Time is up!"
+            }
+            _uiState.value = UiState.RemainingTimerValue(timeLabel)
         }
     }
-
 
     private fun stopTimer(){
         execute {

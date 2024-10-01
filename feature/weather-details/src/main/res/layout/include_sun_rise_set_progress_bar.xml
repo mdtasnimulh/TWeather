@@ -130,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_5"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:includeFontPadding="false"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_11ssp"
@@ -138,21 +138,6 @@
         app:layout_constraintEnd_toEndOf="@+id/currentTimeValueTv"
         app:layout_constraintStart_toStartOf="@+id/currentTimeValueTv"
         app:layout_constraintTop_toBottomOf="@+id/currentTimeTv"
-        tools:text="12:30:35 PM" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/remainingTimeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
-        android:text="@string/label_remaining_time_sunset"
-        android:textColor="@color/textColor"
-        android:textSize="@dimen/_10ssp"
-        app:fontFamily="@font/poppins_medium"
-        android:layout_marginTop="@dimen/margin_2"
-        app:layout_constraintEnd_toEndOf="@+id/currentTimeValueTv"
-        app:layout_constraintStart_toStartOf="@+id/currentTimeValueTv"
-        app:layout_constraintTop_toBottomOf="@+id/remainingTimeValueTv" />
+        tools:text="12:30:35\nTime to Sunset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
