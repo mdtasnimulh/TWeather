@@ -13,13 +13,11 @@ import kotlin.math.sin
 class CustomSunRiseSetProgress @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
-
     private var indicatorValue: Int = 0
     private var maxIndicatorValue: Int = 0
     private var minIndicatorValue: Int = 0
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
     private var drawableIndicatorColor: Int = ContextCompat.getColor(context, R.color.transparent)
-
     private var foregroundIndicatorColors = intArrayOf()
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
@@ -31,30 +29,19 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     private var startY = 0f
     private var endY = 0f
     private var gradient: LinearGradient? = null
-
-    private val gradientPositions = floatArrayOf(
-        0.0f,  // Start at 0% for the first color
-        0.15f, // 20% for the second color
-        0.15f, // 40% for the third color
-        0.20f, // 60% for the fourth color
-        0.25f, // 80% for the fifth color
-        1.0f   // 100% for the sixth color
-    )
-
+    private val gradientPositions = floatArrayOf(0.0f, 0.15f, 0.15f, 0.20f, 0.25f, 1.0f)
     private val backgroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
         pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the background
     }
-
     private val foregroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
         pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
     }
-
     private val drawableBackgroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
@@ -63,30 +50,24 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     }
 
     init {
-        context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.CustomIndicatorView,
-            0, 0
-        ).apply {
+        context.theme.obtainStyledAttributes(attrs, R.styleable.CustomIndicatorView, 0, 0).apply {
             try {
-                if (indicatorValue != maxIndicatorValue) {
-                    foregroundIndicatorColors = intArrayOf(
+                foregroundIndicatorColors = if (indicatorValue != maxIndicatorValue) {
+                    intArrayOf(
                         ContextCompat.getColor(context, R.color.yellow_dark_200),
                         ContextCompat.getColor(context, R.color.yellow_dark_1000),
                         ContextCompat.getColor(context, R.color.yellow),
                         ContextCompat.getColor(context, R.color.yellow_dark_1000),
                         ContextCompat.getColor(context, R.color.yellow_dark_800),
-                        ContextCompat.getColor(context, R.color.warning_color),
-                    )
+                        ContextCompat.getColor(context, R.color.warning_color))
                 } else {
-                    foregroundIndicatorColors = intArrayOf(
+                    intArrayOf(
                         ContextCompat.getColor(context, R.color.black_26),
                         ContextCompat.getColor(context, R.color.black_26),
                         ContextCompat.getColor(context, R.color.black_26),
                         ContextCompat.getColor(context, R.color.black_26),
                         ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26)
-                    )
+                        ContextCompat.getColor(context, R.color.black_26))
                 }
 
                 indicatorValue = getInt(R.styleable.CustomIndicatorView_indicatorValue, indicatorValue)
@@ -94,22 +75,17 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
                 backgroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_backgroundIndicatorColor, backgroundIndicatorColor)
                 drawableIndicatorColor = getColor(R.styleable.CustomIndicatorView_drawableBackgroundIndicatorColors, drawableIndicatorColor)
                 val colorsArrayId = getResourceId(R.styleable.CustomIndicatorView_foregroundIndicatorColors, 0)
-                if (colorsArrayId != 0) {
-                    foregroundIndicatorColors = context.resources.getIntArray(colorsArrayId)
-                }
+                if (colorsArrayId != 0) { foregroundIndicatorColors = context.resources.getIntArray(colorsArrayId) }
                 backgroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_backgroundIndicatorStrokeWidth, backgroundIndicatorStrokeWidth)
                 drawableBackgroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_drawableBackgroundIndicatorStrokeWidth, drawableBackgroundIndicatorStrokeWidth)
                 foregroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_foregroundIndicatorStrokeWidth, foregroundIndicatorStrokeWidth)
-            } finally {
-                recycle()
-            }
+            } finally { recycle() }
         }
     }
 
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         // Set dimensions for the circular progress bar
         val screenWidth = width.toFloat()
         val screenHeight = height.toFloat()
@@ -134,7 +110,6 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         // Set up the background arc
         backgroundPaint.color = backgroundIndicatorColor
         backgroundPaint.strokeWidth = backgroundIndicatorStrokeWidth
-
         // Set up the drawable background arc
         drawableBackgroundPaint.color = drawableIndicatorColor
         drawableBackgroundPaint.strokeWidth = drawableBackgroundIndicatorStrokeWidth
@@ -143,18 +118,12 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         val startAngleRad = Math.toRadians(150.0)
         val endAngleRad = Math.toRadians(240.0)
 
-        // Calculate start (150 degrees) and end (390 degrees) points along the arc
         startX = (rect.centerX() + radius * cos(startAngleRad)).toFloat()
         startY = (rect.centerY() + radius * sin(startAngleRad)).toFloat()
         endX = (rect.centerX() + radius * cos(endAngleRad)).toFloat()
         endY = (rect.centerY() + radius * sin(endAngleRad)).toFloat()
 
-        // Create or update the LinearGradient when the size changes
-        gradient = LinearGradient(
-            startX, startY, endX, endY,
-            foregroundIndicatorColors, gradientPositions, Shader.TileMode.CLAMP
-        )
-
+        gradient = LinearGradient(startX, startY, endX, endY, foregroundIndicatorColors, gradientPositions, Shader.TileMode.CLAMP)
         foregroundPaint.shader = gradient
         foregroundPaint.strokeWidth = foregroundIndicatorStrokeWidth
 
@@ -164,23 +133,23 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
 
         if (indicatorValue != maxIndicatorValue) {
             canvas.drawArc(rect, 150f, sweepAngle, false, drawableBackgroundPaint)
-            // Draw the sun drawable that moves along the arc
             val sunDrawable = ContextCompat.getDrawable(context, R.drawable.ic_sun) ?: return
-
             // Calculate the current progress angle (starting from 150 degrees)
             val progressAngle = 150f + sweepAngle
-
             // Convert angle to radians for trigonometric calculation
             val radians = Math.toRadians(progressAngle.toDouble())
-
             // Calculate the center of the arc
             val centerX = rect.centerX()
             val centerY = rect.centerY()
-
             // Calculate the x and y position for the sun drawable
             val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)
             val sunY = (centerY + radius * sin(radians)).toFloat() - (sunDrawable.intrinsicHeight / 2)
-
+            // Save the canvas state before applying rotation
+            canvas.save()
+            // Calculate the rotation angle based on progress
+            val rotationAngle = (indicatorValue.toFloat() / maxIndicatorValue.toFloat()) * 360f
+            // Apply rotation to the canvas, rotating around the center of the drawable
+            canvas.rotate(rotationAngle, sunX + (sunDrawable.intrinsicWidth / 2), sunY + (sunDrawable.intrinsicHeight / 2))
             // Set the bounds for the drawable
             sunDrawable.setBounds(
                 sunX.toInt(),
@@ -188,19 +157,19 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
                 (sunX + sunDrawable.intrinsicWidth).toInt(),
                 (sunY + sunDrawable.intrinsicHeight).toInt()
             )
-
-            // Draw the sun drawable at the calculated position
+            // Draw the sun drawable at the calculated position with rotation
             sunDrawable.draw(canvas)
+            // Restore the canvas to its original state (undo the rotation)
+            canvas.restore()
         }
     }
 
     fun setIndicatorValue(value: Int) {
         // Ensure the value is within bounds
         val newValue = value.coerceIn(minIndicatorValue, maxIndicatorValue)
-
         // Animate the progress indicator
         val animator = ValueAnimator.ofFloat(indicatorValue.toFloat(), newValue.toFloat())
-        animator.duration = 4000
+        animator.duration = 5000
         animator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             indicatorValue = animatedValue.toInt()
