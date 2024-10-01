@@ -132,11 +132,6 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
                 sunsetValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunSet, DateTimeFormat.outputHMA)
             }
 
-            riseSetIncl.apply {
-                sunriseValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunrise, DateTimeFormat.outputHMA)
-                sunsetValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunSet, DateTimeFormat.outputHMA)
-            }
-
             setSunriseSunsetProgress(weatherData.dailyWeatherData[0].dailySunrise, weatherData.dailyWeatherData[0].dailySunSet)
         }
     }
@@ -145,12 +140,6 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
         binding.apply {
             val max = (sunset - sunrise).toInt()
             sunriseSunsetIncl.apply {
-                sunRiseSetPb.max = max
-                sunRiseSetPb.min = 0
-                val progress = calculateProgressBySunriseSunset(sunrise, sunset)
-                sunRiseSetPb.progress = progress
-            }
-            riseSetIncl.apply {
                 sunRiseSetPb.setMaxIndicatorValue(max)
                 sunRiseSetPb.setMinIndicatorValue(0)
                 sunRiseSetPb.setIndicatorValue(calculateProgressBySunriseSunset(sunrise, sunset))

@@ -1,6 +1,7 @@
 package com.tasnimulhasan.designsystem
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -17,20 +18,34 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     private var maxIndicatorValue: Int = 0
     private var minIndicatorValue: Int = 0
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
-    private var drawableIndicatorColor: Int = ContextCompat.getColor(context, R.color.white_n_gray_light_900)
+    private var drawableIndicatorColor: Int = ContextCompat.getColor(context, R.color.transparent)
     private var foregroundIndicatorColors: IntArray = intArrayOf(
-        ContextCompat.getColor(context, R.color.green_light_700),
-        ContextCompat.getColor(context, R.color.green_light_800),
-        ContextCompat.getColor(context, R.color.yellow_light_700),
-        ContextCompat.getColor(context, R.color.yellow_light_800),
-        ContextCompat.getColor(context, R.color.yellow_light_700),
-        ContextCompat.getColor(context, R.color.primary_orange_light_800),
+        ContextCompat.getColor(context, R.color.yellow_dark_200),
+        ContextCompat.getColor(context, R.color.yellow_dark_1000),
+        ContextCompat.getColor(context, R.color.yellow),
+        ContextCompat.getColor(context, R.color.yellow_dark_1000),
+        ContextCompat.getColor(context, R.color.yellow_dark_800),
+        ContextCompat.getColor(context, R.color.warning_color),
     )
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
     private var drawableBackgroundIndicatorStrokeWidth: Float = 100f
     private var sweepAngle: Float = 0f
     private val rect = RectF()
+    private var startX = 0f
+    private var endX = 0f
+    private var startY = 0f
+    private var endY = 0f
+    private var gradient: LinearGradient? = null
+
+    private val gradientPositions = floatArrayOf(
+        0.0f,  // Start at 0% for the first color
+        0.15f, // 20% for the second color
+        0.15f, // 40% for the third color
+        0.20f, // 60% for the fourth color
+        0.25f, // 80% for the fifth color
+        1.0f   // 100% for the sixth color
+    )
 
     private val backgroundPaint = Paint().apply {
         style = Paint.Style.STROKE
@@ -77,6 +92,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -85,15 +101,21 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         val screenHeight = height.toFloat()
         val leftMargin = 25f
         val rightMargin = 25f
+        val topMargin = 100f  // Increased top margin to avoid cropping the sun drawable
+        val bottomMargin = 25f
         val padding = backgroundIndicatorStrokeWidth / 2
         val availableWidth = screenWidth - leftMargin - rightMargin
-        val componentSize = availableWidth.coerceAtMost(screenHeight) - padding * 2
+        val availableHeight = screenHeight - topMargin - bottomMargin
+        val componentSize = availableWidth.coerceAtMost(availableHeight) - padding * 2
         val left = leftMargin + (availableWidth - componentSize) / 2
-        val top = (screenHeight - componentSize) / 2 + padding
+        val top = topMargin + (availableHeight - componentSize) / 2
         val right = left + componentSize
         val bottom = top + componentSize
 
         rect.set(left, top, right, bottom)
+
+        // Calculate the radius adjusted for stroke width
+        val radius = (rect.width() / 2) - (drawableBackgroundIndicatorStrokeWidth / 2)
 
         // Set up the background arc
         backgroundPaint.color = backgroundIndicatorColor
@@ -103,12 +125,23 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         drawableBackgroundPaint.color = drawableIndicatorColor
         drawableBackgroundPaint.strokeWidth = drawableBackgroundIndicatorStrokeWidth
 
-        // Set up the foreground arc with gradient colors
-        val gradientPositions = floatArrayOf(0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f)
-        foregroundPaint.shader = LinearGradient(
-            rect.left, rect.bottom, rect.right, rect.bottom,
+        // Calculate the start and end points for the gradient based on the arc's geometry
+        val startAngleRad = Math.toRadians(150.0)
+        val endAngleRad = Math.toRadians(240.0)
+
+        // Calculate start (150 degrees) and end (390 degrees) points along the arc
+        startX = (rect.centerX() + radius * cos(startAngleRad)).toFloat()
+        startY = (rect.centerY() + radius * sin(startAngleRad)).toFloat()
+        endX = (rect.centerX() + radius * cos(endAngleRad)).toFloat()
+        endY = (rect.centerY() + radius * sin(endAngleRad)).toFloat()
+
+        // Create or update the LinearGradient when the size changes
+        gradient = LinearGradient(
+            startX, startY, endX, endY,
             foregroundIndicatorColors, gradientPositions, Shader.TileMode.CLAMP
         )
+
+        foregroundPaint.shader = gradient
         foregroundPaint.strokeWidth = foregroundIndicatorStrokeWidth
 
         // Draw the background and foreground arcs
@@ -128,9 +161,6 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         // Calculate the center of the arc
         val centerX = rect.centerX()
         val centerY = rect.centerY()
-
-        // Calculate the radius adjusted for stroke width
-        val radius = (rect.width() / 2) - (drawableBackgroundIndicatorStrokeWidth / 2)
 
         // Calculate the x and y position for the sun drawable
         val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)

@@ -126,7 +126,7 @@
 
             <include
                 android:id="@+id/sunriseSunsetIncl"
-                layout="@layout/include_sunrise_sunset_item"
+                layout="@layout/include_sun_rise_set_progress_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -142,15 +142,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sunriseSunsetIncl" />
-
-            <include
-                android:id="@+id/riseSetIncl"
-                layout="@layout/include_sun_rise_set_progress_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/airQualityIncl" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
