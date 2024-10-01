@@ -17,6 +17,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     private var maxIndicatorValue: Int = 0
     private var minIndicatorValue: Int = 0
     private var backgroundIndicatorColor: Int = ContextCompat.getColor(context, R.color.green_light_200)
+    private var drawableIndicatorColor: Int = ContextCompat.getColor(context, R.color.white_n_gray_light_900)
     private var foregroundIndicatorColors: IntArray = intArrayOf(
         ContextCompat.getColor(context, R.color.green_light_700),
         ContextCompat.getColor(context, R.color.green_light_800),
@@ -27,6 +28,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     )
     private var backgroundIndicatorStrokeWidth: Float = 100f
     private var foregroundIndicatorStrokeWidth: Float = 100f
+    private var drawableBackgroundIndicatorStrokeWidth: Float = 100f
     private var sweepAngle: Float = 0f
     private val rect = RectF()
 
@@ -44,6 +46,13 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
     }
 
+    private val drawableBackgroundPaint = Paint().apply {
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        strokeCap = Paint.Cap.ROUND
+        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
+    }
+
     init {
         context.theme.obtainStyledAttributes(
             attrs,
@@ -54,11 +63,13 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
                 indicatorValue = getInt(R.styleable.CustomIndicatorView_indicatorValue, indicatorValue)
                 maxIndicatorValue = getInt(R.styleable.CustomIndicatorView_maxIndicatorValue, maxIndicatorValue)
                 backgroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_backgroundIndicatorColor, backgroundIndicatorColor)
+                drawableIndicatorColor = getColor(R.styleable.CustomIndicatorView_drawableBackgroundIndicatorColors, drawableIndicatorColor)
                 val colorsArrayId = getResourceId(R.styleable.CustomIndicatorView_foregroundIndicatorColors, 0)
                 if (colorsArrayId != 0) {
                     foregroundIndicatorColors = context.resources.getIntArray(colorsArrayId)
                 }
                 backgroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_backgroundIndicatorStrokeWidth, backgroundIndicatorStrokeWidth)
+                drawableBackgroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_drawableBackgroundIndicatorStrokeWidth, drawableBackgroundIndicatorStrokeWidth)
                 foregroundIndicatorStrokeWidth = getDimension(R.styleable.CustomIndicatorView_foregroundIndicatorStrokeWidth, foregroundIndicatorStrokeWidth)
             } finally {
                 recycle()
@@ -88,6 +99,10 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         backgroundPaint.color = backgroundIndicatorColor
         backgroundPaint.strokeWidth = backgroundIndicatorStrokeWidth
 
+        // Set up the drawable background arc
+        drawableBackgroundPaint.color = drawableIndicatorColor
+        drawableBackgroundPaint.strokeWidth = drawableBackgroundIndicatorStrokeWidth
+
         // Set up the foreground arc with gradient colors
         val gradientPositions = floatArrayOf(0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f)
         foregroundPaint.shader = LinearGradient(
@@ -99,6 +114,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         // Draw the background and foreground arcs
         canvas.drawArc(rect, 150f, 240f, false, backgroundPaint)
         canvas.drawArc(rect, 150f, sweepAngle, false, foregroundPaint)
+        canvas.drawArc(rect, 150f, sweepAngle, false, drawableBackgroundPaint)
 
         // Draw the sun drawable that moves along the arc
         val sunDrawable = ContextCompat.getDrawable(context, R.drawable.ic_sun_solid) ?: return
@@ -114,7 +130,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         val centerY = rect.centerY()
 
         // Calculate the radius adjusted for stroke width
-        val radius = (rect.width() / 2) - foregroundIndicatorStrokeWidth / 2
+        val radius = (rect.width() / 2) - (drawableBackgroundIndicatorStrokeWidth / 2)
 
         // Calculate the x and y position for the sun drawable
         val sunX = (centerX + radius * cos(radians)).toFloat() - (sunDrawable.intrinsicWidth / 2)

@@ -5,7 +5,9 @@
         <attr name="maxIndicatorValue" format="integer" />
         <attr name="backgroundIndicatorColor" format="color" />
         <attr name="foregroundIndicatorColors" format="color" />
+        <attr name="drawableBackgroundIndicatorColors" format="color" />
         <attr name="backgroundIndicatorStrokeWidth" format="dimension" />
         <attr name="foregroundIndicatorStrokeWidth" format="dimension" />
+        <attr name="drawableBackgroundIndicatorStrokeWidth" format="dimension" />
     </declare-styleable>
 </resources>

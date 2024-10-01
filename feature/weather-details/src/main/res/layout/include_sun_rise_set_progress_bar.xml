@@ -104,8 +104,10 @@
         android:layout_height="@dimen/_130sdp"
         android:layout_marginHorizontal="@dimen/margin_15"
         app:backgroundIndicatorColor="@color/gray"
+        app:drawableBackgroundIndicatorColors="@color/gray"
         app:backgroundIndicatorStrokeWidth="10dp"
         app:foregroundIndicatorStrokeWidth="10dp"
+        app:drawableBackgroundIndicatorStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sunriseIv" />
