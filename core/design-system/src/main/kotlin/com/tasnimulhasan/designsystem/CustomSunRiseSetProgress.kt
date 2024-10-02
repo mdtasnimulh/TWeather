@@ -52,24 +52,6 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.CustomIndicatorView, 0, 0).apply {
             try {
-                foregroundIndicatorColors = if (indicatorValue != maxIndicatorValue) {
-                    intArrayOf(
-                        ContextCompat.getColor(context, R.color.yellow_dark_200),
-                        ContextCompat.getColor(context, R.color.yellow_dark_1000),
-                        ContextCompat.getColor(context, R.color.yellow),
-                        ContextCompat.getColor(context, R.color.yellow_dark_1000),
-                        ContextCompat.getColor(context, R.color.yellow_dark_800),
-                        ContextCompat.getColor(context, R.color.warning_color))
-                } else {
-                    intArrayOf(
-                        ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26),
-                        ContextCompat.getColor(context, R.color.black_26))
-                }
-
                 indicatorValue = getInt(R.styleable.CustomIndicatorView_indicatorValue, indicatorValue)
                 maxIndicatorValue = getInt(R.styleable.CustomIndicatorView_maxIndicatorValue, maxIndicatorValue)
                 backgroundIndicatorColor = getColor(R.styleable.CustomIndicatorView_backgroundIndicatorColor, backgroundIndicatorColor)
@@ -101,6 +83,24 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         val top = topMargin + (availableHeight - componentSize) / 2
         val right = left + componentSize
         val bottom = top + componentSize
+        // Setting the foreground color based on sunrise to sunset
+        foregroundIndicatorColors = if (indicatorValue != maxIndicatorValue) {
+            intArrayOf(
+                ContextCompat.getColor(context, R.color.yellow_dark_200),
+                ContextCompat.getColor(context, R.color.yellow_dark_1000),
+                ContextCompat.getColor(context, R.color.yellow),
+                ContextCompat.getColor(context, R.color.yellow_dark_1000),
+                ContextCompat.getColor(context, R.color.yellow_dark_800),
+                ContextCompat.getColor(context, R.color.warning_color))
+        } else {
+            intArrayOf(
+                ContextCompat.getColor(context, R.color.black_26),
+                ContextCompat.getColor(context, R.color.black_26),
+                ContextCompat.getColor(context, R.color.black_26),
+                ContextCompat.getColor(context, R.color.black_26),
+                ContextCompat.getColor(context, R.color.black_26),
+                ContextCompat.getColor(context, R.color.black_26))
+        }
 
         rect.set(left, top, right, bottom)
 
