@@ -311,7 +311,7 @@
 
             <include
                 android:id="@+id/airQualityIncl"
-                layout="@layout/include_aqi"
+                layout="@layout/include_sunrise_sunset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"

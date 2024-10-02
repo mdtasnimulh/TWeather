@@ -19,15 +19,14 @@ import com.tasnimulhasan.common.base.BaseFragment
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
+import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.createLocationRequest
-import com.tasnimulhasan.common.extfun.getColorForAqiName
 import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
-import com.tasnimulhasan.entity.aqi.AirQualityIndexApiEntity
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
@@ -152,14 +151,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initUi() {
         uiStateObserver()
-        bindUiEvent()
         onClickListener()
     }
 
     private fun fetchData() {
         viewModel.action(UiAction.FetchWeatherData(viewModel.getWeatherApiParams()))
         viewModel.action(UiAction.FetchWeatherOverview(viewModel.getOverviewApiParams()))
-        viewModel.action(UiAction.FetchAirQualityIndex(viewModel.getAqiParams()))
     }
 
     private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
@@ -180,14 +177,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     this showWeatherData uiState.weatherData
                     this initDailyRecyclerView uiState.weatherData.dailyWeatherData.take(5)
                 }
-                is UiState.AirQualityIndex -> this showAirQualityIndex uiState.aqi
-                is UiState.WeatherOverview -> binding.summaryTv.text = uiState.weatherOverview.weatherOverview
+                is UiState.WeatherOverview -> binding.summaryValueTv?.text = uiState.weatherOverview.weatherOverview
+                is UiState.RemainingTimerValue -> binding.sunriseSunsetIncl?.remainingTimeValueTv?.text = uiState.time
             }
         }
     }
 
     private infix fun showWeatherData(weatherData: WeatherApiEntity) {
         binding.apply {
+            viewModel.action(UiAction.RemainTime(weatherData.dailyWeatherData[0].dailySunrise, weatherData.dailyWeatherData[0].dailySunSet))
             setCurrentWeatherIcon(weatherData.currentWeatherData.currentWeatherCondition)
 
             unitTv?.text = if (viewModel.exists) AppConstants.SHORT_FORM_CELSIUS
@@ -206,31 +204,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             humidityValueTv.text = getString(Res.string.format_humidity, weatherData.currentWeatherData.currentHumidity.toString())
             windValueTv.text = getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
             uviValueTv.text = getString(Res.string.format_uv_index, weatherData.currentWeatherData.currentUvi)
+
+            sunriseSunsetIncl?.apply {
+                sunriseValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunrise, DateTimeFormat.outputHMA)
+                sunsetValueTv.text = convertLongToDateTime(weatherData.dailyWeatherData[0].dailySunSet, DateTimeFormat.outputHMA)
+            }
+
+            setSunriseSunsetProgress(weatherData.dailyWeatherData[0].dailySunrise, weatherData.dailyWeatherData[0].dailySunSet)
         }
     }
 
-    private infix fun showAirQualityIndex(aqi: List<AirQualityIndexApiEntity>) {
-        with(binding.airQualityIncl) {
-            aqiValueTv.text = aqi[0].aqi.toString()
-            customIndicatorView.setIndicatorValue(aqi[0].aqi)
-            val matchingAqi = AppConstants.aqiValues.find { aqi[0].aqi == it.aqi }
-            matchingAqi?.let {
-                aqiDescriptionTv.text = it.name
-                aqiValueTv.setTextColor(ContextCompat.getColor(requireContext(), getColorForAqiName(it.name)))
+    private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
+        binding.apply {
+            val max = (sunset - sunrise).toInt()
+            sunriseSunsetIncl?.apply {
+                sunRiseSetPb.setMaxIndicatorValue(max)
+                sunRiseSetPb.setMinIndicatorValue(0)
+                sunRiseSetPb.setIndicatorValue(calculateProgressBySunriseSunset(sunrise, sunset))
             }
         }
     }
 
-    private fun bindUiEvent() {
-        viewModel.uiEvent.execute {  }
-    }
-
     private fun onClickListener() {
         binding.apply {
-            seeDetailsTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, viewModel.cityName, viewModel.latitude, viewModel.longitude).toUri()) }
-            seeMoreDailyTempTv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri()) }
-            cityIv.clickWithDebounce { navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri()) }
-            airQualityIncl.customIndicatorView.clickWithDebounce { AirQualityBottomSheet(viewModel.aqi[0]).show(childFragmentManager, "AirQualityBottomSheet") }
+            seeDetailsTv.clickWithDebounce {
+                navigateToDestination(getString(UI.string.deep_link_weather_details_fragment_args, viewModel.cityName, viewModel.latitude, viewModel.longitude).toUri())
+                viewModel.action(UiAction.StopTimer)
+            }
+
+            seeMoreDailyTempTv.clickWithDebounce {
+                navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri())
+                viewModel.action(UiAction.StopTimer)
+            }
+
+            cityIv.clickWithDebounce {
+                navigateToDestination(getString(UI.string.deep_link_city_fragment).toUri())
+                viewModel.action(UiAction.StopTimer)
+            }
+
             unitTv?.clickWithDebounce {
                 if (viewModel.exists) {
                     sharedPrefHelper.putString(SpKey.UNIT_TYPE, AppConstants.DATA_UNIT_FAHRENHEIT)

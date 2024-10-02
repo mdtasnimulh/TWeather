@@ -25,7 +25,6 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import com.tasnimulhasan.weatherdetails.databinding.FragmentWeatherDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 
@@ -94,7 +93,7 @@ class WeatherDetailsFragment : BaseFragment<FragmentWeatherDetailsBinding>() {
                     this initHourlyRecyclerView uiState.weatherData.hourlyWeatherData.take(24)
                 }
                 is UiState.AirQualityIndex -> showAirQuality(uiState.aqi[0])
-                is UiState.TimerValue -> binding.sunriseSunsetIncl.currentTimeValueTv.text = uiState.time
+                is UiState.TimerValue -> binding.sunriseSunsetIncl.timerValueTv.text = uiState.time
                 is UiState.RemainingTimerValue -> binding.sunriseSunsetIncl.remainingTimeValueTv.text = uiState.time
             }
         }

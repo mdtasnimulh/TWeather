@@ -67,7 +67,7 @@
     <string name="label_min">Min</string>
     <string name="label_visibility">Visibility</string>
     <string name="label_aqi">AQI</string>
-    <string name="label_see_more">More</string>
+    <string name="label_see_more">See All</string>
     <string name="label_sunrise">Sunrise</string>
     <string name="label_sunset">Sunset</string>
     <string name="label_add_city">Add City</string>
@@ -93,6 +93,8 @@
     <string name="label_current_time">Now</string>
     <string name="label_remaining_time_sunset">Time to Sunset</string>
     <string name="label_remaining_time_sunrise">Time to Sunrise</string>
+    <string name="label_summary">Summary</string>
+    <string name="label_overview">Overview</string>
     <!--    label string resources-->
 
     <!--    title string resources-->

@@ -95,49 +95,19 @@
         tools:text="06:35 pm" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timerValueTv"
+        android:id="@+id/remainingTimeValueTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_30"
-        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_50"
+        android:gravity="center"
         android:includeFontPadding="false"
-        tools:text="12:30:35 PM"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_11ssp"
         app:fontFamily="@font/poppins_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
-        android:text="@string/label_current_time"
-        android:textColor="@color/textColor"
-        android:textSize="@dimen/_10ssp"
-        app:fontFamily="@font/poppins_medium"
-        android:layout_marginTop="@dimen/margin_2"
-        app:layout_constraintEnd_toEndOf="@+id/timerValueTv"
-        app:layout_constraintStart_toStartOf="@+id/timerValueTv"
-        app:layout_constraintTop_toBottomOf="@+id/timerValueTv" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/remainingTimeValueTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_5"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:textColor="@color/textColor"
-        android:textSize="@dimen/_11ssp"
-        app:fontFamily="@font/poppins_medium"
-        app:layout_constraintEnd_toEndOf="@+id/timerValueTv"
-        app:layout_constraintStart_toStartOf="@+id/timerValueTv"
-        app:layout_constraintTop_toBottomOf="@+id/timeTv"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="12:30:35\nTime to Sunset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

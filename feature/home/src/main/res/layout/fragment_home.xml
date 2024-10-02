@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="UV Index"
+                        android:text="@string/label_uv_index"
                         android:textColor="@color/textColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="Wind"
+                        android:text="@string/label_wind"
                         android:textColor="@color/textColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
@@ -242,7 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="Humidity"
+                        android:text="@string/label_humidity"
                         android:textColor="@color/textColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
@@ -264,10 +264,25 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/summaryTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_12"
+                android:includeFontPadding="false"
+                android:text="@string/label_overview"
+                android:textColor="@color/subTextColor"
+                android:textSize="@dimen/_13ssp"
+                app:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weatherConditionLl"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/summaryValueTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginHorizontal="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
                 android:includeFontPadding="false"
                 tools:text="@string/msg_demo_overview"
                 android:textColor="@color/subTextColor"
@@ -276,7 +291,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weatherConditionLl"/>
+                app:layout_constraintTop_toBottomOf="@+id/summaryTv"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/seeDetailsTv"
@@ -291,7 +306,7 @@
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toBottomOf="@id/summaryTv"
+                app:layout_constraintTop_toBottomOf="@id/summaryValueTv"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -326,14 +341,14 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <include
-                android:id="@+id/airQualityIncl"
-                layout="@layout/include_aqi"
+                android:id="@+id/sunriseSunsetIncl"
+                layout="@layout/include_sunrise_sunset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seeMoreDailyTempTv" />
+                app:layout_constraintTop_toBottomOf="@+id/dailyWeatherRv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
