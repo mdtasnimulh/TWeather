@@ -55,22 +55,25 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
 
         binding.apply {
             dayDateTv.text = convertLongToDateTime(jsonArgs.dateTime, DateTimeFormat.FULL_DAY_DATE)
+            overViewValueTv.text = jsonArgs.weather[0].description
 
             tempDayValueTv.text = getString(if (exits) Res.string.format_day_weather else Res.string.format_day_weather_f, jsonArgs.temp.dayTemp)
             tempNightValueTv.text = getString(if (exits) Res.string.format_night_weather else Res.string.format_night_weather_f, jsonArgs.temp.nightTemp)
-            tempMornValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.temp.mornTemp)
+            tempMorningValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.temp.mornTemp)
             tempEveValueTv.text = getString(if (exits) Res.string.format_eve_weather else Res.string.format_eve_weather_f, jsonArgs.temp.eveTemp)
             tempMaxValueTv.text = getString(if (exits) Res.string.format_daily_max_weather else Res.string.format_daily_max_weather_f, jsonArgs.temp.maxTemp)
             tempMinValueTv.text = getString(if (exits) Res.string.format_daily_min_weather else Res.string.format_daily_min_weather_f, jsonArgs.temp.minTemp)
 
-            feelsLikeDayValueTv.text = getString(if (exits) Res.string.format_day_weather else Res.string.format_day_weather_f, jsonArgs.feelsLike.dayFeelsLike)
-            feelsLikeNightValueTv.text = getString(if (exits) Res.string.format_night_weather else Res.string.format_night_weather_f, jsonArgs.feelsLike.nightFeelsLike)
-            feelsLikeMornValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.feelsLike.mornFeelsLike)
-            feelsLikeEveValueTv.text = getString(if (exits) Res.string.format_eve_weather else Res.string.format_eve_weather_f, jsonArgs.feelsLike.eveFeelsLike)
+            tempDayFlValueTv.text = getString(if (exits) Res.string.format_day_weather else Res.string.format_day_weather_f, jsonArgs.feelsLike.dayFeelsLike)
+            tempNightFlValueTv.text = getString(if (exits) Res.string.format_night_weather else Res.string.format_night_weather_f, jsonArgs.feelsLike.nightFeelsLike)
+            tempMorningFlValueTv.text = getString(if (exits) Res.string.format_morn_weather else Res.string.format_morn_weather_f, jsonArgs.feelsLike.mornFeelsLike)
+            tempEveFlValueTv.text = getString(if (exits) Res.string.format_eve_weather else Res.string.format_eve_weather_f, jsonArgs.feelsLike.eveFeelsLike)
 
             pressureValueTv.text = getString(Res.string.format_air_pressure, jsonArgs.pressure.toString())
             humidityValueTv.text = getString(Res.string.format_humidity, jsonArgs.humidity.toString())
-            windValueTv.text = resources.getString(Res.string.format_wind, jsonArgs.speed)
+            windSpeedValueTv.text = resources.getString(Res.string.format_wind, jsonArgs.speed)
+            windGustValueTv.text = getString(Res.string.format_wind_gust, jsonArgs.gust)
+            windAngleValueTv.text = getString(Res.string.format_wind_degree, jsonArgs.deg)
             rainValueTv.text = resources.getString(Res.string.format_rain, jsonArgs.rain)
             cloudsValueTv.text = resources.getString(Res.string.format_rain, jsonArgs.clouds.toDouble())
 
@@ -84,11 +87,13 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
     }
 
     private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
-        binding.sunriseSunsetIncl.apply {
-            sunRiseSetPb.max = (sunset - sunrise).toInt()
-            sunRiseSetPb.min = 0
-            val progress = calculateProgressBySunriseSunset(sunrise, sunset)
-            sunRiseSetPb.progress = progress
+        binding.apply {
+            val max = (sunset - sunrise).toInt()
+            sunriseSunsetIncl.apply {
+                sunRiseSetPb.setMaxIndicatorValue(max)
+                sunRiseSetPb.setMinIndicatorValue(0)
+                sunRiseSetPb.setIndicatorValue(calculateProgressBySunriseSunset(sunrise, sunset))
+            }
         }
     }
 }

@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/sunriseSunsetTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_12"
-        android:layout_marginTop="@dimen/margin_8"
-        android:gravity="center_vertical"
-        android:text="@string/title_sunrise_sunset"
-        android:textColor="@color/textColor"
-        android:textSize="@dimen/_12ssp"
-        app:fontFamily="@font/poppins_medium"
-        android:includeFontPadding="false"
+    <com.tasnimulhasan.designsystem.CustomSunRiseSetProgress
+        android:id="@+id/sunRiseSetPb"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_200sdp"
+        app:backgroundIndicatorColor="@color/gray"
+        app:drawableBackgroundIndicatorColors="@color/transparent"
+        app:backgroundIndicatorStrokeWidth="10dp"
+        app:foregroundIndicatorStrokeWidth="10dp"
+        app:drawableBackgroundIndicatorStrokeWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -24,51 +23,48 @@
         android:id="@+id/sunriseIv"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_12"
         android:src="@drawable/ic_sunrise"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunriseSunsetTv"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sunriseTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:layout_marginStart="@dimen/margin_8"
         android:includeFontPadding="false"
         android:text="@string/label_sunrise"
         android:textColor="@color/textColor"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins_semibold"
-        app:layout_constraintStart_toEndOf="@+id/sunriseIv"
-        app:layout_constraintTop_toTopOf="@+id/sunriseIv" />
+        app:layout_constraintStart_toStartOf="@+id/sunriseIv"
+        app:layout_constraintTop_toBottomOf="@+id/sunriseIv" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sunsetIv"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginEnd="@dimen/margin_20"
-        android:layout_marginTop="@dimen/margin_12"
-        android:layout_marginBottom="@dimen/margin_12"
+        android:layout_marginEnd="@dimen/margin_12"
         android:src="@drawable/ic_sunset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sunRiseSetPb"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/sunriseTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sunriseIv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sunsetTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_8"
         android:gravity="end"
         android:includeFontPadding="false"
         android:text="@string/label_sunset"
         android:textColor="@color/textColor"
+        android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins_semibold"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintTop_toTopOf="@id/sunsetIv"
-        app:layout_constraintEnd_toStartOf="@id/sunsetIv"/>
+        app:layout_constraintBottom_toBottomOf="@+id/sunriseTv"
+        app:layout_constraintEnd_toEndOf="@+id/sunsetIv"
+        app:layout_constraintTop_toTopOf="@+id/sunriseTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sunriseValueTv"
@@ -78,7 +74,7 @@
         android:includeFontPadding="false"
         android:layout_marginTop="@dimen/margin_2"
         android:textColor="@color/subTextColor"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins"
         app:layout_constraintTop_toBottomOf="@id/sunriseTv"
         app:layout_constraintStart_toStartOf="@id/sunriseTv"
@@ -88,28 +84,14 @@
         android:id="@+id/sunsetValueTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_2"
         android:gravity="start"
         android:includeFontPadding="false"
         android:textColor="@color/subTextColor"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins"
-        app:layout_constraintTop_toBottomOf="@id/sunsetTv"
+        app:layout_constraintBottom_toBottomOf="@+id/sunriseValueTv"
         app:layout_constraintEnd_toEndOf="@id/sunsetTv"
+        app:layout_constraintTop_toTopOf="@+id/sunriseValueTv"
         tools:text="06:35 pm" />
-
-    <ProgressBar
-        android:id="@+id/sunRiseSetPb"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/margin_12"
-        android:layout_marginHorizontal="@dimen/margin_20"
-        android:progressDrawable="@drawable/sun_progress_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunriseIv"
-        android:progress="75" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

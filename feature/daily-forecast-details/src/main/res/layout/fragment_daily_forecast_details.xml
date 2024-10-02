@@ -26,8 +26,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/featureUi"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding_30">
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dayDateTv"
@@ -48,7 +47,7 @@
                 android:id="@+id/overViewTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_12"
                 android:includeFontPadding="false"
                 android:text="@string/label_overview"
                 android:textColor="@color/textColor"
@@ -91,11 +90,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4"
-                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintTop_toBottomOf="@id/temperatureTv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
@@ -233,10 +231,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4"
-                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
                 app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -324,11 +321,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4"
-                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintTop_toBottomOf="@id/feelsLikeTv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
@@ -479,11 +475,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4"
-                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintTop_toBottomOf="@id/windDetailsTv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
@@ -601,10 +596,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_6"
-                android:layout_marginStart="@dimen/margin_15"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintEnd_toStartOf="@id/humidityCl"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
                 app:layout_constraintTop_toBottomOf="@+id/othersTv">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -656,10 +650,9 @@
                 android:id="@+id/humidityCl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_15"
                 android:layout_marginStart="@dimen/_6sdp"
                 app:layout_constraintStart_toEndOf="@id/pressureCl"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"
                 app:layout_constraintTop_toTopOf="@id/pressureCl"
                 app:layout_constraintBottom_toBottomOf="@id/pressureCl">
 
@@ -714,8 +707,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_6"
                 app:layout_constraintStart_toEndOf="@id/cloudsCl"
-                android:layout_marginEnd="@dimen/margin_15"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"
                 app:layout_constraintBottom_toBottomOf="@id/cloudsCl"
                 app:layout_constraintTop_toTopOf="@id/cloudsCl">
 
@@ -768,10 +760,9 @@
                 android:id="@+id/cloudsCl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_15"
                 android:layout_marginTop="@dimen/margin_6"
                 app:layout_constraintEnd_toStartOf="@id/rainCl"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
                 app:layout_constraintTop_toBottomOf="@id/pressureCl">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -821,7 +812,7 @@
 
             <include
                 android:id="@+id/sunriseSunsetIncl"
-                layout="@layout/include_sunrise_sunset_item"
+                layout="@layout/include_sunrise_sunset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"

@@ -136,10 +136,10 @@
     <string name="format_app_version">%s - (%s)</string>
     <string name="format_current_weather">%.1f°C</string>
     <string name="format_current_weather_f">%.1f°F</string>
-    <string name="format_daily_min_weather">Min: %.1f°C</string>
-    <string name="format_daily_min_weather_f">Min: %.1f°F</string>
-    <string name="format_daily_max_weather">Max: %.1f°C</string>
-    <string name="format_daily_max_weather_f">Max: %.1f°F</string>
+    <string name="format_daily_min_weather">%.1f°C</string>
+    <string name="format_daily_min_weather_f">%.1f°F</string>
+    <string name="format_daily_max_weather">%.1f°C</string>
+    <string name="format_daily_max_weather_f">%.1f°F</string>
     <string name="format_min_max_temp">%.0f°C/%.0f°C</string>
     <string name="format_min_max_temp_f">%.0f°F/%.0f°F</string>
     <string name="format_min_max_home_temp">H. %.0f°C - L. %.0f°C</string>
@@ -168,13 +168,15 @@
     <string name="format_low_temp_F">Low, %.1f°F</string>
     <string name="format_temp">%.0f°</string>
     <string name="format_city_day">%s, %s</string>
-    <string name="format_day_weather">Day: %.1f°C</string>
-    <string name="format_day_weather_f">Day: %.1f°F</string>
-    <string name="format_night_weather">Night: %.1f°C</string>
-    <string name="format_night_weather_f">Night: %.1f°F</string>
-    <string name="format_eve_weather">Evening: %.1f°C</string>
-    <string name="format_eve_weather_f">Evening: %.1f°F</string>
-    <string name="format_morn_weather">Morning: %.1f°C</string>
-    <string name="format_morn_weather_f">Morning: %.1f°F</string>
+    <string name="format_day_weather">%.1f°C</string>
+    <string name="format_day_weather_f">%.1f°F</string>
+    <string name="format_night_weather">%.1f°C</string>
+    <string name="format_night_weather_f">%.1f°F</string>
+    <string name="format_eve_weather">%.1f°C</string>
+    <string name="format_eve_weather_f">%.1f°F</string>
+    <string name="format_morn_weather">%.1f°C</string>
+    <string name="format_morn_weather_f">%.1f°F</string>
+    <string name="format_wind_gust">%.2f</string>
+    <string name="format_wind_degree">%d°</string>
     <!--    format string resources-->
 </resources>
