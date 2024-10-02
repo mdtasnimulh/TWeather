@@ -41,9 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_12"
             android:layout_marginTop="@dimen/margin_10"
-            android:hint="@string/hint_search_city"
+            android:hint="@string/label_city_search"
+            app:placeholderText="@string/msg_start_typing_to_search"
             app:endIconMode="clear_text"
             app:boxStrokeWidth="0.5dp"
+            app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

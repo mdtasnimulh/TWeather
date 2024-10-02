@@ -26,10 +26,10 @@
             android:id="@+id/searchCityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/msg_no_city_found"
             android:textColor="@color/textColor"
             android:textSize="@dimen/extra_large_text_size"
-            android:gravity="center"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,26 +52,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="4"
-            tools:listitem="@layout/item_city_list" />
+            tools:listitem="@layout/item_cities" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/citySearchFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_12"
-            android:layout_marginEnd="@dimen/margin_12"
-            android:outlineSpotShadowColor="@color/colorPrimaryDark"
-            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:backgroundTint="@color/background_color_white"
             android:clickable="true"
             android:contentDescription="@string/desc_image_content_description"
+            android:outlineAmbientShadowColor="@color/background_color_white"
+            android:outlineSpotShadowColor="@color/background_color_white"
+            android:src="@drawable/ic_add"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:elevation="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_city"
-            app:tint="@color/white"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            app:elevation="@dimen/_2sdp"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            app:maxImageSize="@dimen/_26sdp"
+            app:tint="@color/textColor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
