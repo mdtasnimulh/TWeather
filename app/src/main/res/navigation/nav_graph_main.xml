@@ -16,6 +16,7 @@
     </fragment>
 
     <include app:graph="@navigation/nav_graph_weather_details"/>
+    <include app:graph="@navigation/nav_graph_daily_weather_detail"/>
     <include app:graph="@navigation/nav_graph_city"/>
     <include app:graph="@navigation/nav_graph_city_search"/>
     <include app:graph="@navigation/nav_graph_daily_forecast"/>

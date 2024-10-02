@@ -68,6 +68,7 @@ dependencies {
     with(projects) {
         implementation(feature.home)
         implementation(feature.weatherDetails)
+        implementation(feature.dailyWeatherDetails)
         implementation(feature.city)
         implementation(feature.citySearch)
         implementation(feature.dailyForecast)

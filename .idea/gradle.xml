@@ -42,6 +42,7 @@
             <option value="$PROJECT_DIR$/feature/city-search" />
             <option value="$PROJECT_DIR$/feature/daily-forecast" />
             <option value="$PROJECT_DIR$/feature/daily-forecast-details" />
+            <option value="$PROJECT_DIR$/feature/daily-weather-details" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/weather-details" />
           </set>

@@ -22,6 +22,8 @@ import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.createLocationRequest
+import com.tasnimulhasan.common.extfun.decode
+import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setTextColor
@@ -161,7 +163,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private infix fun initDailyRecyclerView(dailyWeatherData: List<DailyWeatherData>) {
         dailyAdapter = DailyAdapter(viewModel.exists) {
-            navigateToDestination(getString(UI.string.deep_link_daily_forecast_fragment_args, viewModel.locality).toUri())
+            navigateToDestination(getString(UI.string.deep_link_daily_weather_detail_fragment_args, gson.toJson(it).encode()).toUri())
         }
         requireContext().setUpHorizontalRecyclerView(binding.dailyWeatherRv, dailyAdapter)
         dailyAdapter.submitList(dailyWeatherData)

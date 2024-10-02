@@ -14,4 +14,7 @@
 
     <string name="deep_link_daily_forecast_details_fragment" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast_details/params={forecast}</string>
     <string name="deep_link_daily_forecast_details_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/daily_forecast_details/params=%s</string>
+
+    <string name="deep_link_daily_weather_detail_fragment" translatable="false">app://com.tasnimulhasan.tweather/daily_weather_detail/params={dailyWeatherData}</string>
+    <string name="deep_link_daily_weather_detail_fragment_args" translatable="false">app://com.tasnimulhasan.tweather/daily_weather_detail/params=%s</string>
 </resources>
