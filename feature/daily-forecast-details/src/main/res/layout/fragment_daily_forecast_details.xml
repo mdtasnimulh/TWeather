@@ -38,11 +38,39 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_15ssp"
-                app:fontFamily="@font/poppins_semibold"
+                app:fontFamily="@font/roboto_serif_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Wednesday, 05 Sep 2024" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overViewTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15"
+                android:includeFontPadding="false"
+                android:text="@string/label_overview"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_12ssp"
+                app:fontFamily="@font/roboto_serif_medium"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintTop_toBottomOf="@id/dayDateTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overViewValueTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:includeFontPadding="false"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_12ssp"
+                app:fontFamily="@font/poppins"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintTop_toBottomOf="@id/overViewTv"
+                tools:text="@string/msg_dummy_text" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/temperatureTv"
@@ -50,120 +78,232 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
-                android:text="Temperature"
+                android:text="@string/label_temperature"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_12ssp"
-                app:fontFamily="@font/poppins_medium"
+                app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@id/dayDateTv" />
+                app:layout_constraintTop_toBottomOf="@id/overViewValueTv" />
 
-            <LinearLayout
-                android:id="@+id/temperatureDayNightLl"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/dailyTempDetailsLl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_20"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temperatureTv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temperatureTv">
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempDayValueTv"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Day: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempNightValueTv"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMorningTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_morning"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMorningValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Night: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempDayTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_day"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
 
-            <LinearLayout
-                android:id="@+id/temperatureEveMornLl"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempDayValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempEveTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_evening"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempEveValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempNightTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_night"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempNightValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/dailyTempDetails2Ll"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_5"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:weightSum="4"
+                android:layout_marginHorizontal="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temperatureDayNightLl">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempMornValueTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Morning: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempEveValueTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Evening: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/temperatureMinMaxLl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_5"
-                android:orientation="horizontal"
-                android:weightSum="2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temperatureEveMornLl">
+                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempMinValueTv"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Min: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tempMaxValueTv"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMinTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_min"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMinValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Max: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMaxTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_max"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMaxValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feelsLikeTv"
@@ -171,84 +311,277 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
-                android:text="Feels Like"
+                android:text="@string/label_feels_like"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_12ssp"
-                app:fontFamily="@font/poppins_medium"
+                app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@id/temperatureMinMaxLl" />
+                app:layout_constraintTop_toBottomOf="@id/dailyTempDetails2Ll" />
 
-            <LinearLayout
-                android:id="@+id/feelsLikeDayNightLl"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/dailyFeelsLikeDetailsLl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_20"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/feelsLikeTv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feelsLikeTv">
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/feelsLikeDayValueTv"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Day: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/feelsLikeNightValueTv"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMorningFlTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_morning"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempMorningFlValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Night: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempDayFlTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_day"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
 
-            <LinearLayout
-                android:id="@+id/feelsLikeEveMornLl"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempDayFlValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempEveFlTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_evening"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempEveFlValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempNightFlTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_night"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tempNightFlValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="31.5°c"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/windDetailsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15"
+                android:includeFontPadding="false"
+                android:text="@string/label_wind"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_12ssp"
+                app:fontFamily="@font/roboto_serif_medium"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintTop_toBottomOf="@id/dailyFeelsLikeDetailsLl" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/dailyWindDetailsLl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_5"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:weightSum="4"
+                android:layout_marginHorizontal="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintTop_toBottomOf="@id/windDetailsTv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feelsLikeDayNightLl">
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/feelsLikeMornValueTv"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Morning: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/feelsLikeEveValueTv"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windSpeedTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_speed"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windSpeedValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="40 km/h"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    tools:text="Evening: 30°C"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins_medium" />
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-            </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windAngleTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_angle"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windAngleValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="142°"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windGustTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/label_gust"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins_medium" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/windGustValueTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        tools:text="4.19"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/subTextColor"
+                        android:textSize="@dimen/_12ssp"
+                        app:fontFamily="@font/poppins" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/othersTv"
@@ -256,12 +589,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
-                android:text="Other\'s"
+                android:text="@string/label_other"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_12ssp"
-                app:fontFamily="@font/poppins_medium"
+                app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@id/feelsLikeEveMornLl" />
+                app:layout_constraintTop_toBottomOf="@id/dailyWindDetailsLl" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pressureCl"
@@ -292,7 +625,7 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="Pressure"
+                    android:text="@string/label_pressure"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
@@ -308,7 +641,7 @@
                     android:layout_marginTop="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="1000 pHb"
+                    tools:text="1000 pHb"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
@@ -348,7 +681,7 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="Humidity"
+                    android:text="@string/label_humidity"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
@@ -364,7 +697,7 @@
                     android:layout_marginTop="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="70.35%"
+                    tools:text="70.35%"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
@@ -376,71 +709,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/windCl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_15"
-                android:layout_marginTop="@dimen/margin_6"
-                android:layout_marginEnd="@dimen/margin_6"
-                app:layout_constraintEnd_toStartOf="@id/rainCl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pressureCl">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/windConditionIv"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/margin_5"
-                    android:src="@drawable/ic_high_wind"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/windTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
-                    android:layout_marginTop="@dimen/margin_5"
-                    android:layout_marginEnd="@dimen/margin_5"
-                    android:includeFontPadding="false"
-                    android:text="Wind"
-                    android:textColor="@color/textColor"
-                    android:textSize="@dimen/_13ssp"
-                    app:fontFamily="@font/poppins"
-                    app:layout_constraintBottom_toTopOf="@id/windValueTv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/windConditionIv"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/windValueTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_4"
-                    android:layout_marginBottom="@dimen/margin_5"
-                    android:includeFontPadding="false"
-                    android:text="12 km/h"
-                    android:textColor="@color/subTextColor"
-                    android:textSize="@dimen/_12ssp"
-                    app:fontFamily="@font/poppins"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/windTv"
-                    app:layout_constraintStart_toStartOf="@id/windTv"
-                    app:layout_constraintTop_toBottomOf="@id/windTv" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rainCl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_6"
-                app:layout_constraintStart_toEndOf="@id/windCl"
+                app:layout_constraintStart_toEndOf="@id/cloudsCl"
                 android:layout_marginEnd="@dimen/margin_15"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/windCl"
-                app:layout_constraintTop_toTopOf="@id/windCl">
+                app:layout_constraintBottom_toBottomOf="@id/cloudsCl"
+                app:layout_constraintTop_toTopOf="@id/cloudsCl">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/rainConditionIv"
@@ -460,7 +737,7 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="Rain"
+                    android:text="@string/label_rain"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
@@ -476,7 +753,7 @@
                     android:layout_marginTop="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="41%"
+                    tools:text="41%"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
@@ -493,9 +770,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_15"
                 android:layout_marginTop="@dimen/margin_6"
-                app:layout_constraintEnd_toEndOf="@id/windCl"
+                app:layout_constraintEnd_toStartOf="@id/rainCl"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/windCl">
+                app:layout_constraintTop_toBottomOf="@id/pressureCl">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/cloudsConditionIv"
@@ -515,7 +792,7 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="Clouds"
+                    android:text="@string/label_clouds"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
@@ -531,7 +808,7 @@
                     android:layout_marginTop="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
-                    android:text="70%"
+                    tools:text="70%"
                     android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"

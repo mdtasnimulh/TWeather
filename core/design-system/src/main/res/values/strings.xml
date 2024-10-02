@@ -42,6 +42,7 @@
     <string name="msg_15_day_forecast">Showing 15 day\'s forecast</string>
     <string name="msg_components_value">* Note: Above Pollutant concentration in μg/m3</string>
     <string name="msg_start_typing_to_search">Start typing to find city…</string>
+    <string name="msg_dummy_text">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum</string>
     <!--    message string resources-->
 
     <!--    error string resources-->
@@ -96,6 +97,18 @@
     <string name="label_remaining_time_sunrise">Time to Sunrise</string>
     <string name="label_summary">Summary</string>
     <string name="label_overview">Overview</string>
+    <string name="label_morning">Morn</string>
+    <string name="label_evening">Eve</string>
+    <string name="label_day">Day</string>
+    <string name="label_night">Night</string>
+    <string name="label_moon">Moon</string>
+    <string name="label_speed">Speed</string>
+    <string name="label_angle">Angle</string>
+    <string name="label_gust">Gust</string>
+    <string name="label_clouds">Clouds</string>
+    <string name="label_other">Other\'s</string>
+    <string name="label_feels_like">Feels Like</string>
+    <string name="label_temperature">Temperature</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
