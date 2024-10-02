@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DiffUtil
-import com.tasnimulhasan.city.databinding.ItemCityListBinding
+import com.tasnimulhasan.city.databinding.ItemCitiesBinding
 import com.tasnimulhasan.common.adapter.DataBoundListAdapter
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
@@ -22,7 +22,7 @@ class CityListAdapter(
     private val exists: Boolean,
     private val onClick: (CityListRoomEntity) -> Unit,
     private val onLongClick: (CityListRoomEntity) -> Unit
-) : DataBoundListAdapter<CityListRoomEntity, ItemCityListBinding>(
+) : DataBoundListAdapter<CityListRoomEntity, ItemCitiesBinding>(
     diffCallback = object : DiffUtil.ItemCallback<CityListRoomEntity>() {
         override fun areItemsTheSame(oldItem: CityListRoomEntity, newItem: CityListRoomEntity) =
             oldItem.id == newItem.id
@@ -36,11 +36,11 @@ class CityListAdapter(
 ) {
     private var weatherMap: Map<Pair<Double, Double>, WeatherApiEntity> = mapOf()
 
-    override fun createBinding(parent: ViewGroup) = ItemCityListBinding.inflate(
+    override fun createBinding(parent: ViewGroup) = ItemCitiesBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
     )
 
-    override fun bind(binding: ItemCityListBinding, item: CityListRoomEntity, position: Int) {
+    override fun bind(binding: ItemCitiesBinding, item: CityListRoomEntity, position: Int) {
         with(binding) {
             cityNameTv.text = item.cityName
             val key = Pair(roundToPrecision(item.lat?:0.0, 2), roundToPrecision(item.lon?:0.0, 2))
@@ -51,8 +51,10 @@ class CityListAdapter(
                 cityTimeTv.text = DateTimeParser.convertLongToDateTime(weatherData.currentWeatherData.currentTime, DateTimeFormat.outputHMA)
                 AppConstants.iconSetTwo.find { it.iconId == weatherData.currentWeatherData.currentWeatherCondition[0].currentWeatherIcon }?.let { icon ->
                     cityIconIv.setImageResource(icon.iconRes)
-                    setTextColorWithIconBG(cityTempTv, cityIconIv, Palette.from(ContextCompat.getDrawable(root.context, icon.iconRes)?.toBitmap()!!).generate(), root.context)
                 }
+                cityWindTv.text = root.context.getString(Res.string.format_wind, weatherData.currentWeatherData.currentWindSpeed)
+                cityRainTv.text = root.context.getString(Res.string.format_rain, weatherData.currentWeatherData.currentRain)
+                cityFeelsLike.text = root.context.getString(if (exists) Res.string.format_temperature else Res.string.format_temperature_f, weatherData.currentWeatherData.currentFeelsLike)
             } else {
                 cityTempTv.text = null
                 cityConditionTv.text = null
