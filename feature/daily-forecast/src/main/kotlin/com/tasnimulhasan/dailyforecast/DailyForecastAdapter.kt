@@ -39,11 +39,12 @@ class DailyForecastAdapter(
         val resources = context.resources
 
         with(binding) {
-            dailyMinMaxTv.text = resources.getString(if (exits) Res.string.format_min_max_temp else Res.string.format_min_max_temp_f, item.temp.maxTemp, item.temp.minTemp)
+            dailyMinMaxTv.text = resources.getString(if (exits) Res.string.format_min_max_home_temp else Res.string.format_min_max_home_temp_f, item.temp.maxTemp, item.temp.minTemp)
             dayTv.text = convertLongToDateTime(item.dateTime, DateTimeFormat.DAILY_TIME_FORMAT)
             AppConstants.iconSetTwo.find { it.iconId == item.weather.firstOrNull()?.icon }?.let {
                 dailyIconIv.setImageResource(it.iconRes)
             }
+            summaryTv.text = item.weather.firstOrNull()?.description
 
             val isCurrentTime = convertLongToDateTime(item.dateTime, DateTimeFormat.sqlYMD) == getCurrentTimeFormatted()
             if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.white_n_gray_light_100))

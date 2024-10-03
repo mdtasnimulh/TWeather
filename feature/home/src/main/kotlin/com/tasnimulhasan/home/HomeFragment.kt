@@ -176,7 +176,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
                 is UiState.ApiSuccess -> {
                     this showWeatherData uiState.weatherData
-                    this initDailyRecyclerView uiState.weatherData.dailyWeatherData.take(5)
+                    this initDailyRecyclerView uiState.weatherData.dailyWeatherData.take(7)
                 }
                 is UiState.WeatherOverview -> binding.summaryValueTv?.text = uiState.weatherOverview.weatherOverview
                 is UiState.RemainingTimerValue -> binding.sunriseSunsetIncl?.remainingTimeValueTv?.text = uiState.time

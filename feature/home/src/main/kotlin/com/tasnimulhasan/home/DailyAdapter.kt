@@ -4,17 +4,13 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import com.tasnimulhasan.common.adapter.DataBoundListAdapter
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.dateparser.DateTimeFormat
-import com.tasnimulhasan.common.dateparser.DateTimeParser.calculateHoursBetweenTwoTimes
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
-import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.home.databinding.ItemDailyWeatherBinding
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -51,8 +47,8 @@ class DailyAdapter(
             dailyConditionTv.text = item.dailyWeatherCondition[0].dailyWeatherCondition
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
-            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white))
-            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.transparent))
+            if (isCurrentTime) mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white)))
+            else mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur)))
 
             root.setOnClickListener { onClick.invoke(item) }
         }
