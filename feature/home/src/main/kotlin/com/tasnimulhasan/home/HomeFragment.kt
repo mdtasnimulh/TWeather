@@ -22,7 +22,6 @@ import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
 import com.tasnimulhasan.common.extfun.createLocationRequest
-import com.tasnimulhasan.common.extfun.decode
 import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
@@ -219,10 +218,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
         binding.apply {
             val max = (sunset - sunrise).toInt()
+            val progress = calculateProgressBySunriseSunset(sunrise, sunset)
             sunriseSunsetIncl?.apply {
                 sunRiseSetPb.setMaxIndicatorValue(max)
                 sunRiseSetPb.setMinIndicatorValue(0)
-                sunRiseSetPb.setIndicatorValue(calculateProgressBySunriseSunset(sunrise, sunset))
+                sunRiseSetPb.setIndicatorValue(progress)
+
+                if (progress in 1..max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
+                else bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_2)
             }
         }
     }

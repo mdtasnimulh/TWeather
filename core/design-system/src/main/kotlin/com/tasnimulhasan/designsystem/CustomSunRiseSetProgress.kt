@@ -34,19 +34,19 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the background
+        pathEffect = DashPathEffect(floatArrayOf(10f, 46f), 0f)  // Dashed effect with gaps for the background
     }
     private val foregroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
+        pathEffect = DashPathEffect(floatArrayOf(10f, 46f), 0f)  // Dashed effect with gaps for the foreground
     }
     private val drawableBackgroundPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        pathEffect = DashPathEffect(floatArrayOf(10f, 40f), 0f)  // Dashed effect with gaps for the foreground
+        pathEffect = DashPathEffect(floatArrayOf(10f, 46f), 0f)  // Dashed effect with gaps for the foreground
     }
 
     init {
@@ -115,7 +115,7 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         drawableBackgroundPaint.strokeWidth = drawableBackgroundIndicatorStrokeWidth
 
         // Calculate the start and end points for the gradient based on the arc's geometry
-        val startAngleRad = Math.toRadians(150.0)
+        val startAngleRad = Math.toRadians(152.0)
         val endAngleRad = Math.toRadians(240.0)
 
         startX = (rect.centerX() + radius * cos(startAngleRad)).toFloat()
@@ -128,14 +128,14 @@ class CustomSunRiseSetProgress @JvmOverloads constructor(
         foregroundPaint.strokeWidth = foregroundIndicatorStrokeWidth
 
         // Draw the background and foreground arcs
-        canvas.drawArc(rect, 150f, 240f, false, backgroundPaint)
-        canvas.drawArc(rect, 150f, sweepAngle, false, foregroundPaint)
+        canvas.drawArc(rect, 152f, 240f, false, backgroundPaint)
+        canvas.drawArc(rect, 152f, sweepAngle, false, foregroundPaint)
 
         if (indicatorValue != maxIndicatorValue) {
-            canvas.drawArc(rect, 150f, sweepAngle, false, drawableBackgroundPaint)
+            canvas.drawArc(rect, 152f, sweepAngle, false, drawableBackgroundPaint)
             val sunDrawable = ContextCompat.getDrawable(context, R.drawable.ic_sun) ?: return
             // Calculate the current progress angle (starting from 150 degrees)
-            val progressAngle = 150f + sweepAngle
+            val progressAngle = 152f + sweepAngle
             // Convert angle to radians for trigonometric calculation
             val radians = Math.toRadians(progressAngle.toDouble())
             // Calculate the center of the arc

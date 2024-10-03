@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 tools:text="26°C/24°C"
-                android:textColor="@color/subTextColor"
+                android:textColor="@color/child_text_color"
                 android:textSize="@dimen/_11ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/tempTv"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="@dimen/margin_90"
                 android:includeFontPadding="false"
                 tools:text="MELBOURNE"
-                android:textColor="@color/textColor"
+                android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_22ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
                 android:layout_marginTop="@dimen/margin_4"
                 android:includeFontPadding="false"
                 tools:text="Monday 9:00"
-                android:textColor="@color/subTextColor"
+                android:textColor="@color/child_text_color"
                 android:textSize="@dimen/regular_text_size"
                 app:fontFamily="@font/poppins"
                 app:layout_constraintStart_toStartOf="@id/cityNameTv"
@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:text="@string/label_uv_index"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
 
@@ -178,7 +178,7 @@
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
                         tools:text="High"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
 
@@ -205,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:text="@string/label_wind"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
 
@@ -216,7 +216,7 @@
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
                         tools:text="5 km/h"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
 
@@ -243,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:text="@string/label_humidity"
-                        android:textColor="@color/textColor"
+                        android:textColor="@color/subTextColor"
                         android:textSize="@dimen/_13ssp"
                         app:fontFamily="@font/poppins_semibold" />
 
@@ -254,7 +254,7 @@
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
                         tools:text="35%"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins_medium" />
 

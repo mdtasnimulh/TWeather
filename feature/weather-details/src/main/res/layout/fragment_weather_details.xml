@@ -79,7 +79,7 @@
                     android:includeFontPadding="false"
                     tools:text="Tejgaon, Mon"
                     android:gravity="center|center_vertical"
-                    android:textColor="@color/subTextColor"
+                    android:textColor="@color/child_text_color"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins_medium" />
 

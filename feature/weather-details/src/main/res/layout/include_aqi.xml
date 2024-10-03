@@ -26,52 +26,36 @@
         android:layout_marginHorizontal="@dimen/margin_12"
         app:backgroundIndicatorColor="@color/green_light_300"
         app:backgroundIndicatorStrokeWidth="35dp"
-        app:foregroundIndicatorStrokeWidth="35dp"
+        app:foregroundIndicatorStrokeWidth="27dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/todayWeatherTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        app:fontFamily="@font/poppins"
-        android:includeFontPadding="false"
         android:id="@+id/aqiDescriptionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_55"
-        tools:text="Moderate"
-        android:textColor="@color/color_78849E"
+        android:includeFontPadding="false"
+        android:textColor="@color/child_text_color"
         android:textSize="@dimen/_10ssp"
-        app:layout_constraintTop_toTopOf="@+id/customIndicatorView"
+        app:fontFamily="@font/poppins"
         app:layout_constraintEnd_toEndOf="@+id/aqiValueTv"
-        app:layout_constraintStart_toStartOf="@+id/aqiValueTv" />
+        app:layout_constraintStart_toStartOf="@+id/aqiValueTv"
+        app:layout_constraintTop_toBottomOf="@+id/aqiValueTv"
+        tools:text="Moderate" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        app:fontFamily="@font/poppins_medium"
-        android:includeFontPadding="false"
-        android:id="@+id/aqiTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-5dp"
-        android:text="@string/aqi_level"
-        android:textColor="@color/subTextColor"
-        android:textSize="@dimen/_11ssp"
-        android:drawableTint="@color/color_78849E"
-        app:layout_constraintBottom_toTopOf="@+id/aqiValueTv"
-        app:layout_constraintEnd_toEndOf="@+id/aqiValueTv"
-        app:layout_constraintStart_toStartOf="@+id/aqiValueTv" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        app:fontFamily="@font/poppins_bold"
-        android:includeFontPadding="false"
         android:id="@+id/aqiValueTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="256"
-        android:textColor="@color/textColor"
+        android:includeFontPadding="false"
+        android:textColor="@color/child_text_color"
         android:textSize="@dimen/_18ssp"
-        android:layout_marginBottom="@dimen/_25sdp"
+        app:fontFamily="@font/poppins_bold"
+        android:layout_marginBottom="@dimen/_30sdp"
         app:layout_constraintBottom_toBottomOf="@+id/customIndicatorView"
+        app:layout_constraintEnd_toEndOf="@id/customIndicatorView"
         app:layout_constraintStart_toStartOf="@id/customIndicatorView"
-        app:layout_constraintEnd_toEndOf="@id/customIndicatorView"/>
+        tools:text="256" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

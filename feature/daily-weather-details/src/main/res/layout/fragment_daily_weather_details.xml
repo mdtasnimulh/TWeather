@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
                 android:includeFontPadding="false"
-                android:textColor="@color/textColor"
+                android:textColor="@color/child_text_color"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins"
                 android:gravity="center"
@@ -70,6 +70,16 @@
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
                 app:layout_constraintTop_toBottomOf="@id/overViewTv"
                 tools:text="@string/msg_dummy_text" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                app:layout_constraintBottom_toTopOf="@id/temperatureTv"
+                android:background="@color/divider_color"
+                app:layout_constraintTop_toBottomOf="@id/overViewValueTv"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/temperatureTv"
@@ -121,7 +131,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -153,7 +163,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -185,7 +195,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -217,13 +227,23 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                app:layout_constraintBottom_toTopOf="@id/dailyTempDetails2Ll"
+                android:background="@color/divider_color"
+                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/dailyTempDetails2Ll"
@@ -262,7 +282,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -294,7 +314,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -362,7 +382,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -394,7 +414,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -426,7 +446,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -458,7 +478,7 @@
                         android:gravity="start"
                         tools:text="31.5°c"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -526,7 +546,7 @@
                         android:gravity="start"
                         tools:text="40 km/h"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -558,7 +578,7 @@
                         android:gravity="start"
                         tools:text="142°"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -590,7 +610,7 @@
                         android:gravity="start"
                         tools:text="4.19"
                         android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
+                        android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
                         app:fontFamily="@font/poppins" />
 
@@ -650,7 +670,7 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
                     android:text="@string/label_pressure"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toTopOf="@id/pressureValueTv"
@@ -666,7 +686,7 @@
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
                     tools:text="1000 pHb"
-                    android:textColor="@color/subTextColor"
+                    android:textColor="@color/child_text_color"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -705,7 +725,7 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
                     android:text="@string/label_humidity"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toTopOf="@id/humidityValueTv"
@@ -721,7 +741,7 @@
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
                     tools:text="70.35%"
-                    android:textColor="@color/subTextColor"
+                    android:textColor="@color/child_text_color"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -730,6 +750,16 @@
                     app:layout_constraintTop_toBottomOf="@id/humidityTv" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                app:layout_constraintBottom_toTopOf="@id/rainCl"
+                android:background="@color/divider_color"
+                app:layout_constraintTop_toBottomOf="@id/pressureCl"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rainCl"
@@ -760,7 +790,7 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
                     android:text="@string/label_rain"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toTopOf="@id/rainValueTv"
@@ -776,7 +806,7 @@
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
                     tools:text="41%"
-                    android:textColor="@color/subTextColor"
+                    android:textColor="@color/child_text_color"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -814,7 +844,7 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:includeFontPadding="false"
                     android:text="@string/label_clouds"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/subTextColor"
                     android:textSize="@dimen/_13ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toTopOf="@id/cloudsValueTv"
@@ -830,7 +860,7 @@
                     android:layout_marginBottom="@dimen/margin_5"
                     android:includeFontPadding="false"
                     tools:text="70%"
-                    android:textColor="@color/subTextColor"
+                    android:textColor="@color/child_text_color"
                     android:textSize="@dimen/_12ssp"
                     app:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"

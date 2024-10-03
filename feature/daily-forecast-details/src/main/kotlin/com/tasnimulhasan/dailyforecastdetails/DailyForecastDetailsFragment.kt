@@ -89,10 +89,14 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
     private fun setSunriseSunsetProgress(sunrise: Long, sunset: Long) {
         binding.apply {
             val max = (sunset - sunrise).toInt()
+            val progress = calculateProgressBySunriseSunset(sunrise, sunset)
             sunriseSunsetIncl.apply {
                 sunRiseSetPb.setMaxIndicatorValue(max)
                 sunRiseSetPb.setMinIndicatorValue(0)
-                sunRiseSetPb.setIndicatorValue(calculateProgressBySunriseSunset(sunrise, sunset))
+                sunRiseSetPb.setIndicatorValue(progress)
+
+                if (progress in 1..max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
+                else bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_2)
             }
         }
     }

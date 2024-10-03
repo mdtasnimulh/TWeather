@@ -11,8 +11,8 @@
         android:layout_height="@dimen/_200sdp"
         app:backgroundIndicatorColor="@color/gray"
         app:drawableBackgroundIndicatorColors="@color/transparent"
-        app:backgroundIndicatorStrokeWidth="10dp"
-        app:foregroundIndicatorStrokeWidth="10dp"
+        app:backgroundIndicatorStrokeWidth="13dp"
+        app:foregroundIndicatorStrokeWidth="13dp"
         app:drawableBackgroundIndicatorStrokeWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,47 +23,49 @@
         android:id="@+id/sunriseIv"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/margin_12"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginBottom="@dimen/_45sdp"
         android:src="@drawable/ic_sunrise"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sunriseTv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:includeFontPadding="false"
         android:text="@string/label_sunrise"
-        android:textColor="@color/textColor"
+        android:textColor="@color/subTextColor"
         android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins_semibold"
-        app:layout_constraintStart_toStartOf="@+id/sunriseIv"
-        app:layout_constraintTop_toBottomOf="@+id/sunriseIv" />
+        app:layout_constraintBottom_toTopOf="@id/sunriseIv"
+        app:layout_constraintEnd_toEndOf="@+id/sunriseIv"
+        app:layout_constraintStart_toStartOf="@+id/sunriseIv" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sunsetIv"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginEnd="@dimen/margin_12"
+        android:layout_marginEnd="@dimen/margin_15"
         android:src="@drawable/ic_sunset"
-        app:layout_constraintBottom_toTopOf="@+id/sunriseTv"
+        app:layout_constraintBottom_toBottomOf="@+id/sunriseIv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sunriseIv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sunsetTv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:includeFontPadding="false"
         android:text="@string/label_sunset"
-        android:textColor="@color/textColor"
+        android:textColor="@color/subTextColor"
         android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins_semibold"
         app:layout_constraintBottom_toBottomOf="@+id/sunriseTv"
         app:layout_constraintEnd_toEndOf="@+id/sunsetIv"
+        app:layout_constraintStart_toStartOf="@+id/sunsetIv"
         app:layout_constraintTop_toTopOf="@+id/sunriseTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -72,11 +74,11 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:includeFontPadding="false"
-        android:layout_marginTop="@dimen/margin_2"
-        android:textColor="@color/subTextColor"
+        android:textColor="@color/child_text_color"
         android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins"
-        app:layout_constraintTop_toBottomOf="@id/sunriseTv"
+        app:layout_constraintBottom_toTopOf="@+id/sunriseTv"
+        app:layout_constraintEnd_toEndOf="@+id/sunriseTv"
         app:layout_constraintStart_toStartOf="@id/sunriseTv"
         tools:text="05:15 am" />
 
@@ -86,11 +88,12 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:includeFontPadding="false"
-        android:textColor="@color/subTextColor"
+        android:textColor="@color/child_text_color"
         android:textSize="@dimen/small_text_size"
         app:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="@+id/sunriseValueTv"
         app:layout_constraintEnd_toEndOf="@id/sunsetTv"
+        app:layout_constraintStart_toStartOf="@+id/sunsetTv"
         app:layout_constraintTop_toTopOf="@+id/sunriseValueTv"
         tools:text="06:35 pm" />
 
@@ -102,7 +105,7 @@
         android:gravity="center_vertical"
         android:includeFontPadding="false"
         tools:text="12:30:35 PM"
-        android:textColor="@color/textColor"
+        android:textColor="@color/child_text_color"
         android:textSize="@dimen/_11ssp"
         app:fontFamily="@font/poppins_medium"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +120,7 @@
         android:gravity="center_vertical"
         android:includeFontPadding="false"
         android:text="@string/label_current_time"
-        android:textColor="@color/textColor"
+        android:textColor="@color/subTextColor"
         android:textSize="@dimen/_10ssp"
         app:fontFamily="@font/poppins_medium"
         android:layout_marginTop="@dimen/margin_2"
@@ -132,7 +135,7 @@
         android:layout_marginTop="@dimen/margin_5"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:textColor="@color/textColor"
+        android:textColor="@color/subTextColor"
         android:textSize="@dimen/_11ssp"
         app:fontFamily="@font/poppins_medium"
         app:layout_constraintEnd_toEndOf="@+id/timerValueTv"
