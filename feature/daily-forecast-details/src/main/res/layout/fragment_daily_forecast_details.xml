@@ -236,99 +236,12 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
-                android:id="@+id/view5"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_1sdp"
-                app:layout_constraintBottom_toTopOf="@id/dailyTempDetails2Ll"
-                android:background="@color/divider_color"
-                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl"
-                app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/dailyTempDetails2Ll"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="4"
-                android:layout_marginTop="@dimen/margin_8"
-                app:layout_constraintEnd_toEndOf="@+id/dayDateTv"
-                app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl">
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tempMinTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:text="@string/label_min"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
-                        android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins_medium" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tempMinValueTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        tools:text="31.5°c"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/child_text_color"
-                        android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tempMaxTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:text="@string/label_max"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/subTextColor"
-                        android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins_medium" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tempMaxValueTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        tools:text="31.5°c"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/child_text_color"
-                        android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <View
                 android:id="@+id/view1"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_1sdp"
                 app:layout_constraintBottom_toTopOf="@id/feelsLikeTv"
                 android:background="@color/divider_color"
-                app:layout_constraintTop_toBottomOf="@id/dailyTempDetails2Ll"
+                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
                 app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
 
@@ -343,7 +256,7 @@
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@id/dailyTempDetails2Ll" />
+                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/dailyFeelsLikeDetailsLl"
@@ -642,6 +555,126 @@
                 app:layout_constraintTop_toBottomOf="@id/dailyWindDetailsLl" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/maxTempCl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:layout_constraintEnd_toStartOf="@id/minTempCl"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintTop_toBottomOf="@id/othersTv">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/maxConditionIv"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:src="@drawable/max_temp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maxTempTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_max"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/poppins"
+                    app:layout_constraintBottom_toTopOf="@id/maxValueTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/maxConditionIv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maxValueTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:includeFontPadding="false"
+                    tools:text="High, 32°C"
+                    android:textColor="@color/child_text_color"
+                    android:textSize="@dimen/_12ssp"
+                    app:fontFamily="@font/poppins"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/maxTempTv"
+                    app:layout_constraintStart_toStartOf="@id/maxTempTv"
+                    app:layout_constraintTop_toBottomOf="@id/maxTempTv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/minTempCl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                app:layout_constraintStart_toEndOf="@id/maxTempCl"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"
+                app:layout_constraintBottom_toBottomOf="@id/maxTempCl"
+                app:layout_constraintTop_toTopOf="@id/maxTempCl">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/minConditionIv"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:src="@drawable/ic_low_temp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/minTempTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_min"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="@dimen/_13ssp"
+                    app:fontFamily="@font/poppins"
+                    app:layout_constraintBottom_toTopOf="@id/minValueTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/minConditionIv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/minValueTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:includeFontPadding="false"
+                    tools:text="High, 32°C"
+                    android:textColor="@color/child_text_color"
+                    android:textSize="@dimen/_12ssp"
+                    app:fontFamily="@font/poppins"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/minTempTv"
+                    app:layout_constraintStart_toStartOf="@id/minTempTv"
+                    app:layout_constraintTop_toBottomOf="@id/minTempTv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                app:layout_constraintBottom_toTopOf="@id/pressureCl"
+                android:background="@color/divider_color"
+                app:layout_constraintTop_toBottomOf="@id/maxTempCl"
+                app:layout_constraintStart_toStartOf="@id/dayDateTv"
+                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pressureCl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -649,7 +682,7 @@
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintEnd_toStartOf="@id/humidityCl"
                 app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintTop_toBottomOf="@+id/othersTv">
+                app:layout_constraintTop_toBottomOf="@+id/maxTempCl">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/pressureConditionIv"
