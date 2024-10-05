@@ -37,6 +37,7 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
@@ -224,7 +225,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 sunRiseSetPb.setMinIndicatorValue(0)
                 sunRiseSetPb.setIndicatorValue(progress)
 
-                if (progress in 1..max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
+                if (progress in 1..<max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
                 else bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_2)
             }
         }
@@ -266,7 +267,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             weatherValue.iconId == currentWeatherConditionData[0].currentWeatherIcon
         }?.iconRes?.let { icon ->
             binding.weatherConditionIv.setImageResource(icon)
-            setTextColor(binding.currentConditionTv, Palette.from(ContextCompat.getDrawable(requireContext(), icon)?.toBitmap()!!).generate())
         }
     }
 }

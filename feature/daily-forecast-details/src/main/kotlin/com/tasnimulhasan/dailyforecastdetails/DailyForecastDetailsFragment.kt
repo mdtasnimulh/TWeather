@@ -95,7 +95,7 @@ class DailyForecastDetailsFragment : BaseFragment<FragmentDailyForecastDetailsBi
                 sunRiseSetPb.setMinIndicatorValue(0)
                 sunRiseSetPb.setIndicatorValue(progress)
 
-                if (progress in 1..max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
+                if (progress in 1..<max) bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_1)
                 else bottomView.setBackgroundResource(Res.drawable.sunset_sunrise_bg_2)
             }
         }

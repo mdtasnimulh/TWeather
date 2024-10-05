@@ -656,7 +656,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:src="@drawable/air_pressure"
+                    android:src="@drawable/ic_pressure"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -711,7 +711,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:src="@drawable/current_humidity"
+                    android:src="@drawable/ic_humidity"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -776,7 +776,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:src="@drawable/rain"
+                    android:src="@drawable/ic_rain"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -830,7 +830,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:src="@drawable/ic_overcast_cloud"
+                    android:src="@drawable/cloudy_day"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

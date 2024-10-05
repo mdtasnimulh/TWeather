@@ -133,7 +133,7 @@
                 android:includeFontPadding="false"
                 tools:text="S\nU\nN\nN\nY"
                 android:gravity="center_horizontal"
-                android:textColor="@color/textColor"
+                android:textColor="@color/child_text_color"
                 android:textSize="@dimen/_16ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintEnd_toEndOf="parent"
