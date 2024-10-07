@@ -5,11 +5,8 @@ import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
-import androidx.palette.graphics.Palette
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -25,7 +22,6 @@ import com.tasnimulhasan.common.extfun.createLocationRequest
 import com.tasnimulhasan.common.extfun.encode
 import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
-import com.tasnimulhasan.common.extfun.setTextColor
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
 import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
@@ -37,7 +33,6 @@ import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
@@ -57,15 +52,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
-                if (requireActivity().isLocationEnabled()) viewModel.isLocationGranted.value = true
-                else {
+                if (requireActivity().isLocationEnabled()) {
+                    checkCache()
+                } else {
                     showToastMessage(getString(Res.string.msg_location_permission_denied))
                     requireActivity().createLocationRequest()
                 }
-            }
-            else -> {
-                viewModel.isLocationGranted.value = false
-                showToastMessage(getString(Res.string.msg_location_permanent_denied))
             }
         }
     }
@@ -81,14 +73,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
             else true
 
+        requestPermission()
         setUnit()
-        checkCache()
     }
 
     private fun checkCache() {
         if (sharedPrefHelper.getString(SpKey.CURRENT_TIME).isNotEmpty()) {
             if (System.currentTimeMillis() - sharedPrefHelper.getString(SpKey.CURRENT_TIME).toLong() > 1800000) {
-                requestPermission()
                 getCurrentLocation()
                 initUi()
             } else {
@@ -105,13 +96,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 fetchData()
             }
         } else {
-            requestPermission()
-            viewModel.isLocationGranted.execute {
-                if (it) {
-                    getCurrentLocation()
-                    initUi()
-                }
-            }
+            getCurrentLocation()
+            initUi()
         }
     }
 
@@ -152,7 +138,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initUi() {
-        uiStateObserver()
+        bindUiEvent()
         onClickListener()
     }
 
@@ -170,17 +156,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         dailyAdapter.notifyItemRangeChanged(0, dailyAdapter.itemCount)
     }
 
-    private fun uiStateObserver() {
-        viewModel.uiState.execute { uiState ->
-            when (uiState) {
-                is UiState.Loading -> errorHandler.showProgressBarHideFeatureUi(uiState.loading)
-                is UiState.Error -> errorHandler.dataError(uiState.message) { /*NA*/ }
-                is UiState.ApiSuccess -> {
-                    this showWeatherData uiState.weatherData
-                    this initDailyRecyclerView uiState.weatherData.dailyWeatherData.take(7)
+    private fun bindUiEvent() {
+        viewModel.uiEvent.execute { event ->
+            when (event) {
+                is UiEvent.Loading -> errorHandler.showProgressBarHideFeatureUi(event.loading)
+                is UiEvent.Error -> errorHandler.dataError(event.message) { /*NA*/ }
+                is UiEvent.ApiSuccess -> {
+                    this showWeatherData event.weatherData
+                    this initDailyRecyclerView event.weatherData.dailyWeatherData.take(7)
                 }
-                is UiState.WeatherOverview -> binding.summaryValueTv?.text = uiState.weatherOverview.weatherOverview
-                is UiState.RemainingTimerValue -> binding.sunriseSunsetIncl?.remainingTimeValueTv?.text = uiState.time
+                is UiEvent.WeatherOverview -> binding.summaryValueTv?.text = event.weatherOverview.weatherOverview
+                is UiEvent.RemainingTimerValue -> binding.sunriseSunsetIncl?.remainingTimeValueTv?.text = event.time
             }
         }
     }

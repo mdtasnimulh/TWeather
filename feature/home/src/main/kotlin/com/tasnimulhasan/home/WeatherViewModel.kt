@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.Looper
 import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.common.extfun.calculateRemainingTime
-import com.tasnimulhasan.domain.apiusecase.aqi.AirQualityIndexApiUseCase
 import com.tasnimulhasan.domain.apiusecase.details.WeatherDetailsApiUseCase
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
@@ -13,7 +12,8 @@ import com.tasnimulhasan.entity.details.RiseSet
 import com.tasnimulhasan.entity.details.WeatherDetailsApiEntity
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import java.util.Locale
 import javax.inject.Inject
 
@@ -23,7 +23,6 @@ class WeatherViewModel @Inject constructor(
     private val weatherDetailsApiUseCase: WeatherDetailsApiUseCase
 ) : BaseViewModel() {
 
-    var isLocationGranted = MutableStateFlow(false)
     var latitude = ""
     var longitude = ""
     var cityName = ""
@@ -41,16 +40,16 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading(false))
-    val uiState get() = _uiState
+    private val _uiEvent = Channel<UiEvent>()
+    val uiEvent get() = _uiEvent.receiveAsFlow()
 
     private fun fetchWeatherData(params: HomeWeatherApiUseCase.Params) {
         execute {
             homeWeatherApiUseCase.execute(params).collect { result ->
                 when (result) {
-                    is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
-                    is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> _uiState.value = UiState.ApiSuccess(result.data)
+                    is ApiResult.Error -> _uiEvent.send(UiEvent.Error(result.message))
+                    is ApiResult.Loading -> _uiEvent.send(UiEvent.Loading(result.loading))
+                    is ApiResult.Success -> _uiEvent.send(UiEvent.ApiSuccess(result.data))
                 }
             }
         }
@@ -60,9 +59,9 @@ class WeatherViewModel @Inject constructor(
         execute {
             weatherDetailsApiUseCase.execute(params).collect { result ->
                 when (result) {
-                    is ApiResult.Error -> _uiState.value = UiState.Error(result.message)
-                    is ApiResult.Loading -> _uiState.value = UiState.Loading(result.loading)
-                    is ApiResult.Success -> _uiState.value = UiState.WeatherOverview(result.data)
+                    is ApiResult.Error -> _uiEvent.send(UiEvent.Error(result.message))
+                    is ApiResult.Loading -> _uiEvent.send(UiEvent.Loading(result.loading))
+                    is ApiResult.Success -> _uiEvent.send(UiEvent.WeatherOverview(result.data))
                 }
             }
         }
@@ -103,7 +102,7 @@ class WeatherViewModel @Inject constructor(
             val remainingTimeInSeconds = remainingTimeResult.remainingTime
 
             if (remainingTimeInSeconds < 0) {
-                _uiState.value = UiState.RemainingTimerValue("00:00:00")
+                _uiEvent.send(UiEvent.RemainingTimerValue("00:00:00"))
                 return@execute
             }
 
@@ -117,7 +116,7 @@ class WeatherViewModel @Inject constructor(
                 RiseSet.SUNSET -> "$formattedTime\nTime to Sunset"
                 else -> "Time is up!"
             }
-            _uiState.value = UiState.RemainingTimerValue(timeLabel)
+            _uiEvent.send(UiEvent.RemainingTimerValue(timeLabel))
         }
     }
 
@@ -128,12 +127,12 @@ class WeatherViewModel @Inject constructor(
     }
 }
 
-sealed interface UiState {
-    data class Loading(val loading: Boolean) : UiState
-    data class Error(val message: String) : UiState
-    data class ApiSuccess(val weatherData: WeatherApiEntity) : UiState
-    data class WeatherOverview(val weatherOverview: WeatherDetailsApiEntity) : UiState
-    data class RemainingTimerValue(val time: String) : UiState
+sealed interface UiEvent {
+    data class Loading(val loading: Boolean) : UiEvent
+    data class Error(val message: String) : UiEvent
+    data class ApiSuccess(val weatherData: WeatherApiEntity) : UiEvent
+    data class WeatherOverview(val weatherOverview: WeatherDetailsApiEntity) : UiEvent
+    data class RemainingTimerValue(val time: String) : UiEvent
 }
 
 sealed interface UiAction {
