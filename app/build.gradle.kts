@@ -17,9 +17,6 @@ android {
         versionCode = AppConfig.VERSION_CODE
         versionName = AppConfig.VERSION_NAME
 
-        /*renderscriptTargetApi = AppConfig.MIN_SDK_VERSION
-        renderscriptSupportModeEnabled = true*/
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,11 +53,6 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
-    }
-    sourceSets {
-        getByName("main") {
-            java.srcDir("src/main/kotlin")
-        }
     }
 }
 
