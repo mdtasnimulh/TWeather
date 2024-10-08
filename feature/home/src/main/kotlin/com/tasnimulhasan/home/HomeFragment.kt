@@ -133,25 +133,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         else viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
     }
 
-    private fun requestPermission() {
-        when {
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
-                // Permission already granted
-                showToastMessage("Location Permission Already Granted")
-                checkCache()
-            }
-            ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                // Show a rationale and then request permission
-                showToastMessage("Location Permission is needed for this app to function")
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-            else -> {
-                // Directly request the permission
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
-    }
-
     // Function to open the app settings when the user has denied permission permanently
     private fun openAppSettings() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
