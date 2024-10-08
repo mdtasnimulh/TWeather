@@ -2,9 +2,16 @@ package com.tasnimulhasan.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -18,9 +25,7 @@ import com.tasnimulhasan.common.dateparser.DateTimeFormat
 import com.tasnimulhasan.common.dateparser.DateTimeParser.convertLongToDateTime
 import com.tasnimulhasan.common.extfun.calculateProgressBySunriseSunset
 import com.tasnimulhasan.common.extfun.clickWithDebounce
-import com.tasnimulhasan.common.extfun.createLocationRequest
 import com.tasnimulhasan.common.extfun.encode
-import com.tasnimulhasan.common.extfun.isLocationEnabled
 import com.tasnimulhasan.common.extfun.navigateToDestination
 import com.tasnimulhasan.common.extfun.setUpHorizontalRecyclerView
 import com.tasnimulhasan.common.utils.autoCleared
@@ -48,16 +53,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private var dailyAdapter by autoCleared<DailyAdapter>()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-    private val locationPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        when {
-            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) ||
-            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)-> {
-                if (requireActivity().isLocationEnabled()) {
-                    checkCache()
-                } else {
-                    showToastMessage(getString(Res.string.msg_location_permission_denied))
-                    requireActivity().createLocationRequest()
-                }
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+        if (isGranted) checkCache()
+        else {
+            // Permission is denied. Check if the user has selected "Don't ask again"
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // The user checked "Don't ask again." Direct them to the app settings.
+                showToastMessage("Permission denied permanently. Please enable it in settings.")
+                showPermissionRequiredDialog()
+            } else {
+                // Permission denied but not permanently.
+                showToastMessage("Location Permission Denied")
+                requestPermission()
             }
         }
     }
@@ -72,9 +79,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
             else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
             else true
-
-        requestPermission()
         setUnit()
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            checkCache()
+        } else {
+            showPermissionRequiredDialog()
+        }
     }
 
     private fun checkCache() {
@@ -107,24 +118,75 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun requestPermission() {
-        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
+        when {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+                // Permission already granted
+                showToastMessage("Location Permission Already Granted")
+                checkCache()
+            }
+            ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                // Show a rationale and then request permission
+                showToastMessage("Location Permission is needed for this app to function")
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            else -> {
+                // Directly request the permission
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
     }
+
+    // Function to open the app settings when the user has denied permission permanently
+    private fun openAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", requireActivity().packageName, null)
+        }
+        startActivity(intent)
+    }
+
+    private fun showPermissionRequiredDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Permission Required")
+        builder.setMessage("Location permission is required for this app. Please grant the permission or exit the app.")
+
+        builder.setPositiveButton("Grant") { _, _ ->
+            // Open app settings to grant permission
+            openAppSettings()
+        }
+
+        builder.setNegativeButton("Deny") { _, _ ->
+            // Exit the app if permission is denied
+            requireActivity().finish()
+        }
+
+        val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.show()
+    }
+
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
-        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token).addOnCompleteListener { location ->
-            try {
-                sharedPrefHelper.putString(SpKey.LATITUDE, location.result.latitude.toString())
-                sharedPrefHelper.putString(SpKey.LONGITUDE, location.result.longitude.toString())
-                sharedPrefHelper.putString(SpKey.CURRENT_TIME, System.currentTimeMillis().toString())
+        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    task.result?.let { location ->
+                        sharedPrefHelper.putString(SpKey.LATITUDE, location.latitude.toString())
+                        sharedPrefHelper.putString(SpKey.LONGITUDE, location.longitude.toString())
+                        sharedPrefHelper.putString(SpKey.CURRENT_TIME, System.currentTimeMillis().toString())
 
-                getCityName(location.result.latitude, location.result.longitude)
-                viewModel.latitude = location.result.latitude.toString()
-                viewModel.longitude = location.result.longitude.toString()
+                        getCityName(location.latitude, location.longitude)
+                        viewModel.latitude = location.latitude.toString()
+                        viewModel.longitude = location.longitude.toString()
 
-                fetchData()
-            } catch (_: Exception) {}
-        }
+                        fetchData()
+                    } ?: run {
+                        showToastMessage("Location is unavailable")
+                    }
+                } else {
+                    showToastMessage("Failed to get location: ${task.exception?.message}")
+                }
+            }
     }
 
     private fun getCityName(lat: Double, lon: Double) {
