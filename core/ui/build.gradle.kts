@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.lottie.animation)
     implementation(libs.card.view)
+    implementation(libs.material)
 
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.extjunit)

@@ -109,6 +109,7 @@
     <string name="label_other">Other\'s</string>
     <string name="label_feels_like">Feels Like</string>
     <string name="label_temperature">Temperature</string>
+    <string name="label_permission_required">Permission Required!</string>
     <!--    label string resources-->
 
     <!--    title string resources-->
@@ -123,10 +124,13 @@
     <!--    title string resources-->
 
     <!--    action string resources-->
+    <string name="action_deny">Deny</string>
+    <string name="action_grant">Grant</string>
     <!--    action string resources-->
 
     <!--    description string resources-->
     <string name="desc_image_content_description">filer_image_toolbar</string>
+    <string name="desc_location_permission">TWeather requires access to your location to function properly. Without location permission, the app won\'t be able to provide weather updates. Please grant permission to continue.</string>
     <!--    description string resources-->
 
     <!--    value string resources-->

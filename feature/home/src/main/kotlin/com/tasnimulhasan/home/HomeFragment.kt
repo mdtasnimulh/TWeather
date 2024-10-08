@@ -36,6 +36,7 @@ import com.tasnimulhasan.home.databinding.FragmentHomeBinding
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
+import com.tasnimulhasan.ui.databinding.DialogRequestPermissionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
 import java.util.Locale
@@ -143,21 +144,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun showPermissionRequiredDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Permission Required")
-        builder.setMessage("Location permission is required for this app. Please grant the permission or exit the app.")
+        val dialogBinding = DialogRequestPermissionBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val dialog = builder.create()
+        dialog.setCancelable(false)
 
-        builder.setPositiveButton("Grant") { _, _ ->
-            // Open app settings to grant permission
-            openAppSettings()
-        }
-
-        builder.setNegativeButton("Deny") { _, _ ->
-            // Exit the app if permission is denied
+        dialogBinding.denyTv.clickWithDebounce {
             requireActivity().finish()
         }
 
-        val dialog = builder.create()
-        dialog.setCancelable(false)
+        dialogBinding.grantTv.clickWithDebounce {
+            openAppSettings()
+            dialog.dismiss()
+        }
+
         dialog.show()
     }
 

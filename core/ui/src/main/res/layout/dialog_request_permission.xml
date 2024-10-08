@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_15sdp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingAnimationView"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginHorizontal="@dimen/margin_12"
+            android:layout_marginTop="@dimen/margin_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_animation" />
+
+        <TextView
+            android:id="@+id/errorTitleTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_12"
+            android:layout_marginTop="@dimen/margin_8"
+            android:fontFamily="@font/roboto_serif_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/label_permission_required"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loadingAnimationView" />
+
+        <com.tasnimulhasan.designsystem.CustomTV
+            android:id="@+id/errorMessageTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/desc_location_permission"
+            android:textColor="@color/subTextColor"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="@+id/errorTitleTV"
+            app:layout_constraintStart_toStartOf="@+id/errorTitleTV"
+            app:layout_constraintTop_toBottomOf="@+id/errorTitleTV" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/denyTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:background="@drawable/deny_bg"
+            android:gravity="center"
+            android:paddingVertical="@dimen/padding_8"
+            android:text="@string/action_deny"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/grantTv"
+            app:layout_constraintStart_toStartOf="@id/errorMessageTv"
+            app:layout_constraintTop_toBottomOf="@+id/errorMessageTv"
+            app:textAllCaps="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/grantTv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:background="@drawable/grant_bg"
+            android:gravity="center"
+            android:paddingVertical="@dimen/padding_8"
+            android:text="@string/action_grant"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@id/denyTv"
+            app:layout_constraintEnd_toEndOf="@id/errorMessageTv"
+            app:layout_constraintStart_toEndOf="@id/denyTv"
+            app:layout_constraintTop_toTopOf="@id/denyTv"
+            app:textAllCaps="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
