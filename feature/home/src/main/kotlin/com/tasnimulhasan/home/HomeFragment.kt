@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -57,14 +58,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
         if (isGranted) checkCache()
         else {
-            // Permission is denied. Check if the user has selected "Don't ask again"
             if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // The user checked "Don't ask again." Show the dialog to guide them to settings.
                 showPermissionRequiredDialog()
             } else {
-                // Permission denied but not permanently
                 showToastMessage("Location Permission Denied")
-                requestLocationPermission() // Request again
+                requestLocationPermission()
             }
         }
     }
@@ -86,16 +84,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setUnit()
 
         checkLocationPermission()
+
+        viewModel.isFirst.execute {
+            binding.loadingUi?.root?.isVisible = it
+        }
     }
 
     private fun checkLocationPermission() {
         when {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
-                // Permission already granted
                 checkCache()
             }
             else -> {
-                // Request permission directly if it hasn't been granted yet
                 requestLocationPermission()
             }
         }
@@ -134,12 +134,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         else viewModel.units = AppConstants.DATA_UNIT_FAHRENHEIT
     }
 
-    // Function to open the app settings when the user has denied permission permanently
     private fun openAppSettings() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", requireActivity().packageName, null)
         }
-        openSettingsLauncher.launch(intent)  // Use the new launcher to open settings
+        openSettingsLauncher.launch(intent)
     }
 
     private fun showPermissionRequiredDialog() {

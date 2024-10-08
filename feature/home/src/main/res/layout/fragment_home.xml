@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_white_blur"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/background_color_white_blur">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/featureNsv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
         android:background="@color/background_color"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +29,12 @@
                 android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
-                tools:text="27°"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_60ssp"
                 app:fontFamily="@font/roboto_serif_bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="27°" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/unitTv"
@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:includeFontPadding="false"
+                android:padding="@dimen/padding_2"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/_30ssp"
-                android:padding="@dimen/padding_2"
                 app:fontFamily="@font/roboto_serif_semibold"
                 app:layout_constraintBottom_toBottomOf="@+id/tempTv"
                 app:layout_constraintStart_toEndOf="@id/tempTv"
@@ -56,12 +56,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                tools:text="26°C/24°C"
                 android:textColor="@color/child_text_color"
                 android:textSize="@dimen/_11ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="@id/tempTv"
-                app:layout_constraintTop_toBottomOf="@id/tempTv" />
+                app:layout_constraintTop_toBottomOf="@id/tempTv"
+                tools:text="26°C/24°C" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/cityIv"
@@ -82,18 +82,18 @@
                 android:layout_marginTop="@dimen/margin_25"
                 android:paddingHorizontal="@dimen/padding_12"
                 android:paddingVertical="@dimen/padding_5"
-                tools:src="@drawable/cloudy_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tempTv" />
+                app:layout_constraintTop_toBottomOf="@id/tempTv"
+                tools:src="@drawable/cloudy_day" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/blurView"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_150sdp"
                 android:layout_marginTop="@dimen/_75sdp"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/day_gradient_bg"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/weatherConditionIv" />
 
@@ -104,12 +104,12 @@
                 android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_90"
                 android:includeFontPadding="false"
-                tools:text="MELBOURNE"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_22ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/blurView" />
+                app:layout_constraintTop_toTopOf="@id/blurView"
+                tools:text="MELBOURNE" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dayTimeTv"
@@ -117,12 +117,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:includeFontPadding="false"
-                tools:text="Monday 9:00"
                 android:textColor="@color/child_text_color"
                 android:textSize="@dimen/regular_text_size"
                 app:fontFamily="@font/poppins"
                 app:layout_constraintStart_toStartOf="@id/cityNameTv"
-                app:layout_constraintTop_toBottomOf="@id/cityNameTv" />
+                app:layout_constraintTop_toBottomOf="@id/cityNameTv"
+                tools:text="Monday 9:00" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/currentConditionTv"
@@ -130,14 +130,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_25"
-                android:includeFontPadding="false"
-                tools:text="S\nU\nN\nN\nY"
                 android:gravity="center_horizontal"
+                android:includeFontPadding="false"
                 android:textColor="@color/child_text_color"
                 android:textSize="@dimen/_16ssp"
                 app:fontFamily="@font/roboto_serif_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityIv" />
+                app:layout_constraintTop_toBottomOf="@+id/cityIv"
+                tools:text="S\nU\nN\nN\nY" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/weatherConditionLl"
@@ -177,10 +177,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        tools:text="High"
                         android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins_medium" />
+                        app:fontFamily="@font/poppins_medium"
+                        tools:text="High" />
 
                 </LinearLayout>
 
@@ -215,10 +215,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        tools:text="5 km/h"
                         android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins_medium" />
+                        app:fontFamily="@font/poppins_medium"
+                        tools:text="5 km/h" />
 
                 </LinearLayout>
 
@@ -253,10 +253,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4"
                         android:includeFontPadding="false"
-                        tools:text="35%"
                         android:textColor="@color/child_text_color"
                         android:textSize="@dimen/_12ssp"
-                        app:fontFamily="@font/poppins_medium" />
+                        app:fontFamily="@font/poppins_medium"
+                        tools:text="35%" />
 
                 </LinearLayout>
 
@@ -268,14 +268,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_12"
+                android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/label_overview"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_13ssp"
                 app:fontFamily="@font/poppins_medium"
-                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weatherConditionLl"/>
+                app:layout_constraintTop_toBottomOf="@+id/weatherConditionLl" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/summaryValueTv"
@@ -283,15 +283,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
+                android:gravity="center"
                 android:includeFontPadding="false"
-                tools:text="@string/msg_demo_overview"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_11ssp"
                 app:fontFamily="@font/poppins"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/summaryTv"/>
+                app:layout_constraintTop_toBottomOf="@+id/summaryTv"
+                tools:text="@string/msg_demo_overview" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/seeDetailsTv"
@@ -299,15 +299,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:layout_marginEnd="@dimen/margin_12"
-                android:includeFontPadding="false"
-                android:text="@string/label_see_details"
                 android:drawableEnd="@drawable/ic_arrow_forward"
                 android:drawableTint="@color/subTextColor"
+                android:includeFontPadding="false"
+                android:text="@string/label_see_details"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toBottomOf="@id/summaryValueTv"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/summaryValueTv" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dailyWeatherRv"
@@ -330,15 +330,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_4"
                 android:layout_marginEnd="@dimen/margin_12"
-                android:includeFontPadding="false"
-                android:text="@string/label_see_more"
                 android:drawableEnd="@drawable/ic_arrow_forward"
                 android:drawableTint="@color/subTextColor"
+                android:includeFontPadding="false"
+                android:text="@string/label_see_more"
                 android:textColor="@color/subTextColor"
                 android:textSize="@dimen/_12ssp"
                 app:fontFamily="@font/poppins_medium"
-                app:layout_constraintTop_toBottomOf="@id/dailyWeatherRv"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dailyWeatherRv" />
 
             <include
                 android:id="@+id/sunriseSunsetIncl"
@@ -357,12 +357,23 @@
     <include
         android:id="@+id/errorUi"
         layout="@layout/error_ui"
-        android:layout_height="0dp"
         android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/loadingUi"
+        layout="@layout/dialog_fetching_data"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

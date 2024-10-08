@@ -13,6 +13,8 @@ import com.tasnimulhasan.entity.details.WeatherDetailsApiEntity
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import java.util.Locale
 import javax.inject.Inject
@@ -30,6 +32,9 @@ class WeatherViewModel @Inject constructor(
     var units: String = ""
     var exists = true
     private val handler = Handler(Looper.getMainLooper())
+
+    private val _isFirst = MutableStateFlow(true)
+    val isFirst: StateFlow<Boolean> = _isFirst
 
     val action: (UiAction) -> Unit = {
         when (it) {
@@ -49,7 +54,10 @@ class WeatherViewModel @Inject constructor(
                 when (result) {
                     is ApiResult.Error -> _uiEvent.send(UiEvent.Error(result.message))
                     is ApiResult.Loading -> _uiEvent.send(UiEvent.Loading(result.loading))
-                    is ApiResult.Success -> _uiEvent.send(UiEvent.ApiSuccess(result.data))
+                    is ApiResult.Success -> {
+                        _isFirst.value = false
+                        _uiEvent.send(UiEvent.ApiSuccess(result.data))
+                    }
                 }
             }
         }
