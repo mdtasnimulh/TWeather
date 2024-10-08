@@ -58,15 +58,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         else {
             // Permission is denied. Check if the user has selected "Don't ask again"
             if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // The user checked "Don't ask again." Direct them to the app settings.
-                showToastMessage("Permission denied permanently. Please enable it in settings.")
+                // The user checked "Don't ask again." Show the dialog to guide them to settings.
                 showPermissionRequiredDialog()
             } else {
-                // Permission denied but not permanently.
+                // Permission denied but not permanently
                 showToastMessage("Location Permission Denied")
-                requestPermission()
+                requestLocationPermission() // Request again
             }
         }
+    }
+
+    private val openSettingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        checkLocationPermission()
     }
 
     override fun viewBindingLayout(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
@@ -81,11 +84,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             else true
         setUnit()
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            checkCache()
-        } else {
-            showPermissionRequiredDialog()
+        checkLocationPermission()
+    }
+
+    private fun checkLocationPermission() {
+        when {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+                // Permission already granted
+                checkCache()
+            }
+            else -> {
+                // Request permission directly if it hasn't been granted yet
+                requestLocationPermission()
+            }
         }
+    }
+
+    private fun requestLocationPermission() {
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun checkCache() {
@@ -141,7 +157,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", requireActivity().packageName, null)
         }
-        startActivity(intent)
+        openSettingsLauncher.launch(intent)  // Use the new launcher to open settings
     }
 
     private fun showPermissionRequiredDialog() {
