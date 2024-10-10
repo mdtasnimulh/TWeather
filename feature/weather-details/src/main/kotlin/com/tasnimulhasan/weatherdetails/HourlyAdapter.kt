@@ -46,8 +46,8 @@ class HourlyAdapter(
             hourlyTempTv.text = resources.getString(if (exits) Res.string.format_current_weather else Res.string.format_current_weather_f, item.hourlyTemperature)
 
             val isCurrentTime = hourlyTimeTv.text == getCurrentTimeFormatted()
-            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white))
-            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.transparent))
+            if (isCurrentTime) root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_2))
+            else root.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white))
 
             root.clickWithDebounce { onClick.invoke(item) }
         }

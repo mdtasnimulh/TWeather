@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_85sdp"
     android:layout_margin="@dimen/margin_8"
-    app:cardBackgroundColor="@color/background_color_white_blur"
+    app:cardBackgroundColor="@color/background_color_white"
     app:cardCornerRadius="@dimen/_15sdp"
-    app:cardElevation="@dimen/_1sdp"
-    app:strokeColor="@color/background_color_white"
-    app:strokeWidth="1dp">
+    app:cardElevation="0dp"
+    app:strokeColor="@color/transparent"
+    app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dailyCardCl"

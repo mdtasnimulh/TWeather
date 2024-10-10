@@ -47,8 +47,8 @@ class DailyAdapter(
             dailyConditionTv.text = item.dailyWeatherCondition[0].dailyWeatherCondition
 
             val isCurrentTime = dayTv.text == getCurrentTimeFormatted()
-            if (isCurrentTime) mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white)))
-            else mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur)))
+            if (isCurrentTime) mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_2)))
+            else mainCv.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white)))
 
             root.setOnClickListener { onClick.invoke(item) }
         }

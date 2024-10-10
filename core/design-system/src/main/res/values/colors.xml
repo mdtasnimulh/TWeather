@@ -25,6 +25,7 @@
     <color name="divider_color">#F3F3FA</color>
     <color name="stroke_color">#F3F3FA</color>
     <color name="background_color">#80FAF7ED</color>
+    <color name="background_color_2">#BFFAF7ED</color>
     <color name="background_color_white">#F8F8F8</color>
     <color name="background_color_white_blur">#D9FFFFFF</color>
     <color name="gradient_white">#D9FFFFFF</color>
@@ -36,6 +37,53 @@
     <color name="cancelled_color">#80DF2A43</color>
     <color name="hold_color">#80A72199</color>
     <color name="verified_color">#80FF6600</color>
+
+    <color name="color_a1">#F3E1C7</color>
+    <color name="color_a2">#161415</color>
+    <color name="color_a3">#DCCEA8</color>
+    <color name="color_a4">#F45325</color>
+
+    <color name="text_color_a1">#F45325</color>
+    <color name="text_color_a2">#161415</color>
+    <color name="text_color_a3">#F3E1C7</color>
+
+    <color name="color_b1">#06141B</color>
+    <color name="color_b2">#11212D</color>
+    <color name="color_b3">#253745</color>
+    <color name="color_b4">#4A5C6A</color>
+    <color name="color_b5">#9BA8AB</color>
+    <color name="color_b6">#CCD0CF</color>
+
+    <color name="color_c1">#051F20</color>
+    <color name="color_c2">#0B2B26</color>
+    <color name="color_c3">#163832</color>
+    <color name="color_c4">#235347</color>
+    <color name="color_c5">#8EB69B</color>
+    <color name="color_c6">#DAF1DE</color>
+
+    <color name="color_d1">#021024</color>
+    <color name="color_d2">#052659</color>
+    <color name="color_d3">#5483B3</color>
+    <color name="color_d4">#5483B3</color>
+    <color name="color_d5">#7DA0CA</color>
+    <color name="color_d6">#C1E8FF</color>
+    <color name="color_d7">#F6F8FA</color>
+    <color name="color_d7_90">#E6F6F8FA</color>
+
+    <color name="color_e1">#16423C</color>
+    <color name="color_e2">#6A9C89</color>
+    <color name="color_e3">#C4DAD2</color>
+    <color name="color_e4">#E9EFEC</color>
+
+    <color name="color_f1">#0F1035</color>
+    <color name="color_f2">#365486</color>
+    <color name="color_f3">#7FC7D9</color>
+    <color name="color_f4">#DCF2F1</color>
+
+    <color name="color_g1">#F95A37</color>
+    <color name="color_g2">#FCC07E</color>
+    <color name="color_g3">#FCF1D8</color>
+    <color name="color_g4">#C6CEBE</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white_opt_30">#4DFFFFFF</color>

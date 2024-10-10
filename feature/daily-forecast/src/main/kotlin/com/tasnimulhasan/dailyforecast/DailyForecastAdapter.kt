@@ -47,8 +47,8 @@ class DailyForecastAdapter(
             summaryTv.text = item.weather.firstOrNull()?.description
 
             val isCurrentTime = convertLongToDateTime(item.dateTime, DateTimeFormat.sqlYMD) == getCurrentTimeFormatted()
-            if (isCurrentTime) root.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.white_n_gray_light_100)))
-            else root.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white_blur)))
+            if (isCurrentTime) root.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_2)))
+            else root.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(context, Res.color.background_color_white)))
 
             root.clickWithDebounce {
                 onClick.invoke(item)
