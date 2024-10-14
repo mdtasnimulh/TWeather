@@ -235,16 +235,6 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_1sdp"
-                app:layout_constraintBottom_toTopOf="@id/dailyTempDetails2Ll"
-                android:background="@color/divider_color"
-                app:layout_constraintTop_toBottomOf="@id/dailyTempDetailsLl"
-                app:layout_constraintStart_toStartOf="@id/dayDateTv"
-                app:layout_constraintEnd_toEndOf="@id/dayDateTv"/>
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/dailyTempDetails2Ll"
                 android:layout_width="0dp"

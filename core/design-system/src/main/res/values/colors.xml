@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2CD994</color>
-    <color name="colorPrimaryDark">#13A471</color>
-    <color name="colorAccent">#40CD86</color>
+    <color name="colorPrimary">@color/color_b3</color>
+    <color name="colorPrimaryDark">@color/color_b2</color>
+    <color name="colorAccent">@color/color_b3</color>
 
     <color name="color_1">#C076B4</color>
     <color name="color_2">#9164D1</color>
@@ -42,6 +42,7 @@
     <color name="color_a2">#161415</color>
     <color name="color_a3">#DCCEA8</color>
     <color name="color_a4">#F45325</color>
+    <color name="color_a5">#C64117</color>
 
     <color name="text_color_a1">#F45325</color>
     <color name="text_color_a2">#161415</color>

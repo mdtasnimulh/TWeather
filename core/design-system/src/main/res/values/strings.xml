@@ -133,6 +133,7 @@
     <string name="desc_image_content_description">filer_image_toolbar</string>
     <string name="desc_location_permission">TWeather requires access to your location to function properly. Without location permission, the app won\'t be able to provide weather updates. Please grant permission to continue.</string>
     <string name="desc_fetching_data">loading weather data, please wait…</string>
+    <string name="desc_dev_name">Developer &amp; Maintainer</string>
     <!--    description string resources-->
 
     <!--    value string resources-->

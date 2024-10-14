@@ -8,15 +8,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/_15sdp">
+        android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadingAnimationView"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="-120dp"
+            android:layout_marginTop="-200dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +23,7 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loading_animation" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/errorTitleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loadingAnimationView" />
 
-        <com.tasnimulhasan.designsystem.CustomTV
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/errorMessageTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,6 +53,32 @@
             app:layout_constraintEnd_toEndOf="@+id/errorTitleTV"
             app:layout_constraintStart_toStartOf="@+id/errorTitleTV"
             app:layout_constraintTop_toBottomOf="@+id/errorTitleTV" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/devNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/desc_dev_name"
+            android:textColor="@color/child_text_color"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintTop_toBottomOf="@id/brandLogoIv"
+            app:layout_constraintStart_toStartOf="@id/brandLogoIv"
+            app:layout_constraintEnd_toEndOf="@id/brandLogoIv"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/brandLogoIv"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:srcCompat="@drawable/brand_logo"
+            android:tint="@color/child_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
