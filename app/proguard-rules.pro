@@ -19,15 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# Retrofit
 
 #-----------------------SAFE ARGS and model--------------------------------
 #noinspection ShrinkerUnresolvedReference
 -keepnames class com.path.to.your.ParcelableArg
 -keepnames class com.path.to.your.SerializableArg
 -keepnames class com.path.to.your.EnumArg
--keep class com.jerp.domain.** { *; }
--keep class com.jerp.entity.** { *; }
--keep class com.jerp.apiresponse.** { *; }
+-keep class com.tasnimulhasan.domain.** { *; }
+-keep class com.tasnimulhasan.entity.** { *; }
+-keep class com.tasnimulhasan.apiresponse.** { *; }
 
 #-----------------------------  COMMON KEEP ENTRY ----------------------
 -keep class kotlin.** { *; }
