@@ -88,7 +88,11 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.androidx.core.splashscreen)
 
+    implementation(libs.work)
+    implementation(libs.hilt.ext.work)
+
     ksp(libs.hilt.compiler)
+    ksp(libs.hilt.ext.compiler)
     kspTest(libs.hilt.compiler)
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.extjunit)

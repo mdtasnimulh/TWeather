@@ -15,6 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -34,6 +37,7 @@ import com.tasnimulhasan.entity.home.CurrentWeatherConditionData
 import com.tasnimulhasan.entity.home.DailyWeatherData
 import com.tasnimulhasan.entity.home.WeatherApiEntity
 import com.tasnimulhasan.home.databinding.FragmentHomeBinding
+import com.tasnimulhasan.home.widget.WeatherUpdateWorker
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import com.tasnimulhasan.sharedpref.SpKey
 import com.tasnimulhasan.ui.ErrorUiHandler
@@ -41,6 +45,7 @@ import com.tasnimulhasan.ui.databinding.DialogRequestPermissionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import okio.IOException
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.ui.R as UI
@@ -74,6 +79,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun viewBindingLayout(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun initializeView(savedInstanceState: Bundle?) {
+        setupWeatherUpdateWorker()
+
         errorHandler = ErrorUiHandler(binding.errorUi, binding.featureUi)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -88,6 +95,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.isFirst.execute {
             binding.loadingUi?.root?.isVisible = it
         }
+    }
+
+    private fun setupWeatherUpdateWorker() {
+        val workRequest = PeriodicWorkRequestBuilder<WeatherUpdateWorker>(30, TimeUnit.MINUTES)
+            .build()
+
+        WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+            WeatherUpdateWorker::class.java.simpleName,
+            ExistingPeriodicWorkPolicy.KEEP,
+            workRequest
+        )
     }
 
     private fun checkLocationPermission() {

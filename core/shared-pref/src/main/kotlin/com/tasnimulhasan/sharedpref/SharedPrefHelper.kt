@@ -47,4 +47,31 @@ class SharedPrefHelper(application: Context) {
     fun clearAllCache() {
         sharedPreferences.edit().clear().apply()
     }
+
+    fun savedWeatherData(cityName: String, temperature: String, condition: String) {
+        with(sharedPreferences.edit()) {
+            putString("CITY_NAME", cityName)
+            putString("CURRENT_TEMP", temperature)
+            putString("CURRENT_CONDITION", condition)
+            putLong("LAST_UPDATE", System.currentTimeMillis())
+            apply()
+        }
+    }
+
+    fun getWeatherData(): WidgetWeatherData {
+        val cityName = sharedPreferences.getString("CITY_NAME", "Unknown") ?: "Unknown"
+        val temperature = sharedPreferences.getString("CURRENT_TEMP", "N/A") ?: "N/A"
+        val condition = sharedPreferences.getString("CURRENT_CONDITION", "N/A") ?: "N/A"
+        return WidgetWeatherData(cityName, temperature, condition)
+    }
+
+    fun getLastUpdateTime(): Long {
+        return sharedPreferences.getLong("LAST_UPDATE", 0)
+    }
 }
+
+data class WidgetWeatherData(
+    val cityName: String,
+    val temperature: String,
+    val condition: String
+)

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/widget_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorPrimaryContainer"
+    android:theme="@style/Theme.Material3.DynamicColors.DayNight"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        tools:text="MELBOURNE"
+        android:textColor="@color/green"/>
+
+    <TextView
+        android:id="@+id/current_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        tools:text="12"
+        android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/current_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="fog"
+        android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/current_condition1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="fog"
+        android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/current_condition2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="fog"
+        android:textColor="@color/green" />
+</LinearLayout>
