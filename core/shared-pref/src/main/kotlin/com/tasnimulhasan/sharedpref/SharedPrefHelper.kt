@@ -48,21 +48,31 @@ class SharedPrefHelper(application: Context) {
         sharedPreferences.edit().clear().apply()
     }
 
-    fun savedWeatherData(cityName: String, temperature: String, condition: String) {
+    fun savedWeatherData(exists: Boolean, cityName: String, temperature: String, condition: String, windSpeed: String, rain: String, feelsLike: String, icon: String) {
         with(sharedPreferences.edit()) {
+            putBoolean("EXISTS", exists)
             putString("CITY_NAME", cityName)
             putString("CURRENT_TEMP", temperature)
             putString("CURRENT_CONDITION", condition)
+            putString("WIND_SPEED", windSpeed)
+            putString("RAIN", rain)
+            putString("FEELS_LIKE", feelsLike)
+            putString("ICON", icon)
             putLong("LAST_UPDATE", System.currentTimeMillis())
             apply()
         }
     }
 
     fun getWeatherData(): WidgetWeatherData {
+        val exists = sharedPreferences.getBoolean("EXISTS", true)
         val cityName = sharedPreferences.getString("CITY_NAME", "Unknown") ?: "Unknown"
         val temperature = sharedPreferences.getString("CURRENT_TEMP", "N/A") ?: "N/A"
         val condition = sharedPreferences.getString("CURRENT_CONDITION", "N/A") ?: "N/A"
-        return WidgetWeatherData(cityName, temperature, condition)
+        val windSpeed = sharedPreferences.getString("WIND_SPEED", "N/A") ?: "N/A"
+        val rain = sharedPreferences.getString("RAIN", "N/A") ?: "N/A"
+        val feelsLike = sharedPreferences.getString("FEELS_LIKE", "N/A") ?: "N/A"
+        val icon = sharedPreferences.getString("ICON", "N/A") ?: "N/A"
+        return WidgetWeatherData(exists, cityName, temperature, condition, windSpeed, rain, feelsLike, icon)
     }
 
     fun getLastUpdateTime(): Long {
@@ -71,7 +81,12 @@ class SharedPrefHelper(application: Context) {
 }
 
 data class WidgetWeatherData(
+    val exists: Boolean,
     val cityName: String,
     val temperature: String,
-    val condition: String
+    val condition: String,
+    val windSpeed: String,
+    val rain: String,
+    val feelsLike: String,
+    val icon: String,
 )

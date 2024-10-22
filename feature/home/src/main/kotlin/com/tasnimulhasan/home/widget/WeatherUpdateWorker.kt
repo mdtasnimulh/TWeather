@@ -31,11 +31,21 @@ class WeatherUpdateWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         val weatherApiResponse = fetchWeatherDataFromApi()
 
+        val exists =
+            if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_CELSIUS) true
+            else if (sharedPrefHelper.getString(SpKey.UNIT_TYPE) == AppConstants.DATA_UNIT_FAHRENHEIT) false
+            else true
+
         if (weatherApiResponse != null) {
             sharedPrefHelper.savedWeatherData(
+                exists,
                 sharedPrefHelper.getString(SpKey.CITY_NAME),
                 weatherApiResponse.currentWeatherData.currentTemp.toString(),
-                weatherApiResponse.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition
+                weatherApiResponse.currentWeatherData.currentWeatherCondition[0].currentWeatherCondition,
+                weatherApiResponse.currentWeatherData.currentWindSpeed.toString(),
+                weatherApiResponse.currentWeatherData.currentRain.toString(),
+                weatherApiResponse.currentWeatherData.currentFeelsLike.toString(),
+                weatherApiResponse.currentWeatherData.currentWeatherCondition[0].currentWeatherIcon
             )
             updateWeatherWidget()
         }
@@ -71,8 +81,13 @@ class WeatherUpdateWorker @AssistedInject constructor(
             val views = RemoteViews(applicationContext.packageName, R.layout.widget_weather_forecast_small)
 
             views.setTextViewText(R.id.city_name, weatherData.cityName)
-            views.setTextViewText(R.id.current_temp, weatherData.temperature)
+            views.setTextViewText(R.id.current_temp, applicationContext.getString(if (weatherData.exists) com.tasnimulhasan.designsystem.R.string.format_temperature else com.tasnimulhasan.designsystem.R.string.format_temperature_f, weatherData.temperature.toDouble()))
             views.setTextViewText(R.id.current_condition, weatherData.condition)
+            AppConstants.iconSetTwo.find { weatherValue ->
+                weatherValue.iconId == weatherData.icon
+            }?.iconRes?.let { icon ->
+                views.setImageViewResource(R.id.weather_icon, icon)
+            }
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

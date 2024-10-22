@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
+import com.tasnimulhasan.common.constant.AppConstants
 import com.tasnimulhasan.home.R
+import com.tasnimulhasan.designsystem.R as Res
 import com.tasnimulhasan.sharedpref.SharedPrefHelper
 import javax.inject.Inject
 
@@ -41,8 +43,17 @@ class WeatherWidget : AppWidgetProvider() {
         val weatherData = sharedPrefHelper.getWeatherData()
 
         views.setTextViewText(R.id.city_name, weatherData.cityName)
-        views.setTextViewText(R.id.current_temp, weatherData.temperature)
+        views.setTextViewText(R.id.current_temp, context.getString(if (weatherData.exists) Res.string.format_temperature else Res.string.format_temperature_f, weatherData.temperature.toDouble()))
         views.setTextViewText(R.id.current_condition, weatherData.condition)
+        /*views.setTextViewText(R.id.wind_speed, context.getString(Res.string.format_wind, weatherData.windSpeed.toDouble()))
+        views.setTextViewText(R.id.rain, context.getString(Res.string.format_rain, weatherData.rain.toDouble()))
+        views.setTextViewText(R.id.feels_like, context.getString(Res.string.format_current_weather, weatherData.feelsLike.toDouble()))*/
+
+        AppConstants.iconSetTwo.find { weatherValue ->
+            weatherValue.iconId == weatherData.icon
+        }?.iconRes?.let { icon ->
+            views.setImageViewResource(R.id.weather_icon, icon)
+        }
 
         val intent = Intent(context, RefreshWeatherReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
