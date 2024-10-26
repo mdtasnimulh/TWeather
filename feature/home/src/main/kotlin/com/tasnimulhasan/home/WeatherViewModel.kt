@@ -86,8 +86,8 @@ class WeatherViewModel @Inject constructor(
 
     fun getOverviewApiParams(): WeatherDetailsApiUseCase.Params {
         return WeatherDetailsApiUseCase.Params(
-            lat = AppConstants.DEFAULT_LATITUDE,
-            lon = AppConstants.DEFAULT_LONGITUDE,
+            lat = latitude,
+            lon = longitude,
             appid = AppConstants.OPEN_WEATHER_API_KEY,
             units = units
         )

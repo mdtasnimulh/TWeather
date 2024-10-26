@@ -66,12 +66,12 @@ class SharedPrefHelper(application: Context) {
     fun getWeatherData(): WidgetWeatherData {
         val exists = sharedPreferences.getBoolean("EXISTS", true)
         val cityName = sharedPreferences.getString("CITY_NAME", "Unknown") ?: "Unknown"
-        val temperature = sharedPreferences.getString("CURRENT_TEMP", "N/A") ?: "N/A"
-        val condition = sharedPreferences.getString("CURRENT_CONDITION", "N/A") ?: "N/A"
-        val windSpeed = sharedPreferences.getString("WIND_SPEED", "N/A") ?: "N/A"
-        val rain = sharedPreferences.getString("RAIN", "N/A") ?: "N/A"
-        val feelsLike = sharedPreferences.getString("FEELS_LIKE", "N/A") ?: "N/A"
-        val icon = sharedPreferences.getString("ICON", "N/A") ?: "N/A"
+        val temperature = sharedPreferences.getString("CURRENT_TEMP", "0.0") ?: "0.0"
+        val condition = sharedPreferences.getString("CURRENT_CONDITION", "Unknown") ?: "Unknown"
+        val windSpeed = sharedPreferences.getString("WIND_SPEED", "0.0") ?: "0.0"
+        val rain = sharedPreferences.getString("RAIN", "0.0") ?: "0.0"
+        val feelsLike = sharedPreferences.getString("FEELS_LIKE", "0.0") ?: "0.0"
+        val icon = sharedPreferences.getString("ICON", "1d") ?: "1d"
         return WidgetWeatherData(exists, cityName, temperature, condition, windSpeed, rain, feelsLike, icon)
     }
 
