@@ -34,9 +34,6 @@ class WeatherWidget : AppWidgetProvider() {
         val views = RemoteViews(context.packageName, R.layout.widget_weather_forecast_small)
 
         val weatherData = sharedPrefHelper.getWeatherData()
-        /*views.setTextViewText(R.id.wind_speed, context.getString(Res.string.format_wind, weatherData.windSpeed.toDouble()))
-        views.setTextViewText(R.id.rain, context.getString(Res.string.format_rain, weatherData.rain.toDouble()))
-        views.setTextViewText(R.id.feels_like, context.getString(Res.string.format_current_weather, weatherData.feelsLike.toDouble()))*/
 
         AppConstants.iconSetTwo.find { weatherValue ->
             weatherValue.iconId == weatherData.icon

@@ -185,5 +185,6 @@
     <string name="format_morn_weather_f">%.1f°F</string>
     <string name="format_wind_gust">%.2f</string>
     <string name="format_wind_degree">%d°</string>
+    <string name="format_widget_wind">Wind %skm/h</string>
     <!--    format string resources-->
 </resources>

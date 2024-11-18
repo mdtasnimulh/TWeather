@@ -48,7 +48,7 @@ class SharedPrefHelper(application: Context) {
         sharedPreferences.edit().clear().apply()
     }
 
-    fun savedWeatherData(exists: Boolean, cityName: String, temperature: String, condition: String, windSpeed: String, rain: String, feelsLike: String, icon: String) {
+    fun savedWeatherData(exists: Boolean, cityName: String, temperature: String, condition: String, windSpeed: String, rain: String, feelsLike: String, icon: String, dayMax: String, dayMin: String) {
         with(sharedPreferences.edit()) {
             putBoolean("EXISTS", exists)
             putString("CITY_NAME", cityName)
@@ -58,6 +58,8 @@ class SharedPrefHelper(application: Context) {
             putString("RAIN", rain)
             putString("FEELS_LIKE", feelsLike)
             putString("ICON", icon)
+            putString("DAY_MAX", dayMax)
+            putString("DAY_MIN", dayMin)
             putLong("LAST_UPDATE", System.currentTimeMillis())
             apply()
         }
@@ -72,7 +74,9 @@ class SharedPrefHelper(application: Context) {
         val rain = sharedPreferences.getString("RAIN", "0.0") ?: "0.0"
         val feelsLike = sharedPreferences.getString("FEELS_LIKE", "0.0") ?: "0.0"
         val icon = sharedPreferences.getString("ICON", "1d") ?: "1d"
-        return WidgetWeatherData(exists, cityName, temperature, condition, windSpeed, rain, feelsLike, icon)
+        val dayMax = sharedPreferences.getString("DAY_MAX", "0") ?: "0"
+        val dayMin = sharedPreferences.getString("DAY_MIN", "0") ?: "0"
+        return WidgetWeatherData(exists, cityName, temperature, condition, windSpeed, rain, feelsLike, icon, dayMax, dayMin)
     }
 
     fun getLastUpdateTime(): Long {
@@ -89,4 +93,6 @@ data class WidgetWeatherData(
     val rain: String,
     val feelsLike: String,
     val icon: String,
+    val dayMax: String,
+    val dayMin: String,
 )
