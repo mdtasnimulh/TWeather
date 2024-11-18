@@ -34,17 +34,13 @@
             tools:ignore="RtlHardcoded,UseCompatTextViewDrawableXml"
             tools:text="Dhaka" />
 
-        <TextView
+        <ImageView
             android:id="@+id/current_temp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/_50ssp"
-            app:fontFamily="@font/roboto_serif_medium"
-            tools:text="00.0°C" />
+            tools:src="@mipmap/ic_launcher"
+            android:contentDescription="@string/app_name"/>
 
         <TextView
             android:id="@+id/current_condition"

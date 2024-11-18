@@ -8,6 +8,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.tasnimulhasan.common.constant.AppConstants
+import com.tasnimulhasan.common.extfun.getFontBitmap
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
 import com.tasnimulhasan.entity.home.WeatherApiEntity
@@ -19,7 +20,7 @@ import dagger.assisted.AssistedInject
 
 @HiltWorker
 class WeatherUpdateWorker @AssistedInject constructor(
-    @Assisted context: Context,
+    @Assisted val context: Context,
     @Assisted workerParameters: WorkerParameters,
     private val homeWeatherApiUseCase: HomeWeatherApiUseCase,
     private val sharedPrefHelper: SharedPrefHelper,
@@ -81,13 +82,25 @@ class WeatherUpdateWorker @AssistedInject constructor(
             val views = RemoteViews(applicationContext.packageName, R.layout.widget_weather_forecast_small)
 
             views.setTextViewText(R.id.city_name, weatherData.cityName)
-            views.setTextViewText(R.id.current_temp, applicationContext.getString(if (weatherData.exists) com.tasnimulhasan.designsystem.R.string.format_temperature else com.tasnimulhasan.designsystem.R.string.format_temperature_f, weatherData.temperature.toDouble()))
             views.setTextViewText(R.id.current_condition, weatherData.condition)
             AppConstants.iconSetTwo.find { weatherValue ->
                 weatherValue.iconId == weatherData.icon
             }?.iconRes?.let { icon ->
                 views.setImageViewResource(R.id.weather_icon, icon)
             }
+
+            views.setImageViewBitmap(
+                R.id.current_temp,
+                getFontBitmap(
+                    context,
+                    context.getString(
+                        if (weatherData.exists) com.tasnimulhasan.designsystem.R.string.format_temperature else com.tasnimulhasan.designsystem.R.string.format_temperature_f,
+                        weatherData.temperature.toDouble()
+                    ),
+                    0xFFF95A37.toInt(),
+                    50f
+                )
+            )
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

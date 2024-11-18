@@ -86,6 +86,8 @@
     <color name="color_g3">#FCF1D8</color>
     <color name="color_g4">#C6CEBE</color>
 
+    <color name="red_with_alpha">#FFEC250D</color>
+
     <color name="white">#FFFFFF</color>
     <color name="white_opt_30">#4DFFFFFF</color>
     <color name="black">#000000</color>
