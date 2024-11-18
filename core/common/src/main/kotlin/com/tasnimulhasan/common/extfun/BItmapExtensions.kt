@@ -7,11 +7,11 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.util.TypedValue
 
-fun getFontBitmap(context: Context, text: String, color: Int, fontSize: Float): Bitmap {
+fun getFontBitmap(context: Context, text: String, color: Int, fontSize: Float, fontPath: String): Bitmap {
     val fontSizePx = convertDipToPix(context, fontSize)
     val padding = (fontSizePx/9)
     val paint = Paint()
-    val typeFace: Typeface = Typeface.createFromAsset(context.assets, "fonts/Sofia-Regular.ttf")
+    val typeFace: Typeface = Typeface.createFromAsset(context.assets, fontPath)
     paint.isAntiAlias = true
     paint.setTypeface(typeFace)
     paint.setColor(color)

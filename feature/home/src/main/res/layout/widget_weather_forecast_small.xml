@@ -6,64 +6,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_bg"
+    android:baselineAligned="false"
+    android:gravity="center"
     android:orientation="horizontal"
     android:padding="16dp"
     android:paddingStart="@dimen/padding_15"
     android:paddingEnd="@dimen/padding_15"
-    android:gravity="center"
     android:theme="@style/Theme.Material3.DynamicColors.DayNight">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="8"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/city_name"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/current_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_city"
-            android:drawablePadding="@dimen/padding_5"
-            android:drawableTint="@color/child_text_color"
-            android:gravity="start|center_vertical"
-            android:includeFontPadding="false"
-            android:textColor="@color/subTextColor"
-            android:textSize="@dimen/_14ssp"
-            app:fontFamily="@font/poppins_medium"
-            tools:ignore="RtlHardcoded,UseCompatTextViewDrawableXml"
-            tools:text="Dhaka" />
+            android:layout_marginTop="@dimen/_4sdp"
+            android:contentDescription="@string/app_name"
+            tools:src="@drawable/ic_city" />
 
         <ImageView
             android:id="@+id/current_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
-            tools:src="@mipmap/ic_launcher"
-            android:contentDescription="@string/app_name"/>
+            android:layout_marginTop="@dimen/_4sdp"
+            android:contentDescription="@string/app_name"
+            tools:src="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/current_condition"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_5"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:textColor="@color/subTextColor"
-            android:textSize="@dimen/small_text_size"
-            app:fontFamily="@font/poppins"
-            tools:text="Clear Sky" />
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/city_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_city" />
+
+            <ImageView
+                android:id="@+id/city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:contentDescription="@string/app_name"
+                tools:src="@drawable/ic_city" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/weather_icon"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-        android:layout_weight="1"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/thunderstorm_day" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:contentDescription="@string/app_name"
+            tools:src="@drawable/thunderstorm_day" />
+
+        <ImageView
+            android:id="@+id/current_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:contentDescription="@string/app_name"
+            tools:src="@drawable/ic_city" />
+
+    </LinearLayout>
 
 </LinearLayout>

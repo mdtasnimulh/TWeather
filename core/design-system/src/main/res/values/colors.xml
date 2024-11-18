@@ -18,6 +18,8 @@
     <color name="color_12">#D8D8FE</color>
     <color name="color_13">#B3B2FD</color>
 
+    <color name="widget_sub_text_color">#FF06141B</color>
+
     <color name="textColor">#181818</color>
     <color name="subTextColor">#262626</color>
     <color name="child_text_color">#8B95A6</color>

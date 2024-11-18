@@ -4,10 +4,13 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.widget.RemoteViews
+import androidx.core.content.ContextCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.tasnimulhasan.common.constant.AppConstants
+import com.tasnimulhasan.common.dateparser.DateTimeFormat
+import com.tasnimulhasan.common.dateparser.DateTimeParser.getCurrentDeviceDateTime
 import com.tasnimulhasan.common.extfun.getFontBitmap
 import com.tasnimulhasan.domain.apiusecase.home.HomeWeatherApiUseCase
 import com.tasnimulhasan.domain.base.ApiResult
@@ -81,8 +84,6 @@ class WeatherUpdateWorker @AssistedInject constructor(
             val weatherData = sharedPrefHelper.getWeatherData()
             val views = RemoteViews(applicationContext.packageName, R.layout.widget_weather_forecast_small)
 
-            views.setTextViewText(R.id.city_name, weatherData.cityName)
-            views.setTextViewText(R.id.current_condition, weatherData.condition)
             AppConstants.iconSetTwo.find { weatherValue ->
                 weatherValue.iconId == weatherData.icon
             }?.iconRes?.let { icon ->
@@ -98,7 +99,41 @@ class WeatherUpdateWorker @AssistedInject constructor(
                         weatherData.temperature.toDouble()
                     ),
                     0xFFF95A37.toInt(),
-                    50f
+                    50f,
+                    "fonts/JetBrainsMono-ExtraBold.ttf"
+                )
+            )
+
+            views.setImageViewBitmap(
+                R.id.current_time,
+                getFontBitmap(
+                    context,
+                    getCurrentDeviceDateTime(DateTimeFormat.WIDGET_DATE_TIME_FORMAT),
+                    ContextCompat.getColor(context, com.tasnimulhasan.designsystem.R.color.widget_sub_text_color),
+                    18f,
+                    "fonts/JetBrainsMono-Bold.ttf"
+                )
+            )
+
+            views.setImageViewBitmap(
+                R.id.city_name,
+                getFontBitmap(
+                    context,
+                    weatherData.cityName,
+                    ContextCompat.getColor(context, com.tasnimulhasan.designsystem.R.color.widget_sub_text_color),
+                    14f,
+                    "fonts/JetBrainsMono-Medium.ttf"
+                )
+            )
+
+            views.setImageViewBitmap(
+                R.id.current_condition,
+                getFontBitmap(
+                    context,
+                    weatherData.condition,
+                    ContextCompat.getColor(context, com.tasnimulhasan.designsystem.R.color.widget_sub_text_color),
+                    14f,
+                    "fonts/JetBrainsMono-Medium.ttf"
                 )
             )
 
