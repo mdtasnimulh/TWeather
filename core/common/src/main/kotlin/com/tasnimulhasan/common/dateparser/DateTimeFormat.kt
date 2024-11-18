@@ -31,5 +31,5 @@ object DateTimeFormat {
     const val DAY_HOUR_TIME_FORMAT = "EEEE hh:mm aa"
     const val FULL_DAY_DATE = "EEEE, dd MMM yyyy"
 
-    const val WIDGET_DATE_TIME_FORMAT = "EEEE dd, yyyy"
+    const val WIDGET_DATE_TIME_FORMAT = "EEEE, MMM dd"
 }

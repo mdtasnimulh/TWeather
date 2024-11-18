@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import com.tasnimulhasan.common.constant.AppConstants
@@ -23,16 +22,6 @@ class WeatherWidget : AppWidgetProvider() {
 
     @Inject
     lateinit var sharedPrefHelper: SharedPrefHelper
-
-    override fun onAppWidgetOptionsChanged(
-        context: Context?,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetId: Int,
-        newOptions: Bundle?
-    ) {
-        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
-
-    }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         sharedPrefHelper = SharedPrefHelper(context)
