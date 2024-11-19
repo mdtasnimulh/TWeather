@@ -156,8 +156,9 @@
             android:id="@+id/current_temp_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="end"
             android:layout_weight="1.8"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/app_name"
             android:gravity="end|center_vertical" />
 
