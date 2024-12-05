@@ -47,7 +47,7 @@ This app is under active development, with new features and optimizations being 
 
 | Light Mode                          | Dark Mode                          |  
 |-------------------------------------|-------------------------------------|  
-| ![Light Mode Screenshot](path-to-light-mode-image) | ![Dark Mode Screenshot](path-to-dark-mode-image) |  
+| ![Light Mode Screenshot](https://drive.google.com/file/d/1EVvQY56oThNMehfOrwqu7fAOG0-Lt20j/view?usp=drivesdk) | ![Dark Mode Screenshot](path-to-dark-mode-image) |  
 
 | Sunrise-Sunset Progress Bar         | AQI Indicator                      |  
 |-------------------------------------|-------------------------------------|  
