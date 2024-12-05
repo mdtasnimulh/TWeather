@@ -58,11 +58,3 @@ This app is under active development, with new features and optimizations being 
 ## 🌟 Widgets  
 
 ![Widget Screenshot](path-to-widget-image)  
-
----
-
-## 🏗️ How to Build  
-
-1. Clone this repository:  
-   ```bash  
-   git clone https://github.com/yourusername/weather-forecast-app.git
