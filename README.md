@@ -58,3 +58,12 @@ This app is under active development, with new features and optimizations being 
 ## 🌟 Widgets  
 
 ![Widget Screenshot](path-to-widget-image)  
+
+---
+
+## 🚧 Roadmap  
+
+- [ ] Add more widgets.  
+- [ ] Enhance animations for custom UI components.  
+- [ ] Introduce offline mode using Room.  
+- [ ] Add multi-language support.
